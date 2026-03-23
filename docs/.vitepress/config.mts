@@ -6,7 +6,7 @@ export default defineConfig({
   srcDir: "src",
   ignoreDeadLinks: true,
   
-  title: "Helidon Documentation",
+  title: "Helidon Docs",
   description: "A VitePress Site",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -18,6 +18,11 @@ export default defineConfig({
       { text: 'About', link: '/about/README.md' }
     ],
     sidebar: generateReadmeSidebar(),
+
+    logo: {
+      src: '/images/FrankOutline.svg',
+      alt: 'Helidon'
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/helidon-io/helidon' }
