@@ -1,5 +1,7 @@
 # Guides
 
+[Quickstart]: ./quickstart.md [Tutorial]: ./mp-tutorial.md [Config]: ./config.md [LangChain4j]: ./langchain4j.md [Health]: ./health.md [Metrics]: ./metrics.md [Tracing]: ./tracing.md [Upgrade from 1.x to 2.x]: ./upgrade.md [Upgrade from 2.x to 3.x]: ./upgrade_3x.md [Upgrade from 3.x to 4.x]: ./upgrade_4x.md [OIDC]: ./security-oidc.md [Testing with JUnit 5]: ./testing-junit5.md [JBatch]: ./jbatch.md [Performance tuning]: ./performance-tuning.md [Maven]: ./maven-build.md [Gradle]: ./gradle-build.md [GraalVM Native Image]: ./graalnative.md [JLink]: ./jlink-image.md [Jib]: ../../guides/jib.md [OKE]: ../../guides/oke.md [OCI]: ./oci-guide.md
+
 | Topic                                             | Description                                                                                                                                                                     |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [2.x Upgrade Guide](upgrade.md)                   | In Helidon 2.x we have made some changes to APIs and runtime behavior.                                                                                                          |

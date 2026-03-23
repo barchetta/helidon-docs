@@ -1,5 +1,7 @@
 # Config
 
+Helidon Configuration provides a Java API to load and process configuration data from various sources into a `Config` object which provides typed access to configuration values.
+
 | Topic                                               | Description                                                                                                                                                                                                                                                                                                                                      |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [About](introduction.md)                            | Helidon provides a very flexible and comprehensive configuration system, offering you many application configuration choices.                                                                                                                                                                                                                    |

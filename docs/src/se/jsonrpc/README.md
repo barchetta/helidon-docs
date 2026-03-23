@@ -1,5 +1,7 @@
 # JSON-RPC
 
+Helidon support JSON-RPC 2.0 in both Helidon WebServer and WebClient.
+
 | Topic                        | Description                                                                                                                                                        |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [JSON RPC Server](server.md) | The Helidon WebServer provides a framework for creating [JSON-RPC 2.0](https://www.jsonrpc.org/specification) applications.                                        |

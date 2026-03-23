@@ -1,5 +1,7 @@
 # Integrations
 
+Integrations with third party components.
+
 | Topic                                 | Description                                                                                                                                                                                |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [HashiCorp Vault](hcv.md)             | HashiCorp Vault is a commonly used Vault in many microservices.                                                                                                                            |

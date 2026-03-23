@@ -1,5 +1,7 @@
 # Config
 
+Browse Config documentation.
+
 | Topic                                               | Description                                                                                                                                                                                                                           |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Config](introduction.md)                           | Helidon MicroProfile Config is an implementation of [Eclipse MicroProfile Config](https://github.com/eclipse/microprofile-config/).                                                                                                   |

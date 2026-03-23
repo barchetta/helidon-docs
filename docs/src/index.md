@@ -4,6 +4,9 @@ layout: home
 
 hero:
   name: "Helidon Documentation"
+  image:
+    src: /images/FrankOutline.svg
+    alt: Helidon
   actions:
     - theme: brand
       text: About

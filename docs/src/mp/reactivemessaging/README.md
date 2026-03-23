@@ -1,5 +1,7 @@
 # Reactivemessaging
 
+Support for MicroProfile reactive messaging.
+
 | Topic                                 | Description                                                                                                                                     |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | [AQ](aq.md)                           | Connecting streams to Oracle AQ with Reactive Messaging couldn’t be easier.                                                                     |

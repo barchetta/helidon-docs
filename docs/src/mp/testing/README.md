@@ -1,5 +1,7 @@
 # Testing
 
+Helidon MP testing extensions.
+
 | Topic                                | Description                                                                                 |
 | ------------------------------------ | ------------------------------------------------------------------------------------------- |
 | [Testing with Junit5](testing.md)    | Helidon provides a JUnit5 extension that integrates CDI to support testing with Helidon MP. |

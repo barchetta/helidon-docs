@@ -1,5 +1,7 @@
 # Documentation
 
+Browse the Helidon documentation by section.
+
 | Topic                    | Description        |
 | ------------------------ | ------------------ |
 | [About](about/README.md) | Overview of About. |

@@ -1,5 +1,7 @@
 # Metrics
 
+Helidon provides a neutral metrics API for tracking and exporting monitoring data.
+
 | Topic                                                         | Description                                                                                                             |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | [Metrics](metrics.md)                                         | Helidon MP metrics implements the MicroProfile Metrics specification, providing:                                        |

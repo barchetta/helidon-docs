@@ -1,5 +1,7 @@
 # Security
 
+Helidon Security provides authentication, authorization, and auditing for your Helidon application.
+
 | Topic                                              | Description                                                                                                        |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [About Security](introduction.md)                  | Helidon Security provides authentication, authorization, and auditing for your Helidon application.                |

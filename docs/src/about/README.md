@@ -1,5 +1,7 @@
 # About
 
+Helidon is a collection of Java libraries for writing microservices.
+
 | Topic                                             | Description                                                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [Get Started](get-started.md)                     | You'll need Java and Maven to build and run Helidon examples.                                                      |

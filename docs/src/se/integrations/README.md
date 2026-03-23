@@ -1,5 +1,7 @@
 # Integrations
 
+Integrations with third party components.
+
 | Topic                      | Description                                                                                            |
 | -------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [Eureka](eureka/README.md) | Overview of Eureka.                                                                                    |

@@ -1,5 +1,7 @@
 # AI
 
+Helidon AI provides integration with AI technologies.
+
 | Topic                                | Description                                                                                               |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | [Langchain4j](langchain4j/README.md) | Overview of Langchain4j.                                                                                  |

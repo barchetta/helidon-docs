@@ -1,5 +1,7 @@
 # JAX-RS
 
+Helidon MP supports JAX-RS using the Jersey implementation.
+
 | Topic                                                            | Description                                                                                                                                                                     |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Helidon Connector](helidon-connector.md)                        | Helidon uses Jersey as the Jakarta REST (JAX-RS) implementation.                                                                                                                |

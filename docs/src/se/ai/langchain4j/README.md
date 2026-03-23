@@ -1,5 +1,7 @@
 # Langchain4j
 
+Helidon's LangChain4J support provides integration with a number of LangChain4J providers.
+
 | Topic                                              | Description                                                                                                                                            |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [About LangChain4J](langchain4j.md)                | [LangChain4j](https://github.com/langchain4j/langchain4j) is a Java framework for building AI-powered applications using Large Language Models (LLMs). |

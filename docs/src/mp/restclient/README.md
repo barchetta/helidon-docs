@@ -1,5 +1,7 @@
 # Rest Client
 
+Helidon support for MicroProfile Rest Client.
+
 | Topic                                       | Description                                                                                                                                                                             |
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Rest Client](restclient.md)                | MicroProfile Rest Client adds the capability to invoke remote services by defining a Java interface with Jakarta REST (JAX-RS) annotations that resembles a server-side resource class. |

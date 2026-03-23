@@ -1,5 +1,7 @@
 # SE
 
+Helidon SE is Helidon’s foundational set of APIs and, as of Helidon 4, it uses virtual threads to enable these APIs to change from asynchronous to blocking.
+
 | Topic                                        | Description                                                                                                                                                                                                            |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [AI](ai/README.md)                           | Overview of AI.                                                                                                                                                                                                        |
