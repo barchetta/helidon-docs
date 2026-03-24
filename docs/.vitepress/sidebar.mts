@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import type { DefaultTheme } from 'vitepress'
+import { DOCS_SRC_DIR, toVitePressLink } from './routes.mts'
 
-const DOCS_SRC_DIR = path.resolve(process.cwd(), 'docs/src')
 const ROOT_README = path.join(DOCS_SRC_DIR, 'README.md')
 
 type ReadmeRow = {
@@ -50,9 +50,4 @@ function parseReadmeRows(readmePath: string): ReadmeRow[] {
   }
 
   return rows
-}
-
-function toVitePressLink(filePath: string): string {
-  const relativePath = path.relative(DOCS_SRC_DIR, filePath)
-  return `/${relativePath.split(path.sep).join('/')}`
 }

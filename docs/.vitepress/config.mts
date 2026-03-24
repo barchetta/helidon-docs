@@ -1,10 +1,12 @@
 import { defineConfig } from 'vitepress'
+import { generateReadmeRewrites } from './routes.mts'
 import { generateReadmeSidebar } from './sidebar.mts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "src",
   ignoreDeadLinks: true,
+  rewrites: generateReadmeRewrites(),
   
   title: "Helidon Docs",
   description: "A VitePress Site",
