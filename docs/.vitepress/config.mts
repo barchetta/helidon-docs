@@ -7,6 +7,9 @@ export default defineConfig({
   srcDir: "src",
   ignoreDeadLinks: true,
   rewrites: generateReadmeRewrites(),
+  head: [
+    ['link', { rel: 'icon', type: 'image/png', href: '/images/frank-mark.svg' }]
+  ],
   
   title: "Helidon Docs",
   description: "A VitePress Site",
@@ -22,7 +25,7 @@ export default defineConfig({
     sidebar: generateReadmeSidebar(),
 
     logo: {
-      src: '/images/FrankOutline.svg',
+      src: '/images/frank-mark.svg',
       alt: 'Helidon'
     },
 
