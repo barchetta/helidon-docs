@@ -1,9 +1,8 @@
-# Documentation
+# Helidon Documentation
 
-Browse the Helidon documentation by section.
-
-| Topic                    | Description        |
-| ------------------------ | ------------------ |
-| [About](about/README.md) | Overview of About. |
-| [MP](mp/README.md)       | Overview of MP.    |
-| [SE](se/README.md)       | Overview of SE.    |
+| Topic                                | Description               |
+|--------------------------------------|---------------------------|
+| [Get Started](about/get-started.md) | Get Started with Helidon  |
+| [About](about/README.md)             | About Helidon             |
+| [Helidon SE](se/README.md)           | Helidon SE Documentation  |
+| [Helidon MP](mp/README.md)           | Helidon  MP Documentation |
