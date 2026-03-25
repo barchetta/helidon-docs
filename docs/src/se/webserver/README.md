@@ -2,7 +2,7 @@
 
 Index of WebServer documentation.
 
-| Topic | Description |
-| --- | --- |
-| [Concurrency Limits](concurrency-limits.md) | Helidon SE Concurrency Limits |
-| [WebServer Introduction](webserver.md) | Helidon WebServer Introduction |
+| Topic                                       | Description                  |
+|---------------------------------------------|------------------------------|
+| [WebServer](webserver.md)                   | Helidon WebServer            |
+| [Concurrency Limits](concurrency-limits.md) | WebServer Concurrency Limits |
