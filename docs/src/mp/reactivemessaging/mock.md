@@ -2,15 +2,15 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Helidon Test](#_helidon_test_with_mock_connector)
+- [Helidon Test](#helidon-test-with-mock-connector)
 
 ## Overview
 

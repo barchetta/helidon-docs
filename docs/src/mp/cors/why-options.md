@@ -4,10 +4,10 @@ There are some good reasons why it is `@OPTIONS` methods that you decorate with 
 
 Table of Contents
 
-- [The Resource](#_the_resource)
-- [Methods, Resources, and Subresources in JAX-RS Resource Classes](#_methods_resources_and_subresources_in_jax_rs_resource_classes)
-- [`OPTIONS` in CORS, `@OPTIONS` in JAX-RS, and Technical Reality](#_options_in_cors_options_in_jax_rs_and_technical_reality)
-- [The Bottom Line](#_the_bottom_line)
+- [The Resource](#the-resource)
+- [Methods, Resources, and Subresources in JAX-RS Resource Classes](#methods-resources-and-subresources-in-jax-rs-resource-classes)
+- [`OPTIONS` in CORS, `@OPTIONS` in JAX-RS, and Technical Reality](#options-in-cors-options-in-jax-rs-and-technical-reality)
+- [The Bottom Line](#the-bottom-line)
 
 ### The Resource
 

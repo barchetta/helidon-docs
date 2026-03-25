@@ -2,21 +2,21 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [API](#_api)
+- [API](#api)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Testing](#_testing)
+- [Testing](#testing)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
   - [Coordinator](#_coordinator)
 
@@ -26,7 +26,7 @@
 
   - [Narayana](#_narayana)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

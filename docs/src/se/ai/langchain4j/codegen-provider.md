@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Lc4j Provider](#_lc4j_provider)
+- [Lc4j Provider](#lc4j-provider)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Injectable Properties](#_injectable_properties)
+- [Injectable Properties](#injectable-properties)
 
-- [Default Injectable Properties](#_default_injectable_properties)
+- [Default Injectable Properties](#default-injectable-properties)
 
 ## Overview
 

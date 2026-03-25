@@ -2,13 +2,13 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Using Config Metadata](#_using_config_metadata)
+- [Using Config Metadata](#using-config-metadata)
 
-- [Responding to Changes in Config Sources](#polling)
+- [Responding to Changes in Config Sources](#responding-to-changes-in-config-sources)
 
-- [Accessing Always-current Values](#_accessing_always_current_values)
+- [Accessing Always-current Values](#accessing-always-current-values)
 
 ## Overview
 

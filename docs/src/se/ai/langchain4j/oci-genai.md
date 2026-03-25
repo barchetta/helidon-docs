@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Components](#_components)
+- [Components](#components)
 
   - [OciGenAiChatModel](#_ocigenaichatmodel)
 
@@ -16,7 +16,7 @@
 
   - [OciGenAiCohereStreamingChatModel](#_ocigenaicoherestreamingchatmodel)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Overview
 

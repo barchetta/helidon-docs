@@ -2,23 +2,23 @@
 
 ### Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Configuring an Extension](#_configuring_an_extension)
+- [Configuring an Extension](#configuring-an-extension)
 
-- [Config-SPI-ConfigSource](#Config-SPI-ConfigSource)
+- [Config-SPI-ConfigSource](#configsource-spi)
 
-- [Config-SPI-ConfigParser](#Config-SPI-ConfigParser)
+- [Config-SPI-ConfigParser](#configparser-spi)
 
-- [Config-SPI-OverrideSource](#Config-SPI-OverrideSource)
+- [Config-SPI-OverrideSource](#overridesource-spi)
 
-- [Config-SPI-ConfigFilter](#Config-SPI-ConfigFilter)
+- [Config-SPI-ConfigFilter](#configfilter-spi)
 
-- [Config-SPI-ConfigMapperProvider](#Config-SPI-ConfigMapperProvider)
+- [Config-SPI-ConfigMapperProvider](#configmapperprovider-spi)
 
-- [Change Support SPI](#Config-SPI-PollingStrategy)
+- [Change Support SPI](#change-support-spi)
 
-- [Config-SPI-RetryPolicy](#Config-SPI-RetryPolicy)
+- [Config-SPI-RetryPolicy](#retrypolicy-spi)
 
 ### Overview
 

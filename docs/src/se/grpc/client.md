@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
   - [Generated Stubs](#_generated_stubs)
 
@@ -20,7 +20,7 @@
 
   - [Tracing](#_tracing)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
 ## Overview
 

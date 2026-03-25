@@ -2,27 +2,27 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Annotation Processor](#_annotation_processor)
+- [Annotation Processor](#annotation-processor)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Helidon Config](#_helidon_config)
+- [Helidon Config](#helidon-config)
 
-- [MP Application](#_mp_application)
+- [MP Application](#mp-application)
 
-- [Repository Interface](#_repository_interface)
+- [Repository Interface](#repository-interface)
 
-- [Pagination](#_pagination)
+- [Pagination](#pagination)
 
-- [Dynamic Ordering](#_dynamic_ordering)
+- [Dynamic Ordering](#dynamic-ordering)
 
-- [Persistence Session Access](#_persistence_session_access)
+- [Persistence Session Access](#persistence-session-access)
 
-- [Transactions](#_transactions)
+- [Transactions](#transactions)
 
 ## Overview
 

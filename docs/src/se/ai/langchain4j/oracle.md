@@ -2,15 +2,15 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [OracleEmbeddingStore](#_oracleembeddingstore)
+- [OracleEmbeddingStore](#oracleembeddingstore)
 
   - [OracleEmbeddingTable](#_oracleembeddingtable)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Overview
 

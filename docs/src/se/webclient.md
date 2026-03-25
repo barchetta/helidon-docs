@@ -2,19 +2,19 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Configuring the WebClient](#_configuring_the_webclient)
+- [Configuring the WebClient](#configuring-the-webclient)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Context Propagation](#_context_propagation)
+- [Context Propagation](#context-propagation)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

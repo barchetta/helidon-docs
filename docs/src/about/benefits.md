@@ -1,14 +1,14 @@
 # Features and Benefits of Helidon
 
-- [Open Source with Support](#_open_source_with_support)
+- [Open Source with Support](#open-source-with-support)
 
-- [Two API Flavors for Two Programming Styles](#_two_api_flavors_for_two_programming_styles)
+- [Two API Flavors for Two Programming Styles](#two-api-flavors-for-two-programming-styles)
 
-- [Feature Richness](#_feature_richness)
+- [Feature Richness](#feature-richness)
 
-- [Enterprise Features](#_enterprise_features)
+- [Enterprise Features](#enterprise-features)
 
-- [Integrations](#_integrations)
+- [Integrations](#integrations)
 
 ## Open Source with Support
 

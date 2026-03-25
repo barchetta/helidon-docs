@@ -2,23 +2,23 @@
 
 ### Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Features](#_features)
+- [Features](#features)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [General Concepts](#_general_concepts)
+- [General Concepts](#general-concepts)
 
   - [LangChain4j Providers](#_providers)
 
   - [Supplier Factory](#_supplier_factory)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
   - [Configuration Migration Guide](#_configuration_migration_guide)
 
-- [Declarative AI](#_declarative_ai)
+- [Declarative AI](#declarative-ai)
 
   - [AI Services](#_ai_services)
 
@@ -26,13 +26,13 @@
 
   - [Agentic Workflow](#_agentic_workflow)
 
-- [Tools (Callback Functions)](#_tools_callback_functions)
+- [Tools (Callback Functions)](#tools-callback-functions)
 
-- [Guardrails](#_guardrails)
+- [Guardrails](#guardrails)
 
-- [Observability (ChatModelListeners)](#_observability_chatmodellisteners)
+- [Observability (ChatModelListeners)](#observability-chatmodellisteners)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ### Overview
 

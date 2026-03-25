@@ -2,25 +2,25 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [API](#_api)
+- [API](#api)
 
   - [Helidon Metrics API](#_helidon_metrics_api)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
   - [Example Application Code](#_example_application_code)
 
   - [Example Configuration](#example-configuration)
 
-- [Additional Information](#config-rest-request)
+- [Additional Information](#additional-information)
 
   - [References](#_references)
 

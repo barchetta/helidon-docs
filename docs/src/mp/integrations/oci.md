@@ -2,15 +2,15 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Authentication](#_authentication)
+- [Authentication](#authentication)
 
-- [Accessing OCI Services](#_accessing_oci_services)
+- [Accessing OCI Services](#accessing-oci-services)
 
-- [References](#_references)
+- [References](#references)
 
 ## Overview
 

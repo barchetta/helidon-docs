@@ -2,15 +2,15 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Usage](#usage-section)
+- [Usage](#usage)
 
-- [References](#_references)
+- [References](#references)
 
 ## Overview
 

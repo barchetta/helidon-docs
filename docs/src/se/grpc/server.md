@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
   - [gRPC Server Routing](#_grpc_server_routing)
 
@@ -16,7 +16,7 @@
 
   - [Metrics](#_metrics)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
   - [Configuring the gRPC Server](#_configuring_the_grpc_server)
 
@@ -24,7 +24,7 @@
 
   - [Configuring Compression](#_configuring_compression)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
 ## Overview
 

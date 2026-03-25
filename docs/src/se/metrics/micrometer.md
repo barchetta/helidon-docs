@@ -2,29 +2,29 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-  - [Registering and Updating Meters](#_registering_and_updating_meters)
+  - [Registering and Updating Meters](#registering_and_updating_meters)
 
-  - [Accessing the Helidon Micrometer Endpoint](#_accessing_the_helidon_micrometer_endpoint)
+  - [Accessing the Helidon Micrometer Endpoint](#accessing_the_helidon_micrometer_endpoint)
 
-- [API](#_api)
+- [API](#api)
 
-  - [The Helidon Micrometer API](#_the_helidon_micrometer_api)
+  - [The Helidon Micrometer API](#the_helidon_micrometer_api)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
   - [Register an Instance of MicrometerSupport with the Web Server](#_register_an_instance_of_micrometersupport_with_the_web_server)
 
   - [Create and Update Meters in Your Application Service](#_create_and_update_meters_in_your_application_service)
 
-- [Additional Information](#_additional_information) \` :se-flavor: :feature-name: Micrometer support
+- [Additional Information](additional_information) 
 
 ## Overview
 

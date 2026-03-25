@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [API](#_api)
+- [API](#api)
 
   - [Enabling Health Support](#_enabling_health_support_and_built_in_health_checks_in_your_application)
 
@@ -16,15 +16,15 @@
 
   - [Troubleshooting Probes](#_troubleshooting_probes)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
   - [JSON Response Example](#_json_response_example)
 
   - [Kubernetes Example](#_kubernetes_example)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Overview
 

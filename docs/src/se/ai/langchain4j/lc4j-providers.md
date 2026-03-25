@@ -2,13 +2,13 @@
 
 ## Contents
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Content Retriever](#Lc4jContentRetrieverProvider)
+- [Content Retriever](#content-retriever)
 
-- [In-Memory Embedding Store](#Lc4jInMemoryEmbeddingStoreProvider)
+- [In-Memory Embedding Store](#in-memory-embedding-store)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Maven Coordinates
 

@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Components](#_components)
+- [Components](#components)
 
   - [OpenAiChatModel](#_openaichatmodel)
 
@@ -20,7 +20,7 @@
 
   - [OpenAiStreamingChatModel](#_openaistreamingchatmodel)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Overview
 

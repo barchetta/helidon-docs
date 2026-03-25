@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Additional Config Formats and Parsers](#_additional_config_formats_and_parsers)
+- [Additional Config Formats and Parsers](#additional-config-formats-and-parsers)
 
-- [Additional Config Source Types](#_additional_config_source_types)
+- [Additional Config Source Types](#additional-config-source-types)
 
 ## Overview
 

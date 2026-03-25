@@ -2,13 +2,13 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

@@ -2,17 +2,17 @@
 
 ### Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Advanced Config Sources](#_advanced_config_sources)
+- [Advanced Config Sources](#advanced-config-sources)
 
-- [Advanced Config Parsers](#_advanced_config_parsers)
+- [Advanced Config Parsers](#advanced-config-parsers)
 
-- [Config Keys with . in name](#_config_keys_with_in_name)
+- [Config Keys with . in name](#config-keys-with-in-name)
 
-- [Filters, Overrides and Token Substitution](#filters-and-overrides)
+- [Filters, Overrides and Token Substitution](#filters-overrides-and-token-substitution)
 
-- [Executors for Asynchronous Config Activity](#_executors_for_asynchronous_config_activity)
+- [Executors for Asynchronous Config Activity](#executors-for-asynchronous-config-activity)
 
 ### Overview
 

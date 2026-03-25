@@ -2,9 +2,9 @@
 
 ## Contents
 
-- [Overview](#Overview)
+- [Overview](#overview)
 
-- [Named Data Source Integration](#DS)
+- [Named Data Source Integration](#named-data-source-integration)
 
   - [Project Setup](#DS-Setup)
 
@@ -34,7 +34,7 @@
 
   - [Usage](#DS-Usage)
 
-- [Jakarta Transactions (JTA) Integration](#JTA)
+- [Jakarta Transactions (JTA) Integration](#jakarta-transactions-jta-integration)
 
   - [Maven Coordinates](#JTA-Maven-Coordinates)
 

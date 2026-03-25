@@ -2,15 +2,15 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
   - [Jaeger Tracing](#jaeger-tracing)
 
@@ -18,7 +18,7 @@
 
   - [OpenTelemetry Tracing](#opentelemetry-tracing)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

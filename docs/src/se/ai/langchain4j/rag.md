@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Retrieval-Augmented Generation](#_retrieval_augmented_generation)
+- [Retrieval-Augmented Generation](#retrieval-augmented-generation)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Maven Coordinates
 

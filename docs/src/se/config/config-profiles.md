@@ -2,15 +2,15 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Profile Options](#_profile_options)
+- [Profile Options](#profile-options)
 
-- [Profile Config Source](#Profile-Config-Source)
+- [Profile Config Source](#profile-config-sources)
 
-- [Profile Files](#Profile-File)
+- [Profile Files](#profile-files)
 
-- [Declarative](#Declarative)
+- [Declarative](#declarative)
 
 ## Overview
 

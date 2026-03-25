@@ -2,19 +2,19 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Maven Coordinates](#Maven-Coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [REST Endpoints](#Rest-Endpoints)
+- [REST Endpoints](#rest-endpoints)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

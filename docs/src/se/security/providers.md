@@ -2,11 +2,11 @@
 
 ### Contents
 
-- [Implemented Security Providers](#_implemented_security_providers)
+- [Implemented Security Providers](#implemented-security-providers)
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ### Implemented Security Providers
 

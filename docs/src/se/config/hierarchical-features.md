@@ -2,19 +2,19 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Configuration Node Types](#_configuration_node_types)
+- [Configuration Node Types](#configuration-node-types)
 
-- [Configuration Key](#_configuration_key)
+- [Configuration Key](#configuration-key)
 
-- [In-memory Representation of Configuration](#_in_memory_representation_of_configuration)
+- [In-memory Representation of Configuration](#in-memory-representation-of-configuration)
 
-- [Access by Key](#accessByKey)
+- [Access by Key](#access-by-key)
 
-- [Access by General Navigation](#_access_by_general_navigation)
+- [Access by General Navigation](#access-by-general-navigation)
 
-- [Detaching a Config Subtree](#_detaching_a_config_subtree)
+- [Detaching a Config Subtree](#detaching-a-config-subtree)
 
 ## Overview
 

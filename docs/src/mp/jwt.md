@@ -2,21 +2,21 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [API](#_api)
+- [API](#api)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Converting Configuration to Simple Types](#_converting_configuration_to_simple_types)
+- [Converting Configuration to Simple Types](#converting-configuration-to-simple-types)
 
-- [Converting Configuration to `enum` Values](#_converting_configuration_to_enum_values)
+- [Converting Configuration to `enum` Values](#converting-configuration-to-enum-values)
 
-- [Converting Configuration to Complex Types](#_converting_configuration_to_complex_types)
+- [Converting Configuration to Complex Types](#converting-configuration-to-complex-types)
 
-- [Advanced Conversions using Explicit Mapping Logic](#_advanced_conversions_using_explicit_mapping_logic)
+- [Advanced Conversions using Explicit Mapping Logic](#advanced-conversions-using-explicit-mapping-logic)
 
-- [Conversions using JavaBean Deserialization](#_conversions_using_javabean_deserialization)
+- [Conversions using JavaBean Deserialization](#conversions-using-javabean-deserialization)
 
 ## Overview
 

@@ -2,21 +2,21 @@
 
 ### Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [API Usage](#_api_usage)
+- [API Usage](#api-usage)
 
-- [Providers](#_providers)
+- [Providers](#providers)
 
   - [Eureka](#_eureka)
 
-- [Integrations](#_integrations)
+- [Integrations](#integrations)
 
   - [Web Client](#_web_client_discovery_integration)
 
-- [References](#_references)
+- [References](#references)
 
 ### Overview
 

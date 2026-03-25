@@ -2,19 +2,19 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Config](#_config)
+- [Config](#config)
 
-- [Consuming Messages](#_consuming_messages)
+- [Consuming Messages](#consuming-messages)
 
-- [Producing Messages](#_producing_messages)
+- [Producing Messages](#producing-messages)
 
-- [NACK Strategy](#_nack_strategy)
+- [NACK Strategy](#nack-strategy)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
 ## Overview
 

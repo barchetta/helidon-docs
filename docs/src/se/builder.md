@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Use Cases](#_use_cases)
+- [Use Cases](#use-cases)
 
   - [Generate a class with a builder](#_generate_a_class_with_a_builder)
 
@@ -14,7 +14,7 @@
 
   - [Creating a runtime type](#_creating_a_runtime_type)
 
-- [API](#_api)
+- [API](#api)
 
 ## Overview
 

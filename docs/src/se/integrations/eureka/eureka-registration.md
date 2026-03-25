@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Installation](#_installation)
+- [Installation](#installation)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Logging](#_logging)
+- [Logging](#logging)
 
-- [Related Documentation](#_related_documentation)
+- [Related Documentation](#related-documentation)
 
 ## Overview
 

@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Local Testing](#Local-Testing)
+- [Local Testing](#local-testing)
 
-- [References](#_references)
+- [References](#references)
 
 ## Overview
 

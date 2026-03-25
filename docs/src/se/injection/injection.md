@@ -2,37 +2,37 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Basic terms](#_basic_terms)
+- [Basic terms](#basic-terms)
 
-- [How are services defined?](#_how_are_services_defined)
+- [How are services defined?](#how-are-services-defined)
 
-- [Injection points](#_injection_points)
+- [Injection points](#injection-points)
 
-- [Scopes](#_scopes)
+- [Scopes](#scopes)
 
-- [Build time](#_build_time)
+- [Build time](#build-time)
 
-- [Basic injection example](#_basic_injection_example)
+- [Basic injection example](#basic-injection-example)
 
-- [Service Lifecycle](#_service_lifecycle)
+- [Service Lifecycle](#service-lifecycle)
 
-- [Qualifiers](#_qualifiers)
+- [Qualifiers](#qualifiers)
 
-- [Factories](#_factories)
+- [Factories](#factories)
 
-- [Interceptors](#_interceptors)
+- [Interceptors](#interceptors)
 
-- [Events](#_events)
+- [Events](#events)
 
-- [Programmatic Lookup](#_programmatic_lookup)
+- [Programmatic Lookup](#programmatic-lookup)
 
-- [Startup](#generate-binding)
+- [Startup](#startup)
 
 ## Overview
 

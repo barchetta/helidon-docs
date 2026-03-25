@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [API](#_api)
+- [API](#api)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
   - [Configuring TLS](#_configuring_tls)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
   - [Defining a Client Interface](#_defining_a_client_interface)
 
@@ -20,7 +20,7 @@
 
   - [Injecting Channels](#_injecting_channels)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
 ## Overview
 

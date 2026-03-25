@@ -2,15 +2,15 @@
 
 ## Content
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Discovery of REST Beans](#_discovery_of_rest_beans)
+- [Discovery of REST Beans](#discovery-of-rest-beans)
 
-- [Setting Application Path](#_setting_application_path)
+- [Setting Application Path](#setting-application-path)
 
-- [Access to Application Instances](#_access_to_application_instances)
+- [Access to Application Instances](#access-to-application-instances)
 
-- [Injection Managers in Helidon](#_injection_managers_in_helidon)
+- [Injection Managers in Helidon](#injection-managers-in-helidon)
 
 ## Overview
 

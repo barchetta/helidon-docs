@@ -2,11 +2,11 @@
 
 ### Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Features](#_features)
+- [Features](#features)
 
 ### Overview
 

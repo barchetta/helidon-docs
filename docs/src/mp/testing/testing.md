@@ -2,21 +2,21 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Mock Support](#_mock_support)
+- [Mock Support](#mock-support)
 
-- [Virtual Threads](#_virtual_threads)
+- [Virtual Threads](#virtual-threads)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

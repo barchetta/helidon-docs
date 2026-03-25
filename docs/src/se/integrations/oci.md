@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
   - [Configuring Authentication](#_configuring_authentication)
 
@@ -16,9 +16,9 @@
 
   - [Instance Metadata Service Instance Information](#_imds)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [References](#_references)
+- [References](#references)
 
 ## Overview
 

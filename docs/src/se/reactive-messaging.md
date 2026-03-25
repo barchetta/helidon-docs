@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
   - [Channel](#_channel)
 
@@ -22,9 +22,9 @@
 
     - [AQ Connector](#_aq_connector)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 

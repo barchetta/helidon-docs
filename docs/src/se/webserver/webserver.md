@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
   - [Configuring the WebServer in Your Code](#_configuring_the_webserver_in_your_code)
 
@@ -16,19 +16,19 @@
 
   - [Configuration Options](#_configuration_options)
 
-- [Routing](#_routing)
+- [Routing](#routing)
 
   - [Request Handling](#_request_handling)
 
   - [Error Handling](#_error_handling)
 
-- [Server Features](#_server_features)
+- [Server Features](#server-features)
 
   - [Access Log](#_access_log)
 
   - [Context](#_context)
 
-- [Supported Technologies](#_supported_technologies)
+- [Supported Technologies](#supported-technologies)
 
   - [HTTP/2 Support](#_http2_support)
 

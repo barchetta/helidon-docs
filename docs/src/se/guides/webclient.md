@@ -35,9 +35,9 @@ export JAVA_HOME=`/usr/libexec/java_home -v 21`
 export JAVA_HOME=/usr/lib/jvm/jdk-21
 ```
 
-- [WebClient features](#WebClient-features)
+- [WebClient features](#webclient-features)
 
-- [WebClient usage](#WebClient-usage)
+- [WebClient usage](#webclient-usage)
 
 - [WebClient Metrics](#WebClient-Metrics)
 

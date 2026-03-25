@@ -2,13 +2,13 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
-- [API](#_api)
+- [API](#api)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
   - [Common Settings](#common-config)
 
@@ -18,7 +18,7 @@
 
   - [Logging](#logger-config)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Overview
 

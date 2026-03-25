@@ -2,11 +2,11 @@
 
 ## Contents
 
-- [Maven Coordinates](#_maven_coordinates)
+- [Maven Coordinates](#maven-coordinates)
 
-- [In-Process Embedding Model](#_in_process_embedding_model)
+- [In-Process Embedding Model](#in-process-embedding-model)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Maven Coordinates
 

@@ -2,17 +2,17 @@
 
 ## Contents
 
-- [Overview](#_overview)
+- [Overview](#overview)
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [Configuration](#_configuration)
+- [Configuration](#configuration)
 
-- [Examples](#_examples)
+- [Examples](#examples)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
   - [Jaeger Tracing](#jaeger-tracing)
 
@@ -22,7 +22,7 @@
 
   - [Responding to Span Life Cycle Events](#Tracing-callbacks)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
 ## Overview
 
