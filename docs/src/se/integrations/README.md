@@ -1,10 +1,10 @@
 # Integrations
 
-Integrations with third party components.
+Index of Integrations documentation.
 
-| Topic                      | Description                                                                                            |
-| -------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [Eureka](eureka/README.md) | Overview of Eureka.                                                                                    |
-| [HasiCorp Vault](hcv.md)   | HashiCorp Vault is a commonly used Vault in many microservices.                                        |
-| [Neo4J](neo4j.md)          | Neo4j is a graph database management system developed by Neo4j, Inc.                                   |
-| [OCI](oci.md)              | Helidon SE OCI Integration provides easy access to Oracle Cloud Infrastructure using the OCI Java SDK. |
+| Topic | Description |
+| --- | --- |
+| [Eureka](eureka/README.md) | Index of Eureka documentation |
+| [HashiCorp Vault](hcv.md) | Helidon HashiCorp Vault integration |
+| [Neo4j](neo4j.md) | Neo4j integration |
+| [Oracle Cloud Infrastructure](oci.md) | Helidon OCI Integration |

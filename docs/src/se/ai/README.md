@@ -1,8 +1,8 @@
 # AI
 
-Helidon AI provides integration with AI technologies.
+Index of AI documentation.
 
-| Topic                                | Description                                                                                               |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------- |
-| [Langchain4j](langchain4j/README.md) | Overview of Langchain4j.                                                                                  |
-| [MCP](mcp.md)                        | Helidon provides support for building Model Context Protocol (MCP) servers through a dedicated extension. |
+| Topic | Description |
+| --- | --- |
+| [LangChain4j](langchain4j/README.md) | Index of LangChain4j documentation |
+| [MCP](mcp.md) | MCP |

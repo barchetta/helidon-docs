@@ -1,4 +1,26 @@
-# Open AI Provider
+# OpenAI
+
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#_maven_coordinates)
+
+- [Components](#_components)
+
+  - [OpenAiChatModel](#_openaichatmodel)
+
+  - [OpenAiEmbeddingModel](#_openaiembeddingmodel)
+
+  - [OpenAiImageModel](#_openaiimagemodel)
+
+  - [OpenAiLanguageModel](#_openailanguagemodel)
+
+  - [OpenAiModerationModel](#_openaimoderationmodel)
+
+  - [OpenAiStreamingChatModel](#_openaistreamingchatmodel)
+
+- [Additional Information](#_additional_information)
 
 ## Overview
 
@@ -6,10 +28,9 @@ This module adds support for selected Open AI models.
 
 ## Maven Coordinates
 
-In addition to the [Helidon integration with LangChain4j core dependencies](langchain4j.md#maven-coordinates), you must add the
-following:
+In addition to the [Helidon integration with LangChain4j core dependencies](langchain4j.md#maven-coordinates), you must add the following:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.integrations.langchain4j.providers</groupId>
     <artifactId>helidon-integrations-langchain4j-providers-open-ai</artifactId>
@@ -20,19 +41,21 @@ following:
 
 ### OpenAiChatModel
 
-To automatically create and add `OpenAiChatModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OpenAiChatModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    chat-model:
-      enabled: true
+  providers:
+    open-ai:
       api-key: "demo"
+
+  models:
+    openai-chat-model:
+      provider: open-ai
+      model-name: "gpt-4o-mini"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
@@ -41,7 +64,7 @@ Full list of configuration properties:
 | `api-key` | string | Required. The API key used to authenticate requests to the OpenAI API. |
 | `base-url` | string | The base URL for the OpenAI API. If not present, the default value supplied from LangChain4j is used. |
 | `custom-headers` | Map\<string, string\> | A map containing custom headers. |
-| `enabled` | boolean | If set to `false` (default), OpenAI model will not be available even if configured. |
+| `enabled` | boolean | If set to `false`, OpenAI model will not be available even if configured. |
 | `frequency-penalty` | double | The frequency penalty, between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model’s likelihood to repeat the same line. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
@@ -67,46 +90,39 @@ Full list of configuration properties:
 
 The framework attempts to resolve a proxy using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `java.net.Proxy` with the name `open-ai.chat-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.chat-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `java.net.Proxy` service with the name
-    `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
 
-3.  **No proxy**: If neither service is found, the framework will not
-    use a proxy.
+3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
 
-The framework attempts to resolve a tokenizer using the following
-strategy:
+The framework attempts to resolve a tokenizer using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `dev.langchain4j.model.Tokenizer` with the name
-    `open-ai.chat-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.chat-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `dev.langchain4j.model.Tokenizer` service with
-    the name `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
 
-3.  **Default Tokenizer**: If neither service is found, the framework
-    will use the default tokenizer provided by LangChain4j.
+3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ### OpenAiEmbeddingModel
 
-To automatically create and add `OpenAiEmbeddingModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OpenAiEmbeddingModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    embedding-model:
-      enabled: true
+  providers:
+    open-ai:
+      api-key: "demo"
+
+  models:
+    openai-embedding-model:
+      provider: open-ai
+      model-name: "text-embedding-3-small"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
@@ -116,7 +132,7 @@ Full list of configuration properties:
 | `base-url` | string | The base URL for the OpenAI API. If not present, the default value supplied from LangChain4j is used. |
 | `custom-headers` | Map\<string, string\> | A map containing custom headers. |
 | `dimensions` | int | The dimensionality of the embeddings generated by the model. |
-| `enabled` | boolean | If set to false (default), OpenAI model will not be available even if configured. |
+| `enabled` | boolean | If set to false, OpenAI model will not be available even if configured. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
 | `max-retries` | integer | The maximum number of retries for failed API requests. |
@@ -129,47 +145,39 @@ Full list of configuration properties:
 
 The framework attempts to resolve a proxy using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `java.net.Proxy` with the name
-    `open-ai.embedding-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.embedding-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `java.net.Proxy` service with the name
-    `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
 
-3.  **No proxy**: If neither service is found, the framework will not
-    use a proxy.
+3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
 
-The framework attempts to resolve a tokenizer using the following
-strategy:
+The framework attempts to resolve a tokenizer using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `dev.langchain4j.model.Tokenizer` with the name
-    `open-ai.embedding-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.embedding-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `dev.langchain4j.model.Tokenizer` service with
-    the name `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
 
-3.  **Default Tokenizer**: If neither service is found, the framework
-    will use the default tokenizer provided by LangChain4j.
+3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ### OpenAiImageModel
 
-To automatically create and add `OpenAiImageModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OpenAiImageModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    image-model:
-      enabled: true
+  providers:
+    open-ai:
+      api-key: "demo"
+
+  models:
+    openai-image-model:
+      provider: open-ai
+      model-name: "gpt-image-1"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
@@ -178,7 +186,7 @@ Full list of configuration properties:
 | `api-key` | string | Required. The API key used to authenticate requests to the OpenAI API. |
 | `base-url` | string | The base URL for the OpenAI API. If not present, the default value supplied from LangChain4j is used. |
 | `custom-headers` | Map\<string, string\> | A map containing custom headers. |
-| `enabled` | boolean | If set to false (default), OpenAI model will not be available even if configured. |
+| `enabled` | boolean | If set to false, the OpenAI model will not be available even if configured. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
 | `max-retries` | integer | The maximum number of retries for failed API requests. |
@@ -197,31 +205,29 @@ Full list of configuration properties:
 
 The framework attempts to resolve a proxy using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `java.net.Proxy` with the name
-    `open-ai.image-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.image-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `java.net.Proxy` service with the name
-    `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
 
-3.  **No proxy**: If neither service is found, the framework will not
-    use a proxy.
+3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 ### OpenAiLanguageModel
 
-To automatically create and add `OpenAiLanguageModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OpenAiLanguageModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    language-model:
-      enabled: true
+  providers:
+    open-ai:
+      api-key: "demo"
+
+  models:
+    openai-language-model:
+      provider: open-ai
+      model-name: "gpt-4o-mini"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
@@ -230,7 +236,7 @@ Full list of configuration properties:
 | `api-key` | string | Required. The API key used to authenticate requests to the OpenAI API. |
 | `base-url` | string | The base URL for the OpenAI API. If not present, the default value supplied from LangChain4j is used. |
 | `custom-headers` | Map\<string, string\> | A map containing custom headers. |
-| `enabled` | boolean | If set to false (default), OpenAI model will not be available even if configured. |
+| `enabled` | boolean | If set to false, the OpenAI model will not be available even if configured. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
 | `max-retries` | integer | The maximum number of retries for failed API requests. |
@@ -243,47 +249,39 @@ Full list of configuration properties:
 
 The framework attempts to resolve a proxy using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `java.net.Proxy` with the name
-    `open-ai.language-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.language-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `java.net.Proxy` service with the name
-    `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
 
-3.  **No proxy**: If neither service is found, the framework will not
-    use a proxy.
+3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
 
-The framework attempts to resolve a tokenizer using the following
-strategy:
+The framework attempts to resolve a tokenizer using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `dev.langchain4j.model.Tokenizer` with the name
-    `open-ai.language-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.language-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `dev.langchain4j.model.Tokenizer` service with
-    the name `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
 
-3.  **Default Tokenizer**: If neither service is found, the framework
-    will use the default tokenizer provided by LangChain4j.
+3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ### OpenAiModerationModel
 
-To automatically create and add `OpenAiModerationModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OpenAiModerationModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    moderation-model:
-      enabled: true
+  providers:
+    open-ai:
+      api-key: "demo"
+
+  models:
+    openai-moderation-model:
+      provider: open-ai
+      model-name: "omni-moderation-latest"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
@@ -292,7 +290,7 @@ Full list of configuration properties:
 | `api-key` | string | Required. The API key used to authenticate requests to the OpenAI API. |
 | `base-url` | string | The base URL for the OpenAI API. If not present, the default value supplied from LangChain4j is used. |
 | `custom-headers` | Map\<string, string\> | A map containing custom headers. |
-| `enabled` | boolean | If set to false (default), OpenAI model will not be available even if configured. |
+| `enabled` | boolean | If set to false, the OpenAI model will not be available even if configured. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
 | `max-retries` | integer | The maximum number of retries for failed API requests. |
@@ -304,32 +302,29 @@ Full list of configuration properties:
 
 The framework attempts to resolve a proxy using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `java.net.Proxy` with the name
-    `open-ai.moderation-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.moderation-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `java.net.Proxy` service with the name
-    `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
 
-3.  **No proxy**: If neither service is found, the framework will not
-    use a proxy.
+3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 ### OpenAiStreamingChatModel
 
-To automatically create and add `OpenAiStreamingChatModel` to the
-service registry add the following lines to `application.yaml`:
+To automatically create and add `OpenAiStreamingChatModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    streaming-chat-model:
-      enabled: true
+  providers:
+    open-ai:
       api-key: "demo"
+
+  models:
+    openai-streaming-chat-model:
+      provider: open-ai
+      model-name: "gpt-4o-mini"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
@@ -338,7 +333,7 @@ Full list of configuration properties:
 | `api-key` | string | Required. The API key used to authenticate requests to the OpenAI API. |
 | `base-url` | string | The base URL for the OpenAI API. If not present, the default value supplied from LangChain4j is used. |
 | `custom-headers` | Map\<string, string\> | A map containing custom headers. |
-| `enabled` | boolean | If set to `false` (default), OpenAI model will not be available even if configured. |
+| `enabled` | boolean | If set to `false`, OpenAI model will not be available even if configured. |
 | `frequency-penalty` | double | The frequency penalty, between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model’s likelihood to repeat the same line. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
@@ -362,36 +357,28 @@ Full list of configuration properties:
 
 The framework attempts to resolve a proxy using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `java.net.Proxy` with the name
-    `open-ai.streaming-chat-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.streaming-chat-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `java.net.Proxy` service with the name
-    `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
 
-3.  **No proxy**: If neither service is found, the framework will not
-    use a proxy.
+3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
 
-The framework attempts to resolve a tokenizer using the following
-strategy:
+The framework attempts to resolve a tokenizer using the following strategy:
 
-1.  **Check for a named service**: Look in the service registry for a
-    service of type `dev.langchain4j.model.Tokenizer` with the name
-    `open-ai.streaming-chat-model`.
+1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.streaming-chat-model`.
 
-2.  **Fallback to another named service**: If the first service is not
-    found, search for a `dev.langchain4j.model.Tokenizer` service with
-    the name `open-ai`.
+2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
 
-3.  **Default Tokenizer**: If neither service is found, the framework
-    will use the default tokenizer provided by LangChain4j.
+3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
+
 - [LangChain4j OpenAI Documentation](https://docs.langchain4j.dev/integrations/language-models/open-ai)
+
 - [OpenAI API Documentation](https://platform.openai.com/docs/introduction)
+
 - [OpenAI API Reference](https://platform.openai.com/docs/api-reference)

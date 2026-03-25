@@ -1,14 +1,14 @@
 # Config
 
-Helidon Configuration provides a Java API to load and process configuration data from various sources into a `Config` object which provides typed access to configuration values.
+Index of Config documentation.
 
-| Topic                                               | Description                                                                                                                                                                                                                                                                                                                                      |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [About](introduction.md)                            | Helidon provides a very flexible and comprehensive configuration system, offering you many application configuration choices.                                                                                                                                                                                                                    |
-| [Configuration Profiles](config-profiles.md)        | Configuration profiles provide a capability to prepare structure of configuration for each environment in advance, and then simply switch between these structures using a system property or an environment variable.                                                                                                                           |
-| [Extensions](extensions.md)                         | Developer-provided extensions influence how the config system behaves.                                                                                                                                                                                                                                                                           |
-| [Hierarchical Features](hierarchical-features.md)   | The config system represents configuration as a tree in memory.                                                                                                                                                                                                                                                                                  |
-| [Mutability Support](mutability-support.md)         | An in-memory config tree, once loaded, is immutable, even though the data in the underlying config sources *can* change over time.                                                                                                                                                                                                               |
-| [Property Mapping](property-mapping.md)             | Although config values are originally text, you can use the config system’s built-in conversions or add your own to translate text into Java primitive types and simple objects (such as `Double`), into `enum` values, and to express parts of the config tree as complex types (`List`, `Map`, and custom types specific to your application). |
-| [Supported Formats](supported-formats.md)           | Helidon Config provides several extension modules that support other configuration formats (parsers) and sources.                                                                                                                                                                                                                                |
-| [Advanced Configuration](advanced-configuration.md) | This section discusses several advanced topics related to Helidon configuration.                                                                                                                                                                                                                                                                 |
+| Topic | Description |
+| --- | --- |
+| [Additional Supported Formats and Sources](supported-formats.md) | Helidon config supported formats and sources |
+| [Advanced Configuration Topics](advanced-configuration.md) | Helidon advanced configuration |
+| [Configuration Profiles](config-profiles.md) | Helidon config profiles |
+| [Extensions](extensions.md) | Helidon config extensions |
+| [Hierarchical Features](hierarchical-features.md) | Helidon hierarchical features |
+| [Mutability Support](mutability-support.md) | Helidon mutability support |
+| [Property Mapping](property-mapping.md) | Helidon config property mapping |
+| [The Configuration Component](introduction.md) | Helidon config introduction |

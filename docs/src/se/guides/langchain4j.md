@@ -1,49 +1,41 @@
-# LangChain4j guide
+# Helidon SE LangChain4j Guide
 
-This guide describes how to create a sample AI powered Helidon SE
-project with LangChain4j integration.
+This guide describes how to create a sample AI powered Helidon SE project with LangChain4j integration.
 
 ## Introduction
 
-[LangChain4j](https://github.com/langchain4j/langchain4j) is a Java
-framework for building AI-powered applications using Large Language
-Models (LLMs). It provides seamless integration with multiple LLM
-providers, including OpenAI, Cohere, Hugging Face, and others. Key
-features include AI Services for easy model interaction, support for
-Retrieval-Augmented Generation (RAG) to enhance responses with external
-data, and tools for working with embeddings and knowledge retrieval.
+[LangChain4j](https://github.com/langchain4j/langchain4j) is a Java framework for building AI-powered applications using Large Language Models (LLMs). It provides seamless integration with multiple LLM providers, including OpenAI, Cohere, Hugging Face, and others. Key features include AI Services and Agents for model interaction, support for Retrieval-Augmented Generation (RAG) to enhance responses with external data, and tools for working with embeddings and knowledge retrieval.
 
-Helidon provides a LangChain4j integration module that simplifies the
-use of LangChain4j in Helidon applications.
+Helidon provides a LangChain4j integration module that simplifies the use of LangChain4j in Helidon applications.
 
 > [!NOTE]
-> LangChain4j integration is a preview feature. The APIs shown here are
-> subject to change. These APIs will be finalized in a future release of
-> Helidon.
+> LangChain4j integration is a preview feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon.
 
 ## What you need
 
 For this 15 minute tutorial, you will need the following:
 
-|                                                                                                         |                                                                                                                                                     |
-|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| [JavaSE21](https://www.oracle.com/technetwork/java/javase/downloads) ([OpenJDK21](http://jdk.java.net)) | Helidon requires Java 21+ (25+ recommended).                                                                                                        |
-| [Maven 3.8+](https://maven.apache.org/download.cgi)                                                     | Helidon requires Maven 3.8+.                                                                                                                        |
-| [Docker 18.09+](https://docs.docker.com/install/)                                                       | If you want to build and run Docker containers.                                                                                                     |
-| [Kubectl 1.16.5+](https://kubernetes.io/docs/tasks/tools/install-kubectl/)                              | If you want to deploy to Kubernetes, you need `kubectl` and a Kubernetes cluster (you can [install one on your desktop](../../about/kubernetes.md). |
+|  |  |
+|----|----|
+| [Java SE 21](https://www.oracle.com/technetwork/java/javase/downloads) ([Open JDK 21](http://jdk.java.net)) | Helidon requires Java 21+ (25+ recommended). |
+| [Maven 3.8+](https://maven.apache.org/download.cgi) | Helidon requires Maven 3.8+. |
+| [Docker 18.09+](https://docs.docker.com/install/) | If you want to build and run Docker containers. |
+| [Kubectl 1.16.5+](https://kubernetes.io/docs/tasks/tools/install-kubectl/) | If you want to deploy to Kubernetes, you need `kubectl` and a Kubernetes cluster (you can [install one on your desktop](../../about/kubernetes.md)). |
 
 Prerequisite product versions for Helidon 4.4.0-SNAPSHOT
 
-Verify Prerequisites:
-```shell
+*Verify Prerequisites*
+
+``` bash
 java -version
 mvn --version
 docker --version
 kubectl version
 ```
 
-Setting JAVA_HOME:
-```shell
+*Setting JAVA_HOME*
+
+``` bash
 # On Mac
 export JAVA_HOME=`/usr/libexec/java_home -v 21`
 
@@ -56,8 +48,9 @@ export JAVA_HOME=/usr/lib/jvm/jdk-21
 
 Generate the project using the Helidon SE Quickstart Maven archetype.
 
-Run the Maven archetype:
-```shell
+*Run the Maven archetype:*
+
+``` bash
 mvn -U archetype:generate -DinteractiveMode=false \
     -DarchetypeGroupId=io.helidon.archetypes \
     -DarchetypeArtifactId=helidon-quickstart-se \
@@ -67,20 +60,17 @@ mvn -U archetype:generate -DinteractiveMode=false \
     -Dpackage=io.helidon.examples.quickstart.lc4j
 ```
 
-The archetype generates a Maven project in your current directory, (for
-example, `helidon-quickstart-lc4j-se`). Change into this directory and
-build.
+The archetype generates a Maven project in your current directory, (for example, `helidon-quickstart-lc4j-se`). Change into this directory and build.
 
-```shell
+``` bash
 cd helidon-quickstart-lc4j-se
 ```
 
 ## Dependencies
 
-Add necessary dependencies for LangChain4j integration and OpenAI
-provider in the project POM.
+Add necessary dependencies for LangChain4j integration and OpenAI provider in the project POM.
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.integrations.langchain4j</groupId>
     <artifactId>helidon-integrations-langchain4j</artifactId>
@@ -91,31 +81,19 @@ provider in the project POM.
 </dependency>
 ```
 
-You will also need extra annotation processors as LangChain4j AI
-services are handled as superfast build time beans.
+You will also need extra annotation processors as LangChain4j AI services are handled as superfast build time beans.
 
-Include the following annotation processors in the `<build><plugins>`
-section of `pom.xml`:
+Include the following annotation processor in the `<build><plugins>` section of `pom.xml`:
 
-```xml
+``` xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
     <configuration>
         <annotationProcessorPaths>
             <path>
-                <groupId>io.helidon.codegen</groupId>
-                <artifactId>helidon-codegen-apt</artifactId>
-                <version>${helidon.version}</version>
-            </path>
-            <path>
-                <groupId>io.helidon.integrations.langchain4j</groupId>
-                <artifactId>helidon-integrations-langchain4j-codegen</artifactId>
-                <version>${helidon.version}</version>
-            </path>
-            <path>
-                <groupId>io.helidon.service</groupId>
-                <artifactId>helidon-service-codegen</artifactId>
+                <groupId>io.helidon.bundles</groupId>
+                <artifactId>helidon-bundles-apt</artifactId>
                 <version>${helidon.version}</version>
             </path>
         </annotationProcessorPaths>
@@ -125,51 +103,46 @@ section of `pom.xml`:
 
 ## Configuration
 
-Add to the configuration file `./src/main/resources/application.yaml`
-following LangChain4j configuration for OpenAI provider.
+Add to the configuration file `./src/main/resources/application.yaml` following LangChain4j configuration for OpenAI provider.
 
-> [!TIP]
-> Don’t forget to enable your model with `enabled` set to `true`
+Model configured under `langchain4j.models` has arbitrary name `pirate-chat-model`, it uses `open-ai` provider defined under `langchain4j.providers`. With a single configured chat model, default auto-discovery resolves it automatically. If you configure multiple chat models, use `@Ai.ChatModel("pirate-chat-model")` to select one explicitly.
 
-```yaml
+``` yaml
 langchain4j:
-  open-ai:
-    chat-model:
-      enabled: true
-      model-name: "gpt-4o-mini"
+  providers:
+    open-ai:
       # Lc4j demo api key needs to be routed over lc4j proxy
       base-url: "http://langchain4j.dev/demo/openai/v1"
       api-key: "demo"
+  models:
+    pirate-chat-model:
+      provider: open-ai
+      model-name: "gpt-4o-mini"
 ```
 
 ## Ai Service
 
-Next we need to create LangChain4j [Ai service](https://docs.langchain4j.dev/tutorials/ai-services) and
-annotate it with `@Ai.Service` so Helidon can make a superfast build
-time bean from it.
+Next we need to create LangChain4j [Ai service](https://docs.langchain4j.dev/tutorials/ai-services) and annotate it with `@Ai.Service` so Helidon can make a superfast build time bean from it.
 
-```java
+``` java
 @Ai.Service
 public interface PirateService {
 
     @SystemMessage("""
-            You are a pirate who like to tell stories about his time.
+            You are a pirate who like to tell stories about his time at the sea.
             """)
     String chat(String prompt);
 }
 ```
 
-Next step is to add new Http POST handler to the webserver, you can do
-it by changing method `routing` in
-`src/main/java/io/helidon/examples/quickstart/lc4j/Main.java` like
-following example shows.
+Next step is to add new Http POST handler to the webserver, you can do it by changing method `routing` in `src/main/java/io/helidon/examples/quickstart/lc4j/Main.java` like following example shows.
 
-```java
+``` java
 static void routing(HttpRouting.Builder routing) {
     routing.post("/chat", (req, res) -> {
         var prompt = req.content().as(String.class);
 
-        var response = Services.get(PirateService.class)
+        var response = Services.get(PirateService.class) 
                 .chat(prompt);
 
         res.send(response);
@@ -177,8 +150,7 @@ static void routing(HttpRouting.Builder routing) {
 }
 ```
 
-- Notice how we can look up the LangChain4j Ai service as Helidon
-  declarative superfast build time bean.
+- Notice how we can look up the LangChain4j Ai service as Helidon declarative superfast build time bean.
 
 When we build and run our Helidon AI-powered quickstart:
 
@@ -190,10 +162,9 @@ We can test our pirate service with curl:
 
 ## Prompt Template Arguments
 
-Ofcourse all the features from LangChain4j Ai services are going to
-work, let’s try to expand the example with [template arguments](https://docs.langchain4j.dev/tutorials/ai-services#usermessage).
+Ofcourse all the features from LangChain4j Ai services are going to work, let’s try to expand the example with [template arguments](https://docs.langchain4j.dev/tutorials/ai-services#usermessage).
 
-```java
+``` java
 @Ai.Service
 public interface PirateService {
 
@@ -208,7 +179,7 @@ public interface PirateService {
 
 Remember to fix the code calling the service.
 
-```java
+``` java
 static void routing(HttpRouting.Builder routing) {
     routing.post("/chat", (req, res) -> {
         var prompt = req.content().as(String.class);
@@ -230,11 +201,9 @@ We can test our pirate service with curl:
 
 ## Custom Memory Provider
 
-We can also extend the pirate example with [conversation memory](https://docs.langchain4j.dev/tutorials/chat-memory). First, we
-need to create a memory provider so our memory works per conversation
-ID.
+We can also extend the pirate example with [conversation memory](https://docs.langchain4j.dev/tutorials/chat-memory). First, we need to create a memory provider so our memory works per conversation ID.
 
-```java
+``` java
 @Service.Singleton
 @Service.Named(PirateMemoryProvider.NAME)
 public class PirateMemoryProvider implements Supplier<ChatMemoryProvider> {
@@ -251,10 +220,9 @@ public class PirateMemoryProvider implements Supplier<ChatMemoryProvider> {
 }
 ```
 
-Now we can extend Ai service with an extra argument so we can supply
-identifier of our conversation with the pirate.
+Now we can extend Ai service with an extra argument so we can supply identifier of our conversation with the pirate.
 
-```java
+``` java
 @Ai.Service
 @Ai.ChatMemoryProvider(PirateMemoryProvider.NAME)
 public interface PirateService {
@@ -271,7 +239,7 @@ public interface PirateService {
 
 We will expect conversation id as a header on the webserver.
 
-```java
+``` java
 static void routing(HttpRouting.Builder routing) {
     routing.post("/chat", (req, res) -> {
         var prompt = req.content().as(String.class);

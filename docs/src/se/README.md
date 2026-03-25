@@ -1,37 +1,38 @@
 # SE
 
-Helidon SE is Helidon’s foundational set of APIs and, as of Helidon 4, it uses virtual threads to enable these APIs to change from asynchronous to blocking.
+Index of SE documentation.
 
-| Topic                                        | Description                                                                                                                                                                                                            |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [AI](ai/README.md)                           | Overview of AI.                                                                                                                                                                                                        |
-| [Builder](builder.md)                        | Helidon Builder is an API designed for generating immutable objects using the builder pattern, with optional integration with Helidon Config for initialization at runtime.                                            |
-| [Config](config/README.md)                   | Overview of Config.                                                                                                                                                                                                    |
-| [CORS](cors.md)                              | The [cross-origin resource sharing (CORS) protocol](https://www.w3.org/TR/cors) helps developers control if and how REST resources served by their applications can be shared across origins.                          |
-| [Data](data.md)                              | The Helidon SE Data Repository provides a unified API for working with database queries.                                                                                                                               |
-| [DBClient](dbclient.md)                      | The Helidon SE DB Client provides a unified API for working with databases.                                                                                                                                            |
-| [Discovery](discovery.md)                    | In Helidon, *discovery* is the general process of finding named sets of advertised resources at a moment of an application’s runtime.                                                                                  |
-| [Fault Tolerance](fault-tolerance.md)        | Helidon Fault Tolerance support is inspired by [MicroProfile Fault Tolerance](https://download.eclipse.org/microprofile/microprofile-fault-tolerance-4.0.2/microprofile-fault-tolerance-spec-4.0.2.html).              |
-| [GraphQL](graphql.md)                        | The Helidon GraphQL Server provides a framework for creating [GraphQL](https://github.com/graphql-java/graphql-java) applications that integrate with the Helidon WebServer.                                           |
-| [gRPC](grpc/README.md)                       | Overview of gRPC.                                                                                                                                                                                                      |
-| [Guides](guides/README.md)                   | Overview of Guides.                                                                                                                                                                                                    |
-| [Health](health.md)                          | It’s a good practice to monitor your microservice’s health to ensure that it is available and performs correctly.                                                                                                      |
-| [Injection](injection/README.md)             | Overview of Injection.                                                                                                                                                                                                 |
-| [Integrations](integrations/README.md)       | Overview of Integrations.                                                                                                                                                                                              |
-| [JSON Schema](json-schema.md)                | JSON Schema is a specification for describing the structure and validation rules of JSON data.                                                                                                                         |
-| [JSON-RPC](jsonrpc/README.md)                | Overview of JSON-RPC.                                                                                                                                                                                                  |
-| [Metrics](metrics/README.md)                 | Overview of Metrics.                                                                                                                                                                                                   |
-| [Observability](observability.md)            | In Helidon 4 all observability features were moved to one logical module: `observe`.                                                                                                                                   |
-| [OpenAPI](openapi/README.md)                 | Overview of OpenAPI.                                                                                                                                                                                                   |
-| [OpenTelemetry](open-telemetry.md)           | Helidon SE supports OpenTelemetry in several important ways:                                                                                                                                                           |
-| [Reactive Messaging](reactive-messaging.md)  | Asynchronous messaging is a commonly used form of communication in the world of microservices.                                                                                                                         |
-| [Reactivestreams](reactivestreams/README.md) | Overview of Reactivestreams.                                                                                                                                                                                           |
-| [Scheduling](scheduling.md)                  | Scheduling is an essential feature for the Enterprise.                                                                                                                                                                 |
-| [Security](security/README.md)               | Overview of Security.                                                                                                                                                                                                  |
-| [SSE](sse.md)                                | Server-sent events (SSE) enable servers to push data to clients (e.g.                                                                                                                                                  |
-| [Testing](testing.md)                        | Helidon provides built-in test support for Helidon testing with JUnit 5.                                                                                                                                               |
-| [Tracing](tracing.md)                        | Distributed tracing is a critical feature of microservice based applications, since it traces workflow both within a service and across multiple services.                                                             |
-| [Validation](validation.md)                  | Validation checks values against constraints.                                                                                                                                                                          |
-| [WebClient](webclient.md)                    | WebClient is an HTTP client for Helidon SE.                                                                                                                                                                            |
-| [Webserver](webserver/README.md)             | Overview of Webserver.                                                                                                                                                                                                 |
-| [WebSocket](websocket.md)                    | Helidon integrates with [Tyrus](https://projects.eclipse.org/projects/ee4j.tyrus) to provide support for the [Jakarta WebSocket API](https://jakarta.ee/specifications/websocket/2.1/jakarta-websocket-spec-2.1.html). |
+| Topic | Description |
+| --- | --- |
+| [About Helidon Data Repository](data.md) | Helidon Data Repository |
+| [About Helidon DB Client](dbclient.md) | Helidon DB Client |
+| [AI](ai/README.md) | Index of AI documentation |
+| [Config](config/README.md) | Index of Config documentation |
+| [CORS in Helidon SE](cors.md) | Helidon SE CORS Support |
+| [Discovery](discovery.md) | Helidon SE Discovery Support |
+| [Fault Tolerance in Helidon](fault-tolerance.md) | Fault Tolerance in Helidon |
+| [GraphQL Server Introduction](graphql.md) | Helidon GraphQL Server Introduction |
+| [gRPC](grpc/README.md) | Index of gRPC documentation |
+| [Guides](guides/README.md) | Index of Guides documentation |
+| [Health Checks](health.md) | Helidon health checks |
+| [Helidon Builder](builder.md) | Helidon SE Builder |
+| [Helidon Testing](testing.md) | Testing in Helidon |
+| [Injection](injection/README.md) | Index of Injection documentation |
+| [Integrations](integrations/README.md) | Index of Integrations documentation |
+| [Introduction](introduction.md) | Helidon SE introduction |
+| [JSON](json/README.md) | Index of JSON documentation |
+| [JSON-RPC](jsonrpc/README.md) | Index of JSON-RPC documentation |
+| [Metrics](metrics/README.md) | Index of Metrics documentation |
+| [Observability](observability.md) | Helidon SE Observability |
+| [OpenAPI](openapi/README.md) | Index of OpenAPI documentation |
+| [Overview](scheduling.md) | Scheduling in Helidon SE |
+| [Reactive Messaging](reactive-messaging.md) | Reactive Messaging support in Helidon SE |
+| [Reactivestreams](reactivestreams/README.md) | Index of Reactivestreams documentation |
+| [Security](security/README.md) | Index of Security documentation |
+| [Server-Sent Events in Helidon](sse.md) | Helidon SSE Support |
+| [Telemetry](telemetry/README.md) | Index of Telemetry documentation |
+| [Tracing](tracing.md) | Helidon SE Tracing Support |
+| [Validation](validation.md) | Helidon SE Validation |
+| [WebClient Introduction](webclient.md) | Helidon WebClient |
+| [WebServer](webserver/README.md) | Index of WebServer documentation |
+| [WebSocket Introduction](websocket.md) | Helidon WebSocket Introduction |

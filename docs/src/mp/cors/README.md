@@ -1,8 +1,8 @@
 # CORS
 
-Browse CORS documentation.
+Index of CORS documentation.
 
-| Topic                     | Description                                                                                                                                                                                   |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CORS](cors.md)           | The [cross-origin resource sharing (CORS) protocol](https://www.w3.org/TR/cors) helps developers control if and how REST resources served by their applications can be shared across origins. |
-| [Options](why-options.md) | There are some good reasons why it is `@OPTIONS` methods that you decorate with the Helidon MP `@CrossOrigin` annotation.                                                                     |
+| Topic | Description |
+| --- | --- |
+| [CORS in Helidon MP](cors.md) | Helidon MP CORS Support |
+| [Why `@OPTIONS`?](why-options.md) | Exploration of why Helidon MP associates the `@CrossOrigin` annotation with `@OPTIONS` methods. |

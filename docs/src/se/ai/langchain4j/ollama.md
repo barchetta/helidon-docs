@@ -1,16 +1,32 @@
-# Ollama Provider
+# Ollama
+
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#_maven_coordinates)
+
+- [Components](#_components)
+
+  - [OllamaChatModel](#_ollamachatmodel)
+
+  - [OllamaEmbeddingModel](#_ollamaembeddingmodel)
+
+  - [OllamaLanguageModel](#_ollamalanguagemodel)
+
+  - [OllamaStreamingChatModel](#_ollamastreamingchatmodel)
+
+- [Additional Information](#_additional_information)
 
 ## Overview
 
-This module adds support for selected [Ollama](https://ollama.ai/)
-models.
+This module adds support for selected [Ollama](https://ollama.ai/) models.
 
 ## Maven Coordinates
 
-In addition to the [Helidon integration with LangChain4j core dependencies](langchain4j.md#maven-coordinates), you must add the
-following:
+In addition to the [Helidon integration with LangChain4j core dependencies](langchain4j.md#maven-coordinates), you must add the following:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.integrations.langchain4j.providers</groupId>
     <artifactId>helidon-integrations-langchain4j-providers-ollama</artifactId>
@@ -21,25 +37,28 @@ following:
 
 ### OllamaChatModel
 
-To automatically create and add `OllamaChatModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OllamaChatModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  ollama:
-    chat-model:
-      enabled: true
+  providers:
+    ollama:
+      base-url: "http://localhost:11434"
+
+  models:
+    ollama-chat-model:
+      provider: ollama
+      model-name: "llama3.1"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
 | Key | Type | Description |
 |----|----|----|
 | `base-url` | string | The base URL for the Ollama API. If not present, the default value supplied from LangChain4j is used. |
-| `enabled` | boolean | If set to false (default), the component will not be available even if configured. |
+| `enabled` | boolean | If set to false, the component will not be available even if configured. |
 | `format` | string | Specifies the structure or style of the text produced by the model, such as plain text, JSON, or a custom format. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
@@ -56,25 +75,28 @@ Full list of configuration properties:
 
 ### OllamaEmbeddingModel
 
-To automatically create and add `OllamaEmbeddingModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OllamaEmbeddingModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  ollama:
-    embedding-model:
-      enabled: true
+  providers:
+    ollama:
+      base-url: "http://localhost:11434"
+
+  models:
+    ollama-embedding-model:
+      provider: ollama
+      model-name: "nomic-embed-text"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
 | Key | Type | Description |
 |----|----|----|
 | `base-url` | string | The base URL for the Ollama API. If not present, the default value supplied from LangChain4j is used. |
-| `enabled` | boolean | If set to false (default), the component will not be available even if configured. |
+| `enabled` | boolean | If set to false, the component will not be available even if configured. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
 | `max-retries` | integer | The maximum number of retries for failed API requests. |
@@ -83,25 +105,28 @@ Full list of configuration properties:
 
 ### OllamaLanguageModel
 
-To automatically create and add `OllamaLanguageModel` to the service
-registry add the following lines to `application.yaml`:
+To automatically create and add `OllamaLanguageModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  ollama:
-    language-model:
-      enabled: true
+  providers:
+    ollama:
+      base-url: "http://localhost:11434"
+
+  models:
+    ollama-language-model:
+      provider: ollama
+      model-name: "llama3.1"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
 | Key | Type | Description |
 |----|----|----|
 | `base-url` | string | The base URL for the Ollama API. If not present, the default value supplied from LangChain4j is used. |
-| `enabled` | boolean | If set to false (default), the component will not be available even if configured. |
+| `enabled` | boolean | If set to false, the component will not be available even if configured. |
 | `format` | string | Specifies the structure or style of the text produced by the model, such as plain text, JSON, or a custom format. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
@@ -118,25 +143,28 @@ Full list of configuration properties:
 
 ### OllamaStreamingChatModel
 
-To automatically create and add `OllamaStreamingChatModel` to the
-service registry add the following lines to `application.yaml`:
+To automatically create and add `OllamaStreamingChatModel` to the service registry add the following lines to `application.yaml`:
 
-```yaml
+``` yaml
 langchain4j:
-  ollama:
-    streaming-chat-model:
-      enabled: true
+  providers:
+    ollama:
+      base-url: "http://localhost:11434"
+
+  models:
+    ollama-streaming-chat-model:
+      provider: ollama
+      model-name: "llama3.1"
 ```
 
-If `enabled` is set to `false`, the configuration is ignored, and the
-component is not created.
+If `enabled` is set to `false`, the configuration is ignored, and the component is not created.
 
 Full list of configuration properties:
 
 | Key | Type | Description |
 |----|----|----|
 | `base-url` | string | The base URL for the Ollama API. If not present, the default value supplied from LangChain4j is used. |
-| `enabled` | boolean | If set to false (default), the component will not be available even if configured. |
+| `enabled` | boolean | If set to false, the component will not be available even if configured. |
 | `format` | string | Specifies the structure or style of the text produced by the model, such as plain text, JSON, or a custom format. |
 | `log-requests` | boolean | Whether to log API requests. |
 | `log-responses` | boolean | Whether to log API responses. |
@@ -154,5 +182,7 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
+
 - [LangChain4j Ollama Documentation](https://docs.langchain4j.dev/integrations/language-models/ollama/)
+
 - [Ollama Website](https://ollama.ai/)

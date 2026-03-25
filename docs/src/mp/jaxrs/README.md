@@ -1,10 +1,10 @@
 # JAX-RS
 
-Helidon MP supports JAX-RS using the Jersey implementation.
+Index of JAX-RS documentation.
 
-| Topic                                                            | Description                                                                                                                                                                     |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Helidon Connector](helidon-connector.md)                        | Helidon uses Jersey as the Jakarta REST (JAX-RS) implementation.                                                                                                                |
-| [JAX-RS](jaxrs-applications.md)                                  | The Jakarta REST specification (formerly JAX-RS) defines the notion of an `Application` subclass whose methods return resource and provider classes, singletons and properties. |
-| [JAX-RS Application Configuration](application-configuration.md) | Your application can use the MicroProfile Config or Helidon Config (or both).                                                                                                   |
-| [JJAX-RS Client](jaxrs-client.md)                                | The Jakarta REST Client defines a programmatic API to access REST resources.                                                                                                    |
+| Topic | Description |
+| --- | --- |
+| [Configuring the Application](application-configuration.md) | Helidon MicroProfile application configuration |
+| [Helidon Connector](helidon-connector.md) | Helidon Connector for Jakarta REST Client |
+| [Jakarta REST](jaxrs-applications.md) | Helidon MicroProfile Jakarta REST |
+| [Jakarta REST Client](jaxrs-client.md) | Jakarta REST Client |

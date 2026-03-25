@@ -1,27 +1,37 @@
-# HasiCorp Vault
+# HashiCorp Vault
+
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [Usage](#_usage)
+
+- [Examples](#_examples)
+
+- [Local Testing](#Local-Testing)
+
+- [References](#_references)
 
 ## Overview
 
-HashiCorp Vault is a commonly used Vault in many microservices. The APIs
-are REST-based and Helidon implements them using
-[WebClient](../../se/webclient.md).
+HashiCorp Vault is a commonly used Vault in many microservices. The APIs are REST-based and Helidon implements them using [WebClient](../../se/webclient.md).
 
 ## Maven Coordinates
 
-To enable HashiCorp Vault, add the following dependency to your
-project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
+To enable HashiCorp Vault, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.integrations.vault</groupId>
     <artifactId>helidon-integrations-vault</artifactId>
 </dependency>
 ```
 
-The following is a list of maven coordinates of all Vault modules
-available:
+The following is a list of maven coordinates of all Vault modules available:
 
-```xml
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.integrations.vault.auths</groupId>
@@ -66,18 +76,15 @@ available:
 
 Vault integration supports the following:
 
-- **Secret Engines**: Key/Value version 2, Key/Value version 1,
-  Cubbyhole, PKI, Transit, Database
+- **Secret Engines**: Key/Value version 2, Key/Value version 1, Cubbyhole, PKI, Transit, Database
 
 - **Authentication Methods**: Token, Kubernetes (k8s), AppRole
 
 - **Other Sys Operations and Configurations**
 
-Each of these features is implemented as a separate module, with the
-Vault class binding them together. Code to set up Vault and obtain a
-specific secret engine:
+Each of these features is implemented as a separate module, with the Vault class binding them together. Code to set up Vault and obtain a specific secret engine:
 
-```java
+``` java
 Vault vault = Vault.builder()
         .config(config.get("vault"))
         .build();
@@ -86,24 +93,19 @@ Kv2Secrets secrets = vault.secrets(Kv2Secrets.ENGINE);
 
 Similar code can be used for any secret engine available:
 
-- Kv2SecretsRx - Key/Value Version 2 Secrets (versioned secrets,
-  default)
+- Kv2SecretsRx - Key/Value Version 2 Secrets (versioned secrets, default)
 
-- Kv1SecretsRx - Key/Value Version 1 Secrets (unversioned secrets,
-  legacy)
+- Kv1SecretsRx - Key/Value Version 1 Secrets (unversioned secrets, legacy)
 
 - CubbyholeSecretsRx - Cubbyhole secrets (token bound secrets)
 
-- DbSecretsRx - Database secrets (for generating temporary DB
-  credentials)
+- DbSecretsRx - Database secrets (for generating temporary DB credentials)
 
-- PkiSecretsRx - PKI secrets (for generating keys and X.509
-  certificates)
+- PkiSecretsRx - PKI secrets (for generating keys and X.509 certificates)
 
 - TransitSecretsRx - Transit operations (encryption, signatures, HMAC)
 
-In addition to these features, Vault itself can be authenticated as
-follows:
+In addition to these features, Vault itself can be authenticated as follows:
 
 - Token authentication - token is configured when connecting to Vault
 
@@ -113,9 +115,7 @@ follows:
        address: "http://localhost:8200"
        token: "my-token"
 
-- AppRole authentication - AppRole ID and secret ID are configured,
-  integration exchanges these for a temporary token that is used to
-  connect to Vault
+- AppRole authentication - AppRole ID and secret ID are configured, integration exchanges these for a temporary token that is used to connect to Vault
 
 <!-- -->
 
@@ -125,36 +125,30 @@ follows:
           role-id: "app-role-id"
           secret-id: app-role-secret-id
 
-- K8s authentication - the k8s JWT token is discovered on current node
-  and used to obtain a temporary token that is used to connect to Vault
+- K8s authentication - the k8s JWT token is discovered on current node and used to obtain a temporary token that is used to connect to Vault
 
 <!-- -->
 
     vault:
       auth:
         k8s:
-          token-role: "my-role"
+          token-role: "my-role" 
 
-- The token role must be configured in Vault Minimal configuration to
-  connect to Vault:
+- The token role must be configured in Vault Minimal configuration to connect to Vault:
 
 Code to get the Sys operations of Vault:
 
-```java
+``` java
 Sys sys = vault.sys(Sys.API);
 ```
 
-## Extensibility
+### Extensibility
 
-New secret engines and authentication methods can be implemented quite
-easily, as the integration is based on service providers (using
-ServiceLoader). This gives us (or you, as the users) the option to add
-new secret engines and/or authentication methods without adding a
-plethora of methods to the Vault class.
+New secret engines and authentication methods can be implemented quite easily, as the integration is based on service providers (using ServiceLoader). This gives us (or you, as the users) the option to add new secret engines and/or authentication methods without adding a plethora of methods to the Vault class.
 
 See the following SPIs:
 
-```text
+``` text
 io.helidon.integrations.vault.spi.AuthMethodProvider
 io.helidon.integrations.vault.spi.SecretsEngineProvider
 io.helidon.integrations.vault.spi.SysProvider
@@ -166,11 +160,11 @@ io.helidon.integrations.vault.spi.InjectionProvider
 
 The following example shows usage of Vault to encrypt a secret.
 
-## Usage with WebServer
+### Usage with WebServer
 
 Configure the `Vault` object using token base configuration:
 
-```java
+``` java
 Vault tokenVault = Vault.builder()
         .config(config.get("vault.token"))
         .updateWebClient(it -> it
@@ -181,7 +175,7 @@ Vault tokenVault = Vault.builder()
 
 Then `WebServer` has to be configured with endpoints routing registered:
 
-```java
+``` java
 Sys sys = tokenVault.sys(Sys.API);
 WebServer webServer = WebServer.builder()
         .config(config.get("server"))
@@ -196,23 +190,23 @@ WebServer webServer = WebServer.builder()
 
 AppRole-based and Kubernetes authentications are available.
 
-## Cubbyhole secrets
+### Cubbyhole secrets
 
 Cubbyhole secrets engine operations:
 
-```java
+``` java
 @Override
 public void routing(HttpRules rules) {
     rules.get("/create", this::createSecrets)
             .get("/secrets/{path:.*}", this::getSecret);
 }
 
-void createSecrets(ServerRequest req, ServerResponse res) {
+void createSecrets(ServerRequest req, ServerResponse res) { 
     secrets.create("first/secret", Map.of("key", "secretValue"));
     res.send("Created secret on path /first/secret");
 }
 
-void getSecret(ServerRequest req, ServerResponse res) {
+void getSecret(ServerRequest req, ServerResponse res) { 
     String path = req.path().pathParameters().get("path");
     Optional<Secret> secret = secrets.get(path);
     if (secret.isPresent()) {
@@ -229,11 +223,11 @@ void getSecret(ServerRequest req, ServerResponse res) {
 
 - Get the secret on a specified path.
 
-## KV1 Secrets
+### KV1 Secrets
 
 Key/Value version 1 secrets engine operations:
 
-```java
+``` java
 @Override
 public void routing(HttpRules rules) {
     rules.get("/enable", this::enableEngine)
@@ -243,28 +237,28 @@ public void routing(HttpRules rules) {
             .get("/disable", this::disableEngine);
 }
 
-void disableEngine(ServerRequest req, ServerResponse res) {
+void disableEngine(ServerRequest req, ServerResponse res) { 
     sys.disableEngine(Kv1Secrets.ENGINE);
     res.send("KV1 Secret engine disabled");
 }
 
-void enableEngine(ServerRequest req, ServerResponse res) {
+void enableEngine(ServerRequest req, ServerResponse res) { 
     sys.enableEngine(Kv1Secrets.ENGINE);
     res.send("KV1 Secret engine enabled");
 }
 
-void createSecrets(ServerRequest req, ServerResponse res) {
+void createSecrets(ServerRequest req, ServerResponse res) { 
     secrets.create("first/secret", Map.of("key", "secretValue"));
     res.send("Created secret on path /first/secret");
 }
 
-void deleteSecret(ServerRequest req, ServerResponse res) {
+void deleteSecret(ServerRequest req, ServerResponse res) { 
     String path = req.path().pathParameters().get("path");
     secrets.delete(path);
     res.send("Deleted secret on path " + path);
 }
 
-void getSecret(ServerRequest req, ServerResponse res) {
+void getSecret(ServerRequest req, ServerResponse res) { 
     String path = req.path().pathParameters().get("path");
 
     Optional<Secret> secret = secrets.get(path);
@@ -288,11 +282,11 @@ void getSecret(ServerRequest req, ServerResponse res) {
 
 - Get the secret on a specified path.
 
-## KV2 Secrets
+### KV2 Secrets
 
 Key/Value version 2 secrets engine operations:
 
-```java
+``` java
 @Override
 public void routing(HttpRules rules) {
     rules.get("/create", this::createSecrets)
@@ -300,18 +294,18 @@ public void routing(HttpRules rules) {
             .delete("/secrets/{path:.*}", this::deleteSecret);
 }
 
-void createSecrets(ServerRequest req, ServerResponse res) {
+void createSecrets(ServerRequest req, ServerResponse res) { 
     secrets.create("first/secret", Map.of("key", "secretValue"));
     res.send("Created secret on path /first/secret");
 }
 
-void deleteSecret(ServerRequest req, ServerResponse res) {
+void deleteSecret(ServerRequest req, ServerResponse res) { 
     String path = req.path().pathParameters().get("path");
     secrets.deleteAll(path);
     res.send("Deleted secret on path " + path);
 }
 
-void getSecret(ServerRequest req, ServerResponse res) {
+void getSecret(ServerRequest req, ServerResponse res) { 
     String path = req.path().pathParameters().get("path");
 
     Optional<Kv2Secret> secret = secrets.get(path);
@@ -332,11 +326,11 @@ void getSecret(ServerRequest req, ServerResponse res) {
 
 - Get the secret on a specified path.
 
-## Transit secrets
+### Transit secrets
 
 Transit secrets engine operations:
 
-```java
+``` java
 @Override
 public void routing(HttpRules rules) {
     rules.get("/enable", this::enableEngine)
@@ -352,17 +346,17 @@ public void routing(HttpRules rules) {
             .get("/disable", this::disableEngine);
 }
 
-void enableEngine(ServerRequest req, ServerResponse res) {
+void enableEngine(ServerRequest req, ServerResponse res) { 
     sys.enableEngine(TransitSecrets.ENGINE);
     res.send("Transit Secret engine enabled");
 }
 
-void disableEngine(ServerRequest req, ServerResponse res) {
+void disableEngine(ServerRequest req, ServerResponse res) { 
     sys.disableEngine(TransitSecrets.ENGINE);
     res.send("Transit Secret engine disabled");
 }
 
-void createKeys(ServerRequest req, ServerResponse res) {
+void createKeys(ServerRequest req, ServerResponse res) { 
     CreateKey.Request request = CreateKey.Request.builder()
             .name(ENCRYPTION_KEY);
 
@@ -374,7 +368,7 @@ void createKeys(ServerRequest req, ServerResponse res) {
     res.send("Created keys");
 }
 
-void deleteKeys(ServerRequest req, ServerResponse res) {
+void deleteKeys(ServerRequest req, ServerResponse res) { 
     secrets.updateKeyConfig(UpdateKeyConfig.Request.builder()
                                     .name(ENCRYPTION_KEY)
                                     .allowDeletion(true));
@@ -385,7 +379,7 @@ void deleteKeys(ServerRequest req, ServerResponse res) {
     res.send("Deleted key.");
 }
 
-void encryptSecret(ServerRequest req, ServerResponse res) {
+void encryptSecret(ServerRequest req, ServerResponse res) { 
     String secret = req.path().pathParameters().get("text");
 
     Encrypt.Response encryptResponse = secrets.encrypt(Encrypt.Request.builder()
@@ -395,7 +389,7 @@ void encryptSecret(ServerRequest req, ServerResponse res) {
     res.send(encryptResponse.encrypted().cipherText());
 }
 
-void decryptSecret(ServerRequest req, ServerResponse res) {
+void decryptSecret(ServerRequest req, ServerResponse res) { 
     String encrypted = req.path().pathParameters().get("text");
 
     Decrypt.Response decryptResponse = secrets.decrypt(Decrypt.Request.builder()
@@ -405,7 +399,7 @@ void decryptSecret(ServerRequest req, ServerResponse res) {
     res.send(String.valueOf(decryptResponse.decrypted().toDecodedString()));
 }
 
-void hmac(ServerRequest req, ServerResponse res) {
+void hmac(ServerRequest req, ServerResponse res) { 
     Hmac.Response hmacResponse = secrets.hmac(Hmac.Request.builder()
                                                       .hmacKeyName(ENCRYPTION_KEY)
                                                       .data(SECRET_STRING));
@@ -413,7 +407,7 @@ void hmac(ServerRequest req, ServerResponse res) {
     res.send(hmacResponse.hmac());
 }
 
-void sign(ServerRequest req, ServerResponse res) {
+void sign(ServerRequest req, ServerResponse res) { 
     Sign.Response signResponse = secrets.sign(Sign.Request.builder()
                                                       .signatureKeyName(SIGNATURE_KEY)
                                                       .data(SECRET_STRING));
@@ -421,7 +415,7 @@ void sign(ServerRequest req, ServerResponse res) {
     res.send(signResponse.signature());
 }
 
-void verifyHmac(ServerRequest req, ServerResponse res) {
+void verifyHmac(ServerRequest req, ServerResponse res) { 
     String hmac = req.path().pathParameters().get("text");
 
     Verify.Response verifyResponse = secrets.verify(Verify.Request.builder()
@@ -432,7 +426,7 @@ void verifyHmac(ServerRequest req, ServerResponse res) {
     res.send("Valid: " + verifyResponse.isValid());
 }
 
-void verify(ServerRequest req, ServerResponse res) {
+void verify(ServerRequest req, ServerResponse res) { 
     String signature = req.path().pathParameters().get("text");
 
     Verify.Response verifyResponse = secrets.verify(Verify.Request.builder()
@@ -464,11 +458,11 @@ void verify(ServerRequest req, ServerResponse res) {
 
 - Verify signature.
 
-## Authentication with Kubernetes
+### Authentication with Kubernetes
 
 In order to use Kubernetes authentication:
 
-```java
+``` java
 class K8sExample {
     private static final String SECRET_PATH = "k8s/example/secret";
     private static final String POLICY_NAME = "k8s_policy";
@@ -487,7 +481,7 @@ class K8sExample {
         this.config = config;
     }
 
-    public String run() {
+    public String run() { 
         // The following tasks must be run before we authenticate
         enableK8sAuth();
         // Now we can login using k8s - must run within a k8s cluster
@@ -498,7 +492,7 @@ class K8sExample {
         return "k8s example finished successfully.";
     }
 
-    private void workWithSecrets() {
+    private void workWithSecrets() { 
         Kv2Secrets secrets = k8sVault.secrets(Kv2Secrets.ENGINE);
 
         secrets.create(SECRET_PATH, Map.of(
@@ -516,12 +510,12 @@ class K8sExample {
         secrets.deleteAll(SECRET_PATH);
     }
 
-    private void disableK8sAuth() {
+    private void disableK8sAuth() { 
         sys.deletePolicy(POLICY_NAME);
         sys.disableAuth(K8sAuth.AUTH_METHOD.defaultPath());
     }
 
-    private void enableK8sAuth() {
+    private void enableK8sAuth() { 
         // enable the method
         sys.enableAuth(K8sAuth.AUTH_METHOD);
         sys.createPolicy(POLICY_NAME, VaultPolicy.POLICY);
@@ -550,17 +544,13 @@ class K8sExample {
 
 ## Local testing
 
-Vault is available as a docker image, so to test locally, you can
-simply:
+Vault is available as a docker image, so to test locally, you can simply:
 
-```shell
+``` bash
 docker run -e VAULT_DEV_ROOT_TOKEN_ID=my-token -d --name=vault -p8200:8200 vault
 ```
 
-This will create a Vault docker image, run it in background and open it
-on `localhost:8200` with a custom root token my-token, using name vault.
-This is of course only suitable for local testing, as the root token has
-too many rights, but it can be easily used with the examples below.
+This will create a Vault docker image, run it in background and open it on `localhost:8200` with a custom root token my-token, using name vault. This is of course only suitable for local testing, as the root token has too many rights, but it can be easily used with the examples below.
 
 ## References
 

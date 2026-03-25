@@ -1,32 +1,59 @@
-# 4.x Upgrade Guide
+# Helidon SE 4.x Upgrade Guide
 
-In Helidon 4.x we have made some major changes to Helidon. Reactive
-engine has been removed. APIS and implementations are rewritten in
-"blocking" paradigm. This guide will help you upgrade a Helidon SE 3.x
-application to 4.x.
+Helidon 4.x introduces significant changes to APIs and runtime behavior. Use this guide to help you understand the changes required to transition a Helidon SE 3.x application to Helidon 4.x.
 
-## Java 21 Runtime
+## Significant Changes
 
-Java 17 is no longer supported in Helidon 4. Java 21 or newer is
-required. Java 25 or newer is highly recommended. Please follow the
-instructions in
-[Prerequisites](../../about/prerequisites.md)
-for proper installation.
+The following sections describe the changes between Helidon 3.x and Helidon 4.x that can significantly impact your development process. Review them carefully.
 
-Helidon 4 no longer uses Netty. Helidon SE is now running on Helidon
-WebServer which is based on virtual threads technology, available in
-Java 21.
+You can also review the [Helidon repository CHANGELOG](https://github.com/helidon-io/helidon/blob/main/CHANGELOG.md) to see a detailed history of changes made to the project.
 
-## Programming Paradigm
+> [!NOTE]
+> Helidon adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). As such, Helidon 4.x includes changes that are not backward compatible with Helidon 3.x.
 
-Helidon SE has changed from an asynchronous style API to an
-imperative/blocking style API that is optimized for use with virtual
-threads. Currently, there is no compatibility API available
+> [!TIP]
+> The [Helidon Examples repository](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/) is a good resource for understanding how things work in Helidon 4.x.
 
-## Server Initialization and Start Up
+### Java SE Support
 
-In Helidon 1.x-3.x you started a server like this:
-```java
+Helidon 4.x removes support for Java SE 17. You must use Java SE 21 or later. If you are using Helidon 4.3.0 or later, using Java SE 25 or later is recommended.
+
+### Programming Paradigm Shift
+
+In Helidon 4.x, Helidon SE moves from an asynchronous-style API to a blocking-style API that is optimized for use with virtual threads. Currently, there is no compatibility API available.
+
+### New Web Server Implementation
+
+Helidon 4.x introduces Helidon WebServer, a virtual threads-based web server implementation based on the JDK Project Loom. Helidon WebServer replaces Netty, the server implementation used in previous versions of Helidon.
+
+You will need to update your existing Helidon SE 3.x code to use the new APIs but it is generally simpler to write and maintain code in Helidon SE 4.x than it was in previous versions.
+
+Here is an example of the differences between Helidon SE 3.x and Helidon SE 4.x:
+
+*Use Helidon 3.x to extract a JSON body from an HTTP request and do something*
+
+``` java
+request.content().as(JsonObject.class)
+        .thenAccept(jo -> doSomething(jo, response));
+```
+
+*Use Helidon 4.x to extract a JSON body from an HTTP request and do something*
+
+``` java
+doSomething(request.content().as(JsonObject.class), response);
+```
+
+Learn more at [WebServer](../webserver/webserver.md).
+
+### Server Startup
+
+Starting a server in Helidon 4.x is much simpler than in previous versions because it no longer requires asynchronous programming.
+
+In previous versions of Helidon, the server was started asynchronously and further server operations had to wait. For example:
+
+*Start Helidon SE 3.x server*
+
+``` java
 static Single<WebServer> startServer() {
     Config config = Config.create();
 
@@ -35,13 +62,13 @@ static Single<WebServer> startServer() {
             .addMediaSupport(JsonpSupport.create())
             .build();
 
-    Single<WebServer> webserver = server.start();
+    Single<WebServer> webserver = server.start(); 
 
-    webserver.thenAccept(ws -> {
+    webserver.thenAccept(ws -> { 
                 System.out.println("WEB server is up! http://localhost:" + ws.port() + "/greet");
                 ws.whenShutdown().thenRun(() -> System.out.println("WEB server is DOWN. Good bye!"));
             })
-            .exceptionallyAccept(t -> {
+            .exceptionallyAccept(t -> { 
                 System.err.println("Startup failed: " + t.getMessage());
                 t.printStackTrace(System.err);
             });
@@ -50,53 +77,44 @@ static Single<WebServer> startServer() {
 }
 ```
 
-- Server is started in an asynchronous way. A `Single` object is
-  returned.
+- Server is started in an asynchronous way. A `Single` object is returned.
 
-- Wait for the Server to start and print the message in an asynchronous
-  way.
+- Wait for the server to start and print the message in an asynchronous way.
 
-- Gracefully handle exceptions if they occur during the initialization
-  process.
+- Gracefully handle exceptions if they occur during the initialization process.
 
-Since Helidon SE in 3.x was reactive, during the start a `Single` object
-is returned, the server has been started in asynchronous way. We have to
-use reactive methods like `thenAccept` to wait for the server to start
-and then to perform the desired action. The exception handling should
-also be done in reactive way using the corresponding method.
+In Helidon 4.x, you can create and configure a server and then wait for it to start. If any exceptions happen, they are handled the traditional way using available language constructions. For example:
 
-In Helidon 4.x asynchronous programming is no longer required so the
-server startup is much simpler:
-```java
+*Start Helidon SE 4.x server*
+
+``` java
 public static void main(String[] args) {
 
     Config config = Config.global();
 
-    WebServer server = WebServer.builder()
+    WebServer server = WebServer.builder() 
             .config(config.get("server"))
             .routing(Main::routing)
             .build()
-            .start();
+            .start(); 
 
-    System.out.println("WEB server is up! http://localhost:" + server.port() + "/greet");
+    System.out.println("WEB server is up! http://localhost:" + server.port() + "/greet"); 
 }
 ```
 
-- Configure the Server.
+- Configure the server.
 
-- Start the Server. No reactive objects returned.
+- Start the server. No reactive objects returned.
 
-- Print a message when the Server is started.
+- Print a message when the server is started.
 
-Just create it, configure it, and wait for it to start. If any
-exceptions happen, they are handled the traditional way using available
-language constructions.
+### Additional Server Lifecycle Tasks
 
-## Server Lifecycle
+In Helidon 3.x, if you provided code to run after WebServer startup and after WebServer shutdown, you needed to use asynchronous constructs, like so:
 
-In Helidon 3.x you provided code to run after WebServer startup and
-after WebServer shutdown using asynchronous constructs:
-```java
+*Helidon 3.x server lifecycle*
+
+``` java
 Single<WebServer> webserver = server.start();
 
 webserver.thenAccept(ws -> {
@@ -109,9 +127,11 @@ webserver.thenAccept(ws -> {
         });
 ```
 
-In Helidon 4 your `HttpService` can interpose on the server lifecycle by
-overriding the `beforeStart` and `afterStop` methods:
-```java
+In Helidon 4.x, no special API is needed for post-server startup tasks since the server starts synchronously. Your `HttpService` can interpose on the server lifecycle by overriding the `beforeStart` and `afterStop` methods, like so:
+
+*Helidon 4.x server lifecycle*
+
+``` java
 static class MyService implements HttpService {
     @Override
     public void beforeStart() {
@@ -124,91 +144,77 @@ static class MyService implements HttpService {
     }
 ```
 
-No special API is needed for after server starup since the server starts
-sycnhronously as described in the previous section.
+### Server Features and Media Support Discovery
 
-## Server Features and Media Support Discovery
+In previous versions of Helidon, you had to explicitly register WebServer features (`register(MetricsSupport.create())`) and explicitly add media support (`addMediaSupport(JsonpSupport.create())`).
 
-In previous versions of Helidon you had to explicitly register WebServer
-features (`register(MetricsSupport.create())`) and explicitly add media
-support (`addMediaSupport(JsonpSupport.create())`). In Helidon 4 the
-default behavior is to automatically discover these components from the
-classpath. So all you need to do is add the dependencies to your pom.xml
-and optionally add configuration to customize them.
+Helidon 4.x automatically discovers these components from the class path. You only need to add the dependencies to your `pom.xml` file and, optionally, add configuration to customize them.
 
 If you want full control using the API, you still have that option.
 
-For more information see:
+For more information, see:
 
-- [Observability feature support](../observability.md)
-- [Media types support](../webserver/webserver.md#_media_types_support)
+- [Observability Feature Support](../observability.md)
 
-## Routing Configuration
+- [Media Types Support](../webserver/webserver.md#_media_types_support)
 
-In Helidon 1.x-3.x the routing config was done the following way:
-```java
+### Routing Configuration
+
+In previous Helidon versions, the routing was configured as follows: services were created and assigned to the desired path. Observability and other features were created as usual Helidon `services`, available as part of the framework. User-defined services were also registered the same way. For example:
+
+*Routing in Helidon SE 3.x server*
+
+``` java
 private static Routing createRouting(Config config) {
 
-    MetricsSupport metrics = MetricsSupport.create();
+    MetricsSupport metrics = MetricsSupport.create(); 
     HealthSupport health = HealthSupport.builder()
             .addLiveness(HealthChecks.healthChecks())
             .build();
 
-    GreetService greetService = new GreetService(config);
+    GreetService greetService = new GreetService(config); 
 
     return Routing.builder()
-            .register(health)
+            .register(health) 
             .register(metrics)
-            .register("/greet", greetService)
+            .register("/greet", greetService) 
             .build();
 }
 ```
 
-- Create and configure `Metrics` and `Heath` support.
+- Create and configure `Metrics` and `Health` support.
 
 - Create a regular Helidon Service.
 
-- Register `Metrics` and `Heath` support as Helidon Services.
+- Register `Metrics` and `Health` support as Helidon Services.
 
 - Register the regular Greeting service.
 
-Services are created and assigned to the desired path. Observability and
-other features are being created as usual Helidon `services`, available
-as part of the framework. User-defined services are also registered the
-same way.
+In Helidon 4.x, the Metrics and Health features are automatically discovered and, assuming you added the dependencies to your project, the routing is configured in the following way:
 
-In Helidon 4, the routing is configured the following way:
-```java
+*Routing in Helidon SE 4.x server*
+
+``` java
 static void routing(HttpRouting.Builder routing) {
-    routing.register("/greet", new GreetService());
+    routing.register("/greet", new GreetService()); 
 }
 ```
 
 - Register Greeting service as in previous versions of Helidon.
 
-As described previously, the Metrics and Health features will be
-discovered automatically as long as you have added the dependencies for
-them to your project.
+If you want to add these features to the server programmatically, you would use `WebServer.builder().addFeature()` method instead.
 
-If you wanted to add these features to the server programmatically you
-would do so using `WebServer.builder().addFeature()` method.
+`Feature` encapsulates a set of endpoints, services and/or filters. It is similar to `HttpService` but gives more freedom in setup. The main difference is that a feature can add `Filters` and it cannot be registered on a path. Features are not registered immediately; each feature can order features according to their weight by defining a `Weight` or implementing `Weighted` . Higher-weighted features are registered first. This allows you to order features in a meaningful way, for example Context, then Tracing, then Security, and so on.
 
-`Feature` encapsulates a set of endpoints, services and/or filters. It
-is similar to `HttpService` but gives more freedom in setup. Main
-difference is that a feature can add `Filters` and it cannot be
-registered on a path. Features are not registered immediately, each
-feature can define a `Weight` or implement `Weighted` to order features
-according to their weight. Higher-weighted features are registered
-first. This is to allow ordering of features in a meaningful way (e.g.
-Context should be first, Tracing second, Security third etc).
+#### Adding Additional Routing Criteria
 
-## Adding Additional Routing Criteria
+Helidon 4.x removes the `RequestPredicate` class, which in previous versions, was used to specify more routing criteria.
 
-In prior versions, the `RequestPredicate` class was used to specify more
-routing criteria. This class has been removed from Helidon 4.
+So, for example, if you used the following in Helidon 3.x:
 
-So, for example, if you used the following in Helidon 3:
-```java
+*Helidon 3.x using `RequestPredicate`*
+
+``` java
 public abstract class RoutingHandlerResource<I, R> implements HttpService {
 
         protected Handler requestHandler(HttpRules rules, Method method, Handler applyHandler) {
@@ -224,8 +230,11 @@ public abstract class RoutingHandlerResource<I, R> implements HttpService {
 }
 ```
 
-Then, you would use the following in Helidon 4:
-```java
+Then, you would now use the following in Helidon 4.x:
+
+*Routing without RequestPredicate in Helidon 4.x*
+
+``` java
 public abstract class RoutingHandlerResource<I, R> implements HttpService {
 
     protected Handler requestHandler(HttpRules rules, Method method, Handler applyHandler) {
@@ -248,23 +257,31 @@ public abstract class RoutingHandlerResource<I, R> implements HttpService {
 }
 ```
 
-## Services
+### Services
 
-There are also significant changes in Helidon `Service`.
+Helidon 4.x introduces `HttpService` which you implement to process HTTP requests. To set up routing, you should now use the `routing(HttpRules rules)` method. It receives an `HttpRules` object with routes description.
 
-In prior versions, a service looks this way:
-```java
+Additionally, `ServerRequest` and `ServerResponse` are now in the `io.helidon.webserver.http` package and `Http.Status` is now `io.helidon.http.Status`.
+
+> [!WARNING]
+> These changes make Helidon 4.x incompatible with previous versions.
+
+In previous versions, a service looked like this:
+
+*Helidon SE 3.x Service*
+
+``` java
 public class GreetService implements Service {
 
     @Override
-    public void update(Routing.Rules rules) {
+    public void update(Routing.Rules rules) { 
         rules
                 .get("/", this::getDefaultMessageHandler)
                 .get("/{name}", this::getMessageHandler)
                 .put("/greeting", this::updateGreetingHandler);
     }
 
-    private void getDefaultMessageHandler(ServerRequest request, ServerResponse response) {
+    private void getDefaultMessageHandler(ServerRequest request, ServerResponse response) { 
         sendResponse(response, "World");
     }
 
@@ -272,22 +289,25 @@ public class GreetService implements Service {
 }
 ```
 
-- Use `update()` method to set up routing.
+- Use the `update()` method to set up routing.
 
-- Handle a `Request` and return a `Responce`.
+- Handle a `Request` and return a `Response`.
 
-In Helidon 4, the same service:
-```java
-public class GreetService implements HttpService {
+In Helidon 4.x, the same service looks like this:
+
+*Helidon SE 4.x Service*
+
+``` java
+public class GreetService implements HttpService { 
 
     @Override
-    public void routing(HttpRules rules) {
+    public void routing(HttpRules rules) { 
         rules.get("/", this::getDefaultMessageHandler)
                 .get("/{name}", this::getMessageHandler)
                 .put("/greeting", this::updateGreetingHandler);
     }
 
-    private void getDefaultMessageHandler(ServerRequest request, ServerResponse response) {
+    private void getDefaultMessageHandler(ServerRequest request, ServerResponse response) { 
         sendResponse(response, "World");
     }
 
@@ -295,7 +315,7 @@ public class GreetService implements HttpService {
         // ...
     }
 
-    private void updateGreetingHandler(ServerRequest request, ServerResponse response) {
+    private void updateGreetingHandler(ServerRequest request, ServerResponse response) { 
         // ...
     }
 }
@@ -305,31 +325,19 @@ public class GreetService implements HttpService {
 
 - Use `routing(HttpRules rules)` to set up routing.
 
-- Handle a `Request` and return a `Responce`.
+- Handle a `Request` and return a `Response`.
 
-Helidon 4 introduced `HttpService` that should be implemented in order
-to process HTTP requests. To set up routing, the method
-`routing(HttpRules rules)` should now be used. It receives `HttpRules`
-object with routes description.
+Learn more about `HttpService` and `Routing` at [Helidon SE WebServer](../webserver/webserver.md).
 
-`ServerRequest` and `ServerResponse` are now in the
-`io.helidon.webserver.http` package;
+## Other Changes
 
-`Http.Status` is now `io.helidon.http.Status`
-
-> [!WARNING]
-> These changes make Helidon 4 incompatible with previous versions.
-
-Learn more about `HttpService` and `Routing` at [Helidon SE WebServer](../webserver/webserver.md)
-
-## Other Significant Changes
+The following sections describe changes between Helidon 3.x and Helidon 4.x that may impact your development process.
 
 ### Media Support
 
-Media support has moved from the `io.helidon.media` Java package to
-`io.helidon.http.media` and has new dependency coordinates. For example:
+Media support moved from the `io.helidon.media` Java package to `io.helidon.http.media` and has the following new dependency coordinates:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.http.media</groupId>
     <artifactId>helidon-http-media-jsonp</artifactId>
@@ -341,14 +349,11 @@ Media support has moved from the `io.helidon.media` Java package to
 </dependency>
 ```
 
-In Helidon 4 media support is discovered by default, so you simply need
-to add the dependency. You no longer need to explicitly add media
-support using the `WebServer` builder.
+In Helidon 4.x, media support is discovered by default, so you only need to add the dependency rather than explicitly adding media support using the `WebServer` builder.
 
-Media support no long transitively brings the Jakarta API dependencies.
-So you might need to add these explicitly. For example:
+However, media support no longer transitively brings the Jakarta EE API dependencies, so you will need to add those dependencies explicitly. For example:
 
-```xml
+``` xml
 <dependency>
     <groupId>jakarta.json</groupId>
     <artifactId>jakarta.json-api</artifactId>
@@ -357,24 +362,23 @@ So you might need to add these explicitly. For example:
 
 ### Testing
 
-There is a new testing framework for Helidon SE.
+Helidon 4.x adds a new testing framework for Helidon SE.
 
-```xml
+``` xml
 <dependency>
-    <groupId>io.helidon.microprofile.testing</groupId>
-    <artifactId>helidon-microprofile-testing-junit5</artifactId>
-    <scope>test</scope>
+     <groupId>io.helidon.webserver.testing.junit5</groupId>
+     <artifactId>helidon-webserver-testing-junit5</artifactId>
+     <scope>test</scope>
 </dependency>
 ```
 
-Find more information, see [Helidon SE testing](../README.md)
+For more information, see [Helidon SE Testing](../testing.md).
 
 ### Observability
 
-Observability features of Helidon have now moved to different package.
-For `Health` and `Metrics` please use:
+Observability features moved to different packages. For `Health` and `Metrics`, you should now use:
 
-```xml
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.webserver.observe</groupId>
@@ -387,93 +391,72 @@ For `Health` and `Metrics` please use:
 </dependencies>
 ```
 
-Observability has new endpoints. See them [here](../observability.md).
+Observability has new endpoints. See them at [hObservability](../observability.md).
 
-For System Metrics, please use:
+For System Metrics, you should now use:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.metrics</groupId>
     <artifactId>helidon-metrics-system-meters</artifactId>
 </dependency>
 ```
 
-By default, Observability features are discovered automatically if you
-add the above dependencies. If you choose to add them programmatically
-(using `addFeature`) you will need to add the following dependency:
+By default, Observability features are discovered automatically if you add the above dependencies. If you choose to add them programmatically (using `addFeature`), you must add the following dependency:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.webserver.observe</groupId>
     <artifactId>helidon-webserver-observe</artifactId>
 </dependency>
 ```
 
-Metrics has changed significantly in Helidon 4. See [Helidon SE Metrics](../metrics/metrics.md) for more information.
+Metrics has changed significantly in Helidon 4.x. For more information, see [Helidon SE Metrics](../metrics/metrics.md).
 
 ### Security
 
 - Changed modules:
 
-  - `helidon-security-integration-jersey` moved to the module
-    `helidon-microprofile-security`
-
-  - `helidon-security-integration-jersey-client` moved to the module
-    `helidon-microprofile-security`
-
   - `helidon-security-integration-grpc` was removed
 
-  - `helidon-security-integration-webserver` moved to the module
-    `helidon-webserver-security`
+  - `helidon-security-integration-jersey` moved to the module `helidon-microprofile-security`
+
+  - `helidon-security-integration-jersey-client` moved to the module `helidon-microprofile-security`
+
+  - `helidon-security-integration-webserver` moved to the module `helidon-webserver-security`
 
 - Significant class name changes:
 
-  - `OidcSupport` renamed to `OidcFeature`
+  - `OidcSupport` was renamed to `OidcFeature`
 
-  - `WebSecurity` renamed to `SecurityFeature`
+  - `WebSecurity` was renamed to `SecurityFeature`
 
 - Other:
 
-  - `SynchronousProvider removed` - `SynchronousProvider` usage is no
-    longer needed, since all security providers are synchronous.
+  - `SynchronousProvider removed` - `SynchronousProvider` usage is no longer needed, since all security providers are synchronous.
 
-## Global Configuration
+### Global Configuration
 
-The global configuration represents a single instance of the `Config`
-class, which is implicitly employed by certain Helidon components.
-Furthermore, it offers a handy approach for your application to access
-configuration information from any part of your code.
+Helidon 4.x adds global configuration, a singleton instance of the `Config` class, which is implicitly employed by certain Helidon components. Furthermore, it offers a handy approach for your application to access configuration information from any part of your code.
 
-```java
+``` java
 Config config = Config.global();
 ```
 
-More information at [Helidon SE Config](../config/introduction.md).
+For more information, see [Helidon SE Config](../config/introduction.md).
 
-## Logging
+### Logging
 
-The class `LogConfig` has moved to the `io.helidon.logging.common` Java
-package.
+The class `LogConfig` moved to the `io.helidon.logging.common` Java package.
 
-The Helidon console handler has changed from
-`io.helidon.common.HelidonConsoleHandler` to
-`io.helidon.logging.jul.HelidonConsoleHandler`.
+The Helidon console handler changed from `io.helidon.common.HelidonConsoleHandler` to `io.helidon.logging.jul.HelidonConsoleHandler`.
 
-If you use this handler in your `logging.properties` you will need to
-update it and add the following dependency:
+If you use this handler in your `logging.properties` file, you will need to update it and add the following dependency:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.logging</groupId>
     <artifactId>helidon-logging-jul</artifactId>
     <scope>runtime</scope>
 </dependency>
 ```
-
-## Conclusion
-
-Please proceed to [Helidon SE Introduction](../README.md) to find
-more information and documentation about each module.
-
-Also, the [Helidon examples](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/)
-are a good resource for seeing how things are done in Helidon 4.

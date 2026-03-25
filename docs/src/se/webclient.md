@@ -1,35 +1,44 @@
-# WebClient
+# WebClient Introduction
 
-WebClient is an HTTP client for Helidon SE. It can be used to send
-requests and retrieve corresponding responses in a programmatic way.
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [Usage](#_usage)
+
+- [Configuring the WebClient](#_configuring_the_webclient)
+
+- [Examples](#_examples)
+
+- [Context Propagation](#_context_propagation)
+
+- [Reference](#_reference)
+
+## Overview
+
+WebClient is an HTTP client for Helidon SE. It can be used to send requests and retrieve corresponding responses in a programmatic way.
 
 Helidon WebClient provides the following features:
 
-- **Blocking approach**
-  The Webclient uses the blocking approach to synchronously process a
-  request and its correspond response. Both `HTTP/1.1` and `HTTP/2`
-  request and response will run in the thread of the user. Additionally,
-  for `HTTP/2`, virtual thread is employed to manage the connection.
+- **Blocking approach**  
+  The Webclient uses the blocking approach to synchronously process a request and its correspond response. Both `HTTP/1.1` and `HTTP/2` request and response will run in the thread of the user. Additionally, for `HTTP/2`, virtual thread is employed to manage the connection.
 
-- **Builder-like setup and execution**
-  Creates every client and request as a builder pattern. This improves
-  readability and code maintenance.
+- **Builder-like setup and execution**  
+  Creates every client and request as a builder pattern. This improves readability and code maintenance.
 
-- **Redirect chain**
-  Follows the redirect chain and perform requests on the correct
-  endpoint by itself.
+- **Redirect chain**  
+  Follows the redirect chain and perform requests on the correct endpoint by itself.
 
-- **Tracing and security propagation**
-  Automatically propagates the configured tracing and security settings
-  of the Helidon WebServer to the WebClient and uses them during request
-  and response.
+- **Tracing and security propagation**  
+  Automatically propagates the configured tracing and security settings of the Helidon WebServer to the WebClient and uses them during request and response.
 
 ## Maven Coordinates
 
-To enable WebClient, add the following dependency to your project’s
-`pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
+To enable WebClient, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.webclient</groupId>
     <artifactId>helidon-webclient</artifactId>
@@ -38,10 +47,9 @@ To enable WebClient, add the following dependency to your project’s
 
 The `helidon-webclient` dependency has built-in support for `HTTP/1.1`.
 
-If support for `HTTP/2` is a requirement, below dependency needs to be
-added:
+If support for `HTTP/2` is a requirement, below dependency needs to be added:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.webclient</groupId>
     <artifactId>helidon-webclient-http2</artifactId>
@@ -50,206 +58,190 @@ added:
 
 ## Usage
 
-## Instantiating the WebClient
+### Instantiating the WebClient
 
-You can create an instance of a WebClient by executing
-`WebClient.create()` which will have default settings and without a base
-uri set.
+You can create an instance of a WebClient by executing `WebClient.create()` which will have default settings and without a base uri set.
 
-To change the default settings and register additional services, you can
-use simple builder that allows you to customize the client behavior.
+To change the default settings and register additional services, you can use simple builder that allows you to customize the client behavior.
 
-Create a WebClient with simple builder:
-```java
+*Create a WebClient with simple builder:*
+
+``` java
 WebClient client = WebClient.builder()
         .baseUri("http://localhost")
         .build();
 ```
 
-## Creating the Request
+### Creating the Request
 
-WebClient offers a set of request methods that are used to specify the
-type of action to be performed on a given resource. Below are some
-examples of request methods:
+WebClient offers a set of request methods that are used to specify the type of action to be performed on a given resource. Below are some examples of request methods:
 
 - `get()`
+
 - `post()`
+
 - `put()`
+
 - `method(Method method)`
 
-Check out
-[HttpClient](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClient.html)
-API to learn more about request methods. These methods will create a new
-instance of
-[HttpClientRequest](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html)
-which can then be configured to add optional settings that will
-customize the behavior of the request.
+Check out [HttpClient](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClient.html) API to learn more about request methods. These methods will create a new instance of [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html) which can then be configured to add optional settings that will customize the behavior of the request.
 
-## Customizing the Request
+### Customizing the Request
 
 Configuration can be set for every request type before it is sent.
 
-Customizing a request:
-```java
+*Customizing a request*
+
+``` java
 client.get()
-        .uri("http://example.com")
-        .path("/path")
-        .queryParam("query", "parameter")
-        .fragment("someFragment")
-        .headers(headers -> headers.accept(MediaTypes.APPLICATION_JSON));
+        .uri("http://example.com") 
+        .path("/path") 
+        .queryParam("query", "parameter") 
+        .fragment("someFragment") 
+        .headers(headers -> headers.accept(MediaTypes.APPLICATION_JSON)); 
 ```
 
 - Overrides `baseUri` from WebClient
+
 - Adds path to the uri
+
 - Adds query parameter to the request
+
 - Adds fragment to the request
+
 - Adds header to the request
 
-For more information about these optional parameters, check out
-[ClientRequestBase](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequestBase.html)
-API, which is a parent class of
-[HttpClientRequest](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html).
+For more information about these optional parameters, check out [ClientRequestBase](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequestBase.html) API, which is a parent class of [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html).
 
-[HttpClientRequest](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html)
-class also provides specific header methods that help the user to set a
-particular header. Some examples of these are:
+[HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html) class also provides specific header methods that help the user to set a particular header. Some examples of these are:
 
 - `contentType` (MediaType contentType)
-- `accept` (MediaType... mediaTypes)
 
-For more information about these methods, check out
-[ClientRequest](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequest.html)
-API, which is a parent class of
-[HttpClientRequest](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html).
+- `accept` (MediaType…​ mediaTypes)
 
-## Sending the Request
+For more information about these methods, check out [ClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequest.html) API, which is a parent class of [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html).
 
-Once the request setup is completed, the following methods can be used
-to send it:
+### Sending the Request
+
+Once the request setup is completed, the following methods can be used to send it:
 
 - `HttpClientResponse request()`
+
 - `<E> ClientResponseTyped<E> request(Class<E> type)`
+
 - `<E> E requestEntity(Class<E> type)`
+
 - `HttpClientResponse submit(Object entity)`
+
 - `<T> ClientResponseTyped<T> submit(Object entity, Class<T> requestedType)`
+
 - `HttpClientResponse outputStream(OutputStreamHandler outputStreamConsumer)`
+
 - `<T> ClientResponseTyped<T> outputStream(OutputStreamHandler outputStreamConsumer, Class<T> requestedType)`
 
-Each of the methods will provide a way to allow response to be retrieved
-in a particular response type. Refer to [ClientRequest API](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequest.html)
-for more details about these methods.
+Each of the methods will provide a way to allow response to be retrieved in a particular response type. Refer to [ClientRequest API](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequest.html) for more details about these methods.
 
-Execute a simple GET request to endpoint and receive a String response:
-```java
+*Execute a simple GET request to endpoint and receive a String response:*
+
+``` java
 ClientResponseTyped<String> response = client.get()
         .path("/endpoint")
         .request(String.class);
 String entityString = response.entity();
 ```
 
-## Protocol Used
+### Protocol Used
 
-WebClient currently supports `HTTP/1.1` and `HTTP/2` protocols. Below
-are the rules on which specific protocol will be used:
+WebClient currently supports `HTTP/1.1` and `HTTP/2` protocols. Below are the rules on which specific protocol will be used:
 
-- Using plain socket triggers WebClient to process a request using
-  `HTTP/1.1`.
+- Using plain socket triggers WebClient to process a request using `HTTP/1.1`.
 
-- When using TLS, the client will use ALPN (protocol negotiation) to use
-  appropriate HTTP version (either 1.1, or 2). `HTTP/2` has a higher
-  weight, so it is chosen if supported by both sides.
+- When using TLS, the client will use ALPN (protocol negotiation) to use appropriate HTTP version (either 1.1, or 2). `HTTP/2` has a higher weight, so it is chosen if supported by both sides.
 
-- A specific protocol can be explicitly selected by calling
-  `HttpClientRequest#protocolId(String)`.
+- A specific protocol can be explicitly selected by calling `HttpClientRequest#protocolId(String)`.
 
-  ```java
-  String result = client.get()
-        .protocolId("http/1.1")
-        .requestEntity(String.class);
-  ```
+<!-- -->
 
-- If `HTTP/2` is used, an upgrade attempt will be performed. If it
-  fails, the client falls-back to `HTTP/1.1`.
+    String result = client.get()
+            .protocolId("http/1.1")
+            .requestEntity(String.class);
 
-- The parameter `prior-knowledge` can be defined using `HTTP/2` protocol
-  configuration. Please refer to [Setting Protocol configuration](#setting-protocol-configuration) on how to customize
-  `HTTP/2`. In such a case, `prior-knowledge` will be used and fail if
-  it is unable to switch to `HTTP/2`.
+- If `HTTP/2` is used, an upgrade attempt will be performed. If it fails, the client falls-back to `HTTP/1.1`.
 
-## Adding Media Support
+- The parameter `prior-knowledge` can be defined using `HTTP/2` protocol configuration. Please refer to [Setting Protocol configuration](#_setting_protocol_configuration) on how to customize `HTTP/2`. In such a case, `prior-knowledge` will be used and fail if it is unable to switch to `HTTP/2`.
 
-Webclient supports the following built-in Helidon Media Support
-libraries:
+### Adding Media Support
+
+Webclient supports the following built-in Helidon Media Support libraries:
 
 1.  JSON Processing (JSON-P)
+
 2.  JSON Binding (JSON-B)
+
 3.  Jackson
 
-They can be activated by adding their corresponding libraries into the
-classpath. This can simply be done by adding their corresponding
-dependencies.
+They can be activated by adding their corresponding libraries into the classpath. This can simply be done by adding their corresponding dependencies.
 
-Add JSON-P support:
-```xml
+*Add JSON-P support:*
+
+``` xml
 <dependency>
     <groupId>io.helidon.http.media</groupId>
     <artifactId>helidon-http-media-jsonp</artifactId>
 </dependency>
 ```
 
-Add JSON-B support:
-```xml
+*Add JSON-B support:*
+
+``` xml
 <dependency>
     <groupId>io.helidon.http.media</groupId>
     <artifactId>helidon-http-media-jsonb</artifactId>
 </dependency>
 ```
 
-Add Jackson support:
-```xml
+*Add Jackson support:*
+
+``` xml
 <dependency>
     <groupId>io.helidon.http.media</groupId>
     <artifactId>helidon-http-media-jackson</artifactId>
 </dependency>
 ```
 
-Users can also create their own Custom Media Support library and make
-them work by following either of the approaches:
+Users can also create their own Custom Media Support library and make them work by following either of the approaches:
 
-- Create a Provider of the Custom Media Support and expose it via
-  Service Loader followed by adding the Media Support library to the
-  classpath.
+- Create a Provider of the Custom Media Support and expose it via Service Loader followed by adding the Media Support library to the classpath.
 
 - Explicitly register the Custom Media Support from WebClient.
 
-```java
+``` java
 WebClient.builder()
         .mediaContext(it -> it
-                .addMediaSupport(CustomMediaSupport.create()))
+                .addMediaSupport(CustomMediaSupport.create())) 
         .build();
 ```
 
 - Register CustomMedia support from the WebClient.
 
-## DNS Resolving
+### DNS Resolving
 
 Webclient provides three DNS resolver implementations out of the box:
 
 - `Java DNS resolution` is the default.
-- `First DNS resolution` uses the first IP address from a DNS lookup. To
-  enable this option, add below dependency:
 
-```xml
+- `First DNS resolution` uses the first IP address from a DNS lookup. To enable this option, add below dependency:
+
+``` xml
 <dependency>
     <groupId>io.helidon.webclient.dns.resolver</groupId>
     <artifactId>helidon-webclient-dns-resolver-first</artifactId>
 </dependency>
 ```
 
-- `Round-Robin DNS resolution` cycles through IP addresses from a DNS
-  lookup. To enable this option, add this dependency:
+- `Round-Robin DNS resolution` cycles through IP addresses from a DNS lookup. To enable this option, add this dependency:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.webclient.dns.resolver</groupId>
     <artifactId>helidon-webclient-dns-resolver-round-robin</artifactId>
@@ -260,407 +252,59 @@ Webclient provides three DNS resolver implementations out of the box:
 
 The class responsible for WebClient configuration is:
 
-Type:
-[io.helidon.webclient.api.WebClient](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/WebClient.html)
+### Configuration options
 
-This is a standalone configuration type, prefix from configuration root:
-`clients`
+| Key | Kind | Type | Default Value | Description |
+|----|----|----|----|----|
+| <span id="a48ec2-connect-timeout"></span> `connect-timeout` | `VALUE` | `Duration` |   | Connect timeout |
+| <span id="a5bc70-follow-redirects"></span> `follow-redirects` | `VALUE` | `Boolean` | `true` | Whether to follow redirects |
+| <span id="a6536a-keep-alive"></span> `keep-alive` | `VALUE` | `Boolean` | `true` | Determines if connection keep alive is enabled (NOT socket keep alive, but HTTP connection keep alive, to re-use the same connection for multiple requests) |
+| <span id="a04b74-max-redirects"></span> `max-redirects` | `VALUE` | `Integer` | `10` | Max number of followed redirects |
+| <span id="a419a4-properties"></span> `properties` | `MAP` | `String` |   | Properties configured for this client |
+| <span id="a3662c-protocol-configs"></span> [`protocol-configs`](../config/io_helidon_webclient_spi_ProtocolConfig.md) | `LIST` | `i.h.w.s.ProtocolConfig` |   | Configuration of client protocols |
+| <span id="adcd34-protocol-configs-discover-services"></span> `protocol-configs-discover-services` | `VALUE` | `Boolean` | `true` | Whether to enable automatic service discovery for `protocol-configs` |
+| <span id="a23735-protocol-preference"></span> `protocol-preference` | `LIST` | `String` |   | List of HTTP protocol IDs by order of preference |
+| <span id="a62d6a-proxy"></span> [`proxy`](../config/io_helidon_webclient_api_Proxy.md) | `VALUE` | `i.h.w.a.Proxy` |   | Proxy configuration to be used for requests |
+| <span id="aecd9d-read-timeout"></span> `read-timeout` | `VALUE` | `Duration` |   | Read timeout |
+| <span id="aba9ef-tls"></span> [`tls`](../config/io_helidon_common_tls_Tls.md) | `VALUE` | `i.h.c.t.Tls` |   | TLS configuration for any TLS request from this client |
 
-## Configuration options
+### Protocol Specific Configuration
 
-<table>
-<caption>Optional configuration options</caption>
-<thead>
-<tr>
-<th>key</th>
-<th>type</th>
-<th>default value</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><p><code>base-uri</code></p></td>
-<td><p>ClientUri</p></td>
-<td></td>
-<td><p>Base uri used by the client in all
-requests.</p></td>
-</tr>
-<tr>
-<td><p><code>connect-timeout</code></p></td>
-<td><p>Duration</p></td>
-<td></td>
-<td><p>Connect timeout.</p>
-<p>See io.helidon.common.socket.SocketOptions.connectTimeout()</p></td>
-</tr>
-<tr>
-<td><p><code>connection-cache-size</code></p></td>
-<td><p>int</p></td>
-<td><p><code>256</code></p></td>
-<td><p>Maximal size of the connection cache.
-For most HTTP protocols, we may cache connections to various endpoints
-for keep alive (or stream reuse in case of HTTP/2). This option limits
-the size. Setting this number lower than the "usual" number of target
-services will cause connections to be closed and reopened
-frequently.</p></td>
-</tr>
-<tr>
-<td><p><code>content-encoding</code></p></td>
-<td><p><a href="../config/io_helidon_http_encoding_ContentEncodingContext.md">ContentEncodingContext</a></p></td>
-<td></td>
-<td><p>Configure the listener specific
-io.helidon.http.encoding.ContentEncodingContext. This method discards
-all previously registered ContentEncodingContext. If no content encoding
-context is registered, default encoding context is used.</p></td>
-</tr>
-<tr>
-<td><p><code>cookie-manager</code></p></td>
-<td><p><a href="../config/io_helidon_webclient_api_WebClientCookieManager.md">WebClientCookieManager</a></p></td>
-<td></td>
-<td><p>WebClient cookie manager.</p></td>
-</tr>
-<tr>
-<td><p><code>default-headers</code></p></td>
-<td><p>Map&lt;string, string&gt;</p></td>
-<td></td>
-<td><p>Default headers to be used in every
-request from configuration.</p></td>
-</tr>
-<tr>
-<td><p><code>follow-redirects</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Whether to follow redirects.</p></td>
-</tr>
-<tr>
-<td><p><code>keep-alive</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Determines if connection keep alive is
-enabled (NOT socket keep alive, but HTTP connection keep alive, to
-re-use the same connection for multiple requests).</p>
-<p>See io.helidon.common.socket.SocketOptions.socketKeepAlive()</p></td>
-</tr>
-<tr>
-<td><p><code>max-in-memory-entity</code></p></td>
-<td><p>int</p></td>
-<td><p><code>131072</code></p></td>
-<td><p>If the entity is expected to be smaller
-that this number of bytes, it would be buffered in memory to optimize
-performance. If bigger, streaming will be used.</p>
-<p>Note that for some entity types we cannot use streaming, as they are
-already fully in memory (String, byte[]), for such cases, this option is
-ignored. Default is 128Kb.</p></td>
-</tr>
-<tr>
-<td><p><code>max-redirects</code></p></td>
-<td><p>int</p></td>
-<td><p><code>10</code></p></td>
-<td><p>Max number of followed redirects. This
-is ignored if followRedirects() option is <code>false</code>.</p></td>
-</tr>
-<tr>
-<td><p><code>media-context</code></p></td>
-<td><p><a href="../config/io_helidon_http_media_MediaContext.md">MediaContext</a></p></td>
-<td><p><code>create()</code></p></td>
-<td><p>Configure the listener specific
-io.helidon.http.media.MediaContext. This method discards all previously
-registered MediaContext. If no media context is registered, default
-media context is used.</p></td>
-</tr>
-<tr>
-<td><p><code>media-type-parser-mode</code></p></td>
-<td><p>ParserMode (STRICT, RELAXED)</p></td>
-<td><p><code>ParserMode.STRICT</code></p></td>
-<td><p>Configure media type parsing mode for
-HTTP <code>Content-Type</code> header.</p></td>
-</tr>
-<tr>
-<td><p><code>properties</code></p></td>
-<td><p>Map&lt;string, string&gt;</p></td>
-<td></td>
-<td><p>Properties configured for this client.
-These properties are propagated through client request, to be used by
-services (and possibly for other purposes).</p></td>
-</tr>
-<tr>
-<td><p><code>protocol-configs</code></p></td>
-<td><p>io.helidon.webclient.spi.ProtocolConfig[]
-(service provider interface)</p></td>
-<td></td>
-<td><p>Configuration of client
-protocols.</p></td>
-</tr>
-<tr>
-<td><p><code>protocol-preference</code></p></td>
-<td><p>string[]</p></td>
-<td></td>
-<td><p>List of HTTP protocol IDs by order of
-preference. If left empty, all discovered providers will be used,
-ordered by weight.</p>
-<p>For example if both HTTP/2 and HTTP/1.1 providers are available
-(considering HTTP/2 has higher weights), for ALPN we will send h2 and
-http/1.1 and decide based on response. If TLS is not used, we would
-attempt an upgrade (or use prior knowledge if configured in
-protocolConfigs()).</p></td>
-</tr>
-<tr>
-<td><p><code>proxy</code></p></td>
-<td><p><a href="../config/io_helidon_webclient_api_Proxy.md">Proxy</a></p></td>
-<td></td>
-<td><p>Proxy configuration to be used for
-requests.</p></td>
-</tr>
-<tr>
-<td><p><code>read-continue-timeout</code></p></td>
-<td><p>Duration</p></td>
-<td><p><code>PT1S</code></p></td>
-<td><p>Socket 100-Continue read timeout.
-Default is 1 second. This read timeout is used when 100-Continue is sent
-by the client, before it sends an entity.</p></td>
-</tr>
-<tr>
-<td><p><code>read-timeout</code></p></td>
-<td><p>Duration</p></td>
-<td></td>
-<td><p>Read timeout.</p>
-<p>See io.helidon.common.socket.SocketOptions.readTimeout()</p></td>
-</tr>
-<tr>
-<td><p><code>relative-uris</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>false</code></p></td>
-<td><p>Can be set to <code>true</code> to
-force the use of relative URIs in all requests, regardless of the
-presence or absence of proxies or no-proxy lists.</p></td>
-</tr>
-<tr>
-<td><p><code>send-expect-continue</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Whether Expect-100-Continue header is
-sent to verify server availability before sending an entity.</p>
-<p>Defaults to <code>true</code>.</p></td>
-</tr>
-<tr>
-<td><p><code>services</code></p></td>
-<td><p>io.helidon.webclient.spi.WebClientService[]
-(service provider interface)</p></td>
-<td></td>
-<td><p>WebClient services.</p></td>
-</tr>
-<tr>
-<td><p><code>share-connection-cache</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Whether to share connection cache
-between all the WebClient instances in JVM.</p></td>
-</tr>
-<tr>
-<td><p><code>socket-options</code></p></td>
-<td><p><a href="../config/io_helidon_common_socket_SocketOptions.md">SocketOptions</a></p></td>
-<td></td>
-<td><p>Socket options for connections opened
-by this client. If there is a value explicitly configured on this type
-and on the socket options, the one configured on this type’s builder
-will win:</p>
-<ul>
-<li><p>readTimeout()</p></li>
-<li><p>connectTimeout()</p></li>
-</ul></td>
-</tr>
-<tr>
-<td><p><code>tls</code></p></td>
-<td><p><a href="../config/io_helidon_common_tls_Tls.md">Tls</a></p></td>
-<td></td>
-<td><p>TLS configuration for any TLS request
-from this client. TLS can also be configured per request. TLS is used
-when the protocol is set to <code>https</code>.</p></td>
-</tr>
-<tr>
-<td><p><code>write-buffer-size</code></p></td>
-<td><p>int</p></td>
-<td><p><code>4096</code></p></td>
-<td><p>Buffer size used when writing data to
-the underlying socket on a client TCP connection. A value that is less
-or equal to 1 can be set to disable buffering at this level. Note that
-if writing data to the socket in small chunks, they may not be delivered
-to the network immediately due to Nagle’s algorithm (i.e., if
-TCP_NO_DELAY is turned off).</p></td>
-</tr>
-</tbody>
-</table>
-
-## Protocol Specific Configuration
-
-Protocol specific configuration can be set using the `protocol-configs`
-parameter. Webclient currently supports `HTTP/1.1.` and `HTTP/2`. Below
-are the options for each of the protocol type:
+Protocol specific configuration can be set using the `protocol-configs` parameter. Webclient currently supports `HTTP/1.1.` and `HTTP/2`. Below are the options for each of the protocol type:
 
 - `HTTP/1.1`
 
-Type:
-[io.helidon.webclient.http1.Http1ClientProtocolConfig](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.http1/io/helidon/webclient/http1/Http1ClientProtocolConfig.html)
+#### Configuration options
 
-### Configuration options
-
-<table>
-<caption>Optional configuration options</caption>
-<thead>
-<tr>
-<th>key</th>
-<th>type</th>
-<th>default value</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><p><code>default-keep-alive</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Whether to use keep alive by
-default.</p></td>
-</tr>
-<tr>
-<td><p><code>max-header-size</code></p></td>
-<td><p>int</p></td>
-<td><p><code>16384</code></p></td>
-<td><p>Configure the maximum allowed header
-size of the response.</p></td>
-</tr>
-<tr>
-<td><p><code>max-status-line-length</code></p></td>
-<td><p>int</p></td>
-<td><p><code>256</code></p></td>
-<td><p>Configure the maximum allowed length of
-the status line from the response.</p></td>
-</tr>
-<tr>
-<td><p><code>name</code></p></td>
-<td><p>string</p></td>
-<td><p><code>http_1_1</code></p></td>
-<td></td>
-</tr>
-<tr>
-<td><p><code>validate-request-headers</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>false</code></p></td>
-<td><p>Sets whether the request header format
-is validated or not.</p>
-<pre><code>Defaults to `false` as user has control on the header creation.</code></pre></td>
-</tr>
-<tr>
-<td><p><code>validate-response-headers</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Sets whether the response header format
-is validated or not.</p>
-<pre><code>Defaults to `true`.</code></pre></td>
-</tr>
-</tbody>
-</table>
+| Key | Kind | Type | Default Value | Description |
+|----|----|----|----|----|
+| <span id="a7a44c-default-keep-alive"></span> `default-keep-alive` | `VALUE` | `Boolean` | `true` | Whether to use keep alive by default |
+| <span id="a81fda-max-buffered-entity-size"></span> `max-buffered-entity-size` | `VALUE` | `i.h.c.Size` | `64 KB` | Configure the maximum size allowed for an entity that can be explicitly buffered by the application by calling `io.helidon.http.media.ReadableEntity#buffer` |
+| <span id="a403a3-max-header-size"></span> `max-header-size` | `VALUE` | `Integer` | `16384` | Configure the maximum allowed header size of the response |
+| <span id="ab0904-max-status-line-length"></span> `max-status-line-length` | `VALUE` | `Integer` | `256` | Configure the maximum allowed length of the status line from the response |
+| <span id="a2ff23-name"></span> `name` | `VALUE` | `String` | `http_1_1` | `N/A` |
+| <span id="a607dc-validate-request-headers"></span> `validate-request-headers` | `VALUE` | `Boolean` | `false` | Sets whether the request header format is validated or not |
+| <span id="a21e77-validate-response-headers"></span> `validate-response-headers` | `VALUE` | `Boolean` | `true` | Sets whether the response header format is validated or not |
 
 - `HTTP/2`
 
-Type:
-[io.helidon.webclient.http2.Http2ClientProtocolConfig](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.http2/io/helidon/webclient/http2/Http2ClientProtocolConfig.html)
+#### Configuration options
 
-### Configuration options
+| Key | Kind | Type | Default Value | Description |
+|----|----|----|----|----|
+| <span id="a06f7b-flow-control-block-timeout"></span> `flow-control-block-timeout` | `VALUE` | `Duration` | `PT15S` | Timeout for blocking while waiting for window update when window is depleted |
+| <span id="a942dc-initial-window-size"></span> `initial-window-size` | `VALUE` | `Integer` | `65535` | Configure INITIAL_WINDOW_SIZE setting for new HTTP/2 connections |
+| <span id="a2ae0e-max-buffered-entity-size"></span> `max-buffered-entity-size` | `VALUE` | `i.h.c.Size` | `64 KB` | Configure the maximum size allowed for an entity that can be explicitly buffered by the application by calling `io.helidon.http.media.ReadableEntity#buffer` |
+| <span id="aecd63-max-frame-size"></span> `max-frame-size` | `VALUE` | `Integer` | `16384` | Configure initial MAX_FRAME_SIZE setting for new HTTP/2 connections |
+| <span id="aa6ab2-max-header-list-size"></span> `max-header-list-size` | `VALUE` | `Long` | `-1` | Configure initial MAX_HEADER_LIST_SIZE setting for new HTTP/2 connections |
+| <span id="ae847a-name"></span> `name` | `VALUE` | `String` | `h2` | `N/A` |
+| <span id="ac97c5-ping"></span> `ping` | `VALUE` | `Boolean` | `false` | Check healthiness of cached connections with HTTP/2.0 ping frame |
+| <span id="af75f0-ping-timeout"></span> `ping-timeout` | `VALUE` | `Duration` | `PT0.5S` | Timeout for ping probe used for checking healthiness of cached connections |
+| <span id="a8e968-prior-knowledge"></span> `prior-knowledge` | `VALUE` | `Boolean` | `false` | Prior knowledge of HTTP/2 capabilities of the server |
 
-<table>
-<caption>Optional configuration options</caption>
-<thead>
-<tr>
-<th>key</th>
-<th>type</th>
-<th>default value</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><p><code>flow-control-block-timeout</code></p></td>
-<td><p>Duration</p></td>
-<td><p><code>PT15S</code></p></td>
-<td><p>Timeout for blocking while waiting for
-window update when window is depleted.</p></td>
-</tr>
-<tr>
-<td><p><code>initial-window-size</code></p></td>
-<td><p>int</p></td>
-<td><p><code>65535</code></p></td>
-<td><p>Configure INITIAL_WINDOW_SIZE setting
-for new HTTP/2 connections. Sends to the server the size of the largest
-frame payload client is willing to receive. Defaults to
-io.helidon.http.http2.WindowSize.DEFAULT_WIN_SIZE.</p></td>
-</tr>
-<tr>
-<td><p><code>max-frame-size</code></p></td>
-<td><p>int</p></td>
-<td><p><code>16384</code></p></td>
-<td><p>Configure initial MAX_FRAME_SIZE
-setting for new HTTP/2 connections. Maximum size of data frames in bytes
-the client is prepared to accept from the server. Default value is
-2^14(16_384).</p></td>
-</tr>
-<tr>
-<td><p><code>max-header-list-size</code></p></td>
-<td><p>long</p></td>
-<td><p><code>-1</code></p></td>
-<td><p>Configure initial MAX_HEADER_LIST_SIZE
-setting for new HTTP/2 connections. Sends to the server the maximum
-header field section size client is prepared to accept. Defaults to
-<code>-1</code>, which means "unconfigured".</p></td>
-</tr>
-<tr>
-<td><p><code>name</code></p></td>
-<td><p>string</p></td>
-<td><p><code>h2</code></p></td>
-<td></td>
-</tr>
-<tr>
-<td><p><code>ping</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>false</code></p></td>
-<td><p>Check healthiness of cached connections
-with HTTP/2.0 ping frame. Defaults to <code>false</code>.</p></td>
-</tr>
-<tr>
-<td><p><code>ping-timeout</code></p></td>
-<td><p>Duration</p></td>
-<td><p><code>PT0.5S</code></p></td>
-<td><p>Timeout for ping probe used for
-checking healthiness of cached connections. Defaults to
-<code>PT0.5S</code>, which means 500 milliseconds.</p></td>
-</tr>
-<tr>
-<td><p><code>prior-knowledge</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>false</code></p></td>
-<td><p>Prior knowledge of HTTP/2 capabilities
-of the server. If server we are connecting to does not support HTTP/2
-and prior knowledge is set to <code>false</code>, only features
-supported by HTTP/1 will be available and attempts to use HTTP/2
-specific will throw an UnsupportedOperationException.</p>
-<p><u>Plain text connection</u></p>
-<p>If prior knowledge is set to <code>true</code>, we will not attempt
-an upgrade of connection and use prior knowledge. If prior knowledge is
-set to <code>false</code>, we will initiate an HTTP/1 connection and
-upgrade it to HTTP/2, if supported by the server. plaintext connection
-(<code>h2c</code>).</p>
-<p><u>TLS protected connection</u></p>
-<p>If prior knowledge is set to <code>true</code>, we will negotiate
-protocol using HTTP/2 only, failing if not supported. if prior knowledge
-is set to <code>false</code>, we will negotiate protocol using both
-HTTP/2 and HTTP/1, using the protocol supported by server.</p></td>
-</tr>
-</tbody>
-</table>
+### Example of a WebClient Runtime Configuration
 
-## Example of a WebClient Runtime Configuration
-
-```java
+``` java
 Config config = Config.create();
 WebClient client = WebClient.builder()
         .baseUri("http://localhost")
@@ -668,22 +312,22 @@ WebClient client = WebClient.builder()
         .build();
 ```
 
-## Example of a WebClient YAML Configuration
+### Example of a WebClient YAML Configuration
 
-```yaml
+``` yaml
 client:
   connect-timeout-millis: 2000
   read-timeout-millis: 2000
-  follow-redirects: true
+  follow-redirects: true 
   max-redirects: 5
-  cookie-manager:
+  cookie-manager: 
     automatic-store-enabled: true
     default-cookies:
       flavor3: strawberry
       flavor4: raspberry
-  default-headers:
+  default-headers: 
     Accept: '"application/json", "text/plain"'
-  services:
+  services: 
     metrics:
       - methods: ["PUT", "POST", "DELETE"]
         type: METER
@@ -702,17 +346,17 @@ client:
         name-format: "wc.counter.%1$s.error"
         description: "Counter of failed PUT, POST and DELETE requests"
     tracing:
-  protocol-configs:
+  protocol-configs: 
     http_1_1:
       max-header-size: 20000
       validate-request-headers: true
     h2:
       prior-knowledge: true
-  proxy:
+  proxy: 
     host: "hostName"
     port: 80
     no-proxy: ["localhost:8080", ".helidon.io", "192.168.1.1"]
-  tls:
+  tls: 
     trust:
       keystore:
         passphrase: "password"
@@ -737,16 +381,15 @@ client:
 
 ## Examples
 
-## Webclient with Proxy
+### Webclient with Proxy
 
-Configure Proxy setup either programmatically or via the Helidon
-configuration framework.
+Configure Proxy setup either programmatically or via the Helidon configuration framework.
 
-### Configuring Proxy in your code
+#### Configuring Proxy in your code
 
 Proxy can be set directly from WebClient builder.
 
-```java
+``` java
 Proxy proxy = Proxy.builder()
         .type(Proxy.ProxyType.HTTP)
         .host(PROXY_HOST)
@@ -757,28 +400,26 @@ WebClient.builder()
         .build();
 ```
 
-Alternative is to set proxy directly from the request via
-`HttpClientRequest`.
+Alternative is to set proxy directly from the request via `HttpClientRequest`.
 
-```java
-Proxy proxy = Proxy.create();
+``` java
+Proxy proxy = Proxy.create(); 
 HttpClientResponse response = client.get("/proxiedresource")
-        .proxy(proxy)
+        .proxy(proxy) 
         .request();
 ```
 
-- Proxy instance configured using system settings (environment variables
-  and system properties)
+- Proxy instance configured using system settings (environment variables and system properties)
 
 - Configure the proxy per client request
 
-### Configuring Proxy in the config file
+#### Configuring Proxy in the config file
 
-Proxy can also be configured in WebClient through the `application.yaml`
-configuration file.
+Proxy can also be configured in WebClient through the `application.yaml` configuration file.
 
-WebClient Proxy configuration in `application.yaml`:
-```yaml
+*WebClient Proxy configuration in `application.yaml`*
+
+``` yaml
 client:
   proxy:
     host: "hostName"
@@ -788,30 +429,28 @@ client:
 
 Then, in your application code, load the configuration from that file.
 
-WebClient initialization using the `application.yaml` file located on
-the classpath:
-```java
-Config config = Config.create();
+*WebClient initialization using the `application.yaml` file located on the classpath*
+
+``` java
+Config config = Config.create(); 
 WebClient.builder()
-        .config(config.get("client"))
+        .config(config.get("client")) 
         .build();
 ```
 
-- `application.yaml` is a default configuration source loaded when YAML
-  support is on classpath, so we can just use `Config.create()`
+- `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
+
 - Passing the client configuration node
 
-## WebClient TLS Setup
+### WebClient TLS Setup
 
-Configure TLS either programmatically or by the Helidon configuration
-framework.
+Configure TLS either programmatically or by the Helidon configuration framework.
 
-### Configuring TLS in your code
+#### Configuring TLS in your code
 
-One way to configure TLS in WebClient is in your application code as
-shown below.
+One way to configure TLS in WebClient is in your application code as shown below.
 
-```java
+``` java
 WebClient.builder()
         .tls(it -> it.trust(t -> t
                 .keystore(k -> k.passphrase("password")
@@ -820,13 +459,13 @@ WebClient.builder()
         .build();
 ```
 
-### Configuring TLS in the config file
+#### Configuring TLS in the config file
 
-Another way to configure TLS in WebClient is through the
-`application.yaml` configuration file.
+Another way to configure TLS in WebClient is through the `application.yaml` configuration file.
 
-WebClient TLS configuration in `application.yaml`:
-```yaml
+*WebClient TLS configuration in `application.yaml`*
+
+``` yaml
 client:
   tls:
     trust:
@@ -838,88 +477,134 @@ client:
 ```
 
 > [!NOTE]
-> The `passphrase` value on the config file can be encrypted if stronger
-> security is required. For more information on how secrets can be
-> encrypted using a master password and store them in a configuration
-> file, please see [Configuration Secrets](../mp/security/configuration-secrets.md).
+> The `passphrase` value on the config file can be encrypted if stronger security is required. For more information on how secrets can be encrypted using a master password and store them in a configuration file, please see [Configuration Secrets](../mp/security/configuration-secrets.md).
 
 In the application code, load the settings from the configuration file.
 
-WebClient initialization using the `application.yaml` file located on
-the classpath:
-```java
-Config config = Config.create();
+*WebClient initialization using the `application.yaml` file located on the classpath*
+
+``` java
+Config config = Config.create(); 
 WebClient.builder()
-        .config(config.get("client"))
+        .config(config.get("client")) 
         .build();
 ```
 
-- `application.yaml` is a default configuration source loaded when YAML
-  support is on classpath, so we can just use `Config.create()`
+- `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
+
 - Passing the client configuration node
 
-## Adding Service to WebClient
+### Adding Service to WebClient
 
-WebClient currently supports 3 built-in services namely `metrics`,
-`tracing` and `security`.
+WebClient currently supports several built-in services, namely
 
-### Enabling the service
+- [`discovery`](discovery.md#_web_client_discovery_integration)
 
-In order for a service to function, their dependency needs to be added
-in the application’s pom.xml. Below are examples on how to enable the
-built-in services:
+- `metrics`
 
-metrics:
-```xml
-<dependency>
-    <groupId>io.helidon.webclient</groupId>
-    <artifactId>helidon-webclient-metrics</artifactId>
-</dependency>
-```
+- `tracing`
 
-tracing:
-```xml
-<dependency>
-    <groupId>io.helidon.webclient</groupId>
-    <artifactId>helidon-webclient-tracing</artifactId>
-</dependency>
-```
+- `telemetry` (following OpenTelemetry semantic conventions)
 
-security:
-```xml
-<dependency>
-    <groupId>io.helidon.webclient</groupId>
-    <artifactId>helidon-webclient-security</artifactId>
-</dependency>
-```
+  - `metrics`
+
+  - `tracing`
+
+- `security`.
+
+#### Enabling the service
+
+In order for a service to function, its dependencies need to be added in the application’s `pom.xml`. Below are examples on how to enable the built-in services:
+
+- `discovery` (see [its documentation](discovery.md#_web_client_discovery_integration))
+
+  *`pom.xml`*
+
+``` xml
+  <dependency>
+      <groupId>io.helidon.webclient</groupId>
+      <artifactId>helidon-webclient-discovery</artifactId>
+      <scope>runtime</scope>
+  </dependency>
+  <dependency>
+      <groupId>io.helidon.discovery.providers</groupId>
+      <artifactId>helidon-discovery-providers-eureka</artifactId> 
+      <scope>runtime</scope>
+  </dependency>
+  ```
+
+  - Backs the `discovery` service with a [Discovery provider based on Netflix’s Eureka](discovery.md#_eureka)
+
+- `metrics`
+
+  *`pom.xml`*
+
+``` xml
+  <dependency>
+      <groupId>io.helidon.webclient</groupId>
+      <artifactId>helidon-webclient-metrics</artifactId>
+  </dependency>
+  ```
+
+- `tracing`
+
+  *`pom.xml`*
+
+``` xml
+  <dependency>
+      <groupId>io.helidon.webclient</groupId>
+      <artifactId>helidon-webclient-tracing</artifactId>
+  </dependency>
+  ```
+
+- `telemetry metrics` and `tracing`
+
+  *`pom.xml`*
+
+``` xml
+  <dependencdy>
+      <groupId>io.helidon.webclient</groupId>
+      <artifactId>helidon-webclient-telemetry</artifactId>
+  </dependencdy>
+  ```
+
+- `security`
+
+  *`pom.xml`*
+
+``` xml
+  <dependency>
+      <groupId>io.helidon.webclient</groupId>
+      <artifactId>helidon-webclient-security</artifactId>
+  </dependency>
+  ```
 
 ### Adding a service in your code
 
 Services can be added in WebClient as shown in the code below.
 
-```java
+``` java
 WebClientService clientService = WebClientMetrics.counter()
         .methods(Method.GET)
         .nameFormat("example.metric.%1$s.%2$s")
-        .build();
+        .build(); 
 
 WebClient.builder()
-        .addService(clientService)
+        .addService(clientService) 
         .build();
 ```
 
-- Creates new metric which will count all GET requests and has format of
-  `example.metric.GET.<host-name>`
+- Creates new metric which will count all GET requests and has format of `example.metric.GET.<host-name>`
 
 - Register the service in the client instance
 
 ### Adding service in the config file
 
-Adding service in WebClient can also be done through the
-`application.yaml` configuration file.
+Adding service in WebClient can also be done through the `application.yaml` configuration file.
 
-WebClient Service configuration in `application.yaml`:
-```yaml
+*WebClient Service configuration in `application.yaml`*
+
+``` yaml
 webclient:
   services:
     metrics:
@@ -938,31 +623,28 @@ webclient:
 
 Then, in your application code, load the configuration from that file.
 
-WebClient initialization using the `application.yaml` file located on
-the classpath:
-```java
-Config config = Config.create();
+*WebClient initialization using the `application.yaml` file located on the classpath*
+
+``` java
+Config config = Config.create(); 
 WebClient.builder()
-        .config(config.get("client"))
+        .config(config.get("client")) 
         .build();
 ```
 
-- `application.yaml` is a default configuration source loaded when YAML
-  support is on classpath, so we can just use `Config.create()`
+- `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
 
 - Passing the client configuration node
 
 ## Setting Protocol configuration
 
-Individual protocols can be customized using the `protocol-config`
-parameter.
+Individual protocols can be customized using the `protocol-config` parameter.
 
 ### Setting up protocol configuration in your code
 
-Below is an example of customizing `HTTP/1.1` protocol in the
-application code.
+Below is an example of customizing `HTTP/1.1` protocol in the application code.
 
-```java
+``` java
 WebClient.builder()
         .addProtocolConfig(Http1ClientProtocolConfig.builder()
                                    .defaultKeepAlive(false)
@@ -974,12 +656,11 @@ WebClient.builder()
 
 ### Setting up protocol configuration in the config file
 
-Protocol configuration can also be set in the `application.yaml`
-configuration file.
+Protocol configuration can also be set in the `application.yaml` configuration file.
 
-Setting up `HTTP/1.1` and `HTTP/2` protocol using `application.yaml`
-file:
-```yaml
+*Setting up `HTTP/1.1` and `HTTP/2` protocol using `application.yaml` file.*
+
+``` yaml
 webclient:
   protocol-configs:
     http_1_1:
@@ -991,29 +672,95 @@ webclient:
 
 Then, in your application code, load the configuration from that file.
 
-WebClient initialization using the `application.yaml` file located on
-the classpath:
-```java
-Config config = Config.create();
+*WebClient initialization using the `application.yaml` file located on the classpath*
+
+``` java
+Config config = Config.create(); 
 WebClient.builder()
-        .config(config.get("client"))
+        .config(config.get("client")) 
         .build();
 ```
 
-- `application.yaml` is a default configuration source loaded when YAML
-  support is on classpath, so we can just use `Config.create()`
+- `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
 
 - Passing the client configuration node
 
-## Context Propagation
+## Configuring Telemetry
 
-WebClient supports the capability to propagate values from
-`io.helidon.common.context.Context` over HTTP headers.
+The telemetry webclient services provide metrics and tracing spans which follow the OpenTelemetry semantic conventions for clients. These are separate from the `services.metrics` and `services.tracing` services described elsewhere on this page.
 
-To enable this feature (implemented as a WebClient service), add the
-following dependency to your pom file:
+To enable the telemetry webclient services, take the following two steps:
 
-```xml
+- Add the appropriate dependency.
+
+- Add configuration or code to activate the telemetry services.
+
+To set up metrics and tracing, add the following single dependency to your project:
+
+*Dependency for webclient telemetry metrics and tracing*
+
+``` xml
+<dependency>
+    <groupId>io.helidon.webclient</groupId>
+    <artifactId>helidon-webclient-telemetry</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+To transmit the metrics semantic conventions to a backend, add a dependency on an OpenTelemetry exporter and in the `telemetry` configuration set up an exporter under `signals.metrics`.
+
+*Dependency for exporting metrics semantic conventions data using OTLP*
+
+``` xml
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-exporter-otlp</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+*Configuration for an OpenTelemetry exporter*
+
+``` yaml
+telemetry:
+  service: my-app
+  signals:
+    metrics:
+      exporters:
+        type: otlp
+```
+
+To activate webclient telemetry collection using configuration, add the `telemetry` config section under `client.services` and, below it, add `metrics`, `tracing`, or both.
+
+*Enabling metrics and tracing telemetry using configuration*
+
+``` yaml
+client:
+  services:
+    telemetry:
+      metrics:
+      tracing:
+```
+
+The `metrics` and `tracing` subsections have no explicit settings.
+
+Alternatively, trigger webclient telemetry collection by modifying your client code to add one or more webclient telemetry services to the webclient builder. This example shows adding only telemetry metrics.
+
+*Enabling telemetry using code*
+
+``` java
+WebClient.builder()
+        .addService(WebClientTelemetryMetrics.create())
+        .build();
+```
+
+# Context Propagation
+
+WebClient supports the capability to propagate values from `io.helidon.common.context.Context` over HTTP headers.
+
+To enable this feature (implemented as a WebClient service), add the following dependency to your pom file:
+
+``` xml
 <dependency>
     <groupId>io.helidon.webclient</groupId>
     <artifactId>helidon-webclient-context</artifactId>
@@ -1022,7 +769,7 @@ following dependency to your pom file:
 
 Example configuration:
 
-```yaml
+``` yaml
 client:
   services:
     context:
@@ -1038,26 +785,38 @@ client:
 
 Full configuration reference:
 
-## WebClientContextService (webclient.context) Configuration
+# io.helidon.webclient.context.WebClientContextService
 
-Type:
-[io.helidon.webclient.context.WebClientContextService](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.context/io/helidon/webclient/context/WebClientContextService.html)
+## Description
+
+Configuration of WebClient transport level propagation of context values.
+
+## Usages
 
 ## Configuration options
 
-| key       | type                                                                                       | default value | description                  |
-|-----------|--------------------------------------------------------------------------------------------|---------------|------------------------------|
-| `records` | [ContextRecordConfig\[\]](../config/io_helidon_common_context_http_ContextRecordConfig.md) |               | List of propagation records. |
+| Key | Kind | Type | Description |
+|----|----|----|----|
+| <span id="ab403e-records"></span> [`records`](../config/io_helidon_common_context_http_ContextRecordConfig.md) | `LIST` | `i.h.c.c.h.ContextRecordConfig` | List of propagation records |
 
-Optional configuration options
+See the [manifest](../config/manifest.md) for all available types.
 
-## Reference
+# Reference
 
-- [Helidon Webclient API](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.api/module-summary.html)
-- [Helidon WebClient HTTP/1.1 Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.http1/module-summary.html)
-- [Helidon WebClient HTTP/2 Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.http2/module-summary.html)
-- [Helidon WebClient DNS Resolver First Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.dns.resolver.first/module-summary.html)
-- [Helidon WebClient DNS Resolver Round Robin Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.dns.resolver.roundrobin/module-summary.html)
-- [Helidon WebClient Metrics Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.metrics/module-summary.html)
-- [Helidon WebClient Security Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.security/module-summary.html)
-- [Helidon WebClient Tracing Support](https://helidon.io/docs/v4/apidocs/io.helidon.webclient.tracing/module-summary.html)
+- [Helidon Webclient API](/apidocs/io.helidon.webclient.api/module-summary.html)
+
+- [Helidon WebClient HTTP/1.1 Support](/apidocs/io.helidon.webclient.http1/module-summary.html)
+
+- [Helidon WebClient HTTP/2 Support](/apidocs/io.helidon.webclient.http2/module-summary.html)
+
+- [Helidon WebClient DNS Resolver First Support](/apidocs/io.helidon.webclient.dns.resolver.first/module-summary.html)
+
+- [Helidon WebClient DNS Resolver Round Robin Support](/apidocs/io.helidon.webclient.dns.resolver.roundrobin/module-summary.html)
+
+- [Helidon WebClient Discovery Support](/apidocs/io.helidon.webclient.discovery/module-summary.html)
+
+- [Helidon WebClient Metrics Support](/apidocs/io.helidon.webclient.metrics/module-summary.html)
+
+- [Helidon WebClient Security Support](/apidocs/io.helidon.webclient.security/module-summary.html)
+
+- [Helidon WebClient Tracing Support](/apidocs/io.helidon.webclient.tracing/module-summary.html)

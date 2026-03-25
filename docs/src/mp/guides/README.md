@@ -1,27 +1,28 @@
 # Guides
 
-[Quickstart]: ./quickstart.md [Tutorial]: ./mp-tutorial.md [Config]: ./config.md [LangChain4j]: ./langchain4j.md [Health]: ./health.md [Metrics]: ./metrics.md [Tracing]: ./tracing.md [Upgrade from 1.x to 2.x]: ./upgrade.md [Upgrade from 2.x to 3.x]: ./upgrade_3x.md [Upgrade from 3.x to 4.x]: ./upgrade_4x.md [OIDC]: ./security-oidc.md [Testing with JUnit 5]: ./testing-junit5.md [JBatch]: ./jbatch.md [Performance tuning]: ./performance-tuning.md [Maven]: ./maven-build.md [Gradle]: ./gradle-build.md [GraalVM Native Image]: ./graalnative.md [JLink]: ./jlink-image.md [Jib]: ../../guides/jib.md [OKE]: ../../guides/oke.md [OCI]: ./oci-guide.md
+Index of Guides documentation.
 
-| Topic                                             | Description                                                                                                                                                                     |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [2.x Upgrade Guide](upgrade.md)                   | In Helidon 2.x we have made some changes to APIs and runtime behavior.                                                                                                          |
-| [3.x Upgrade Guide](upgrade_3x.md)                | In Helidon 3.x we have made some changes to APIs and runtime behavior.                                                                                                          |
-| [4.x Upgrade Guide](upgrade_4x.md)                | In Helidon 4.x we have made some changes to APIs and runtime behavior.                                                                                                          |
-| [Config Guide](config.md)                         | This guide describes how to create a sample MicroProfile (MP) project that can be used to run some basic examples using both default and custom configuration with Helidon MP.  |
-| [CRaC Guide](crac.md)                             | This guide describes how to create a CRaC snapshot for a Helidon MP application.                                                                                                |
-| [Custom Runtime Images](jlink-image.md)           | This guide describes how to build a custom runtime image for your Helidon application using Helidon’s support for the JDK’s `jlink` tool.                                       |
-| [GraalVM Native Image Guide](graalnative.md)      | This guide describes how to build a GraalVM native image for a Helidon MP application.                                                                                          |
-| [Gradle Guide](gradle-build.md)                   | This guide describes Helidon’s support for Gradle projects.                                                                                                                     |
-| [Health Guide](health.md)                         | This guide describes how to create a sample MicroProfile (MP) project that can be used to run some basic examples using both built-in and custom health checks with Helidon MP. |
-| [JBatch Guide](jbatch.md)                         | This guide describes how Helidon and Jakarta Batch (JBatch) can be used together to execute batch jobs in environments that do not fully support EE environments.               |
-| [LangChain4J Guide](langchain4j.md)               | This guide describes how to create a sample AI powered Helidon MP project with LangChain4j integration.                                                                         |
-| [Maven Guide](maven-build.md)                     | This guide describes Helidon’s support for Maven projects.                                                                                                                      |
-| [Metrics Guide](metrics.md)                       | This guide describes how to create a sample Helidon MicroProfile (MP) project that can be used to run some basic examples using both built-in and custom metrics with Helidon.  |
-| [MicroProfile Tutorial](mp-tutorial.md)           | This tutorial describes how to build a Helidon MicroProfile (MP) application from scratch including JSON REST endpoints, metrics, health check, and configuration.              |
-| [MP Quickstart](quickstart.md)                    | This guide describes a basic example of a Helidon MP application using Docker and Kubernetes.                                                                                   |
-| [OCI Guide](oci-guide.md)                         | This guide describes the basic process of deploying a Helidon MP application on Oracle Cloud Infrastructure (OCI).                                                              |
-| [OIDC Security Guide](security-oidc.md)           | This guide describes how to set up Keycloak and Helidon to secure an application with OIDC security provider.                                                                   |
-| [Performance Tuning Guide](performance-tuning.md) | In this guide you fill find basic advice for performance tuning of your Helidon application.                                                                                    |
-| [Services Guide](se-services.md)                  | This guide shows how reuse Helidon SE Service in your Helidon MP application.                                                                                                   |
-| [Testing with JUnit 5 Guide](testing-junit5.md)   | This guide describes how to write and execute tests for your MicroProfile applications in a JUnit 5 environment using optimized customizations.                                 |
-| [Tracing Guide](tracing.md)                       | This guide describes how to create a sample MicroProfile (MP) project that can be used to run some basic examples using tracing with Helidon MP.                                |
+| Topic | Description |
+| --- | --- |
+| [CRaC](crac.md) | Coordinated Restore at Checkpoint(CRaC) with Helidon application |
+| [Custom Runtime Images with `jlink`](jlink-image.md) | Helidon Custom Runtime Images |
+| [GraalVM Native Images](graalnative.md) | Helidon Native Image |
+| [Gradle Guide](gradle-build.md) | Helidon Gradle Guide |
+| [Helidon MP 2.x Upgrade Guide](upgrade.md) | Helidon MP Upgrade Guide |
+| [Helidon MP 3.x Upgrade Guide](upgrade_3x.md) | Helidon MP 3.x Upgrade Guide |
+| [Helidon MP 4.x Upgrade Guide](upgrade_4x.md) | Helidon MP 4.x Upgrade Guide |
+| [Helidon MP Config Guide](config.md) | Helidon configuration |
+| [Helidon MP Health Check Guide](health.md) | Helidon health checks |
+| [Helidon MP LangChain4j Guide](langchain4j.md) | LangChain4j in Helidon |
+| [Helidon MP Metrics Guide](metrics.md) | Helidon metrics |
+| [Helidon MP OIDC Security Provider](security-oidc.md) | Helidon OIDC Security Provider guide |
+| [Helidon MP Quick Start](quickstart.md) | Helidon MP Quick Start guide |
+| [Helidon MP Testing with JUnit 5 Guide](testing-junit5.md) | Helidon testing with JUnit 5 |
+| [Helidon MP Tracing Guide](tracing.md) | Helidon tracing |
+| [Helidon MP Tutorial](mp-tutorial.md) | Helidon MP Tutorial |
+| [Helidon with JBatch Guide](jbatch.md) | Helidon |
+| [Maven Guide](maven-build.md) | Helidon Maven Guide |
+| [Oracle Cloud Infrastructure Tutorial](oci-guide.md) | Helidon OCI Integration |
+| [Overview](overview.md) | Helidon MP Guides |
+| [Performance Tuning](performance-tuning.md) | Helidon MP Performance Tuning |
+| [Reusing Helidon SE services](se-services.md) | Helidon WebServer Routing |

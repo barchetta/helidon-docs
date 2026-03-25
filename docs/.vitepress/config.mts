@@ -11,7 +11,7 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/png', href: '/images/frank-mark.svg' }]
   ],
   
-  title: "Helidon Docs",
+  title: "Helidon",
   description: "A VitePress Site",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

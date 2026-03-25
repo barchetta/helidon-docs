@@ -1,18 +1,30 @@
-# Neo4J
+# Neo4j
+
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [Usage](#_usage)
+
+- [Configuration](#_configuration)
+
+- [Examples](#_examples)
+
+- [Additional Information](#_additional_information)
+
+- [References](#_references)
 
 ## Overview
 
-Neo4j is a graph database management system developed by Neo4j, Inc. It
-is an ACID-compliant transactional database with native graph storage
-and processing. Neo4j is available in a GPL3-licensed open-source
-“community edition”.
+Neo4j is a graph database management system developed by Neo4j, Inc. It is an ACID-compliant transactional database with native graph storage and processing. Neo4j is available in a GPL3-licensed open-source “community edition”.
 
 ## Maven Coordinates
 
-To enable Neo4j, add the following dependency to your project’s
-`pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
+To enable Neo4j, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
    <groupId>io.helidon.integrations.neo4j</groupId>
    <artifactId>helidon-integrations-neo4j</artifactId>
@@ -20,20 +32,15 @@ To enable Neo4j, add the following dependency to your project’s
 ```
 
 > [!NOTE]
-> Check [Neo4j Metrics propagation](#neo4j_metrics_propagation) and
-> [Neo4j Health Checks](#neo4j_health_checks) for additional
-> dependencies for *Neo4j* `Metrics` and `Health Checks` integration.
+> Check [Neo4j Metrics propagation](#_neo4j_metrics_propagation) and [Neo4j Health Checks](#_neo4j_health_checks) for additional dependencies for *Neo4j* `Metrics` and `Health Checks` integration.
 
 ## Usage
 
-The support for Neo4j is implemented in Neo4j driver level. Just add the
-dependency, add configuration in `application.yaml` file and Neo4j
-driver will be configured by Helidon and can be used with `Neo4j`
-support object.
+The support for Neo4j is implemented in Neo4j driver level. Just add the dependency, add configuration in `application.yaml` file and Neo4j driver will be configured by Helidon and can be used with `Neo4j` support object.
 
 First describe Neo4j connection properties:
 
-```yaml
+``` yaml
 neo4j:
  uri: bolt://localhost:7687
  authentication:
@@ -45,7 +52,7 @@ neo4j:
 
 Then just get the driver:
 
-```java
+``` java
 Neo4j neo4j = Neo4j.create(config.get("neo4j"));
 Driver neo4jDriver = neo4j.driver();
 ```
@@ -54,138 +61,40 @@ The driver can be used according to the [Neo4j documentation](https://neo4j.com/
 
 ## Configuration
 
-Type:
-[io.helidon.integrations.neo4j.Neo4j](https://helidon.io/docs/v4/apidocs/io.helidon.integrations.neo4j/io/helidon/integrations/neo4j/Neo4j.html)
+### Configuration options
 
-## Configuration options
-
-<table>
-<caption>Optional configuration options</caption>
-<thead>
-<tr>
-<th>key</th>
-<th>type</th>
-<th>default value</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><p><code>authentication-enabled</code></p></td>
-<td><p>boolean</p></td>
-<td><p><code>true</code></p></td>
-<td><p>Enable authentication.</p></td>
-</tr>
-<tr>
-<td><p><code>certificate</code></p></td>
-<td><p>Path</p></td>
-<td></td>
-<td><p>Set certificate path.</p></td>
-</tr>
-<tr>
-<td><p><code>connection-acquisition-timeout</code></p></td>
-<td><p>Duration</p></td>
-<td><p><code>PT1M</code></p></td>
-<td><p>Set connection acquisition
-timeout.</p></td>
-</tr>
-<tr>
-<td><p><code>encrypted</code></p></td>
-<td><p>boolean</p></td>
-<td></td>
-<td><p>Enable encrypted field.</p></td>
-</tr>
-<tr>
-<td><p><code>hostname-verification-enabled</code></p></td>
-<td><p>boolean</p></td>
-<td></td>
-<td><p>Enable hostname verification.</p></td>
-</tr>
-<tr>
-<td><p><code>idle-time-before-connection-test</code></p></td>
-<td><p>Duration</p></td>
-<td><p><code>PT1MS</code></p></td>
-<td><p>Set idle time.</p></td>
-</tr>
-<tr>
-<td><p><code>log-leaked-sessions</code></p></td>
-<td><p>boolean</p></td>
-<td></td>
-<td><p>Enable log leaked sessions.</p></td>
-</tr>
-<tr>
-<td><p><code>max-connection-lifetime</code></p></td>
-<td><p>Duration</p></td>
-<td><p><code>PT5H</code></p></td>
-<td><p>Set max life time.</p></td>
-</tr>
-<tr>
-<td><p><code>max-connection-pool-size</code></p></td>
-<td><p>int</p></td>
-<td><p><code>100</code></p></td>
-<td><p>Set pool size.</p></td>
-</tr>
-<tr>
-<td><p><code>metrics-enabled</code></p></td>
-<td><p>boolean</p></td>
-<td></td>
-<td><p>Enable metrics.</p></td>
-</tr>
-<tr>
-<td><p><code>password</code></p></td>
-<td><p>string</p></td>
-<td></td>
-<td><p>Create password.</p></td>
-</tr>
-<tr>
-<td><p><code>trust-strategy</code></p></td>
-<td><p>TrustStrategy (TRUST_ALL_CERTIFICATES,
-TRUST_CUSTOM_CA_SIGNED_CERTIFICATES,
-TRUST_SYSTEM_CA_SIGNED_CERTIFICATES)</p></td>
-<td></td>
-<td><p>Set trust strategy.</p>
-<p>Allowed values:</p>
-<ul>
-<li><p><code>TRUST_ALL_CERTIFICATES</code>: Trust all.</p></li>
-<li><p><code>TRUST_CUSTOM_CA_SIGNED_CERTIFICATES</code>: Trust custom
-certificates.</p></li>
-<li><p><code>TRUST_SYSTEM_CA_SIGNED_CERTIFICATES</code>: Trust system
-CA.</p></li>
-</ul></td>
-</tr>
-<tr>
-<td><p><code>uri</code></p></td>
-<td><p>string</p></td>
-<td></td>
-<td><p>Create uri.</p></td>
-</tr>
-<tr>
-<td><p><code>username</code></p></td>
-<td><p>string</p></td>
-<td></td>
-<td><p>Create username.</p></td>
-</tr>
-</tbody>
-</table>
+| Key | Kind | Type | Default Value | Description |
+|----|----|----|----|----|
+| <span id="a3b4f6-authentication-enabled"></span> `authentication-enabled` | `VALUE` | `Boolean` | `true` | Enable authentication |
+| <span id="a3b383-certificate"></span> `certificate` | `VALUE` | `Path` |   | Set certificate path |
+| <span id="aab80e-connection-acquisition-timeout"></span> `connection-acquisition-timeout` | `VALUE` | `Duration` | `PT1M` | Set connection acquisition timeout |
+| <span id="a05ed9-encrypted"></span> `encrypted` | `VALUE` | `Boolean` |   | Enable encrypted field |
+| <span id="a53ff4-hostname-verification-enabled"></span> `hostname-verification-enabled` | `VALUE` | `Boolean` |   | Enable hostname verification |
+| <span id="afe517-idle-time-before-connection-test"></span> `idle-time-before-connection-test` | `VALUE` | `Duration` | `PT1MS` | Set idle time |
+| <span id="af0aa4-log-leaked-sessions"></span> `log-leaked-sessions` | `VALUE` | `Boolean` |   | Enable log leaked sessions |
+| <span id="acbb81-max-connection-lifetime"></span> `max-connection-lifetime` | `VALUE` | `Duration` | `PT5H` | Set max life time |
+| <span id="a3e142-max-connection-pool-size"></span> `max-connection-pool-size` | `VALUE` | `Integer` | `100` | Set pool size |
+| <span id="afefd3-metrics-enabled"></span> `metrics-enabled` | `VALUE` | `Boolean` |   | Enable metrics |
+| <span id="a74536-password"></span> `password` | `VALUE` | `String` |   | Create password |
+| <span id="abfa44-trust-strategy"></span> [`trust-strategy`](../../config/io_helidon_integrations_neo4j_Neo4j_Builder_TrustStrategy.md) | `VALUE` | `i.h.i.n.N.B.TrustStrategy` |   | Set trust strategy |
+| <span id="a2db98-uri"></span> `uri` | `VALUE` | `String` |   | Create uri |
+| <span id="a98d22-username"></span> `username` | `VALUE` | `String` |   | Create username |
 
 ## Examples
 
-This example implements a simple Neo4j REST service using MicroProfile.
-For this example a working Neo4j database is required. The Neo4j Movie
-database is used for this example.
+This example implements a simple Neo4j REST service using MicroProfile. For this example a working Neo4j database is required. The Neo4j Movie database is used for this example.
 
 Bring up a Neo4j instance via Docker
 
-```shell
+``` bash
 docker run --publish=7474:7474 --publish=7687:7687 -e 'NEO4J_AUTH=neo4j/secret'  neo4j:latest
 ```
 
-Go to the Neo4j browser and play the first step of the movies graph:
-[`:play movies`](http://localhost:7474/browser/?cmd=play&arg=movies)
+Go to the Neo4j browser and play the first step of the movies graph: [`:play movies`](http://localhost:7474/browser/?cmd=play&arg=movies)
 
 Now go to the `pom.xml` and add the following dependencies:
 
-```xml
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.integrations.neo4j</groupId>
@@ -204,7 +113,7 @@ Now go to the `pom.xml` and add the following dependencies:
 
 Next add the connection configuration properties for Neo4j:
 
-```yaml
+``` yaml
 neo4j:
  uri: bolt://localhost:7687
  authentication:
@@ -214,15 +123,14 @@ neo4j:
    metricsEnabled: true
 ```
 
-This includes both connection information and enables Neo4j metrics
-propagation.
+This includes both connection information and enables Neo4j metrics propagation.
 
 Finally, we are able to use the `Neo4j` driver.
 
-```java
-record MovieRepository(Driver driver) {
+``` java
+record MovieRepository(Driver driver) { 
 
-    List<Movie> findAll() {
+    List<Movie> findAll() { 
         try (var session = driver.session()) {
             var query = """
                         match (m:Movie)
@@ -261,7 +169,7 @@ record MovieRepository(Driver driver) {
 
 Movies can now be returned as JSON objects:
 
-```java
+``` java
 record MovieService(MovieRepository movieRepository) implements HttpService {
 
     @Override
@@ -275,27 +183,26 @@ record MovieService(MovieRepository movieRepository) implements HttpService {
 }
 ```
 
-To use the service, as well as to add metrics and health support the
-following routing should be created:
+To use the service, as well as to add metrics and health support the following routing should be created:
 
-```java
+``` java
 Neo4j neo4j = Neo4j.create(config.get("neo4j"));
-Driver driver = neo4j.driver();
+Driver driver = neo4j.driver(); 
 
 Neo4jMetricsSupport.builder()
         .driver(driver)
         .build()
-        .initialize();
+        .initialize(); 
 
 ObserveFeature observeFeature = ObserveFeature.builder()
         .addObserver(HealthObserver.builder()
                              .addCheck(Neo4jHealthCheck.create(driver))
                              .build())
-        .build();
+        .build(); 
 
 WebServer server = WebServer.builder()
         .addFeature(observeFeature)
-        .routing(it -> it.register(new MovieService(new MovieRepository(driver))))
+        .routing(it -> it.register(new MovieService(new MovieRepository(driver)))) 
         .build()
         .start();
 
@@ -304,8 +211,7 @@ System.out.println("WEB server is up! http://localhost:" + server.port() + "/api
 
 - Use of `Neo4j` support object to initialise and configure the driver.
 
-- Use of `Neo4jMetricsSupport` to add *Neo4j* metrics to `/metrics`
-  output.
+- Use of `Neo4jMetricsSupport` to add *Neo4j* metrics to `/metrics` output.
 
 - Use of `Neo4jHealthCheck` to add *Neo4j* health support.
 
@@ -313,14 +219,14 @@ System.out.println("WEB server is up! http://localhost:" + server.port() + "/api
 
 Now build and run.
 
-```shell
+``` bash
 mvn package
 java -jar target/helidon-examples-integration-neo4j.jar
 ```
 
 Exercise the application:
 
-```shell
+``` bash
 curl -X GET http://localhost:8080/movies
 
 # Try health
@@ -337,12 +243,11 @@ Full example code is available in [Helidon Examples Repository](https://github.c
 
 ## Additional Information
 
-## Neo4j Metrics propagation
+### Neo4j Metrics propagation
 
-Neo4j’s metrics can be propagated to the user as `MicroProfile` metrics.
-This is implemented in a separate Maven module. Just add:
+Neo4j’s metrics can be propagated to the user as `MicroProfile` metrics. This is implemented in a separate Maven module. Just add:
 
-```xml
+``` xml
 <dependency>
    <groupId>io.helidon.integrations.neo4j</groupId>
    <artifactId>helidon-integrations-neo4j-metrics</artifactId>
@@ -350,38 +255,33 @@ This is implemented in a separate Maven module. Just add:
 ```
 
 > [!NOTE]
-> Works with *Neo4j Integration* main dependency described in [Maven
-> Coordinates](#maven-coordinates).
+> Works with *Neo4j Integration* main dependency described in [Maven Coordinates](#maven-coordinates).
 
-To enable metrics in Neo4j, add the following property to
-`application.yaml`:
+To enable metrics in Neo4j, add the following property to `application.yaml`:
 
-```yaml
+``` yaml
 pool:
    metricsEnabled: true
 ```
 
 Finally, to initialize metrics run:
 
-```java
+``` java
 Neo4jMetricsSupport.builder()
         .driver(driver)
         .build()
         .initialize();
 ```
 
-Neo4j’s metrics will be automatically added to the output of the
-`/metrics` endpoint.
+Neo4j’s metrics will be automatically added to the output of the `/metrics` endpoint.
 
-## Neo4j Health Checks
+### Neo4j Health Checks
 
-If your application is highly dependent on Neo4j database, health and
-liveness checks are essential for this application to work correctly.
+If your application is highly dependent on Neo4j database, health and liveness checks are essential for this application to work correctly.
 
-`MicroProfile` Health checks for Neo4j are implemented in a separate
-Maven module:
+`MicroProfile` Health checks for Neo4j are implemented in a separate Maven module:
 
-```xml
+``` xml
 <dependency>
    <groupId>io.helidon.integrations.neo4j</groupId>
    <artifactId>helidon-integrations-neo4j-health</artifactId>
@@ -389,12 +289,11 @@ Maven module:
 ```
 
 > [!NOTE]
-> Works with *Neo4j Integration* main dependency described in [Maven
-> Coordinates](#maven-coordinates).
+> Works with *Neo4j Integration* main dependency described in [Maven Coordinates](#maven-coordinates).
 
 To enable health checks run the following code:
 
-```java
+``` java
 ObserveFeature observeFeature = ObserveFeature.builder()
         .addObserver(HealthObserver.builder()
                              .addCheck(Neo4jHealthCheck.create(driver))
@@ -407,4 +306,5 @@ Health checks for Neo4j will be included in `/health` endpoint output.
 ## References
 
 - [Neo4j official website](https://neo4j.com/)
+
 - [Neo4j Java developer guide](https://neo4j.com/developer/java/)

@@ -1,18 +1,30 @@
-# GraphQL
+# MicroProfile GraphQL
 
-Helidon MP implements the [MicroProfile GraphQL specification](https://download.eclipse.org/microprofile/microprofile-graphql-2.0/microprofile-graphql-spec-2.0.html).
-This specification describes how applications can be built to expose an
-endpoint for GraphQL. GraphQL is an open-source data query and
-manipulation language for APIs, and a runtime for fulfilling data
-queries. It provides an alternative to, though not necessarily a
-replacement for, REST.
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [API](#_api)
+
+- [Configuration](#_configuration)
+
+- [Examples](#_examples)
+
+- [Additional Information](#_additional_information)
+
+- [Reference](#_reference)
+
+## Overview
+
+Helidon MP implements the [MicroProfile GraphQL specification](https://download.eclipse.org/microprofile/microprofile-graphql-2.0/microprofile-graphql-spec-2.0.html). This specifcation describes how applications can be built to expose an endpoint for GraphQL. GraphQL is an open-source data query and manipulation language for APIs, and a runtime for fulfilling data queries. It provides an alternative to, though not necessarily a replacement for, REST.
 
 ## Maven Coordinates
 
-To enable MicroProfile GraphQL, add the following dependency to your
-project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
+To enable MicroProfile GraphQL, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.microprofile.graphql</groupId>
     <artifactId>helidon-microprofile-graphql-server</artifactId>
@@ -21,22 +33,19 @@ project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencie
 
 ## API
 
-The MicroProfile GraphQL specification defines a number of key
-annotations to be used when writing a GraphQL endpoint:
+The MicroProfile GraphQL specification defines a number of key annotations to be used when writing a GraphQL endpoint:
 
 - `@GraphQLApi` - identifies a CDI Bean as a GraphQL endpoint
 
 - `@Query` - identifies a method as returning one or more entities
 
-- `@Mutation` - identifies a method which creates, deletes or updates
-  entities
+- `@Mutation` - identifies a method which creates, deletes or updates entities
 
-For example, the following defines a GraphQL endpoint with a number of
-queries and mutations that work against a fictional `CustomerService`
-service and `Customer` class.
+For example, the following defines a GraphQL endpoint with a number of queries and mutations that work against a fictional `CustomerService` service and `Customer` class.
 
-Simple ContactGraphQLApi:
-```java
+*Simple ContactGraphQLApi*
+
+``` java
 @ApplicationScoped
 @GraphQLApi
 public class ContactGraphQLApi {
@@ -45,22 +54,22 @@ public class ContactGraphQLApi {
     private CustomerService customerService;
 
     @Query
-    public Collection<Customer> findAllCustomers() {
+    public Collection<Customer> findAllCustomers() { 
         return customerService.getAllCustomers();
     }
 
     @Query
-    public Customer findCustomer(@Name("customerId") int id) {
+    public Customer findCustomer(@Name("customerId") int id) { 
         return customerService.getCustomer(id);
     }
 
     @Query
-    public Collection<Customer> findCustomersByName(@Name("name") String name) {
+    public Collection<Customer> findCustomersByName(@Name("name") String name) { 
         return customerService.getAllCustomers(name);
     }
 
     @Mutation
-    public Customer createCustomer(@Name("customerId") int id,
+    public Customer createCustomer(@Name("customerId") int id, 
                                   @Name("name") String name,
                                   @Name("balance") float balance) {
         return customerService.createCustomer(id, name, balance);
@@ -78,16 +87,18 @@ public class customer {
 ```
 
 - a query with no-arguments that will return all `Customer` s
+
 - a query that takes an argument to return a specific `Customer`
-- a query that optionally takes a name and returns a collection of
-  `Customer` s
-- a mutation that creates a Customer and returns the newly created
-  `Customer`
+
+- a query that optionally takes a name and returns a collection of `Customer` s
+
+- a mutation that creates a Customer and returns the newly created `Customer`
 
 The example above would generate a GraphQL schema as shown below:
 
-Sample GraphQL schema:
-```graphql
+*Sample GraphQL schema*
+
+``` graphql
 type Query {
    findAllCustomers: [Customer]
    findCustomer(customerId: Int!): Customer
@@ -105,17 +116,15 @@ type Customer {
 }
 ```
 
-After application startup, a GraphQL schema will be generated from your
-annotated API classes and POJO’s and you will be able to access these
-via the URLs described below.
+After application startup, a GraphQL schema will be generated from your annotated API classes and POJO’s and you will be able to access these via the URLs described below.
 
-## Building your application
+### Building your application
 
-As part of building your application, you must create a Jandex index
-using the `jandex-maven-plugin` for all API and POJO classes.
+As part of building your application, you must create a Jandex index using the `jandex-maven-plugin` for all API and POJO classes.
 
-Generate Jandex index:
-```xml
+*Generate Jandex index*
+
+``` xml
 <plugin>
     <groupId>io.smallrye</groupId>
     <artifactId>jandex-maven-plugin</artifactId>
@@ -128,18 +137,11 @@ Generate Jandex index:
 ```
 
 > [!NOTE]
-> As per the instructions [here](about/microprofile.md) ensure
-> you have added a `src/main/resources/META-INF/beans.xml` file, so the
-> CDI implementation can pick up your classes.
+> As per the instructions [here](introduction/microprofile.md) ensure you have added a `src/main/resources/META-INF/beans.xml` file, so the CDI implementation can pick up your classes.
 
-## Accessing the GraphQL endpoints
+### Accessing the GraphQL endpoints
 
-After starting your application you should see a log message indicating
-that GraphQL is in the list of features. You can access the GraphQL
-endpoint at `http://host:port/graphql`, and the corresponding schema at
-`http://host:port/graphql/schema.graphql`. See
-[Configuration](#configuration) for additional information on how to
-change the location of these resources.
+After starting your application you should see a log message indicating that GraphQL is in the list of features. You can access the GraphQL endpoint at `http://host:port/graphql`, and the corresponding schema at `http://host:port/graphql/schema.graphql`. See [Configuration](#_configuration) for additional information on how to change the location of these resources.
 
 If you wish to use the [GraphQL UI](https://github.com/graphql/graphiql) then please see the [GraphQL MP Example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/microprofile/graphql).
 
@@ -147,30 +149,27 @@ If you wish to use the [GraphQL UI](https://github.com/graphql/graphiql) then pl
 
 The specification defines the following configuration options:
 
-| key                              | default value  | description                                                                                                  |
-|----------------------------------|----------------|--------------------------------------------------------------------------------------------------------------|
-| `mp.graphql.defaultErrorMessage` | `Server Error` | Error message to send to caller in case of error                                                             |
-| `mp.graphql.exceptionsBlackList` |                | Array of checked exception classes that should return default error message                                  |
-| `mp.graphql.exceptionsWhiteList` |                | Array of unchecked exception classes that should return message to caller (instead of default error message) |
+| key | default value | description |
+|----|----|----|
+| `mp.graphql.defaultErrorMessage` | `Server Error` | Error message to send to caller in case of error |
+| `mp.graphql.exceptionsBlackList` |   | Array of checked exception classes that should return default error message |
+| `mp.graphql.exceptionsWhiteList` |   | Array of unchecked exception classes that should return message to caller (instead of default error message) |
 
-The following configuration keys can be used to set up integration with
-WebServer:
+The following configuration keys can be used to set up integration with WebServer:
 
-| key                        | default value     | description                                                                 |
-|----------------------------|-------------------|-----------------------------------------------------------------------------|
-| `graphql.web-context`      | `/graphql`        | Context that serves the GraphQL endpoint.                                   |
-| `graphql.schema-uri`       | `/schema.graphql` | URI that serves the schema (under web context)                              |
-| `graphql.cors`             |                   | CORS configuration for this service                                         |
-| `graphql.executor-service` |                   | Configuration of `ServerThreadPoolSupplier` used to set up executor service |
+| key | default value | description |
+|----|----|----|
+| `graphql.web-context` | `/graphql` | Context that serves the GraphQL endpoint. |
+| `graphql.schema-uri` | `/schema.graphql` | URI that serves the schema (under web context) |
+| `graphql.executor-service` |   | Configuration of `ServerThreadPoolSupplier` used to set up executor service |
 
-The following configuration keys can be used to set up GraphQL
-invocation:
+The following configuration keys can be used to set up GraphQL invocation:
 
-| key                             | default value  | description                                                                                                  |
-|---------------------------------|----------------|--------------------------------------------------------------------------------------------------------------|
-| `graphql.default-error-message` | `Server Error` | Error message to send to caller in case of error                                                             |
-| `graphql.exception-white-list`  |                | Array of checked exception classes that should return default error message                                  |
-| `graphql.exception-black-list`  |                | Array of unchecked exception classes that should return message to caller (instead of default error message) |
+| key | default value | description |
+|----|----|----|
+| `graphql.default-error-message` | `Server Error` | Error message to send to caller in case of error |
+| `graphql.exception-white-list` |   | Array of checked exception classes that should return default error message |
+| `graphql.exception-black-list` |   | Array of unchecked exception classes that should return message to caller (instead of default error message) |
 
 ## Examples
 

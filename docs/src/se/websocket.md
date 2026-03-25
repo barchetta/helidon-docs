@@ -1,30 +1,28 @@
-# WebSocket
+# WebSocket Introduction
 
-Helidon integrates with
-[Tyrus](https://projects.eclipse.org/projects/ee4j.tyrus) to provide
-support for the [Jakarta WebSocket API](https://jakarta.ee/specifications/websocket/2.1/jakarta-websocket-spec-2.1.html).
-The WebSocket API enables Java applications to participate in WebSocket
-interactions as both servers and clients. The server API supports two
-flavors: annotated and programmatic endpoints.
+## Contents
 
-Annotated endpoints, as suggested by their name, use Java annotations to
-provide the necessary meta-data to define WebSocket handlers;
-programmatic endpoints implement API interfaces and are annotation free.
-Annotated endpoints tend to be more flexible since they allow different
-method signatures depending on the application needs, whereas
-programmatic endpoints must implement an interface and are, therefore,
-bounded to its definition.
+- [Overview](#_overview)
 
-Helidon SE support is based on the `WebSocketRouting` class which
-enables Helidon application to configure routing for both annotated and
-programmatic WebSocket endpoints.
+- [Maven Coordinates](#maven-coordinates)
+
+- [Example](#_example)
+
+- [Reference](#_reference)
+
+## Overview
+
+Helidon integrates with [Tyrus](https://projects.eclipse.org/projects/ee4j.tyrus) to provide support for the [Jakarta WebSocket API](https://jakarta.ee/specifications/websocket/2.1/jakarta-websocket-spec-2.1.html). The WebSocket API enables Java applications to participate in WebSocket interactions as both servers and clients. The server API supports two flavors: annotated and programmatic endpoints.
+
+Annotated endpoints, as suggested by their name, use Java annotations to provide the necessary meta-data to define WebSocket handlers; programmatic endpoints implement API interfaces and are annotation free. Annotated endpoints tend to be more flexible since they allow different method signatures depending on the application needs, whereas programmatic endpoints must implement an interface and are, therefore, bounded to its definition.
+
+Helidon SE support is based on the `WebSocketRouting` class which enables Helidon application to configure routing for both annotated and programmatic WebSocket endpoints.
 
 ## Maven Coordinates
 
-To enable WebSocket, add the following dependency to your project’s
-`pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
+To enable WebSocket, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.webserver</groupId>
     <artifactId>helidon-webserver-websocket</artifactId>
@@ -33,18 +31,11 @@ To enable WebSocket, add the following dependency to your project’s
 
 ## Example
 
-This section describes the implementation of a simple application that
-uses a REST resource to push messages into a shared queue and a
-programmatic WebSocket endpoint to download messages from the queue, one
-at a time, over a connection. The example will show how REST and
-WebSocket connections can be seamlessly combined into a Helidon
-application.
+This section describes the implementation of a simple application that uses a REST resource to push messages into a shared queue and a programmatic WebSocket endpoint to download messages from the queue, one at a time, over a connection. The example will show how REST and WebSocket connections can be seamlessly combined into a Helidon application.
 
-The complete Helidon SE example is available
-[here](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/webserver/websocket).
-Let us start by looking at `MessageQueueService`:
+The complete Helidon SE example is available [here](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/webserver/websocket). Let us start by looking at `MessageQueueService`:
 
-```java
+``` java
 record MessageQueueService(Queue<String> messageQueue) implements HttpService {
     @Override
     public void routing(HttpRules routingRules) {
@@ -56,14 +47,11 @@ record MessageQueueService(Queue<String> messageQueue) implements HttpService {
 }
 ```
 
-This class exposes a REST resource where messages can be posted. Upon
-receiving a message, it simply pushes it into a shared queue and returns
-204 (No Content).
+This class exposes a REST resource where messages can be posted. Upon receiving a message, it simply pushes it into a shared queue and returns 204 (No Content).
 
-Messages pushed into the queue can be obtained by opening a WebSocket
-connection served by `MessageBoardEndpoint`:
+Messages pushed into the queue can be obtained by opening a WebSocket connection served by `MessageBoardEndpoint`:
 
-```java
+``` java
 record MessageBoardEndpoint(Queue<String> messageQueue) implements WsListener {
     @Override
     public void onMessage(WsSession session, String text, boolean last) {
@@ -77,32 +65,24 @@ record MessageBoardEndpoint(Queue<String> messageQueue) implements WsListener {
 }
 ```
 
-This is an example of a programmatic endpoint that extends `WsListener`.
-The method `onMessage` will be invoked for every message. In this
-example, when the special `send` message is received, it empties the
-shared queue sending messages one at a time over the WebSocket
-connection.
+This is an example of a programmatic endpoint that extends `WsListener`. The method `onMessage` will be invoked for every message. In this example, when the special `send` message is received, it empties the shared queue sending messages one at a time over the WebSocket connection.
 
-In Helidon SE, REST and WebSocket classes need to be manually registered
-into the web server. This is accomplished via a `Routing` builder:
+In Helidon SE, REST and WebSocket classes need to be manually registered into the web server. This is accomplished via a `Routing` builder:
 
-```java
-void snippet() {
-    var staticContent = StaticContentService.builder("/WEB")
-            .welcomeFileName("index.html")
-            .build();
-    var messageQueue = new ConcurrentLinkedQueue<String>();
-    server.routing(it -> it
-                    .register("/web", staticContent)
-                    .register("/rest", new MessageQueueService(messageQueue)))
-            .addRouting(WsRouting.builder()
-                    .endpoint("/websocket/board", new MessageBoardEndpoint(messageQueue)));
-}
+``` java
+StaticContentService staticContent = StaticContentService.builder("/WEB")
+        .welcomeFileName("index.html")
+        .build();
+Queue<String> messageQueue = new ConcurrentLinkedQueue<>();
+server.routing(it -> it
+                .register("/web", staticContent)
+                .register("/rest", new MessageQueueService(messageQueue)))
+        .addRouting(WsRouting.builder()
+                            .endpoint("/websocket/board", new MessageBoardEndpoint(messageQueue)));
 ```
 
-This code snippet registers `MessageBoardEndpoint` at `/websocket/board`
-and associates.
+This code snippet registers `MessageBoardEndpoint` at `/websocket/board` and associates.
 
 ## Reference
 
-- [Helidon WebSocket Javadoc](https://helidon.io/docs/v4/apidocs/io.helidon.webserver.websocket/module-summary.html)
+- [Helidon WebSocket JavaDoc](/apidocs/io.helidon.webserver.websocket/module-summary.html)

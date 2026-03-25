@@ -1,21 +1,42 @@
-# Data
+# About Helidon Data Repository
 
-The Helidon SE Data Repository provides a unified API for working with
-database queries.
+## Contents
 
-Data repository queries are an abstraction over Object–Relational
-Mapping, or ORM. This enables interfaces with query definitions to be
-translated into implementation classes at compile time.
+- [Overview](#_overview)
 
-The Helidon Data Repository supports Jakarta Persistence and major
-providers such as EclipseLink and Hibernate.
+- [Maven Coordinates](#maven-coordinates)
+
+- [Annotation Processor](#_annotation_processor)
+
+- [Usage](#_usage)
+
+- [Helidon Config](#_helidon_config)
+
+- [SE Application](#_se_application)
+
+- [Repository Interface](#_repository_interface)
+
+- [Pagination](#_pagination)
+
+- [Dynamic Ordering](#_dynamic_ordering)
+
+- [Persistence Session Access](#_persistence_session_access)
+
+- [Transactions](#_transactions)
+
+## Overview
+
+The Helidon SE Data Repository provides a unified API for working with database queries.
+
+Data repository queries are an abstraction over Object–Relational Mapping, or ORM. This enables interfaces with query definitions to be translated into implementation classes at compile time.
+
+The Helidon Data Repository supports Jakarta Persistence and major providers such as EclipseLink and Hibernate.
 
 ## Maven Coordinates
 
-To enable Data Repository, add the following dependency to your
-project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
+To enable Data Repository, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.data</groupId>
     <artifactId>helidon-data</artifactId>
@@ -26,10 +47,9 @@ project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencie
 </dependency>
 ```
 
-The Jakarta Persistence provider, such as EclipseLink, and the JDBC
-driver, such as MySQL, are required at runtime:
+The Jakarta Persistence provider, such as EclipseLink, and the JDBC driver, such as MySQL, are required at runtime:
 
-```xml
+``` xml
 <dependency>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.jpa</artifactId>
@@ -49,10 +69,9 @@ driver, such as MySQL, are required at runtime:
 
 ## Annotation Processor
 
-Both the entity model and data repository interfaces require a specific
-annotation-processor configuration:
+Both the entity model and data repository interfaces require a specific annotation-processor configuration:
 
-```xml
+``` xml
 <annotationProcessorPaths>
     <path>
         <groupId>io.helidon.bundles</groupId>
@@ -69,20 +88,19 @@ annotation-processor configuration:
 
 ## Usage
 
-The Data Repository provides an API and tooling for implementing
-database queries through interface method prototypes.
+The Data Repository provides an API and tooling for implementing database queries through interface method prototypes.
 
 There are two ways in which such a query can be defined:
 
 - using the method name as the query definition
 
-```java
+``` java
 Optional<Pet> findByName(String name);
 ```
 
 - using a method annotated with `@Data.Query`
 
-```java
+``` java
 @Data.Query("SELECT p FROM Pet p WHERE p.category.name = :categoryName")
 List<Pet> selectPetsByCategory(String categoryName);
 ```
@@ -91,10 +109,9 @@ List<Pet> selectPetsByCategory(String categoryName);
 
 You must configure the data repository before using it.
 
-In the example below, Helidon Config sets up the data repository using
-the EclipseLink provider and a MySQL database as a custom connection:
+In the example below, Helidon Config sets up the data repository using the EclipseLink provider and a MySQL database as a custom connection:
 
-```yaml
+``` yaml
 data:
   persistence-units:
     jakarta:
@@ -110,10 +127,9 @@ data:
             jakarta.persistence.schema-generation.database.action: "none"
 ```
 
-In the next example, Helidon Config sets up the data repository using
-the Hibernate provider and a MySQL database as a Hikari `DataSource`:
+In the next example, Helidon Config sets up the data repository using the Hibernate provider and a MySQL database as a Hikari `DataSource`:
 
-```yaml
+``` yaml
 data:
   sources:
     sql:
@@ -131,33 +147,23 @@ data:
           jakarta.persistence.schema-generation.database.action: "drop-and-create"
 ```
 
-`DataSource` is defined in a separate node, and its name is set to
-`"example"`. This name is referenced in the corresponding
-`persistence-units` configuration node.
+`DataSource` is defined in a separate node, and its name is set to `"example"`. This name is referenced in the corresponding `persistence-units` configuration node.
 
 ## SE Application
 
-The runtime initialization of the data repository is managed by the
-service registry. You can obtain repository interface instances using
-the service registry API:
+The runtime initialization of the data repository is managed by the service registry. You can obtain repository interface instances using the service registry API:
 
-```java
+``` java
 private final KeeperRepository repository = Services.get(KeeperRepository.class);
 ```
 
 ## Repository Interface
 
-Data repository interfaces are annotated with `@Data.Repository` and
-extend the `Data.GenericRepository` interface.
+Data repository interfaces are annotated with `@Data.Repository` and extend the `Data.GenericRepository` interface.
 
-The `@Data.Repository` annotation takes no arguments. The
-`Data.GenericRepository` declares no methods but has two generic type
-parameters, `E` and `ID`. `E` represents the persistence entity type and
-`ID` represents the type of the entity’s primary key attribute.
-Composite primary keys are not supported.
+The `@Data.Repository` annotation takes no arguments. The `Data.GenericRepository` declares no methods but has two generic type parameters, `E` and `ID`. `E` represents the persistence entity type and `ID` represents the type of the entity’s primary key attribute. Composite primary keys are not supported.
 
-The `Data.GenericRepository` interface is extended by additional
-interfaces that add specific features:
+The `Data.GenericRepository` interface is extended by additional interfaces that add specific features:
 
 | Interface | Description |
 |----|----|
@@ -166,7 +172,7 @@ interfaces that add specific features:
 | `Data.CrudRepository<E, ID>` | Extends `BasicRepository`; adds `insert` and `update` methods to provide full CRUD support. |
 | `Data.PageableRepository<E, ID>` | Extends `GenericRepository`; adds pagination support. |
 
-## Repository Interface Methods
+### Repository Interface Methods
 
 A repository interface may contain three kinds of methods:
 
@@ -176,12 +182,9 @@ A repository interface may contain three kinds of methods:
 
 - Methods with a query defined via the method name
 
-The following `PetRepository` interface contains all of these: inherited
-methods from `CrudRepository`, the methods `findByName` and
-`listNameOrderByName` defined by method name, and `selectPetsByCategory`
-defined by the `@Data.Query` annotation:
+The following `PetRepository` interface contains all of these: inherited methods from `CrudRepository`, the methods `findByName` and `listNameOrderByName` defined by method name, and `selectPetsByCategory` defined by the `@Data.Query` annotation:
 
-```java
+``` java
 @Data.Repository
 public interface PetRepository extends Data.CrudRepository<Pet, Integer> {
 
@@ -195,30 +198,23 @@ public interface PetRepository extends Data.CrudRepository<Pet, Integer> {
 }
 ```
 
-### Method with Query Defined by Method Name
+#### Method with Query Defined by Method Name
 
-This method type infers the query based on the method name and does not
-use a specific annotation.
+This method type infers the query based on the method name and does not use a specific annotation.
 
 The general method name syntax is illustrated below:
 
 <figure>
-<img src="../images/data-qbmn-syntax.png" alt="qbmn syntax" />
+<img src="../images/data/qbmn_syntax.png" alt="qbmn syntax" />
 </figure>
 
-All parts of the pattern are optional except the return type keyword,
-such as `get`, `find`, `list`, `stream`, `count` and `exists`.
+All parts of the pattern are optional except the return type keyword, such as `get`, `find`, `list`, `stream`, `count` and `exists`.
 
-#### Method Name Prefix and Return Type
+##### Method Name Prefix and Return Type
 
-A method can have a user-defined prefix. The prefix is a sequence of
-letters and digits that does not match any return type keyword. This
-prefix has no influence on the query and can be used to distinguish
-between methods that have the same query but different return types. If
-a prefix is used, the following query return type keyword must start
-with a capital letter.
+A method can have a user-defined prefix. The prefix is a sequence of letters and digits that does not match any return type keyword. This prefix has no influence on the query and can be used to distinguish between methods that have the same query but different return types. If a prefix is used, the following query return type keyword must start with a capital letter.
 
-```java
+``` java
 Optional<Keeper> findByName(String name);
 Number countByName(String name);
 long longCountByName(String name);
@@ -226,25 +222,22 @@ long longCountByName(String name);
 
 The query return type depends on the return type keyword:
 
-| Keyword | Return Type            | Description                                                                  |
-|---------|------------------------|------------------------------------------------------------------------------|
-| count   | Numeric type           | Number of rows matching the query criteria                                   |
-| exists  | `boolean` or `Boolean` | Whether at least one matching row exists                                     |
-| get     | Query row type         | Single result that throws an exception if there are zero or multiple results |
-| find    | `Optional<…>`          | Zero or single result that throws an exception if there are multiple results |
-| list    | `Collection` or `List` | All matching rows                                                            |
-| list    | `Slice` or `Page`      | Pageable result set                                                          |
-| stream  | `Stream`               | Stream of matching rows                                                      |
+| Keyword | Return Type | Description |
+|----|----|----|
+| count | Numeric type | Number of rows matching the query criteria |
+| exists | `boolean` or `Boolean` | Whether at least one matching row exists |
+| get | Query row type | Single result that throws an exception if there are zero or multiple results |
+| find | `Optional<…>` | Zero or single result that throws an exception if there are multiple results |
+| list | `Collection` or `List` | All matching rows |
+| list | `Slice` or `Page` | Pageable result set |
+| stream | `Stream` | Stream of matching rows |
 
 > [!NOTE]
-> Validation of the keyword–return type mapping is not fully enforced by
-> the code generator, though this may change in future releases.
+> Validation of the keyword–return type mapping is not fully enforced by the code generator, though this may change in future releases.
 
-#### Projection in Method Name
+##### Projection in Method Name
 
-The projection part is optional and follows directly after the
-return-type keyword. It consists of `expression` and `property`
-components:
+The projection part is optional and follows directly after the return-type keyword. It consists of `expression` and `property` components:
 
 | Keyword | Example | Description |
 |----|----|----|
@@ -255,13 +248,9 @@ components:
 | Sum | `getSumPoints` | Returns the sum of values. Requires numeric type. |
 | Avg | `getAvgPoints` | Returns the average value. Requires floating point type. |
 
-The `property` part is the entity property name and it can contain
-underscores. An underscore is interpreted as a dot, which means
-navigation to a related entity attribute. For example, `Keeper_Name` on
-the `Pet` entity translates to the JPQL query
-`SELECT p.keeper.name FROM Pet p`.
+The `property` part is the entity property name and it can contain underscores. An underscore is interpreted as a dot, which means navigation to a related entity attribute. For example, `Keeper_Name` on the `Pet` entity translates to the JPQL query `SELECT p.keeper.name FROM Pet p`.
 
-```java
+``` java
 @Entity
 public class Pet {
     Keeper keeper;
@@ -278,26 +267,17 @@ public interface PetRepository extends Data.GenericRepository<Pet, Integer> {
 }
 ```
 
-#### Criteria in Method Name
+##### Criteria in Method Name
 
-The criteria part of the method name is optional and represents the
-`WHERE` clause of the query. It is a logical expression composed of
-individual conditions joined by the `AND` and `OR` operators. A single
-criteria condition is the `property`, optionally followed by a set of
-criteria keywords. For example, `NameIgnoreCaseNotEndsWith` consists of
-the entity property `name` and the keywords `IgnoreCase`, `Not`, and
-`EndsWith`.
+The criteria part of the method name is optional and represents the `WHERE` clause of the query. It is a logical expression composed of individual conditions joined by the `AND` and `OR` operators. A single criteria condition is the `property`, optionally followed by a set of criteria keywords. For example, `NameIgnoreCaseNotEndsWith` consists of the entity property `name` and the keywords `IgnoreCase`, `Not`, and `EndsWith`.
 
 Criteria condition keywords are of two types:
 
-- `IgnoreCase` and `Not` modifiers that can appear before the condition
-  keyword
+- `IgnoreCase` and `Not` modifiers that can appear before the condition keyword
 
 - the condition keyword itself, such as `EndsWith`
 
-A condition keyword can consume method arguments. Each keyword consumes
-an exact number of arguments. Method arguments are consumed in the same
-order as the condition keywords appear in the method name.
+A condition keyword can consume method arguments. Each keyword consumes an exact number of arguments. Method arguments are consumed in the same order as the condition keywords appear in the method name.
 
 Criteria modifiers:
 
@@ -330,7 +310,7 @@ Supported condition keywords:
 
 An example repository method with criteria:
 
-```java
+``` java
 // Returns Keeper entity with keepr.name matching provided name
 // or throws an exception when no such entity exists
 Keeper getByName(String name);
@@ -350,21 +330,16 @@ Logical operators:
 
 An example repository method with criteria and logical operator:
 
-```java
+``` java
 Optional<Keeper> findByNameAndAge(String name, int age);
 ```
 
 > [!NOTE]
-> In JPQL, operator precedence places `AND` above `OR` as defined in
-> Jakarta Persistence 3.1, section 4.6.6. The same rule applies to SQL.
+> In JPQL, operator precedence places `AND` above `OR` as defined in Jakarta Persistence 3.1, section 4.6.6. The same rule applies to SQL.
 
-#### Ordering in Method Name
+##### Ordering in Method Name
 
-The ordering part of the method name is optional and represents the
-`ORDER BY` clause of the query. It is a list of ordering rules. A single
-ordering rule is the `property` optionally followed by a direction
-keyword. If more than one ordering rule is present, the rules must be
-separated by direction keywords, so only the last keyword is optional.
+The ordering part of the method name is optional and represents the `ORDER BY` clause of the query. It is a list of ordering rules. A single ordering rule is the `property` optionally followed by a direction keyword. If more than one ordering rule is present, the rules must be separated by direction keywords, so only the last keyword is optional.
 
 Ordering keywords:
 
@@ -373,20 +348,19 @@ Ordering keywords:
 | Asc     | The returned collection is sorted in ascending order.  |
 | Desc    | The returned collection is sorted in descending order. |
 
-The default direction is ascending when the keyword is omitted after the
-`property`.
+The default direction is ascending when the keyword is omitted after the `property`.
 
 An example repository method with ordering:
 
-```java
+``` java
 List<Keeper> listAllOrderByAgeAscName();
 ```
 
-#### Method Name Grammar
+##### Method Name Grammar
 
 The formal grammar for method names is as follows:
 
-```text
+``` text
         method-name  :: <query> | <delete>
 
         query        :: <action> [ <projection> ] [ "By" <criteria>  [ "OrderBy" <order> ] ]
@@ -421,46 +395,35 @@ The formal grammar for method names is as follows:
         direction    :: "Asc" | "Desc"
 ```
 
-### Method with Query Defined by `@Data.Query` Annotation
+#### Method with Query Defined by `@Data.Query` Annotation
 
-This method type must be annotated with `@Data.Query`. The annotation
-takes a single `String` value containing the database query. Currently,
-JPQL is supported. Method arguments must match the query parameters:
+This method type must be annotated with `@Data.Query`. The annotation takes a single `String` value containing the database query. Currently, JPQL is supported. Method arguments must match the query parameters:
 
-- For named parameters, each named parameter in the query must
-  correspond to a method argument with the same name. Order does not
-  matter.
+- For named parameters, each named parameter in the query must correspond to a method argument with the same name. Order does not matter.
 
-```java
+``` java
 @Data.Query("SELECT p FROM Pet p WHERE p.category.name = :categoryName")
 List<Pet> selectPetsByCategory(String categoryName);
 ```
 
-- For indexed parameters, each argument must appear in the same order as
-  in the query. Indexing starts at `1`.
+- For indexed parameters, each argument must appear in the same order as in the query. Indexing starts at `1`.
 
-```java
+``` java
 @Data.Query("SELECT p.keeper FROM Pet p WHERE k.name = $1 AND p.category.name = $2")
 Optional<Keeper> selectKeeper(String name, String category);
 ```
 
 Supported return types include:
 
-- the query row type such as an entity class, an entity attribute, or a
-  custom projection
+- the query row type such as an entity class, an entity attribute, or a custom projection
 
-- `List`, `Collection`, `Stream`, or `Optional` with the query row type
-  as the generic parameter
+- `List`, `Collection`, `Stream`, or `Optional` with the query row type as the generic parameter
 
 - `Page` or `Slice` with the query row type as the generic parameter
 
 ## Pagination
 
-Pagination allows the caller to split a returned data collection into
-individual pages. When pagination is used, the repository method must
-have an argument of type `PageRequest`. The return type of the method is
-`Slice` or `Page`. The `PageRequest` argument defines the page size and
-the page index, starting from `0`.
+Pagination allows the caller to split a returned data collection into individual pages. When pagination is used, the repository method must have an argument of type `PageRequest`. The return type of the method is `Slice` or `Page`. The `PageRequest` argument defines the page size and the page index, starting from `0`.
 
 Returned page content types:
 
@@ -471,54 +434,42 @@ Returned page content types:
 
 An example repository method with pagination:
 
-```java
+``` java
 Slice<Keeper> listAll(PageRequest pageRequest);
 ```
 
 ## Dynamic Ordering
 
-The ordering part of the method name defines a static ordering rule that
-cannot be modified at runtime. Dynamic ordering allows the caller to
-define an additional ordering rule at runtime. Dynamic ordering is
-triggered by adding an argument of type `Sort` to the repository method.
-Both static and dynamic rules can be used together.
+The ordering part of the method name defines a static ordering rule that cannot be modified at runtime. Dynamic ordering allows the caller to define an additional ordering rule at runtime. Dynamic ordering is triggered by adding an argument of type `Sort` to the repository method. Both static and dynamic rules can be used together.
 
 An example repository method with dynamic ordering:
 
-```java
+``` java
 List<Keeper> listByAgeBetween(int min, int max, Sort sort);
 ```
 
-Static ordering rules from the method name are always applied first, and
-dynamic rules are added after them:
+Static ordering rules from the method name are always applied first, and dynamic rules are added after them:
 
-```java
+``` java
 List<Keeper> listByAgeBetweenOrderByAge(int min, int max, Sort sort);
 ```
 
 ## Persistence Session Access
 
-The caller can access the persistence provider session to implement more
-complex tasks that the framework does not support directly. This feature
-is available to a data repository interface that extends the
-`Data.SessionRepository<S>` interface.
+The caller can access the persistence provider session to implement more complex tasks that the framework does not support directly. This feature is available to a data repository interface that extends the `Data.SessionRepository<S>` interface.
 
-The generic argument `S` is the persistence session type, for example
-`EntityManager`. The `Data.SessionRepository` interface provides methods
-that supply a session managed by the data repository framework, so there
-is no need to handle the session instance lifecycle.
+The generic argument `S` is the persistence session type, for example `EntityManager`. The `Data.SessionRepository` interface provides methods that supply a session managed by the data repository framework, so there is no need to handle the session instance lifecycle.
 
-```java
+``` java
 @Data.Repository
 public interface KeeperRepository
         extends Data.GenericRepository<Keeper, Integer>, Data.SessionRepository<EntityManager> {
 }
 ```
 
-The session instance is available through the
-`Data.SessionRepository<S>` interface methods `run` and `call`:
+The session instance is available through the `Data.SessionRepository<S>` interface methods `run` and `call`:
 
-```java
+``` java
 public class PetService {
 
     private final KeeperRepository repository = Services.get(KeeperRepository.class);
@@ -542,28 +493,24 @@ public class PetService {
 ```
 
 > [!NOTE]
-> The session instance is valid only while `run` or `call` method is
-> being executed. This instance must not be stored and used after this
-> method has ended.
+> The session instance is valid only while `run` or `call` method is being executed. This instance must not be stored and used after this method has ended.
 
 ## Transactions
 
 Transaction handling is available through Helidon Transaction API.
 
-To enable Helidon Transaction API, add the following dependency to your
-project’s `pom.xml`:
+To enable Helidon Transaction API, add the following dependency to your project’s `pom.xml`:
 
-```xml
+``` xml
 <dependency>
     <groupId>jakarta.transaction</groupId>
     <artifactId>jakarta.transaction-api</artifactId>
 </dependency>
 ```
 
-Helidon JTA Transaction support, such as Narayana, may be provided at
-runtime to enable `JTA` transaction type:
+Helidon JTA Transaction support, such as Narayana, may be provided at runtime to enable `JTA` transaction type:
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.transaction</groupId>
     <artifactId>helidon-transaction-narayana</artifactId>
@@ -571,15 +518,11 @@ runtime to enable `JTA` transaction type:
 </dependency>
 ```
 
-If JTA transaction support is not provided, Helidon Data runtime will
-use `RESOURCE_LOCAL` transaction type.
+If JTA transaction support is not provided, Helidon Data runtime will use `RESOURCE_LOCAL` transaction type.
 
-## Transaction Types and Annotations
+### Transaction Types and Annotations
 
-The `Tx` class defines several ways how transactional support can be
-applied to transactional method executions. Those ways are defined in
-`Tx.Type` enum. The `Tx` class also defines annotations that can be used
-to mark methods for transactional execution based on `Tx.Type` enum.
+The `Tx` class defines several ways how transactional support can be applied to transactional method executions. Those ways are defined in `Tx.Type` enum. The `Tx` class also defines annotations that can be used to mark methods for transactional execution based on `Tx.Type` enum.
 
 | Enum | Annotation | Description |
 |----|----|----|
@@ -590,10 +533,9 @@ to mark methods for transactional execution based on `Tx.Type` enum.
 | `SUPPORTED` | `@Supported` | A transaction may optionally be in effect when a method executes. If called outside a transaction context, method execution continues outside a transaction context. If called inside a transaction context, method execution continues inside that transaction context. |
 | `UNSUPPORTED` | `@Unsupported` | No transaction will be in effect when a method executes. If called outside a transaction context, method execution continues outside a transaction context. If called inside a transaction context, the current transaction is suspended, method execution continues outside a transaction context, and the previously suspended transaction is resumed after method execution completes. |
 
-## Transaction Methods
+### Transaction Methods
 
-The `Tx` class provides several methods for executing tasks within a
-transaction:
+The `Tx` class provides several methods for executing tasks within a transaction:
 
 | Method | Description |
 |----|----|
@@ -602,22 +544,13 @@ transaction:
 | `transaction(CheckedRunnable<Exception> task)` | Executes a task with a managed transaction of type `REQUIRED` without returning a result. |
 | `transaction(Type type, CheckedRunnable<Exception> task)` | Executes a task with a managed transaction of the specified type without returning a result. |
 
-## Usage
+### Usage
 
-The `Tx.Type` enum is used to control the transactional behavior of
-methods. By specifying the desired transactional behavior using one of
-the enum values, developers can ensure that their methods are executed
-with the correct transactional context. For example, using `REQUIRED`
-ensures that a method is always executed within a transaction, while
-using `NEVER` ensures that a method is never executed within a
-transaction.
+The `Tx.Type` enum is used to control the transactional behavior of methods. By specifying the desired transactional behavior using one of the enum values, developers can ensure that their methods are executed with the correct transactional context. For example, using `REQUIRED` ensures that a method is always executed within a transaction, while using `NEVER` ensures that a method is never executed within a transaction.
 
-In this example, the `doSomething()` method is annotated with
-`@Tx.Required`, ensuring that it is always executed within a
-transaction. The `doSomethingElse()` method is annotated with
-`@Tx.Never`, ensuring that it is never executed within a transaction:
+In this example, the `doSomething()` method is annotated with `@Tx.Required`, ensuring that it is always executed within a transaction. The `doSomethingElse()` method is annotated with `@Tx.Never`, ensuring that it is never executed within a transaction:
 
-```java
+``` java
 @Service.Singleton
 public class PetService {
     @Tx.Required
@@ -634,14 +567,9 @@ public class PetService {
 
 `PetService` class instance is obtained from service registry.
 
-In this example, lambda expression in the `doSomething()` method is
-executed using `Tx.transaction` method with `Tx.Type.REQUIRED` argument,
-ensuring that it is always executed within a transaction. Lambda
-expression in the `doSomethingElse()` method is executed using
-`Tx.transaction` method with `Tx.Type.NEVER` argument, ensuring that it
-is never executed within a transaction:
+In this example, lambda expression in the `doSomething()` method is executed using `Tx.transaction` method with `Tx.Type.REQUIRED` argument, ensuring that it is always executed within a transaction. Lambda expression in the `doSomethingElse()` method is executed using `Tx.transaction` method with `Tx.Type.NEVER` argument, ensuring that it is never executed within a transaction:
 
-```java
+``` java
 public class KeeperService {
     public void doSomething() {
         Tx.transaction(Tx.Type.REQUIRED,

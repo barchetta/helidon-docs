@@ -1,15 +1,24 @@
-# AQ
+# Oracle AQ Connector
 
-Connecting streams to Oracle AQ with Reactive Messaging couldn’t be
-easier. This connector extends Helidon’s JMS connector with Oracle’s
-AQ-specific API.
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [Configuration](#_configuration)
+
+- [Usage](#_usage)
+
+## Overview
+
+Connecting streams to Oracle AQ with Reactive Messaging couldn’t be easier. This connector extends Helidon’s JMS connector with Oracle’s AQ-specific API.
 
 ## Maven Coordinates
 
-To enable AQ Connector, add the following dependency to your project’s
-`pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
+To enable AQ Connector, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.messaging.aq</groupId>
     <artifactId>helidon-messaging-aq</artifactId>
@@ -20,35 +29,36 @@ To enable AQ Connector, add the following dependency to your project’s
 
 Connector name: `helidon-aq`
 
-|                     |                                                                                                                                                                                                                                                                                                                                        |
-|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `datasource`        | name of the datasource bean used to connect Oracle DB with AQ                                                                                                                                                                                                                                                                          |
-| `url`               | jdbc connection string used to connect Oracle DB with AQ (forbidden when `datasource` is specified)                                                                                                                                                                                                                                    |
-| `username`          | User name used to connect Oracle DB with AQ (forbidden when `datasource` is specified)                                                                                                                                                                                                                                                 |
-| `password`          | Password to connect Oracle DB with AQ (forbidden when `datasource` is specified)                                                                                                                                                                                                                                                       |
-| `type`              | Possible values are: `queue`, `topic`                                                                                                                                                                                                                                                                                                  |
-| `destination`       | Queue or topic name                                                                                                                                                                                                                                                                                                                    |
-| `acknowledge-mode`  | Possible values are: `AUTO_ACKNOWLEDGE`- session automatically acknowledges a client’s receipt of a message, `CLIENT_ACKNOWLEDGE` - receipt of a message is acknowledged only when `Message.ack()` is called manually, `DUPS_OK_ACKNOWLEDGE` - session lazily acknowledges the delivery of messages. Default value: `AUTO_ACKNOWLEDGE` |
-| `transacted`        | Indicates whether the session will use a local transaction. Default value: `false`                                                                                                                                                                                                                                                     |
-| `message-selector`  | JMS API message selector expression based on a subset of the SQL92. Expression can only access headers and properties, not the payload.                                                                                                                                                                                                |
-| `client-id`         | Client identifier for JMS connection.                                                                                                                                                                                                                                                                                                  |
-| `durable`           | True for creating durable consumer (only for topic). Default value: `false`                                                                                                                                                                                                                                                            |
-| `subscriber-name`   | Subscriber name for durable consumer used to identify subscription.                                                                                                                                                                                                                                                                    |
-| `non-local`         | If true then any messages published to the topic using this session’s connection, or any other connection with the same client identifier, will not be added to the durable subscription. Default value: `false`                                                                                                                       |
-| `named-factory`     | Select in case factory is injected as a named bean or configured with name.                                                                                                                                                                                                                                                            |
-| `poll-timeout`      | Timeout for polling for next message in every poll cycle in millis. Default value: `50`                                                                                                                                                                                                                                                |
-| `period-executions` | Period for executing poll cycles in millis. Default value: `100`                                                                                                                                                                                                                                                                       |
-| `session-group-id`  | When multiple channels share same `session-group-id`, they share same JMS session and same JDBC connection as well.                                                                                                                                                                                                                    |
+### Configuration options
 
-Attributes
+| Key | Kind | Type | Default Value | Description |
+|----|----|----|----|----|
+| <span id="a4e0a1-acknowledge-mode"></span> [`acknowledge-mode`](../../config/io_helidon_messaging_connectors_jms_AcknowledgeMode.md) | `VALUE` | `i.h.m.c.j.AcknowledgeMode` | `AUTO_ACKNOWLEDGE` | JMS acknowledgement mode |
+| <span id="aa8394-client-id"></span> `client-id` | `VALUE` | `String` |   | Client identifier for JMS connection |
+| <span id="ab7c5d-data-source"></span> `data-source` | `VALUE` | `String` |   | Mapping to `javax.sql.DataSource DataSource` supplied with `io.helidon.messaging.connectors.aq.AqConnector.AqConnectorBuilder#dataSource(String, javax.sql.DataSource) AqConnectorBuilder.dataSource()` |
+| <span id="a750e3-destination"></span> `destination` | `VALUE` | `String` |   | Queue or topic name |
+| <span id="ad5200-durable"></span> `durable` | `VALUE` | `Boolean` | `false` | Indicates whether the consumer should be created as durable (only relevant for topic destinations) |
+| <span id="a56105-message-selector"></span> `message-selector` | `VALUE` | `String` |   | JMS API message selector expression based on a subset of the SQL92 |
+| <span id="a4cfbb-named-factory"></span> `named-factory` | `VALUE` | `String` |   | Select `jakarta.jms.ConnectionFactory ConnectionFactory` in case factory is injected as a named bean or configured with name |
+| <span id="a1e92c-non-local"></span> `non-local` | `VALUE` | `Boolean` | `false` | When set to `true`, messages published by this connection, or any connection with the same client identifier, will not be delivered to this durable subscription |
+| <span id="a9446b-password"></span> `password` | `VALUE` | `String` |   | Password used for creating JMS connection |
+| <span id="a4c7fd-period-executions"></span> `period-executions` | `VALUE` | `Long` | `100` | Period for executing poll cycles in millis |
+| <span id="abdb87-poll-timeout"></span> `poll-timeout` | `VALUE` | `Long` | `50` | Timeout for polling for next message in every poll cycle in millis |
+| <span id="a5bcad-queue"></span> `queue` | `VALUE` | `String` |   | Use supplied destination name and `Type#QUEUE QUEUE` as type |
+| <span id="aad6ba-session-group-id"></span> `session-group-id` | `VALUE` | `String` |   | When multiple channels share same session-group-id, they share same JMS session |
+| <span id="a0166f-subscriber-name"></span> `subscriber-name` | `VALUE` | `String` |   | Subscriber name used to identify a durable subscription |
+| <span id="a82a72-topic"></span> `topic` | `VALUE` | `String` |   | Use supplied destination name and `Type#TOPIC TOPIC` as type |
+| <span id="a5eafc-transacted"></span> `transacted` | `VALUE` | `Boolean` | `false` | Indicates whether the session will use a local transaction |
+| <span id="aa2815-type"></span> [`type`](../../config/io_helidon_messaging_connectors_jms_Type.md) | `VALUE` | `i.h.m.c.j.Type` | `QUEUE` | Specify if connection is `io.helidon.messaging.connectors.jms.Type#QUEUE queue` or `io.helidon.messaging.connectors.jms.Type#TOPIC topic` |
+| <span id="a42b8b-username"></span> `username` | `VALUE` | `String` |   | User name used for creating JMS connection |
 
-## Configured JMS Factory
+### Configured JMS Factory
 
-The simplest possible usage is leaving construction of
-`AQjmsConnectionFactory` to the connector.
+The simplest possible usage is leaving construction of `AQjmsConnectionFactory` to the connector.
 
-Example of connector config:
-```yaml
+*Example of connector config:*
+
+``` yaml
 mp:
   messaging:
 
@@ -73,8 +83,9 @@ mp:
 
 Its also possible and preferable to refer to [configured datasource](../persistence.md), in our example [Oracle UCP datasource](../persistence.md):
 
-Example of connector config with Oracle UCP datasource:
-```yaml
+*Example of connector config with Oracle UCP datasource:*
+
+``` yaml
 javax:
   sql:
     DataSource:
@@ -101,13 +112,13 @@ mp:
       type: queue
 ```
 
-## Injected JMS factory
+### Injected JMS factory
 
-If you need more advanced configurations, connector can work with
-injected `AQjmsConnectionFactory`:
+If you need more advanced configurations, connector can work with injected `AQjmsConnectionFactory`:
 
-Inject:
-```java
+*Inject:*
+
+``` java
 @Produces
 @ApplicationScoped
 @Named("aq-orderdb-factory")
@@ -120,8 +131,9 @@ public AQjmsConnectionFactory connectionFactory() throws JMSException {
 }
 ```
 
-Config:
-```yaml
+*Config:*
+
+``` yaml
 jdbc:
   url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=192.168.0.123)(Port=1521))(CONNECT_DATA=(SID=TESTSID)))
   user: gandalf
@@ -148,18 +160,20 @@ mp:
 
 ## Usage
 
-## Consuming
+### Consuming
 
-Consuming one by one unwrapped value:
-```java
+*Consuming one by one unwrapped value:*
+
+``` java
 @Incoming("from-aq")
 public void consumeAq(String msg) {
     System.out.println("Oracle AQ says: " + msg);
 }
 ```
 
-Consuming one by one, manual ack:
-```java
+*Consuming one by one, manual ack:*
+
+``` java
 @Incoming("from-aq")
 @Acknowledgment(Acknowledgment.Strategy.MANUAL)
 public CompletionStage<Void> consumeAq(AqMessage<String> msg) {
@@ -171,10 +185,11 @@ public CompletionStage<Void> consumeAq(AqMessage<String> msg) {
 }
 ```
 
-## Producing
+### Producing
 
-Producing to AQ:
-```java
+*Producing to AQ:*
+
+``` java
 @Outgoing("to-aq")
 public PublisherBuilder<String> produceToAq() {
     return ReactiveStreams.of("test1", "test2");

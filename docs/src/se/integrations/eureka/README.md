@@ -1,7 +1,7 @@
 # Eureka
 
-Netflix Eureka Server integration.
+Index of Eureka documentation.
 
-| Topic                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Overview](eureka-registration.md) | Helidon’s Eureka Server Service Instance Registration Integration provides a [`ServerFeature`](https://helidon.io/docs/v4/apidocs/io.helidon.webserver/io/helidon/webserver/spi/ServerFeature.html) that offers support for automatically and unobtrusively attempting to register a running Helidon microservice with an available Netflix Eureka Server of at least version 2.0.5 in the microservice’s runtime environment. |
+| Topic | Description |
+| --- | --- |
+| [Eureka Server Service Instance Registration](eureka-registration.md) | Helidon Eureka Server Service Instance Registration Integration |

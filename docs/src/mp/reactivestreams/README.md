@@ -1,8 +1,8 @@
 # Reactivestreams
 
-Browse Reactivestreams documentation.
+Index of Reactivestreams documentation.
 
-| Topic                          | Description                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Engine](engine.md)            | Helidon has its own set of reactive operators that have no dependencies outside the Helidon ecosystem.                                                                                                                                                                                                                                                                 |
-| [RS Operators](rsoperators.md) | Helidon implements [MicroProfile Reactive Streams Operators](https://download.eclipse.org/microprofile/microprofile-reactive-streams-operators-3.0/microprofile-reactive-streams-operators-spec-3.0.html) specification which defines reactive operators and provides a standardized tool for manipulation with [Reactive Streams](https://www.reactive-streams.org/). |
+| Topic | Description |
+| --- | --- |
+| [Helidon Reactive Engine](engine.md) | Dependency-less reactive operators |
+| [MicroProfile Reactive Streams Operators](rsoperators.md) | {spec-name} support in Helidon MP |

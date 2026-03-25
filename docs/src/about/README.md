@@ -1,13 +1,19 @@
 # About
 
-Helidon is a collection of Java libraries for writing microservices.
+Index of About documentation.
 
-| Topic                                             | Description                                                                                                        |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [Get Started](get-started.md)                     | You'll need Java and Maven to build and run Helidon examples.                                                      |
-| [Helidon CLI](cli.md)                             | The Helidon CLI lets you easily create a Helidon project by picking from a set of archetypes.                      |
-| [Helidon Overview](overview.md)                   | Helidon is a collection of Java libraries for writing microservices.                                               |
-| [Helidon Starter](starter.md)                     | The [Helidon Starter](https://helidon.io/starter) provides a friendly way to create a new Helidon project.         |
-| [Managing Dependencies](managing-dependencies.md) | Helidon provides a “Bill Of Materials” (BOM) to manage dependencies.                                               |
-| [Prerequisites](prerequisites.md)                 | Verify Prerequisites:                                                                                              |
-| [What’s New in This Release](new.md)              | threads-based web server implementation based on [JDK Project Loom](https://openjdk.org/jeps/444) virtual threads. |
+| Topic | Description |
+| --- | --- |
+| [Features and Benefits of Helidon](benefits.md) | Helidon is open-source software, licensed with Apache License, Version 2.0. Its codebase is kept in GitHub. Its artifacts are published to Maven Central. This makes it easy for users to inspect, modify, and contribute to its source code. The Apache license makes it easy for organizations to adopt Helidon from a licensing perspective. Publishing artifacts to Maven Central makes it easy and natural for developers and operators to pull Helidon binaries into development environments and CI/CD pipelines. In short, Helidon is intentionally aligned with modern mainstream development practices to make it as easy as possible to adopt and use |
+| [Get Started](prerequisites.md) | Helidon prerequisites and getting started |
+| [Helidon Application Bootstrapping](archetype.md) | Helidon Application Bootstrapping |
+| [Helidon CLI](cli.md) | Helidon CLI |
+| [Helidon Community and Support References](additional_info.md) | Helidon community links and references |
+| [Helidon Documentation](doc_overview.md) | Helidon |
+| [Helidon Documentation Overview](doc_sitemap.md) | Helidon Documentation Sitemap |
+| [Helidon on Windows](windows.md) | Helidon on Windows |
+| [Helidon Project Starter](generating_project.md) | [Helidon Project Starter](https://helidon.io/starter) allows you to choose from a set of archetypes with pre-defined feature sets and lets you customize it by providing a host of options |
+| [Introducing Helidon](introduction.md) | Helidon |
+| [Introducing Helidon 4](intro.md) | Helidon |
+| [Managing Dependencies](managing-dependencies.md) | Managing Maven dependencies |
+| [Run Kubernetes Locally for Development](kubernetes.md) | Running Kubernetes locally |

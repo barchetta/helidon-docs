@@ -1,8 +1,8 @@
-# Webserver
+# WebServer
 
-Browse Webserver documentation.
+Index of WebServer documentation.
 
-| Topic                                       | Description                                                                                                                                                |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [About WebServer](webserver.md)             | WebServer provides an API for creating HTTP servers.                                                                                                       |
-| [Concurrency Limits](concurrency-limits.md) | With the introduction of virtual threads, Helidon is able to create a new thread per request with the only limit being the available memory on the system. |
+| Topic | Description |
+| --- | --- |
+| [Concurrency Limits](concurrency-limits.md) | Helidon SE Concurrency Limits |
+| [WebServer Introduction](webserver.md) | Helidon WebServer Introduction |

@@ -10,11 +10,11 @@ hero:
   actions:
     - theme: brand
       text: About
-      link: /about/index.md
+      link: /about/
     - theme: brand
       text: Get Started
-      link: /about/get-started.md
-
+      link: /about/prerequisites
+      
 features:
   - title: Helidon
     link: /se/index.md

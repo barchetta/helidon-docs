@@ -1,25 +1,37 @@
 # HashiCorp Vault
 
-HashiCorp Vault is a commonly used Vault in many microservices. The APIs
-are REST-based and Helidon implements them using
-[WebClient](../../se/webclient.md).
+## Contents
+
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [Usage](#_usage)
+
+- [Examples](#_examples)
+
+- [Local Testing](#Local-Testing)
+
+- [References](#_references)
+
+## Overview
+
+HashiCorp Vault is a commonly used Vault in many microservices. The APIs are REST-based and Helidon implements them using [WebClient](../../se/webclient.md).
 
 ## Maven Coordinates
 
-To enable HashiCorp Vault, add the following dependency to your
-project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
+To enable HashiCorp Vault, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.integrations.vault</groupId>
     <artifactId>helidon-integrations-vault-cdi</artifactId>
 </dependency>
 ```
 
-The following is a list of maven coordinates of all Vault modules
-available:
+The following is a list of maven coordinates of all Vault modules available:
 
-```xml
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.integrations.vault.auths</groupId>
@@ -64,25 +76,19 @@ available:
 
 Vault integration supports the following:
 
-- **Secret Engines**: Key/Value version 2, Key/Value version 1,
-  Cubbyhole, PKI, Transit, Database
+- **Secret Engines**: Key/Value version 2, Key/Value version 1, Cubbyhole, PKI, Transit, Database
 
 - **Authentication Methods**: Token, Kubernetes (k8s), AppRole
 
 - **Other Sys Operations and Configurations**
 
-Each of these features is implemented as a separate module, with the
-Vault class binding them together. In Helidon MP, with injection, this
-binding is done automatically, and you can simply inject your favorite
-secret engine.
+Each of these features is implemented as a separate module, with the Vault class binding them together. In Helidon MP, with injection, this binding is done automatically, and you can simply inject your favorite secret engine.
 
-The following classes can be injected into any CDI bean (if appropriate
-module is on the classpath):
+The following classes can be injected into any CDI bean (if appropriate module is on the classpath):
 
 - Kv2Secrets - Key/Value Version 2 Secrets (versioned secrets, default)
 
-- Kv1Secrets - Key/Value Version 1 Secrets (un-versioned secrets,
-  legacy)
+- Kv1Secrets - Key/Value Version 1 Secrets (un-versioned secrets, legacy)
 
 - CubbyholeSecrets - Cubbyhole secrets (token bound secrets)
 
@@ -98,11 +104,9 @@ module is on the classpath):
 
 - TokenAuth - Token authentication method (management operations)
 
-- Sys - System operations (management of Vault - enabling/disabling
-  secret engines and authentication methods)
+- Sys - System operations (management of Vault - enabling/disabling secret engines and authentication methods)
 
-In addition to these features, Vault itself can be authenticated as
-follows:
+In addition to these features, Vault itself can be authenticated as follows:
 
 - Token authentication - token is configured when connecting to Vault
 
@@ -111,35 +115,28 @@ follows:
     vault.address=http://localhost:8200
     vault.token=my-token
 
-- AppRole authentication - AppRole ID and secret ID are configured,
-  integration exchanges these for a temporary token that is used to
-  connect to Vault
+- AppRole authentication - AppRole ID and secret ID are configured, integration exchanges these for a temporary token that is used to connect to Vault
 
 <!-- -->
 
     vault.auth.app-role.role-id=app-role-id
     vault.auth.app-role.secret-id=app-role-secret-id
 
-- K8s authentication - the k8s JWT token is discovered on current node
-  and used to obtain a temporary token that is used to connect to Vault
+- K8s authentication - the k8s JWT token is discovered on current node and used to obtain a temporary token that is used to connect to Vault
 
 <!-- -->
 
-    vault.auth.k8s.token-role=my-role
+    vault.auth.k8s.token-role=my-role 
 
 - The token role must be configured in Vault
 
-## Extensibility
+### Extensibility
 
-New secret engines and authentication methods can be implemented quite
-easily, as the integration is based on service providers (using
-ServiceLoader). This gives us (or you, as the users) the option to add
-new secret engines and/or authentication methods without adding a
-plethora of methods to the Vault class.
+New secret engines and authentication methods can be implemented quite easily, as the integration is based on service providers (using ServiceLoader). This gives us (or you, as the users) the option to add new secret engines and/or authentication methods without adding a plethora of methods to the Vault class.
 
 See the following SPIs:
 
-```text
+``` listing
 io.helidon.integrations.vault.spi.AuthMethodProvider
 io.helidon.integrations.vault.spi.SecretsEngineProvider
 io.helidon.integrations.vault.spi.SysProvider
@@ -149,10 +146,9 @@ io.helidon.integrations.vault.spi.InjectionProvider
 
 ## Examples
 
-The following example shows usage of Vault to encrypt a secret using the
-default Vault configuration (in a JAX-RS resource):
+The following example shows usage of Vault to encrypt a secret using the default Vault configuration (in a JAX-RS resource):
 
-```java
+``` java
 @Path("/transit")
 class TransitResource {
     private final TransitSecrets secrets;
@@ -174,11 +170,11 @@ class TransitResource {
 }
 ```
 
-## Cubbyhole secrets
+### Cubbyhole secrets
 
 Cubbyhole example:
 
-```java
+``` java
 @Path("/cubbyhole")
 public class CubbyholeResource {
     private final CubbyholeSecrets secrets;
@@ -190,7 +186,7 @@ public class CubbyholeResource {
 
     @POST
     @Path("/secrets/{path: .*}")
-    public Response createSecret(@PathParam("path") String path, String secret) {
+    public Response createSecret(@PathParam("path") String path, String secret) { 
         CreateCubbyhole.Response response = secrets.create(path, Map.of("secret", secret));
 
         return Response.ok()
@@ -203,7 +199,7 @@ public class CubbyholeResource {
 
     @DELETE
     @Path("/secrets/{path: .*}")
-    public Response deleteSecret(@PathParam("path") String path) {
+    public Response deleteSecret(@PathParam("path") String path) { 
         DeleteCubbyhole.Response response = secrets.delete(path);
 
         return Response.ok()
@@ -216,7 +212,7 @@ public class CubbyholeResource {
 
     @GET
     @Path("/secrets/{path: .*}")
-    public Response getSecret(@PathParam("path") String path) {
+    public Response getSecret(@PathParam("path") String path) { 
         Optional<Secret> secret = secrets.get(path);
 
         if (secret.isPresent()) {
@@ -231,18 +227,17 @@ public class CubbyholeResource {
 }
 ```
 
-- Create a secret from request entity, the name of the value is
-  `secret`.
+- Create a secret from request entity, the name of the value is `secret`.
 
 - Delete the secret on a specified path.
 
 - Get the secret on a specified path.
 
-## KV1 secrets
+### KV1 secrets
 
 Key/Value version 1 secrets engine operations:
 
-```java
+``` java
 @Path("/kv1")
 public class Kv1Resource {
     private final Sys sys;
@@ -256,7 +251,7 @@ public class Kv1Resource {
 
     @Path("/engine")
     @GET
-    public Response enableEngine() {
+    public Response enableEngine() { 
         EnableEngine.Response response = sys.enableEngine(Kv1Secrets.ENGINE);
 
         return Response.ok()
@@ -267,7 +262,7 @@ public class Kv1Resource {
 
     @Path("/engine")
     @DELETE
-    public Response disableEngine() {
+    public Response disableEngine() { 
         DisableEngine.Response response = sys.disableEngine(Kv1Secrets.ENGINE);
         return Response.ok()
                 .entity("Key/value version 1 secret engine is now disabled."
@@ -277,7 +272,7 @@ public class Kv1Resource {
 
     @POST
     @Path("/secrets/{path: .*}")
-    public Response createSecret(@PathParam("path") String path, String secret) {
+    public Response createSecret(@PathParam("path") String path, String secret) { 
         CreateKv1.Response response = secrets.create(path, Map.of("secret", secret));
 
         return Response.ok()
@@ -290,7 +285,7 @@ public class Kv1Resource {
 
     @DELETE
     @Path("/secrets/{path: .*}")
-    public Response deleteSecret(@PathParam("path") String path) {
+    public Response deleteSecret(@PathParam("path") String path) { 
         DeleteKv1.Response response = secrets.delete(path);
 
         return Response.ok()
@@ -303,7 +298,7 @@ public class Kv1Resource {
 
     @GET
     @Path("/secrets/{path: .*}")
-    public Response getSecret(@PathParam("path") String path) {
+    public Response getSecret(@PathParam("path") String path) { 
         Optional<Secret> secret = secrets.get(path);
 
         if (secret.isPresent()) {
@@ -322,18 +317,17 @@ public class Kv1Resource {
 
 - Disable the secrets engine on the default path.
 
-- Create a secret from request entity, the name of the value is
-  `secret`.
+- Create a secret from request entity, the name of the value is `secret`.
 
 - Delete the secret on a specified path.
 
 - Get the secret on a specified path.
 
-## KV2 secrets
+### KV2 secrets
 
 Key/Value version 2 secrets engine operations:
 
-```java
+``` java
 @Path("/kv2")
 public class Kv2Resource {
     private final Kv2Secrets secrets;
@@ -346,7 +340,7 @@ public class Kv2Resource {
 
     @POST
     @Path("/secrets/{path: .*}")
-    public Response createSecret(@PathParam("path") String path, String secret) {
+    public Response createSecret(@PathParam("path") String path, String secret) { 
         CreateKv2.Response response = secrets.create(path, Map.of("secret", secret));
         return Response.ok()
                 .entity(String.format(
@@ -358,7 +352,7 @@ public class Kv2Resource {
 
     @DELETE
     @Path("/secrets/{path: .*}")
-    public Response deleteSecret(@PathParam("path") String path) {
+    public Response deleteSecret(@PathParam("path") String path) { 
         DeleteAllKv2.Response response = secrets.deleteAll(path);
         return Response.ok()
                 .entity(String.format(
@@ -370,7 +364,7 @@ public class Kv2Resource {
 
     @GET
     @Path("/secrets/{path: .*}")
-    public Response getSecret(@PathParam("path") String path) {
+    public Response getSecret(@PathParam("path") String path) { 
 
         Optional<Kv2Secret> secret = secrets.get(path);
 
@@ -389,18 +383,17 @@ public class Kv2Resource {
 }
 ```
 
-- Create a secret from request entity, the name of the value is
-  `secret`.
+- Create a secret from request entity, the name of the value is `secret`.
 
 - Delete the secret on a specified path.
 
 - Get the secret on a specified path.
 
-## Transit secrets
+### Transit secrets
 
 Transit secrets engine operations:
 
-```java
+``` java
 @Path("/transit")
 public class TransitResource {
     private static final String ENCRYPTION_KEY = "encryption-key";
@@ -417,7 +410,7 @@ public class TransitResource {
 
     @Path("/engine")
     @GET
-    public Response enableEngine() {
+    public Response enableEngine() { 
         EnableEngine.Response response = sys.enableEngine(TransitSecrets.ENGINE);
 
         return Response.ok()
@@ -428,7 +421,7 @@ public class TransitResource {
 
     @Path("/engine")
     @DELETE
-    public Response disableEngine() {
+    public Response disableEngine() { 
         DisableEngine.Response response = sys.disableEngine(TransitSecrets.ENGINE);
         return Response.ok()
                 .entity("Transit secret engine is now disabled."
@@ -438,7 +431,7 @@ public class TransitResource {
 
     @Path("/keys")
     @GET
-    public Response createKeys() {
+    public Response createKeys() { 
         secrets.createKey(CreateKey.Request.builder()
                                   .name(ENCRYPTION_KEY));
 
@@ -453,7 +446,7 @@ public class TransitResource {
 
     @Path("/keys")
     @DELETE
-    public Response deleteKeys() {
+    public Response deleteKeys() { 
         // we must first enable deletion of the key (by default it cannot be deleted)
         secrets.updateKeyConfig(UpdateKeyConfig.Request.builder()
                                         .name(ENCRYPTION_KEY)
@@ -473,7 +466,7 @@ public class TransitResource {
 
     @Path("/encrypt/{secret: .*}")
     @GET
-    public String encryptSecret(@PathParam("secret") String secret) {
+    public String encryptSecret(@PathParam("secret") String secret) { 
         return secrets.encrypt(Encrypt.Request.builder()
                                        .encryptionKeyName(ENCRYPTION_KEY)
                                        .data(Base64Value.create(secret)))
@@ -483,7 +476,7 @@ public class TransitResource {
 
     @Path("/decrypt/{cipherText: .*}")
     @GET
-    public String decryptSecret(@PathParam("cipherText") String cipherText) {
+    public String decryptSecret(@PathParam("cipherText") String cipherText) { 
         return secrets.decrypt(Decrypt.Request.builder()
                                        .encryptionKeyName(ENCRYPTION_KEY)
                                        .cipherText(cipherText))
@@ -493,7 +486,7 @@ public class TransitResource {
 
     @Path("/hmac/{text}")
     @GET
-    public String hmac(@PathParam("text") String text) {
+    public String hmac(@PathParam("text") String text) { 
         return secrets.hmac(Hmac.Request.builder()
                                     .hmacKeyName(ENCRYPTION_KEY)
                                     .data(Base64Value.create(text)))
@@ -502,7 +495,7 @@ public class TransitResource {
 
     @Path("/sign/{text}")
     @GET
-    public String sign(@PathParam("text") String text) {
+    public String sign(@PathParam("text") String text) { 
         return secrets.sign(Sign.Request.builder()
                                     .signatureKeyName(SIGNATURE_KEY)
                                     .data(Base64Value.create(text)))
@@ -512,7 +505,7 @@ public class TransitResource {
     @Path("/verify/hmac/{secret}/{hmac: .*}")
     @GET
     public String verifyHmac(@PathParam("secret") String secret,
-                             @PathParam("hmac") String hmac) {
+                             @PathParam("hmac") String hmac) { 
         boolean isValid = secrets.verify(Verify.Request.builder()
                                                  .digestKeyName(ENCRYPTION_KEY)
                                                  .data(Base64Value.create(secret))
@@ -525,7 +518,7 @@ public class TransitResource {
     @Path("/verify/sign/{secret}/{signature: .*}")
     @GET
     public String verifySignature(@PathParam("secret") String secret,
-                                  @PathParam("signature") String signature) {
+                                  @PathParam("signature") String signature) { 
         boolean isValid = secrets.verify(Verify.Request.builder()
                                                  .digestKeyName(SIGNATURE_KEY)
                                                  .data(Base64Value.create(secret))
@@ -559,17 +552,13 @@ public class TransitResource {
 
 ## Local Testing
 
-Vault is available as a docker image, so to test locally, you can
-simply:
+Vault is available as a docker image, so to test locally, you can simply:
 
-```shell
+``` bash
 docker run -e VAULT_DEV_ROOT_TOKEN_ID=my-token -d --name=vault -p8200:8200 vault
 ```
 
-This will create a Vault docker image, run it in background and open it
-on `localhost:8200` with a custom root token my-token, using name vault.
-This is of course only suitable for local testing, as the root token has
-too many rights, but it can be easily used with the examples below.
+This will create a Vault docker image, run it in background and open it on `localhost:8200` with a custom root token my-token, using name vault. This is of course only suitable for local testing, as the root token has too many rights, but it can be easily used with the examples below.
 
 ## References
 

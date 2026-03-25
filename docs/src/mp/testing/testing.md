@@ -1,17 +1,34 @@
-# Testing with Junit5
+# Testing with JUnit5
 
-Helidon provides a JUnit5 extension that integrates CDI to support
-testing with Helidon MP.
+## Contents
 
-The test class is added as a CDI bean to support injection and the CDI
-container is started lazily during test execution.
+- [Overview](#_overview)
+
+- [Maven Coordinates](#maven-coordinates)
+
+- [Usage](#_usage)
+
+- [Examples](#_examples)
+
+- [Mock Support](#_mock_support)
+
+- [Virtual Threads](#_virtual_threads)
+
+- [Additional Information](#_additional_information)
+
+- [Reference](#_reference)
+
+## Overview
+
+Helidon provides a JUnit5 extension that integrates CDI to support testing with Helidon MP.
+
+The test class is added as a CDI bean to support injection and the CDI container is started lazily during test execution.
 
 ## Maven Coordinates
 
-To enable Helidon MicroProfile Testing JUnit5, add the following
-dependency to your project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
+To enable Helidon MicroProfile Testing JUnit5, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../about/managing-dependencies.md)).
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.microprofile.testing</groupId>
     <artifactId>helidon-microprofile-testing-junit5</artifactId>
@@ -21,12 +38,15 @@ dependency to your project’s `pom.xml` (see [Managing Dependencies](../../abou
 
 ## Usage
 
-Basic usage:
-```java
-@HelidonTest // Enable the test class
+*Basic usage*
+
+``` java
+@HelidonTest 
 class MyTest {
 }
 ```
+
+- Enable the test class
 
 > [!NOTE]
 > By default, a MicroProfile Config profile named "test" is defined.
@@ -39,7 +59,7 @@ class MyTest {
 >
 > - Using `mp.config.profile` property and `@Config(useExisting = true)`
 
-## CDI Container Setup
+### CDI Container Setup
 
 By default, CDI discovery is enabled:
 
@@ -48,116 +68,123 @@ By default, CDI discovery is enabled:
 - If disabled, the CDI beans and extensions must be added manually
 
 > [!NOTE]
-> Customization of the CDI container on a test method changes the CDI
-> container affinity.
+> Customization of the CDI container on a test method changes the CDI container affinity.
 >
 > I.e. The test method will use a dedicated CDI container.
 
 > [!NOTE]
-> It is not recommended to provide a `beans.xml` along the test classes,
-> as it would combine beans from all tests.
+> It is not recommended to provide a `beans.xml` along the test classes, as it would combine beans from all tests.
 >
-> Instead, you should use
-> [`@AddBean`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddBean.html)
-> to specify the beans per test or method.
+> Instead, you should use [`@AddBean`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddBean.html) to specify the beans per test or method.
 
-CDI discovery can be disabled using
-[`@DisableDiscovery`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/DisableDiscovery.html).
+CDI discovery can be disabled using [`@DisableDiscovery`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/DisableDiscovery.html).
 
-Disable discovery:
-```java
-@DisableDiscovery // Disable CDI discovery
-@AddBean(MyBean.class) // Add a bean class
+*Disable discovery*
+
+``` java
+@DisableDiscovery 
+@AddBean(MyBean.class) 
 @HelidonTest
 class MyTest {
 }
 ```
 
-When disabling discovery, it can be difficult to identify the CDI
-extensions needed to activate the desired features.
+- Disable CDI discovery
 
-JAX-RS (Jersey) support can be added easily using
-[`@AddJaxRs`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html).
+- Add a bean class
 
-Add JAX-RS (Jersey):
-```java
+When disabling discovery, it can be difficult to identify the CDI extensions needed to activate the desired features.
+
+JAXRS (Jersey) support can be added easily using [`@AddJaxRs`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html).
+
+*Add JAX-RS (Jersey)*
+
+``` java
 @DisableDiscovery
-@AddJaxRs // Add JAX-RS (Jersey) support
-@AddBean(MyResource.class) // Add a resource class to the CDI container
+@AddJaxRs 
+@AddBean(MyResource.class) 
 @HelidonTest
 class MyTest {
 }
 ```
+
+- Add JAX-RS (Jersey) support
+
+- Add a resource class to the CDI container
 
 Note the following Helidon CDI extensions:
 
-| Extension                                                                                                                                        | Note                                                                                                                                              |
-|--------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`ConfigCdiExtension`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.config/io/helidon/microprofile/config/ConfigCdiExtension.html) | Add MicroProfile Config injection support                                                                                                         |
-| [`ServerCdiExtension`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.server/io/helidon/microprofile/server/ServerCdiExtension.html) | Optional if using [`@AddJaxRs`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html) |
-| [`JaxRsCdiExtension`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.server/io/helidon/microprofile/server/JaxRsCdiExtension.html)   | Optional if using [`@AddJaxRs`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html) |
+| Extension | Note |
+|----|----|
+| [`ConfigCdiExtension`](/apidocs/io.helidon.microprofile.config/io/helidon/microprofile/config/ConfigCdiExtension.html) | Add MicroProfile Config injection support |
+| [`ServerCdiExtension`](/apidocs/io.helidon.microprofile.server/io/helidon/microprofile/server/ServerCdiExtension.html) | Optional if using [`@AddJaxRs`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html) |
+| [`JaxRsCdiExtension`](/apidocs/io.helidon.microprofile.server/io/helidon/microprofile/server/JaxRsCdiExtension.html) | Optional if using [`@AddJaxRs`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html) |
 
-## CDI Container Affinity
+### CDI Container Afinity
 
-By default, one CDI container is created per test class and is shared by
-all test methods.
+By default, one CDI container is created per test class and is shared by all test methods.
 
 However, test methods can also require a dedicated CDI container:
 
 - By forcing a reset of the CDI container between methods
+
 - By customizing the CDI container per test method
 
-Reset the CDI container between methods:
-```java
+*Reset the CDI container between methods*
+
+``` java
 @HelidonTest(resetPerTest = true)
 class MyTest {
 
     @Test
-    void testOne() {
-        // executes in a dedicated CDI container
+    void testOne() { 
     }
 
     @Test
-    void testTwo() {
-        // also executes in a dedicated CDI container
+    void testTwo() { 
     }
 }
 ```
 
-Customize the CDI container per method:
-```java
+- `testOne` executes in a dedicated CDI container
+
+- `testTwo` also executes in a dedicated CDI container
+
+*Customize the CDI container per method*
+
+``` java
 @HelidonTest
 class MyTest {
 
     @Test
-    void testOne() {
-        // executes in the shared CDI container
+    void testOne() { 
     }
 
     @Test
     @DisableDiscovery
     @AddBean(MyBean.class)
-    void testTwo() {
-        // executes in a dedicated CDI container
+    void testTwo() { 
     }
 }
 ```
 
-## Configuration
+- `testOne` executes in the shared CDI container
+
+- `testTwo` executes in a dedicated CDI container
+
+### Configuration
 
 The test configuration can be set up in two exclusive ways:
 
-- Using the "synthetic" configuration expressed with annotations
-  (default)
+- Using the "synthetic" configuration expressed with annotations (default)
 
 - Using the "existing" configuration of the current environment
 
-Use
-[`@Configuration`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html)
-to switch to the "existing" configuration.
+Use [`@Configuration`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html) to switch to the "existing" configuration.
 
-Switch to the existing configuration:
-```java
+*Switch to the existing configuration*
+
+``` java
 @Configuration(useExisting = true)
 @HelidonTest
 class MyTest {
@@ -165,33 +192,33 @@ class MyTest {
 ```
 
 > [!NOTE]
-> Customization of the test configuration on a test method changes the
-> CDI container affinity.
+> Customization of the test configuration on a test method changes the CDI container affinity.
 >
 > I.e. The test method will use a dedicated CDI container.
 
-### Synthetic Configuration
+#### Synthetic Configuration
 
-The "synthetic" configuration can be expressed using the following
-annotations:
+The "synthetic" configuration can be expressed using the following annotations:
 
-| Type                                                                                                                                          | Usage                      |
-|-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
-| [`@AddConfig`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfig.html)             | Key value pair             |
-| [`@AddConfigBlock`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigBlock.html)   | Formatted text block       |
-| [`@AddConfigSource`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigSource.html) | Programmatic config source |
-| [`@Configuration`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html)     | Classpath resources using  |
+| Type | Usage |
+|----|----|
+| [`@AddConfig`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfig.html) | Key value pair |
+| [`@AddConfigBlock`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigBlock.html) | Formatted text block |
+| [`@AddConfigSource`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigSource.html) | Programmatic config source |
+| [`@Configuration`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html) | Classpath resources using |
 
-Add a key value pair:
-```java
+*Add a key value pair*
+
+``` java
 @AddConfig(key = "foo", value = "bar")
 @HelidonTest
 class MyTest {
 }
 ```
 
-Add a properties text block:
-```java
+*Add a properties text block*
+
+``` java
 @AddConfigBlock("""
         foo=bar
         bob=alice
@@ -201,8 +228,9 @@ class MyTest {
 }
 ```
 
-Add a YAML text block:
-```java
+*Add a YAML text block*
+
+``` java
 @AddConfigBlock(type = "yaml", value = """
         my-test:
           foo: bar
@@ -213,8 +241,9 @@ class MyTest {
 }
 ```
 
-Add config programmatically:
-```java
+*Add config programmatically*
+
+``` java
 @HelidonTest
 class MyTest {
 
@@ -227,8 +256,9 @@ class MyTest {
 }
 ```
 
-Add classpath resources:
-```java
+*Add classpath resources*
+
+``` java
 @Configuration(configSources = {
         "my-test1.yaml",
         "my-test2.yaml"
@@ -238,13 +268,13 @@ class MyTest {
 }
 ```
 
-### Configuration Ordering
+#### Configuration Ordering
 
-The ordering of the test configuration can be controlled using the
-mechanism defined by the [MicroProfile Config specification](https://download.eclipse.org/microprofile/microprofile-config-3.1/microprofile-config-spec-3.1.html#_configsource_ordering).
+The ordering of the test configuration can be controlled using the mechanism defined by the [MicroProfile Config specification](https://download.eclipse.org/microprofile/microprofile-config-3.1/microprofile-config-spec-3.1.html#_configsource_ordering).
 
-Add a properties text block with ordinal:
-```java
+*Add a properties text block with ordinal*
+
+``` java
 @AddConfigBlock(value = """
         config_ordinal=120
         foo=bar
@@ -254,35 +284,33 @@ class MyTest {
 }
 ```
 
-The default ordering is the following:
+The default ordering is the following
 
-| Annotation                                                                                                                                    | Ordinal |
-|-----------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| [`@AddConfig`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfig.html)             | 1000    |
-| [`@AddConfigBlock`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigBlock.html)   | 900     |
-| [`@AddConfigSource`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigSource.html) | 800     |
-| [`@Configuration`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html)     | 700     |
+| Annotation | Ordinal |
+|----|----|
+| [`@AddConfig`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfig.html) | 1000 |
+| [`@AddConfigBlock`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigBlock.html) | 900 |
+| [`@AddConfigSource`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigSource.html) | 800 |
+| [`@Configuration`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html) | 700 |
 
-## Injectable Types
+### Injectable Types
 
-Helidon provides injection support for types that reflect the current
-server. E.g. JAX-RS client.
+Helidon provides injection support for types that reflect the current server. E.g. JAXRS client.
 
 Here are all the built-in types that can be injected:
 
-| Type                                                                                                                         | Usage                                              |
-|------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| [`WebTarget`](https://jakarta.ee/specifications/restful-ws/3.1/apidocs/jakarta/ws/rs/client/WebTarget.html)                  | A JAX-RS client configured for the current server. |
-| `URI`                                                                                                                        | A URI representing the current server              |
-| `String`                                                                                                                     | A raw URI representing the current server          |
-| [`SeContainer`](https://jakarta.ee/specifications/cdi/4.0/apidocs/jakarta.cdi/jakarta/enterprise/inject/se/SeContainer.html) | The current CDI container instance                 |
+| Type | Usage |
+|----|----|
+| [`WebTarget`](https://jakarta.ee/specifications/restful-ws/3.1/apidocs/jakarta/ws/rs/client/WebTarget.html) | A JAX-RS client configured for the current server. |
+| `URI` | A URI representing the current server |
+| `String` | A raw URI representing the current server |
 
 > [!NOTE]
-> Types that reflect the current server require
-> [`ServerCdiExtension`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.server/io/helidon/microprofile/server/ServerCdiExtension.html)
+> Types that reflect the current server require [`ServerCdiExtension`](/apidocs/io.helidon.microprofile.server/io/helidon/microprofile/server/ServerCdiExtension.html)
 
-Inject a JAX-RS client for the default socket:
-```java
+*Inject a JAX-RS client for the default socket*
+
+``` java
 @HelidonTest
 class MyTest {
 
@@ -291,12 +319,11 @@ class MyTest {
 }
 ```
 
-Use
-[`@Socket`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Socket.html)
-to specify the socket for the clients and URIs.
+Use [`@Socket`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Socket.html) to specify the socket for the clients and URIs.
 
-Inject a JAX-RS client for the admin socket:
-```java
+*Inject a JAX-RS client for the admin socket*
+
+``` java
 @HelidonTest
 class MyTest {
 
@@ -307,10 +334,26 @@ class MyTest {
 ```
 
 > [!NOTE]
+> Except [`WebTarget`](https://jakarta.ee/specifications/restful-ws/3.1/apidocs/jakarta/ws/rs/client/WebTarget.html), all types require the [`@Socket`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Socket.html) annotation
+
+*Inject a URI for the default socket*
+
+``` java
+@HelidonTest
+class MyTest {
+
+    @Inject
+    @Socket("@default")
+    URI uri;
+}
+```
+
+> [!NOTE]
 > All the injectable types are also available as method parameters.
 
-Using a method parameter:
-```java
+*Get a JAX-RS client for the default socket*
+
+``` java
 @HelidonTest
 class MyTest {
 
@@ -320,34 +363,72 @@ class MyTest {
 }
 ```
 
-## Test Instance Lifecycle
+*Get a URI for the default socket*
 
-The CDI scope used by the test instance follows the lifecycle defined by
-JUnit5. The default is `PER_CLASS` and is enforced by
-[`@HelidonTest`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing.junit5/io/helidon/microprofile/testing/junit5/HelidonTest.html).
+``` java
+@HelidonTest
+class MyTest {
+
+    @Test
+    void testOne(@Socket("@default") URI uri) {
+    }
+}
+```
+
+The current CDI [`container`](https://jakarta.ee/specifications/cdi/4.0/apidocs/jakarta.cdi/jakarta/enterprise/inject/se/SeContainer.html) is also available as a method parameter.
+
+*Get the current CDI container*
+
+``` java
+@HelidonTest
+class MyTest {
+
+    @Test
+    void testOne(SeContainer container) {
+    }
+}
+```
+
+> [!NOTE]
+> You can also use CDI qualifier annotations to resolve a method parameter using CDI.
+
+*Resolve a CDI bean*
+
+``` java
+@HelidonTest
+class MyTest {
+
+    @Test
+    void testOne(@Default MyBean myBean) {
+    }
+}
+```
+
+### Test Instance Lifecyle
+
+The CDI scope used by the test instance follows the lifecyle defined by JUnit5. The default is `PER_CLASS` and is enforced by [`@HelidonTest`](/apidocs/io.helidon.microprofile.testing.junit5/io/helidon/microprofile/testing/junit5/HelidonTest.html).
 
 I.e. By default, the test instance is re-used between test methods.
 
 > [!NOTE]
-> The test instance is not re-used between CDI container, using a
-> dedicated CDI container implies a new test instance
+> The test instance is not re-used between CDI container, using a dedicated CDI container implies a new test instance
 
-Using per method lifecycle:
+*Using per method lifecycle*
 
-```java
+``` java
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 @HelidonTest
 class MyTest {
 }
 ```
 
-## Using meta-annotations
+### Using meta-annotations
 
-Meta-annotations are supported on both test classes and test methods and
-can be used as a composition mechanism.
+Meta-annotations are supported on both test classes and test methods and can be used as a composition mechanism.
 
-Class-level meta-annotation example:
-```java
+*Class-level meta-annotation example*
+
+``` java
 @HelidonTest
 @AddBean(FirstBean.class)
 @AddBean(SecondBean.class)
@@ -362,8 +443,9 @@ class AnnotationOnClass {
 }
 ```
 
-Method-level meta-annotation example:
-```java
+*Method-level meta-annotation example*
+
+``` java
 @Test
 @AddBean(FirstBean.class)
 @AddBean(SecondBean.class)
@@ -390,34 +472,33 @@ class AnnotationOnMethod {
 
 Here is a brief overview of the MicroProfile testing annotations:
 
-| Annotation                                                                                                                                      | Usage                                                                                                |
-|-------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| [`@AddBean`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddBean.html)                   | Add a CDI bean class to the CDI container                                                            |
-| [`@AddExtension`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddExtension.html)         | Add a CDI extension to the CDI container                                                             |
-| [`@DisableDiscovery`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/DisableDiscovery.html) | Disable automated discovery of beans and extensions                                                  |
-| [`@AddJaxRs`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html)                 | Shorthand to add JAX-RS (Jersey) support                                                             |
-| [`@AddConfig`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfig.html)               | Define a key value pair in the "synthetic" configuration                                             |
-| [`@AddConfigBlock`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigBlock.html)     | Define a formatted text block in the "synthetic" configuration                                       |
-| [`@AddConfigSource`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigSource.html)   | Add a programmatic config source to the "synthetic" configuration                                    |
-| [`@Configuration`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html)       | Switch between "synthetic" and "existing" ; Add classpath resources to the "synthetic" configuration |
-| [`@Socket`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Socket.html)                     | CDI qualifier to inject a JAX-RS client or URI for a named socket                                    |
-| [`@AfterStop`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AfterStop.html)               | Mark a static method to be executed after the container is stopped                                   |
+| Annotation | Usage |
+|----|----|
+| [`@AddBean`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddBean.html) | Add a CDI bean class to the CDI container |
+| [`@AddExtension`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddExtension.html) | Add a CDI extension to the CDI container |
+| [`@DisableDiscovery`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/DisableDiscovery.html) | Disable automated discovery of beans and extensions |
+| [`@AddJaxRs`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddJaxRs.html) | Shorthand to add JAX-RS (Jersey) support |
+| [`@AddConfig`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfig.html) | Define a key value pair in the "synthetic" configuration |
+| [`@AddConfigBlock`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigBlock.html) | Define a formatted text block in the "synthetic" configuration |
+| [`@AddConfigSource`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AddConfigSource.html) | Add a programmatic config source to the "synthetic" configuration |
+| [`@Configuration`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html) | Switch between "synthetic" and "existing" ; Add classpath resources to the "synthetic" configuration |
+| [`@Socket`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Socket.html) | CDI qualifier to inject a JAX-RS client or URI for a named socket |
+| [`@AfterStop`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/AfterStop.html) | Mark a static method to be executed after the container is stopped |
 
 ## Examples
 
-## Config Injection Example
+### Config Injection Example
 
-The following example demonstrates how to enable the use of
-[`@ConfigProperty`](https://download.eclipse.org/microprofile/microprofile-config-3.1/apidocs/org/eclipse/microprofile/config/inject/ConfigProperty.html)
-without CDI discovery.
+The following example demonstrates how to enable the use of [`@ConfigProperty`](https://download.eclipse.org/microprofile/microprofile-config-3.1/apidocs/org/eclipse/microprofile/config/inject/ConfigProperty.html) without CDI discovery.
 
-Config Injection Example:
-```java
+*Config Injection Example*
+
+``` java
 @HelidonTest
-@DisableDiscovery // CDI discovery is disabled
-@AddBean(MyBean.class) // Add MyBean to the CDI container
-@AddExtension(ConfigCdiExtension.class) // Add ConfigCdiExtension to the CDI container
-@AddConfig(key = "app.greeting", value = "TestHello") // Define test configuration
+@DisableDiscovery 
+@AddBean(MyBean.class) 
+@AddExtension(ConfigCdiExtension.class) 
+@AddConfig(key = "app.greeting", value = "TestHello") 
 class MyTest {
     @Inject
     MyBean myBean;
@@ -432,8 +513,7 @@ class MyTest {
 @ApplicationScoped
 class MyBean {
 
-    // Inject the configuration
-    @ConfigProperty(name = "app.greeting")
+    @ConfigProperty(name = "app.greeting") 
     String greeting;
 
     String greeting() {
@@ -442,18 +522,27 @@ class MyBean {
 }
 ```
 
-## Request Scope Example
+- CDI discovery is disabled
 
-The following example demonstrates how to use
-[`@RequestScoped`](https://jakarta.ee/specifications/cdi/4.0/apidocs/jakarta.cdi/jakarta/enterprise/context/RequestScoped.html)
-with JAX-RS without CDI discovery.
+- Add `MyBean` to the CDI container
 
-Request Scope Example:
-```java
+- Add [`ConfigCdiExtension`](/apidocs/io.helidon.microprofile.config/io/helidon/microprofile/config/ConfigCdiExtension.html) to the CDI container
+
+- Define test configuration
+
+- Inject the configuration
+
+### Request Scope Example
+
+The following example demonstrates how to use [`@RequestScoped`](https://jakarta.ee/specifications/cdi/4.0/apidocs/jakarta.cdi/jakarta/enterprise/context/RequestScoped.html) with JAXRS without CDI discovery.
+
+*Request Scope Example*
+
+``` java
 @HelidonTest
-@DisableDiscovery //  CDI discovery is disabled
-@AddJaxRs // Add JAX-RS (Jersey) support
-@AddBean(MyResource.class) // Add MyResource to the CDI container
+@DisableDiscovery 
+@AddJaxRs 
+@AddBean(MyResource.class) 
 class MyTest {
 
     @Inject
@@ -477,20 +566,23 @@ class MyResource {
 }
 ```
 
+- CDI discovery is disabled
+
+- Add JAXRS (Jersey) support
+
+- Add `MyResource` to the CDI container
+
 ## Mock Support
 
-Mocking in Helidon MP is all about replacing CDI beans with instrumented
-mock classes.
+Mocking in Helidon MP is all about replacing CDI beans with instrumented mock classes.
 
-This can be done using CDI alternatives, however Helidon provides an
-annotation to make it easy.
+This can be done using CDI alternatives, however Helidon provides an annotation to make it easy.
 
-## Maven Coordinates
+### Maven Coordinates
 
-To enable mock support add the following dependency to your project’s
-pom.xml.
+To enable mock mupport add the following dependency to your project’s pom.xml.
 
-```xml
+``` xml
 <dependency>
     <groupId>io.helidon.microprofile.testing</groupId>
     <artifactId>helidon-microprofile-testing-mocking</artifactId>
@@ -498,24 +590,21 @@ pom.xml.
 </dependency>
 ```
 
-## Usage
+### Usage
 
-Use the
-[`@MockBean`](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.testing.mocking/io/helidon/microprofile/testing/mocking/MockBean.html)
-annotation to inject an instrumented CDI bean in your test, and
-customize it in the test method.
+Use the [`@MockBean`](/apidocs/io.helidon.microprofile.testing.mocking/io/helidon/microprofile/testing/mocking/MockBean.html) annotation to inject an instrumented CDI bean in your test, and customize it in the test method.
 
-### Example
+#### Example
 
-Mocking using `@MockBean`:
-```java
+*Mocking using `@MockBean`*
+
+``` java
 @HelidonTest
 @AddBean(MyResource.class)
 @AddBean(MyService.class)
 class MyTest {
 
-    // Instrument MyService using Answers.CALLS_REAL_METHODS
-    @MockBean(answer = Answers.CALLS_REAL_METHODS)
+    @MockBean(answer = Answers.CALLS_REAL_METHODS) 
     MyService myService;
 
     @Inject
@@ -523,10 +612,7 @@ class MyTest {
 
     @Test
     void testService() {
-        // Customize the behavior
-        Mockito.when(myService.test()).thenReturn("Mocked");
-
-        // Test assertions
+        Mockito.when(myService.test()).thenReturn("Mocked"); 
         String response = target.path("/test").request().get(String.class);
         assertThat(response, is("Mocked"));
     }
@@ -553,15 +639,19 @@ class MyService {
 }
 ```
 
-## Using CDI Alternative
+- Instrument `MyService` using `Answers.CALLS_REAL_METHODS`
 
-[`@Alternative`](https://jakarta.ee/specifications/cdi/4.0/apidocs/jakarta.cdi/jakarta/enterprise/inject/Alternative.html)
-can be used to replace a CDI bean with an instrumented instance.
+- Customize the behavior
 
-Mocking using CDI Alternative:
-```java
+### Using CDI Alternative
+
+[`@Alternative`](https://jakarta.ee/specifications/cdi/4.0/apidocs/jakarta.cdi/jakarta/enterprise/inject/Alternative.html) can be used to replace a CDI bean with an instrumented instance.
+
+*Mocking using CDI Alternative*
+
+``` java
 @HelidonTest
-@Priority(1) // Set priority to 1 (required by`@Alternative)
+@Priority(1) 
 class MyTest {
 
     @Inject
@@ -571,23 +661,18 @@ class MyTest {
 
     @BeforeEach
     void initMock() {
-        // Create the mock instance in the test class
-        myService = Mockito.mock(MyService.class, Answers.CALLS_REAL_METHODS);
+        myService = Mockito.mock(MyService.class, Answers.CALLS_REAL_METHODS); 
     }
 
-    // Create a CDI producer method annotated with @Alternative
     @Produces
-    @Alternative
+    @Alternative 
     MyService mockService() {
         return myService;
     }
 
     @Test
     void testService() {
-        // Customize the behavior
-        Mockito.when(myService.test()).thenReturn("Mocked");
-
-        // Test assertions
+        Mockito.when(myService.test()).thenReturn("Mocked"); 
         Response response = target.path("/test").request().get();
         assertThat(response, is("Mocked"));
     }
@@ -614,39 +699,47 @@ class MyService {
 }
 ```
 
+- Create the mock instance in the test class
+
+- Create a CDI producer method annotated with `@Alternative`
+
+- Set priority to 1 (required by `@Alternative`)
+
+- Customize the behavior
+
 ## Virtual Threads
 
 Virtual Threads pinning can be detected during tests.
 
-A virtual thread is "pinning" when it blocks its carrier thread in a way
-that prevents the virtual thread scheduler from scheduling other virtual
-threads.
+A virtual thread is "pinning" when it blocks its carrier thread in a way that prevents the virtual thread scheduler from scheduling other virtual threads.
 
-This can happen when blocking in native code, or prior to JDK24 when a
-blocking IO operation happens in a synchronized block.
+This can happen when blocking in native code, or prior to JDK24 when a blocking IO operation happens in a synchronized block.
 
 Pinning can in some cases negatively affect application performance.
 
-Enable pinning detection:
-```java
+*Enable pinning detection*
+
+``` java
 @HelidonTest(pinningDetection = true)
 class MyTest {
 }
 ```
 
-Pinning is considered harmful when it takes longer than 20 milliseconds,
-that is also the default when detecting it within tests.
+Pinning is considered harmful when it takes longer than 20 milliseconds, that is also the default when detecting it within tests.
 
 Pinning threshold can be changed with:
-```java
-// Change pinning threshold from default(20) to 50 milliseconds.
-@HelidonTest(pinningDetection = true, pinningThreshold = 50)
+
+*Configure pinning threshold*
+
+``` java
+@HelidonTest(pinningDetection = true, pinningThreshold = 50) 
 class MyTest {
 }
 ```
 
-When pinning is detected, the test fails with a stacktrace pointing at
-the culprit.
+- Change pinning threshold from default(20) to 50 milliseconds.
+
+When pinning is detected, the test fails with a stacktrace pointing at the culprit.
 
 ## Additional Information
 

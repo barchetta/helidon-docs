@@ -1,8 +1,8 @@
 # Injection
 
-Injection provides the ability to do inversion of control style programming in Helidon SE.
+Index of Injection documentation.
 
-| Topic                               | Description                                                                                                                          |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [Declarative Guide](declarative.md) | Helidon declarative programming model allows inversion of control style programming with all the performance benefits of Helidon SE. |
-| [Injection](injection.md)           | Injection is the basic building stone for inversion of control.                                                                      |
+| Topic | Description |
+| --- | --- |
+| [Declarative](declarative.md) | Helidon SE Declarative |
+| [Injection](injection.md) | Dependency Injection in Helidon SE |
