@@ -223,7 +223,7 @@ curl -v  http://localhost:8080/health/ready
 
 *HTTP response status*
 
-``` listing
+``` text
 < HTTP/1.1 503 Service Unavailable 
 ```
 
@@ -254,7 +254,7 @@ curl -v http://localhost:8080/health/ready
 
 *HTTP response status*
 
-``` listing
+``` text
 < HTTP/1.1 200 OK 
 ```
 
@@ -327,7 +327,7 @@ curl -v  http://localhost:8080/health/started
 
 *HTTP response status*
 
-``` listing
+``` text
 < HTTP/1.1 503 Service Unavailable 
 ```
 
@@ -358,7 +358,7 @@ curl -v http://localhost:8080/health/started
 
 *HTTP response status*
 
-``` listing
+``` text
 < HTTP/1.1 200 OK 
 ```
 

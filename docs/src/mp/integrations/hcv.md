@@ -136,7 +136,7 @@ New secret engines and authentication methods can be implemented quite easily, a
 
 See the following SPIs:
 
-``` listing
+``` java
 io.helidon.integrations.vault.spi.AuthMethodProvider
 io.helidon.integrations.vault.spi.SecretsEngineProvider
 io.helidon.integrations.vault.spi.SysProvider

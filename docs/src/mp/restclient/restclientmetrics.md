@@ -238,7 +238,7 @@ To create this REST client metrics example follow these steps.
 
     1.  Counter:
 
-        ``` list
+        ``` text
         # TYPE io_helidon_examples_quickstart_mp_GreetRestClient_getDefaultMessage_total counter
         io_helidon_examples_quickstart_mp_GreetRestClient_getDefaultMessage_total{mp_scope="application",} 2.0
         ```
@@ -247,7 +247,7 @@ To create this REST client metrics example follow these steps.
 
     2.  Timer:
 
-        ``` list
+        ``` text
         # TYPE timedGreet_getDefaultMessage_seconds summary
         timedGreet_getDefaultMessage_seconds{mp_scope="application",quantile="0.5",} 0.003407872
         timedGreet_getDefaultMessage_seconds{mp_scope="application",quantile="0.75",} 0.092143616

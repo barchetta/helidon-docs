@@ -80,7 +80,7 @@ The `@HelidonTest` annotation will cause the test extension to start a Helidon M
 
 You can see this in the test output:
 
-``` listing
+``` text
 INFO io.helidon.microprofile.server.ServerCdiExtension: Server started on http://localhost:56293 (and all other host addresses) in 1893 milliseconds (since JVM startup).
 ```
 

@@ -296,7 +296,7 @@ curl -i -H "Origin: https://other.com" http://localhost:8080/metrics
 
 *Curl output*
 
-``` listing
+``` text
 HTTP/1.1 403 Forbidden
 Date: Mon, 11 May 2020 11:08:09 -0500
 transfer-encoding: chunked
@@ -311,7 +311,7 @@ curl -i -H "Origin: https://foo.com" http://localhost:8080/metrics
 
 *Curl output*
 
-``` listing
+``` text
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://foo.com
 Content-Type: text/plain
@@ -333,7 +333,7 @@ The health service rejects requests from origins not specifically approved.
 curl -i -H "Origin: https://foo.com" http://localhost:8080/health
 ```
 
-``` listing
+``` text
 HTTP/1.1 403 Forbidden
 Date: Mon, 11 May 2020 12:06:55 -0500
 transfer-encoding: chunked
@@ -346,7 +346,7 @@ And responds successfully only to cross-origin requests from `https://there.com`
 curl -i -H "Origin: https://there.com" http://localhost:8080/health
 ```
 
-``` listing
+``` text
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://there.com
 Content-Type: application/json

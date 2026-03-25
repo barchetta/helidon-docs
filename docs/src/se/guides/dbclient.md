@@ -532,7 +532,7 @@ curl -i http://localhost:8080/library/SomeBook
 
 *HTTP response*
 
-``` listing
+``` text
 HTTP/1.1 404 Not Found
 Date: Tue, 12 Jan 2021 14:00:48 +0100
 transfer-encoding: chunked
@@ -549,7 +549,7 @@ curl -i -X PUT -d "Fantasy" http://localhost:8080/library/HarryPotter
 
 *HTTP response*
 
-``` listing
+``` text
 HTTP/1.1 201 Created
 Date: Tue, 12 Jan 2021 14:01:08 +0100
 transfer-encoding: chunked
@@ -566,7 +566,7 @@ curl -i http://localhost:8080/library/HarryPotter
 
 *HTTP response*
 
-``` listing
+``` text
 HTTP/1.1 200 OK
 Content-Type: text/plain
 Date: Tue, 12 Jan 2021 14:01:14 +0100
@@ -586,7 +586,7 @@ curl -i http://localhost:8080/library/json/HarryPotter
 
 *HTTP response*
 
-``` listing
+``` text
 HTTP/1.1 200 OK
 Content-Type: text/plain
 Date: Tue, 12 Jan 2021 14:01:14 +0100
@@ -606,7 +606,7 @@ curl -i -X DELETE http://localhost:8080/library/HarryPotter
 
 *HTTP response*
 
-``` listing
+``` text
 HTTP/1.1 204 No Content
 Date: Tue, 12 Jan 2021 14:01:22 +0100
 connection: keep-alive
@@ -622,7 +622,7 @@ curl -i http://localhost:8080/library/HarryPotter
 
 *HTTP response*
 
-``` listing
+``` text
 HTTP/1.1 404 Not Found
 Date: Tue, 12 Jan 2021 14:00:48 +0100
 transfer-encoding: chunked

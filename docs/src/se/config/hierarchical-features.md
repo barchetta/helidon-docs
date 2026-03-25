@@ -300,7 +300,7 @@ config.traverse(node -> !node.name().equals("data"))
 
 - Prints out following list of nodes (type and key):
 
-``` listing
+``` text
 OBJECT    app
 VALUE   app.page-size
 VALUE   app.greeting
