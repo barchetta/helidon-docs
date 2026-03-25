@@ -10,11 +10,11 @@
 
 - [Providers](#providers)
 
-  - [Eureka](#_eureka)
+  - [Eureka](#eureka)
 
 - [Integrations](#integrations)
 
-  - [Web Client](#_web_client_discovery_integration)
+  - [Web Client](#web-client-discovery-integration)
 
 - [References](#references)
 
@@ -22,7 +22,7 @@
 
 In Helidon, *discovery* is the general process of finding named sets of advertised resources at a moment of an application’s runtime. The advertised resources are often URIs representing microservice endpoints. In some environments, those endpoints might frequently come and go at unpredictable intervals, as microservices are started, stopped, and redeployed. The named applications they represent, however, are relatively static. Discovery helps link such a named application to its transient resources, so that clients can more easily contact it, knowing only its name.
 
-Helidon Discovery is a feature with a vendor- and implementation-independent API backed by vendor-specific implementations of that API known as *providers*. A developer programs against the Discovery API, and packages a (normally Helidon-supplied) conformant Discovery implementation (a provider) with her application at deployment time. See [Providers](#_providers) below.
+Helidon Discovery is a feature with a vendor- and implementation-independent API backed by vendor-specific implementations of that API known as *providers*. A developer programs against the Discovery API, and packages a (normally Helidon-supplied) conformant Discovery implementation (a provider) with her application at deployment time. See [Providers](#providers) below.
 
 ### Maven Coordinates
 
@@ -43,7 +43,7 @@ To enable Helidon Discovery, add the following dependency to your project’s `p
 
 Discovery is implemented by one or more
 
-[discovery providers](#_providers). Generally you will choose a single provider and include its relevant dependencies on your runtime classpath as well. See the [Providers](#_providers) section for more details.
+[discovery providers](#providers). Generally you will choose a single provider and include its relevant dependencies on your runtime classpath as well. See the [Providers](#providers) section for more details.
 
 ### API Usage
 
@@ -133,7 +133,7 @@ URI uri = uris.getFirst().uri(); // (4)
 
 ### Providers
 
-The Discovery API is implemented at runtime by a *Discovery provider*. Helidon currently ships with a [Eureka Discovery provider](#_eureka). Others may follow in the future.
+The Discovery API is implemented at runtime by a *Discovery provider*. Helidon currently ships with a [Eureka Discovery provider](#eureka). Others may follow in the future.
 
 To use a Discovery provider, include it on your runtime classpath. See the provider’s documentation for details about installing, configuring, and using the provider.
 
@@ -273,15 +273,15 @@ Users of the Helidon Eureka Discovery provider may also be interested in the (re
 
 ### Integrations
 
-Helidon integrates a [Discovery provider](#_providers) with other Helidon modules as described below.
+Helidon integrates a [Discovery provider](#providers) with other Helidon modules as described below.
 
 #### Web Client Discovery Integration
 
-Helidon integrates a [Discovery provider](#_providers) with [Web Client](webclient.md).
+Helidon integrates a [Discovery provider](#providers) with [Web Client](webclient.md).
 
 ##### Maven Coordinates
 
-To include the Helidon Web Client Discovery integration in your project, you add the Web Client Discovery integration dependency as well as a [Discovery provider](#_providers) dependency (see [Managing Dependencies](../about/managing-dependencies.md)):
+To include the Helidon Web Client Discovery integration in your project, you add the Web Client Discovery integration dependency as well as a [Discovery provider](#providers) dependency (see [Managing Dependencies](../about/managing-dependencies.md)):
 
 `pom.xml`
 
@@ -304,7 +304,7 @@ To include the Helidon Web Client Discovery integration in your project, you add
 
 2.  The scope for the integration. `runtime` since the integration is never required at compile time.
 
-3.  Helidon [Eureka Discovery provider](#_eureka) dependency (for example).
+3.  Helidon [Eureka Discovery provider](#eureka) dependency (for example).
 
 4.  The scope for the provider. Use `runtime` if you have no interest in provider-specific classes and methods (the most common case). Use `compile` if you plan to call provider-specific methods.
 
@@ -326,7 +326,7 @@ webclient:
 
 1.  Indicates that the Web Client Discovery integration should apply to this Web Client configuration. More configuration is required; see below.
 
-You also configure the Discovery provider in use following its documentation. See, for example, [Eureka configuration](#_configuration).
+You also configure the Discovery provider in use following its documentation. See, for example, [Eureka configuration](#configuration).
 
 ##### Configuring URIs
 

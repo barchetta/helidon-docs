@@ -27,6 +27,8 @@ To enable MicroProfile Telemetry, either add a dependency on the [helidon-microp
 </dependency>
 ```
 
+###  OTel Exporter Dependencies
+
 Microprofile Telemetry mandates that implementations such as Helidon use OpenTelemetry, so also add a dependency on an OpenTelemetry exporter.
 
 *Example dependency for the OpenTelemetry OTLP exporter*
@@ -42,7 +44,7 @@ Microprofile Telemetry mandates that implementations such as Helidon use OpenTel
 
 [OpenTelemetry](https://opentelemetry.io/) comprises a collection of APIs, SDKs, integration tools, and other software components intended to facilitate the generation and control of telemetry data, including traces, metrics, and logs. In an environment where distributed tracing is enabled via OpenTelemetry (which combines OpenTracing and OpenCensus), this specification establishes the necessary behaviors for MicroProfile applications to participate seamlessly.
 
-MicroProfile Telemetry 1.1 allows for the export of the data it collects to other systems using a variety of exporters such as OTLP mentioned earlier. Typical applications use a single exporter but you can add dependencies on multiple exporters and then use configuration to choose which to use in any given execution. See the [configuration](#_configuration) section for more details.
+MicroProfile Telemetry 1.1 allows for the export of the data it collects to other systems using a variety of exporters such as OTLP mentioned earlier. Typical applications use a single exporter but you can add dependencies on multiple exporters and then use configuration to choose which to use in any given execution. See the [configuration](#configuration) section for more details.
 
 > [!NOTE]
 > If possible, assign the following config setting in your application’s `META-INF/microprofile-config.properties` file:

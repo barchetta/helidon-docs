@@ -8,41 +8,41 @@
 
 - [Configuration](#configuration)
 
-  - [Configuring the WebServer in Your Code](#_configuring_the_webserver_in_your_code)
+  - [Configuring the WebServer in Your Code](#configuring-the-webserver-in-your-code)
 
-  - [Configuring the WebServer in a Configuration File](#_configuring_the_webserver_in_a_configuration_file)
+  - [Configuring the WebServer in a Configuration File](#configuring-the-webserver-in-a-configuration-file)
 
-  - [Configuring TLS](#_configuring_tls)
+  - [Configuring TLS](#configuring-tls)
 
-  - [Configuration Options](#_configuration_options)
+  - [Configuration Options](#configuration-options)
 
 - [Routing](#routing)
 
-  - [Request Handling](#_request_handling)
+  - [Request Handling](#request-handling)
 
-  - [Error Handling](#_error_handling)
+  - [Error Handling](#error-handling)
 
 - [Server Features](#server-features)
 
-  - [Access Log](#_access_log)
+  - [Access Log](#access-log)
 
-  - [Context](#_context)
+  - [Context](#context)
 
 - [Supported Technologies](#supported-technologies)
 
-  - [HTTP/2 Support](#_http2_support)
+  - [HTTP/2 Support](#http2-support)
 
-  - [Static Content Support](#_static_content_support)
+  - [Static Content Support](#static-content-support)
 
-  - [Media Types Support](#_media_types_support)
+  - [Media Types Support](#media-types-support)
 
-  - [HTTP Content Encoding](#_http_content_encoding)
+  - [HTTP Content Encoding](#http-content-encoding)
 
-  - [Proxy Protocol Support](#_proxy_protocol_support)
+  - [Proxy Protocol Support](#proxy-protocol-support)
 
-- [Reference](#_reference)
+- [Reference](#reference)
 
-- [Additional Information](#_additional_information)
+- [Additional Information](#additional-information)
 
 ## Overview
 
@@ -391,17 +391,17 @@ static class MyService implements HttpService {
 
 By implementing the `io.helidon.webserver.http.HttpFeature` interface, you can organize multiple routes and/or filters into a feature, that will be setup according to its defined `io.helidon.common.Weight` (or using `io.helidon.common.Weighted`).
 
-Each service has access to the routing builder. HTTP Features are configured for each routing builder. If there is a need to configure a feature for multiple sockets, you can use [Server Feature](#_server_features) instead.
+Each service has access to the routing builder. HTTP Features are configured for each routing builder. If there is a need to configure a feature for multiple sockets, you can use [Server Feature](#server-features) instead.
 
 ## Request Handling
 
 Implement the logic to handle requests to WebServer in a `Handler`, which is a `FunctionalInterface`. Handlers:
 
-- Process the request and [send](#anchor-sending-response) a response.
+- Process the request and [send](#sending-a-response) a response.
 
 - Act as a filter and forward requests to downstream handlers using the `response.next()` method.
 
-- Throw an exception to begin [error handling](#_error_handling).
+- Throw an exception to begin [error handling](#error-handling).
 
 ### Process Request and Produce Response
 
@@ -450,7 +450,7 @@ The handler forwards the request to the downstream handlers by *nexting*. There 
 
   - forward the current request to the downstream handler
 
-- throw an exception to forward to [error handling](#_error_handling)
+- throw an exception to forward to [error handling](#error-handling)
 
   ``` java
   rules.any("/hello", (req, res) -> { 
@@ -508,7 +508,7 @@ rules.get("/any-version", (req, res) -> res.send("HTTP Version " + req.prologue(
 
 - An HTTP/2 route registered on `/version-specific` path
 
-While `Http1Route` for Http/1 is always available with Helidon webserver, other routes like `Http2Route` for [HTTP/2](#_http2_support) needs to be added as additional dependency.
+While `Http1Route` for Http/1 is always available with Helidon webserver, other routes like `Http2Route` for [HTTP/2](#http2-support) needs to be added as additional dependency.
 
 ## Requested URI Discovery
 
@@ -749,20 +749,21 @@ Any other port defined in your application may include an `error-handling` secti
 | <span id="a0346e-trust-all"></span> `trust-all` | `VALUE` | `Boolean` | `false` | Trust any certificate provided by the other side of communication |
 | <span id="af626f-trust-manager-factory-algorithm"></span> `trust-manager-factory-algorithm` | `VALUE` | `String` |   | Trust manager factory algorithm |
 
+<a id="server-features"></a>
 # Server Features
 
 Server features provide additional functionality to the WebServer, through modification of the server configuration, listener configuration, or routing.
 
-A server feature can be added by implementing `io.helidon.webserver.spi.ServerFeature`. Server features support automated discovery, as long as the implementation is available through Java `ServiceLoader`. Server features can also be added through configuration, as can be seen above in [Configuration Options](#_configuration_options), configuration key `features`.
+A server feature can be added by implementing `io.helidon.webserver.spi.ServerFeature`. Server features support automated discovery, as long as the implementation is available through Java `ServiceLoader`. Server features can also be added through configuration, as can be seen above in [Configuration Options](#configuration-options), configuration key `features`.
 
-All features (both `ServerFeature` and [HttpFeature](#anchor-http-feature)) honor weight of the feature (defined either through `@Weight` annotation, or by implementing `Weighted` interface) when registering routes, `HttpService`, or `Filter` to the routing.
+All features (both `ServerFeature` and [HttpFeature](#using-httpfeature)) honor weight of the feature (defined either through `@Weight` annotation, or by implementing `Weighted` interface) when registering routes, `HttpService`, or `Filter` to the routing.
 
 The following table shows available server features and their weight. The highest weight is always registered (and invoked) first.
 
 | Feature | Weight |
 |----|----|
-| [Context](#_context) | 1100 |
-| [Access Log](#_access_log) | 1000 |
+| [Context](#context) | 1100 |
+| [Access Log](#access-log) | 1000 |
 | [Tracing](../../se/tracing.md) | 900 |
 | [CORS](../../se/cors.md) | 850 |
 | [Security](../../se/security/introduction.md) | 800 |
@@ -770,6 +771,7 @@ The following table shows available server features and their weight. The highes
 | [OpenAPI](../../se/openapi/openapi.md) | 90 |
 | [Observability](../../se/observability.md) | 80 |
 
+<a id="context"></a>
 ## Context
 
 Context feature adds a filter that executes all requests within the context of `io.helidon.common.context.Context`. A `Context` instance is available on `ServerRequest` even if this feature is not added. This feature adds support for obtaining request context through `io.helidon.common.context.Contexts.context()`.
@@ -807,6 +809,7 @@ Configuration of context feature.
 
 See the [manifest](../../config/manifest.md) for all available types.
 
+<a id="access-log"></a>
 ## Access Log
 
 Access logging in Helidon is done by a dedicated module that can be added to WebServer and configured.
@@ -871,8 +874,10 @@ Configuration of access log feature.
 
 See the [manifest](../../config/manifest.md) for all available types.
 
+<a id="supported-technologies"></a>
 # Supported Technologies
 
+<a id="http2-support"></a>
 # HTTP/2 Support
 
 Helidon supports HTTP/2 upgrade from HTTP/1, HTTP/2 without prior knowledge, HTTP/2 with prior knowledge, and HTTP/2 with ALPN over TLS. HTTP/2 support is enabled in WebServer by default when it’s artifact is available on classpath.
@@ -891,6 +896,7 @@ To enable HTTP/2 support add the following dependency to your project’s `pom.x
 </dependency>
 ```
 
+<a id="static-content-support"></a>
 # Static Content Support
 
 Static content is served through a `StaticContentFeature`. As with other server features, it can be configured through config, or registered with server config builder.
@@ -957,6 +963,7 @@ server:
 
 See [Static Content Feature Configuration Reference](../../config/io_helidon_webserver_staticcontent_StaticContentFeature.md) for details of configuration options.
 
+<a id="media-types-support"></a>
 # Media types support
 
 WebServer and WebClient share the HTTP media support of Helidon, and any supported media type can be used in both. The media type support is automatically discovered from classpath. Programmatic support is of course enabled as well through `MediaContext`.
@@ -977,10 +984,10 @@ The following table lists JSON media supports:
 
 | Media type | TypeName | Maven groupId:artifactId | Supported Java type(s) |
 |----|----|----|----|
-| **[JSON-P](#_json_p_support)** | JsonpSupport | `io.helidon.http.media:helidon-http-media-jsonp` | `JsonObject, JsonArray` |
-| **[JSON-B](#_json_b_support)** | JsonbSupport | `io.helidon.http.media:helidon-http-media-jsonb` | Any \* |
-| **[Jackson](#_jackson_support)** | JacksonSupport | `io.helidon.http.media:helidon-http-media-jackson` | Any \* |
-| **[Gson](#_gson_support)** | GsonSupport | `io.helidon.http.media:helidon-http-media-gson` | Any \* |
+| **[JSON-P](#json-p-support)** | JsonpSupport | `io.helidon.http.media:helidon-http-media-jsonp` | `JsonObject, JsonArray` |
+| **[JSON-B](#json-b-support)** | JsonbSupport | `io.helidon.http.media:helidon-http-media-jsonb` | Any \* |
+| **[Jackson](#jackson-support)** | JacksonSupport | `io.helidon.http.media:helidon-http-media-jackson` | Any \* |
+| **[Gson](#gson-support)** | GsonSupport | `io.helidon.http.media:helidon-http-media-gson` | Any \* |
 
 - JSON-B and Jackson have lower weight, so they are used only when no other media type matched the object being written or read
 
@@ -1296,6 +1303,7 @@ curl --noproxy '*' -X POST -H "Content-Type: application/json" \
 {"name":"Joe"}
 ```
 
+<a id="http-content-encoding"></a>
 # HTTP Content Encoding
 
 HTTP encoding can improve bandwidth utilization and transfer speeds in certain scenarios. It requires a few extra CPU cycles for compressing and uncompressing, but these can be offset if data is transferred over low-bandwidth network links.
@@ -1341,6 +1349,7 @@ HTTP compression negotiation is controlled by clients using the `Accept-Encoding
 
 For example, if the request includes `Accept-Encoding: gzip, deflate`, and HTTP compression has been enabled as shown above, the response shall include the header `Content-Encoding: gzip` and a compressed payload.
 
+<a id="proxy-protocol-support"></a>
 # Proxy Protocol Support
 
 The [Proxy Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) provides a way to convey client information across reverse proxies or load balancers which would otherwise be lost given that new connections are established for each network hop. Often times, this information can be carried in HTTP headers, but not all proxies support this feature. Helidon is capable of parsing a proxy protocol header (i.e., a network preamble) that is based on either V1 or V2 of the protocol, thus making client information available to service developers.
@@ -1412,6 +1421,7 @@ rules.get("/", (req, res) -> {
 });
 ```
 
+<a id="additional-information"></a>
 # Additional Information
 
 Here is the code for a minimalist web application that runs on a random free port:
@@ -1435,6 +1445,7 @@ public static void main(String[] args) {
 
 - The server is bound to a random free port.
 
+<a id="reference"></a>
 # Reference
 
 - [Helidon WebServer JavaDoc](/apidocs/io.helidon.webserver/module-summary.html)

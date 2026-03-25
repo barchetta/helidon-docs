@@ -8,11 +8,11 @@
 
 - [Use Cases](#use-cases)
 
-  - [Generate a class with a builder](#_generate_a_class_with_a_builder)
+  - [Generate a class with a builder](#generate-a-class-with-a-builder)
 
-  - [Add support for reading data from configuration](#_add_support_for_reading_data_from_configuration)
+  - [Add support for reading data from configuration](#add-support-for-reading-data-from-configuration)
 
-  - [Creating a runtime type](#_creating_a_runtime_type)
+  - [Creating a runtime type](#creating-a-runtime-type)
 
 - [API](#api)
 
@@ -274,7 +274,7 @@ Helidon Builder supports a range of customization options:
 
 - **Field Transformation:** Use a custom `BuilderDecorator` to modify field values during the build process.
 
-For additional customization details, see the [API](#_api) section.
+For additional customization details, see the [API](#api) section.
 
 ### Creating a runtime type
 

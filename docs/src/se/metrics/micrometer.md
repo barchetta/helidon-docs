@@ -8,21 +8,21 @@
 
 - [Usage](#usage)
 
-  - [Registering and Updating Meters](#registering_and_updating_meters)
+  - [Registering and Updating Meters](#registering-and-updating-meters)
 
-  - [Accessing the Helidon Micrometer Endpoint](#accessing_the_helidon_micrometer_endpoint)
+  - [Accessing the Helidon Micrometer Endpoint](#accessing-the-helidon-micrometer-endpoint)
 
 - [API](#api)
 
-  - [The Helidon Micrometer API](#the_helidon_micrometer_api)
+  - [The Helidon Micrometer API](#the-helidon-micrometer-api)
 
 - [Configuration](#configuration)
 
 - [Examples](#examples)
 
-  - [Register an Instance of MicrometerSupport with the Web Server](#_register_an_instance_of_micrometersupport_with_the_web_server)
+  - [Register an Instance of MicrometerSupport with the Web Server](#register-an-instance-of-micrometersupport-with-the-web-server)
 
-  - [Create and Update Meters in Your Application Service](#_create_and_update_meters_in_your_application_service)
+  - [Create and Update Meters in Your Application Service](#create-and-update-meters-in-your-application-service)
 
 - [Additional Information](additional_information) 
 

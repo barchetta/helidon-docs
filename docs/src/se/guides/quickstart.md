@@ -50,13 +50,13 @@ Congratulations! You now have a working Helidon SE application. You can use it t
 
 - Experiment with Helidon SE features and services
 
-  - Try out the [Health service and the Metrics service](#health-metrics)
+  - Try out the [Health service and the Metrics service](#track-health-and-metrics)
 
-- [Build a Docker Image](#build-docker-image)
+- [Build a Docker Image](#build-a-docker-image)
 
-- [Deploy it to Kubernetes](#deploy-k8s)
+- [Deploy it to Kubernetes](#deploy-application-to-kubernetes)
 
-- [Build GraalVM Native and Custom Java Runtime Images](#build-graalvmni-customjava)
+- [Build GraalVM Native and Custom Java Runtime Images](#build-graalvm-native-and-custom-java-runtime-images)
 
 and much more!
 

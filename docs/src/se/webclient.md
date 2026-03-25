@@ -12,10 +12,6 @@
 
 - [Examples](#examples)
 
-- [Context Propagation](#context-propagation)
-
-- [Reference](#reference)
-
 ## Overview
 
 WebClient is an HTTP client for Helidon SE. It can be used to send requests and retrieve corresponding responses in a programmatic way.
@@ -168,7 +164,7 @@ WebClient currently supports `HTTP/1.1` and `HTTP/2` protocols. Below are the ru
 
 - If `HTTP/2` is used, an upgrade attempt will be performed. If it fails, the client falls-back to `HTTP/1.1`.
 
-- The parameter `prior-knowledge` can be defined using `HTTP/2` protocol configuration. Please refer to [Setting Protocol configuration](#_setting_protocol_configuration) on how to customize `HTTP/2`. In such a case, `prior-knowledge` will be used and fail if it is unable to switch to `HTTP/2`.
+- The parameter `prior-knowledge` can be defined using `HTTP/2` protocol configuration. Please refer to [Setting Protocol configuration](#setting-protocol-configuration) on how to customize `HTTP/2`. In such a case, `prior-knowledge` will be used and fail if it is unable to switch to `HTTP/2`.
 
 ### Adding Media Support
 
@@ -636,6 +632,7 @@ WebClient.builder()
 
 - Passing the client configuration node
 
+<a id="setting-protocol-configuration"></a>
 ## Setting Protocol configuration
 
 Individual protocols can be customized using the `protocol-config` parameter.

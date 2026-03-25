@@ -249,7 +249,7 @@ Although most applications are explicit about the config sources they use in bui
 
 Most applications let the config system try to infer the media type of the config source.
 
-By default, config source implementations use the `io.helidon.common.media.type.MediaTypes` API to infer the source media type from the source, typically (but not always) based on the file type portion of the file path. Helidon media type module has a predefined set of mappings as configured in `common/media-type/src/main/resources/io/helidon/common/media/type/default-media-types.properties`, including the Config supported formats: `.properties`, `.yaml`, `.json` and `.conf`. To handle other formats you can implement and register your own `io.helidon.common.media.type.spi.MediaTypeDetector` Java Service implementations. (Typically, you would also write and register a config parser to translate that format; see [Locating a Parser](#locating-parser) below.)
+By default, config source implementations use the `io.helidon.common.media.type.MediaTypes` API to infer the source media type from the source, typically (but not always) based on the file type portion of the file path. Helidon media type module has a predefined set of mappings as configured in `common/media-type/src/main/resources/io/helidon/common/media/type/default-media-types.properties`, including the Config supported formats: `.properties`, `.yaml`, `.json` and `.conf`. To handle other formats you can implement and register your own `io.helidon.common.media.type.spi.MediaTypeDetector` Java Service implementations. (Typically, you would also write and register a config parser to translate that format; see [Locating a Parser](#locating-a-parser) below.)
 
 ###### By Application Directive
 

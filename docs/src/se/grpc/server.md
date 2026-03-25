@@ -8,21 +8,21 @@
 
 - [Usage](#usage)
 
-  - [gRPC Server Routing](#_grpc_server_routing)
+  - [gRPC Server Routing](#grpc-server-routing)
 
-  - [Service Implementation](#_service_implementation)
+  - [Service Implementation](#service-implementation)
 
-  - [Server Interceptors](#_server_interceptors)
+  - [Server Interceptors](#server-interceptors)
 
-  - [Metrics](#_metrics)
+  - [Metrics](#metrics)
 
 - [Configuration](#configuration)
 
-  - [Configuring the gRPC Server](#_configuring_the_grpc_server)
+  - [Configuring the gRPC Server](#configuring-the-grpc-server)
 
-  - [Configuring the gRPC Reflection Service](#_configuring_the_grpc_reflection_service)
+  - [Configuring the gRPC Reflection Service](#configuring-the-grpc-reflection-service)
 
-  - [Configuring Compression](#_configuring_compression)
+  - [Configuring Compression](#configuring-compression)
 
 - [Examples](#examples)
 
@@ -55,7 +55,7 @@ Additional dependencies may be required depending on your application needs. See
 
 ### gRPC Server Routing
 
-- [Customizing Service Definitions](#_customizing_service_definitions)
+- [Customizing Service Definitions](#customizing-service-definitions)
 
 Unlike the HTTP server—which routes requests based on path expressions and HTTP verbs—the gRPC server routes requests by service and method names. This simplifies routing configuration: all you need to do is register your services.
 

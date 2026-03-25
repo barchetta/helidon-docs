@@ -8,13 +8,13 @@
 
 - [Components](#components)
 
-  - [OllamaChatModel](#_ollamachatmodel)
+  - [OllamaChatModel](#ollamachatmodel)
 
-  - [OllamaEmbeddingModel](#_ollamaembeddingmodel)
+  - [OllamaEmbeddingModel](#ollamaembeddingmodel)
 
-  - [OllamaLanguageModel](#_ollamalanguagemodel)
+  - [OllamaLanguageModel](#ollamalanguagemodel)
 
-  - [OllamaStreamingChatModel](#_ollamastreamingchatmodel)
+  - [OllamaStreamingChatModel](#ollamastreamingchatmodel)
 
 - [Additional Information](#additional-information)
 

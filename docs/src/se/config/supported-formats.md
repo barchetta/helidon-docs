@@ -219,7 +219,7 @@ Config config = Config.create(
 
 - Version of the Etcd API to use; `v3` is supported. `v2` is deprecated.
 
-The config system will use the [YAML parser](#Config-ModuleYaml) automatically in this example because the file type of the key is `.yaml`.
+The config system will use the [YAML parser](#using-the-yaml-parser) automatically in this example because the file type of the key is `.yaml`.
 
 The `EtcdConfigSourceBuilder` class extends [`AbstractConfigSourceBuilder`](/apidocs/io.helidon.config/io/helidon/config/AbstractConfigSourceBuilder.html) and so supports the usual settings on config sources.
 
@@ -320,7 +320,7 @@ Config config = Config.create(
 
 - Specify the git branch.
 
-Note that the config system will use the [HOCON parser](#Config-ModuleHocon) in this example because the file type is `.conf`. Recall that for this to work the HOCON config module must be on module-path or classpath.
+Note that the config system will use the [HOCON parser](#using-the-hoconjson-parser) in this example because the file type is `.conf`. Recall that for this to work the HOCON config module must be on module-path or classpath.
 
 The `GitConfigSourceBuilder` supports the usual source builder properties because it extends [`AbstractConfigSourceBuilder`](/apidocs/io.helidon.config/io/helidon/config/AbstractConfigSourceBuilder.html).
 

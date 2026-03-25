@@ -53,7 +53,7 @@ For Configuration Observability features:
 
 ## Usage
 
-The MicroProfile observability features use top-level endpoints (such as `/health` and `/metrics`) which you can customize if you wish. See the [configuration](#_configuration) section below for more information.
+The MicroProfile observability features use top-level endpoints (such as `/health` and `/metrics`) which you can customize if you wish. See the [configuration](#configuration) section below for more information.
 
 Other observability features add endpoints under the `/observe` path
 

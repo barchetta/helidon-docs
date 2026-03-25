@@ -66,7 +66,7 @@ Let’s begin by explaining some basic terms.
 
 ### Dependency Injection
 
-Injection is a way to automatically provide instances of dependencies without having to create them manually. Instead of a class creating an object itself, something else (like a [service registry](#_service_registry)) hands it over when needed. This makes code cleaner, easier to manage, and more flexible.
+Injection is a way to automatically provide instances of dependencies without having to create them manually. Instead of a class creating an object itself, something else (like a [service registry](#service-registry)) hands it over when needed. This makes code cleaner, easier to manage, and more flexible.
 
 For example, if a Car needs an Engine, instead of the Car making an Engine itself, it just asks for one, and the system provides it. This is called Dependency Injection (DI).
 
@@ -108,7 +108,7 @@ interface GreetingContract {
 
 ### Service
 
-This can be either a concrete class, which implements the contract (or is contract itself if it was a concrete class), or it can be a factory/producer (more about [Factories](#_factories)), which creates a new instances to be registered into the service registry.
+This can be either a concrete class, which implements the contract (or is contract itself if it was a concrete class), or it can be a factory/producer (more about [Factories](#factories)), which creates a new instances to be registered into the service registry.
 
 *Service example*
 
@@ -132,7 +132,7 @@ Contract and service can be the same thing, but also separate entities. It all d
 
 Services are defined by:
 
-1.  Java classes annotated with one of the [`@Service.Scope`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Scope.html) annotations (see [Scopes](#_scopes))
+1.  Java classes annotated with one of the [`@Service.Scope`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Scope.html) annotations (see [Scopes](#scopes))
 
 2.  Any class with [`@Service.Inject`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Inject.html) annotation even when it doesn’t have a scope annotation. In such a case, the scope of the service will be set as [`@Service.PerLookup`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.PerLookup.html).
 
@@ -251,7 +251,7 @@ class GreetingInjectionService {
 }
 ```
 
-Now it just needs to be tested. The easiest way is to make a main method. The following piece of code initializes Service registry. After that we search for our `GreetingInjectionService` and execute it to print out `Hello David!`. To find out more about this manual approach, please take a look into the [Programmatic Lookup](#_programmatic_lookup) chapter.
+Now it just needs to be tested. The easiest way is to make a main method. The following piece of code initializes Service registry. After that we search for our `GreetingInjectionService` and execute it to print out `Hello David!`. To find out more about this manual approach, please take a look into the [Programmatic Lookup](#programmatic-lookup) chapter.
 
 *Lookup our created service and execute it manually*
 
@@ -262,7 +262,7 @@ public static void main(String[] args) {
 }
 ```
 
-The last step is ensuring that everything necessary for your application to compile correctly with injection is included. See [Build time](#_build_time).
+The last step is ensuring that everything necessary for your application to compile correctly with injection is included. See [Build time](#build-time).
 
 If everything went as expected, no problems occurred and a Service registry gave us fully initialized and ready to use service.
 
@@ -290,7 +290,7 @@ Helidon Inject provides two built-in qualifier:
 
 - [`@Service.NamedByType`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.NamedByType.html) – Works the same way as `@Service.Named` but uses a class type instead. The name that would be used is the fully qualified name of the type.
 
-Both [`@Service.Named`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Named.html) and [`@Service.NamedByType`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.NamedByType.html) are interchangeable, so one can combine them. To see an example of this see [Named by the type](#_named_by_the_type) chapter.
+Both [`@Service.Named`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Named.html) and [`@Service.NamedByType`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.NamedByType.html) are interchangeable, so one can combine them. To see an example of this see [Named by the type](#named-by-the-type) chapter.
 
 ### Named service injection
 
@@ -466,13 +466,13 @@ However, this approach only works if the contract is an interface and we’re im
 
 These challenges can be addressed by implementing one of the factory interfaces supported by the Helidon Service Registry:
 
-- [Supplier](#_supplier)
+- [Supplier](#supplier)
 
-- [ServicesFactory](#_servicesfactory)
+- [ServicesFactory](#servicesfactory)
 
-- [InjectionPointFactory](#_injectionpointfactory)
+- [InjectionPointFactory](#injectionpointfactory)
 
-- [QualifiedFactory](#_qualifiedfactory)
+- [QualifiedFactory](#qualifiedfactory)
 
 ### Supplier
 
@@ -658,7 +658,7 @@ class MyServiceInterceptor implements Interception.Interceptor {
 
 ### Delegate annotation
 
-The [`@Interception.Delegate`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Interception.Delegate.html) annotation enables interception for classes that aren’t created through the service registry but are instead produced by a factory (More about factories can be found here - [Factory chapter](#_factories)).
+The [`@Interception.Delegate`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Interception.Delegate.html) annotation enables interception for classes that aren’t created through the service registry but are instead produced by a factory (More about factories can be found here - [Factory chapter](#factories)).
 
 Let’s make the same `@Traced` annotation and Interceptor as in the previous examples
 
@@ -786,15 +786,15 @@ A single event can be delivered to zero or more consumers.
 
 Key Terminology:
 
-- **[Event Object](#_event_object)** – Any object that is sent as an event.
+- **[Event Object](#event-object)** – Any object that is sent as an event.
 
-- **[Event Emitter](#_event_emitter)** – Helidon generated service responsible for emitting events into the event system.
+- **[Event Emitter](#event-emitter)** – Helidon generated service responsible for emitting events into the event system.
 
-- **[Event Producer](#_event_producer)** – A service that triggers an event by calling an emitter.
+- **[Event Producer](#event-producer)** – A service that triggers an event by calling an emitter.
 
-- **[Event Observer](#_event_observer)** – A service that listens for events, with a method annotated using [`@Event.Observer`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Event.Observer.html).
+- **[Event Observer](#event-observer)** – A service that listens for events, with a method annotated using [`@Event.Observer`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Event.Observer.html).
 
-- **[Qualified Events](#_qualified_events)** – An event emitted with a qualifier, using an annotation marked with [`@Service.Qualifier`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Qualifier.html).
+- **[Qualified Events](#qualified-events)** – An event emitted with a qualifier, using an annotation marked with [`@Service.Qualifier`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.Qualifier.html).
 
 ### Event Object
 
@@ -872,7 +872,7 @@ A qualified event can be produced with two options:
 
 2.  The `Event.Emitter.emit(..)` method is called with explicit qualifier(s), note that if combined, the qualifier specified by the injection point will always be present!
 
-We are using qualifier created in the chapter [Custom qualifier](#_custom_qualifiers), to demonstrate how events work with qualifiers. Now we need to create a new event producer, which fires event only to observers qualified with `@Blue`.
+We are using qualifier created in the chapter [Custom qualifier](#custom-qualifiers), to demonstrate how events work with qualifiers. Now we need to create a new event producer, which fires event only to observers qualified with `@Blue`.
 
 *Qualified event producer*
 
@@ -1024,7 +1024,7 @@ Methods that accept the bindings are on [`ServiceRegistryManager`](/apidocs/io.h
 
 Application binding contains reference to all services that can be used by the application at runtime. As a result, when using the generated binding and JPMS (`module-info.java`), all modules that contain services (or Java ServiceLoader providers used by the registry) must be configured as `required` in the module info, otherwise the binding cannot be compiled.
 
-All options to start a Helidon application that uses service registry: - A generated `ApplicationMain` - optional feature of the Maven plugin, requires property `generateMain` to be set to `true`. It uses [`@Service.RunLevel`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.RunLevel.html) actively, but via code generated classes → See [RunLevel](#_runlevel) for more information. This is the only approach that is fully reflection free and skips lookups for injection points. - The Helidon startup class `io.helidon.Main`, which will start the registry manager and initialize all [`@Service.RunLevel`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.RunLevel.html) services, though it uses service discover (which in turn must use reflection to get service descriptor instances)
+All options to start a Helidon application that uses service registry: - A generated `ApplicationMain` - optional feature of the Maven plugin, requires property `generateMain` to be set to `true`. It uses [`@Service.RunLevel`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.RunLevel.html) actively, but via code generated classes → See [RunLevel](#runlevel) for more information. This is the only approach that is fully reflection free and skips lookups for injection points. - The Helidon startup class `io.helidon.Main`, which will start the registry manager and initialize all [`@Service.RunLevel`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.RunLevel.html) services, though it uses service discover (which in turn must use reflection to get service descriptor instances)
 
 ### ServiceRegistryManager
 
@@ -1034,7 +1034,7 @@ When created programmatically, two possible methods can be chosen.
 
 - `create` - Creates a new [`ServiceRegistry`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/ServiceRegistry.html) instance, but does not create any service instance. Service instances are created only when needed.
 
-- `start` - Creates a new [`ServiceRegistry`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/ServiceRegistry.html) instance and creates all services annotated with [`@Service.RunLevel`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.RunLevel.html). See [RunLevel](#_runlevel) chapter.
+- `start` - Creates a new [`ServiceRegistry`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/ServiceRegistry.html) instance and creates all services annotated with [`@Service.RunLevel`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.RunLevel.html). See [RunLevel](#runlevel) chapter.
 
 It is important to note, that once you don’t need your service registry, method `shutdown` on the manager must be called to ensure proper termination of the service registry.
 

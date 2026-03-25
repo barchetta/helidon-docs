@@ -71,7 +71,7 @@ The built-in metrics fall into these categories:
 
 2.  basic key performance indicators for request handling (in the vendor scope).
 
-A later section describes the [key performance indicator metrics](#basic-and-extended-kpi) in detail.
+A later section describes the [key performance indicator metrics](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) in detail.
 
 The following example demonstrates how to use the other built-in metrics. All examples are executed from the root directory of your project (helidon-quickstart-mp).
 
@@ -166,19 +166,19 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=vendor&
 
 The `base` metrics illustrated above provide some insight into the behavior of the JVM in which the server runs.
 
-The `vendor` metric shown above gives an idea of the request traffic the server is handling. See the [later section](#basic-and-extended-kpi) for more information on the basic and extended key performance indicator metrics.
+The `vendor` metric shown above gives an idea of the request traffic the server is handling. See the [later section](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) for more information on the basic and extended key performance indicator metrics.
 
 ### Controlling Metrics Behavior
 
 By adding a `metrics` section to your application configuration you can control how the Helidon metrics subsystem behaves in any of several ways.
 
-- [Disable metrics subsystem entirely](#disabling-entirely).
+- [Disable metrics subsystem entirely](#disabling-metrics-subsystem-entirely).
 
-- [Control `REST.request` metrics.](#controlling-rest-request-metrics)
+- [Control `REST.request` metrics.](#controlling-restrequest-metrics)
 
-- Select whether to collect [extended key performance indicator metrics](#basic-and-extended-kpi).
+- Select whether to collect [extended key performance indicator metrics](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics).
 
-- Control reporting of [virtual threads metrics](#controlling-vthreads).
+- Control reporting of [virtual threads metrics](#configuring-virtual-threads-metrics).
 
 #### Disabling Metrics Subsystem Entirely
 

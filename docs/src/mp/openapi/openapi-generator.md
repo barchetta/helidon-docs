@@ -44,7 +44,7 @@ You can run the OpenAPI generators in three ways:
 
 - using the online OpenAPI generator website
 
-The rest of this document walks you through [how to use](#usage-section) each technique and how to [configure](#_configuration) the generators to produce the code you want.
+The rest of this document walks you through [how to use](#usage) each technique and how to [configure](#configuration) the generators to produce the code you want.
 
 ## Maven Coordinates
 
@@ -74,11 +74,12 @@ To use the OpenAPI generator plug-in to generate or regenerate files during your
 </build>
 ```
 
-A [later section](#invoking-the-plugin) describes how to invoke the plug-in during your build.
+A [later section](#invoking-the-openapi-generator-maven-plug-in) describes how to invoke the plug-in during your build.
 
 ## Configuration
 
-The OpenAPI generators support a substantial, powerful, and sometimes bewildering group of configuration settings. For complete lists see these pages:
+The OpenAPI generators support a substantial, powerful, and sometimes bewildering group of configuration settings. <a id="links-to-settings"></a>
+For complete lists see these pages:
 
 - [generic options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/usage.md#generate)
 
@@ -368,9 +369,9 @@ Among the many configuration settings available to you, some you should particul
 
 This section covers two major topics:
 
-- [Planning your use of the OpenAPI generators](#usage-planning)
+- [Planning your use of the OpenAPI generators](#planning-your-use-of-the-openapi-generators)
 
-- [Running the generators](#usage-running)
+- [Running the generators](#running-the-openapi-generators)
 
 ### Planning Your Use of the OpenAPI Generators
 
@@ -487,7 +488,7 @@ In both examples, the generator creates the entire project if it does not exist 
 
 You can run the OpenAPI generator plug-in as part of your project build to generate or regenerate files.
 
-First, declare the plug-in as explained in the [earlier section on Maven coordinates](#_maven_coordinates).
+First, declare the plug-in as explained in the [earlier section on Maven coordinates](#maven-coordinates).
 
 Then, in the `<build>` section of your `pom.xml` file, add an execution of the plug-in with the configuration you want. By default, the plug-in runs during the `generate-sources` phase of the Maven build.
 

@@ -8,7 +8,7 @@
 
 - [OracleEmbeddingStore](#oracleembeddingstore)
 
-  - [OracleEmbeddingTable](#_oracleembeddingtable)
+  - [OracleEmbeddingTable](#oracleembeddingtable)
 
 - [Additional Information](#additional-information)
 
@@ -65,7 +65,7 @@ Full list of configuration properties:
 | Key | Type | Description |
 |----|----|----|
 | `data-source` | string | The name of Helidon service containing a data source for connecting to the Oracle embedding store. If not present, the default unnamed service is used. |
-| `embedding-table` | [OracleEmbeddingTable](#_oracleembeddingtable) | Root configuration key for `OracleEmbeddingTable` configuration. Contains properties of the embedding table associated with the Oracle embedding store. |
+| `embedding-table` | [OracleEmbeddingTable](#oracleembeddingtable) | Root configuration key for `OracleEmbeddingTable` configuration. Contains properties of the embedding table associated with the Oracle embedding store. |
 | `enabled` | boolean | If set to `true`, Oracle embedding store will be enabled. |
 | `exact-search` | boolean | Specifies whether exact matching is used in searches. |
 | `vector-index-create-option` | string | The vector index creation option, which defines behavior when creating the vector index. Options are `CREATE_NONE` (default), `CREATE_IF_NOT_EXISTS`, `CREATE_OR_REPLACE`. |

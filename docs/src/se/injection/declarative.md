@@ -28,7 +28,7 @@ Our declarative approach has the following advantages:
 
 ### Usage
 
-To create a declarative application, use the annotations provided in our Helidon SE modules (details under [Features](#_features)), and the maven plugin described in [Injection: Startup](injection.md#generate-binding) to generate the binding.
+To create a declarative application, use the annotations provided in our Helidon SE modules (details under [Features](#features)), and the maven plugin described in [Injection: Startup](injection.md#generate-binding) to generate the binding.
 
 In addition, the following section must be added to the `build` of the Maven `pom.xml` to enable annotation processors that generate the necessary code:
 
@@ -54,31 +54,31 @@ In addition, the following section must be added to the `build` of the Maven `po
 
 The following features are currently implemented:
 
-- [Configuration](#Dec-Config)
+- [Configuration](#configuration)
 
-- [HTTP Server Endpoint](#Dec-HTTP-Server)
+- [HTTP Server Endpoint](#http-server-endpoint)
 
-- [Typed HTTP Client](#Dec-HTTP-Client)
+- [Typed HTTP Client](#typed-http-client)
 
-- [Fault Tolerance](#Dec-FT)
+- [Fault Tolerance](#fault-tolerance)
 
-- [Scheduling](#Dec-Scheduling)
+- [Scheduling](#scheduling)
 
-- [Validation](#Dec-Validation)
+- [Validation](#validation)
 
-- [Security](#Dec-Security)
+- [Security](#security)
 
-- [Metrics](#Dec-Metrics)
+- [Metrics](#metrics)
 
-- [Tracing](#Dec-Tracing)
+- [Tracing](#tracing)
 
-- [WebSocket Server](#Dec-WebSocket-Server)
+- [WebSocket Server](#websocket-server)
 
-- [WebSocket Client](#Dec-WebSocket-Client)
+- [WebSocket Client](#websocket-client)
 
-- [WebServer CORS](#Dec-CORS)
+- [WebServer CORS](#webserver-cors)
 
-- [Health Checks](#Dec-Health)
+- [Health Checks](#health-checks)
 
 A Helidon Declarative application should be started using the generated application binding, to ensure no lookup and no reflection. The call to `ServiceRegistryManager.start` ensures that all services with a defined `RunLevel` are started, including Helidon WebServer, Scheduled services etc.
 

@@ -26,9 +26,9 @@ To choose a configuration profile to use at runtime, you can use:
 
 There are two ways to define a profile configuration:
 
-1.  Use a config source with a [profile specific name](#Profile-Config-Source)
+1.  Use a config source with a [profile specific name](#profile-config-sources)
 
-2.  Use a [profile file](#Profile-File) defining all configuration sources
+2.  Use a [profile file](#profile-files) defining all configuration sources
 
 Configuration profiles can only be used when config is created using the `Config.create()` method without parameters. If you explicitly configure sources, profiles are ignored.
 
@@ -68,9 +68,9 @@ Let’s consider the selected profile is `dev`, and we have `yaml` configuration
 
 4.  `config-profile-dev.properties` on classpath
 
-If any of these files is discovered, it would be used to set up the configuration. In case none is found, the config falls back to [profile specific config sources](#Profile-Config-Source).
+If any of these files is discovered, it would be used to set up the configuration. In case none is found, the config falls back to [profile specific config sources](#profile-config-sources).
 
-The structure of the file is described below in [profile file format](#Config-Profile-Format).
+The structure of the file is described below in [profile file format](#profile-file-format).
 
 In case you need to customize the location of the profile file, you can use the system property `io.helidon.config.meta-config`. For example if it is configured to `config/profile.yaml`, config looks for file `config/profile-dev.yaml` when `dev` profile is configured.
 

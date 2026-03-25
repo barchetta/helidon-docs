@@ -8,17 +8,17 @@
 
 - [Usage](#usage)
 
-  - [Generated Stubs](#_generated_stubs)
+  - [Generated Stubs](#generated-stubs)
 
-  - [Service Descriptors](#_service_descriptors)
+  - [Service Descriptors](#service-descriptors)
 
-  - [Client URI Suppliers](#_client_uri_suppliers)
+  - [Client URI Suppliers](#client-uri-suppliers)
 
-  - [Client Interceptors](#_client_interceptors)
+  - [Client Interceptors](#client-interceptors)
 
-  - [Metrics](#_metrics)
+  - [Metrics](#metrics)
 
-  - [Tracing](#_tracing)
+  - [Tracing](#tracing)
 
 - [Configuration](#configuration)
 

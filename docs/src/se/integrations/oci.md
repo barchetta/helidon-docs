@@ -8,13 +8,13 @@
 
 - [Usage](#usage)
 
-  - [Configuring Authentication](#_configuring_authentication)
+  - [Configuring Authentication](#configuring-authentication)
 
-  - [Accessing OCI Services](#_accessing_oci_services)
+  - [Accessing OCI Services](#accessing-oci-services)
 
-  - [Region Information](#_region)
+  - [Region Information](#region-information)
 
-  - [Instance Metadata Service Instance Information](#_imds)
+  - [Instance Metadata Service Instance Information](#instance-metadata-service-instance-information)
 
 - [Configuration](#configuration)
 

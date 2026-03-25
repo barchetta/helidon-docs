@@ -8,13 +8,13 @@
 
 - [Components](#components)
 
-  - [JlamaChatModel](#_jlamachatmodel)
+  - [JlamaChatModel](#jlamachatmodel)
 
-  - [JlamaEmbeddingModel](#_jlamaembeddingmodel)
+  - [JlamaEmbeddingModel](#jlamaembeddingmodel)
 
-  - [JlamaLanguageModel](#_jlamalanguagemodel)
+  - [JlamaLanguageModel](#jlamalanguagemodel)
 
-  - [JlamaStreamingChatModel](#_jlamastreamingchatmodel)
+  - [JlamaStreamingChatModel](#jlamastreamingchatmodel)
 
 - [Additional Information](#additional-information)
 

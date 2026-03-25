@@ -59,7 +59,7 @@ To enable CORS, add the following dependency to your project’s `pom.xml` (see 
 
 If you add the `io.helidon.webserver:helidon-webserver-cors` Maven artifact to your project you do not have to add any CORS-specific code to your application to implement CORS. Express the CORS behavior you want in configuration, associating path patterns with the CORS settings you want to apply to the matching paths.
 
-See the [configuration](#_configuration) section below for more information.
+See the [configuration](#configuration) section below for more information.
 
 #### Adding Code to Include CORS in WebServer
 
@@ -83,7 +83,7 @@ The CORS feature works as follows:
 
 The [Helidon SE Quickstart application](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/quickstarts/helidon-quickstart-se) lets you change the greeting by sending a `PUT` request to the `/greet/greeting` resource.
 
-This example, based on the QuickStart greeting app, uses the CORS API to influence the [routing](../se/webserver/webserver.md#routing), thereby determining how that resource is shared. (If desired, you can use [configuration](#_configuration) instead of the low-level API.)
+This example, based on the QuickStart greeting app, uses the CORS API to influence the [routing](../se/webserver/webserver.md#routing), thereby determining how that resource is shared. (If desired, you can use [configuration](#configuration) instead of the low-level API.)
 
 The following code shows one way to prepare your application’s routing to support CORS.
 

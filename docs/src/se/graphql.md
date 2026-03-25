@@ -108,7 +108,7 @@ The following configuration keys can be used to set up GraphQL invocation:
 
 ## Examples
 
-Using the schema defined in Section [API](#_api), you can probe the following endpoints:
+Using the schema defined in Section [API](#api), you can probe the following endpoints:
 
 1.  Hello world endpoint
 

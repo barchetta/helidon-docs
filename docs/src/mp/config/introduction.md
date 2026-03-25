@@ -211,7 +211,7 @@ The class responsible for configuration is:
 
 Current properties may be set in `application.yaml` or in `microprofile-config.properties` with `mp.config` prefix.
 
-See [Config Profiles](#Config-Profiles) for more information.
+See [Config Profiles](#microprofile-config-profiles) for more information.
 
 ## Additional Information
 

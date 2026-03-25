@@ -12,8 +12,6 @@
 
 - [Configuration](#configuration)
 
-- [Additional Information](#additional-information)
-
 ## Overview
 
 SmallRye offers an [OpenAPI user interface component](https://github.com/smallrye/smallrye-open-api/tree/3.3.4/ui/open-api-ui) which displays a web page based on your application’s OpenAPI document. Through that UI, users can invoke the operations declared in the document.
@@ -59,7 +57,7 @@ Also make sure your project has the following dependency to include OpenAPI supp
 
 After you modify, build, and start your Helidon MP service, you can access the OpenAPI UI by default at `http://your-host:your-port/openapi/ui`. Helidon also uses conventional content negotiation at `http://your-host:your-port/openapi` returning the UI to browsers (or any client that accepts HTML) and the OpenAPI document otherwise.
 
-You can customize the path using [configuration](#_configuration).
+You can customize the path using [configuration](#configuration).
 
 The example below shows the UI for the Helidon MP QuickStart greeting application.
 
@@ -101,7 +99,7 @@ Note that the UI shows the actual response from invoking the operation in the "S
 
 ## API
 
-Your Helidon MP application does not use any API to enable or control Helidon OpenAPI UI support. Adding the dependency as described earlier is sufficient, and you can control the UI behavior using [configuration](#_configuration).
+Your Helidon MP application does not use any API to enable or control Helidon OpenAPI UI support. Adding the dependency as described earlier is sufficient, and you can control the UI behavior using [configuration](#configuration).
 
 ## Configuration
 

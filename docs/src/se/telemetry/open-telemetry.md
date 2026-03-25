@@ -112,6 +112,7 @@ import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk;
                                     tags);
 ```
 
+<a id="effects-of-setting-global"></a>
 #### Assigning the Global Instance
 
 Using Helidon to set the global `OpenTelemetry` instance has these effects:
@@ -215,6 +216,7 @@ OpenTelemetry prescribes its own [semantic conventions](https://github.com/open-
 
 Helidon supports the OpenTelemetry semantic conventions for outgoing traffic which uses the Helidon WebClient. See the [Helidon WebClient documentation](../../se/webclient.md#_configuring_telemetry).
 
+<a id="note-about-exporter-dependencies"></a>
 ### Specifying Additional OpenTelemetry Dependencies
 
 Most applications need to declare other runtime dependencies on OpenTelemetry artifacts because the configuration specifies—​or the application code uses—​particular OpenTelemetry types packaged in other artifacts. For example, OpenTelemetry exporters are packaged individually or as related groups. See [this section below](#note-about-exporter-dependencies) for some specific dependencies to consider adding for particular exporters.
@@ -233,6 +235,7 @@ You can control almost all of OpenTelemetry’s overall, tracing, metrics, and l
 
 - An OpenTelemetry logger provider based on [logger configuration](#logger-config) in `signals.logging`.
 
+<a id="top-level-config"></a>
 ### Controlling Overall OpenTelemetry Behavior
 
 Several settings control the operation of OpenTelemetry as a whole, as shown in the next table.
@@ -255,10 +258,12 @@ Notes:
 
 - Setting `global` to `true` has the effect described in the [section](#effects-of-setting-global) about global instances.
 
+<a id="common-config"></a>
 ### Common Configuration Across Signals
 
 This section describes settings that apply to multiple signal types.
 
+<a id="attributes-config"></a>
 #### Assigning Attributes
 
 Configured attributes are key/value pairs that OpenTelemetry attaches to each transmission of a signal. OpenTelemetry supports attributes of type `String`, `long`, `double`, and `boolean`. The Helidon configuration structure groups attributes by type so Helidon can indicate precisely to OpenTelemetry what type you intend for each attribute.
@@ -296,6 +301,7 @@ telemetry:
         attr4: true
 ```
 
+<a id="exporters-and-processors"></a>
 #### Configuring Exporters and Processors/Readers
 
 OpenTelemetry transmits the telemetry data it gathers to a backend system—​such as Grafana, Signoz, Prometheus, Jaeger, or others—​where you can view and query the data. OpenTelemetry goes through these distinct steps to gather and send data:
@@ -578,6 +584,7 @@ telemetry:
         exporters: ["alternate-otlp"]
 ```
 
+<a id="tracing-config"></a>
 ### Controlling OpenTelemetry Tracing Behavior
 
 The settings under `signals.tracing` prepare an OpenTelemetry `TracerProvider`. When your application uses the Helidon tracing API to obtain a `Tracer`, Helidon uses the `TracerProvider` prepared from this config to create the tracer.
@@ -613,6 +620,7 @@ Sections below describe how to set up the tracing signal configuration:
 
 - [Configuring the Span Limits](#span-limits-config)
 
+<a id="span-sampler-config"></a>
 #### Configuring the Span Sampler
 
 OpenTelemetry offers different ways of sampling data—​deciding which tracing spans tp capture and send to the backend. The [OpenTelemetry documentation](https://opentelemetry.io/docs/languages/java/sdk/#sampler) describes sampling in more detail.
@@ -632,6 +640,7 @@ Helidon configuration supports the sampler implementations that reside in the `o
 | <span id="a8f212-param"></span> `param` | `VALUE` | `Double` |   | Sampler parameter |
 | <span id="a08fdc-type"></span> [`type`](../../config/io_helidon_telemetry_otelconfig_SamplerType.md) | `VALUE` | `i.h.t.o.SamplerType` | `DEFAULT` | Sampler type |
 
+<a id="span-limits-config"></a>
 #### Configuring Span Limits
 
 OpenTelemetry allows you to constrain certain aspects of the data it gathers in tracing spans. By assigning the settings in the table below, you can apply the span limits you want.
@@ -659,6 +668,7 @@ The [OpenTelemetry documentation](https://opentelemetry.io/docs/languages/java/s
 
 OpenTelemetry defaults for span limits
 
+<a id="metrics-config"></a>
 ### Controlling OpenTelemetry Metrics Behavior
 
 The settings under `signals.metrics` prepare an OpenTelemetry `MeterProvider`. If your code uses the OpenTelemetry API to obtain an OpenTelemetry meter, meter provider, or meter builder, OpenTelemetry uses the `MeterProvider` prepared from this configuration.
@@ -753,6 +763,7 @@ telemetry:
 
 - Declares a single view to influence influence the transmission of the `my-counter` counter data.
 
+<a id="metric-exporters-config"></a>
 #### Metric Exporters
 
 The configuration for metrics exporters has several additional settings beyond those described earlier for exporters in general.
@@ -804,6 +815,7 @@ You can configure the exponential histogram aggregation behavior.
 | <span id="ad284d-max-buckets"></span> `max-buckets` | `VALUE` | `Integer` | Maximum number of buckets |
 | <span id="a8834e-max-scale"></span> `max-scale` | `VALUE` | `Integer` | Maximum scale |
 
+<a id="metric-readers-config"></a>
 #### Metric Readers
 
 An OpenTelemetry metric reader collects metric data in the server and then uses the associated metric exporter to send that data to the endpoint configured.
@@ -825,6 +837,7 @@ The periodic reader supports the following settings.
 | <span id="a5a14c-interval"></span> `interval` | `VALUE` | `Duration` |   | Metric reader read interval |
 | <span id="a1a217-type"></span> [`type`](../../config/io_helidon_telemetry_otelconfig_MetricReaderType.md) | `VALUE` | `i.h.t.o.MetricReaderType` | `PERIODIC` | Metric reader type |
 
+<a id="metric-views-config"></a>
 #### Metric Views
 
 OpenTelemetry metric views allow you to influence how meters are aggregated for reporting to backend systems.
@@ -853,6 +866,7 @@ The instrument selector controls which meters this view reflects.
 | <span id="abc056-type"></span> [`type`](../../config/io_opentelemetry_sdk_metrics_InstrumentType.md) | `VALUE` | `i.o.s.m.InstrumentType` | Instrument type |
 | <span id="afa38c-unit"></span> `unit` | `VALUE` | `String` | Instrument unit |
 
+<a id="logger-config"></a>
 ### Controlling OpenTelemetry Logger Behavior
 
 The settings under `signal.logging` prepare an OpenTelemetry \`LoggerProvider.

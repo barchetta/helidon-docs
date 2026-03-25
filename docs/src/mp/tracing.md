@@ -20,7 +20,7 @@
 
   - [OpenTelemetry Tracing](#opentelemetry-tracing)
 
-  - [Responding to Span Life Cycle Events](#Tracing-callbacks)
+  - [Responding to Span Life Cycle Events](#responding-to-span-lifecycle-events)
 
 - [Reference](#reference)
 

@@ -141,7 +141,8 @@ As part of building your application, you must create a Jandex index using the `
 
 ### Accessing the GraphQL endpoints
 
-After starting your application you should see a log message indicating that GraphQL is in the list of features. You can access the GraphQL endpoint at `http://host:port/graphql`, and the corresponding schema at `http://host:port/graphql/schema.graphql`. See [Configuration](#_configuration) for additional information on how to change the location of these resources.
+After starting your application you should see a log message indicating that GraphQL is in the list of features. You can access the GraphQL endpoint at `http://host:port/graphql`, and the corresponding schema at `http://host:port/graphql/schema.graphql`. See [Configuration](#configuration) for additional information on how to change the location of these resources.
+After starting your application you should see a log message indicating that GraphQL is in the list of features. You can access the GraphQL endpoint at `http://host:port/graphql`, and the corresponding schema at `http://host:port/graphql/schema.graphql`. See [Configuration](#configuration) for additional information on how to change the location of these resources.
 
 If you wish to use the [GraphQL UI](https://github.com/graphql/graphiql) then please see the [GraphQL MP Example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/microprofile/graphql).
 

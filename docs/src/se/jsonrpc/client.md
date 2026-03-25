@@ -8,9 +8,9 @@
 
 - [Usage](#usage)
 
-  - [Simple Requests](#_simple_requests)
+  - [Simple Requests](#simple-requests)
 
-  - [Batch Requests](#_batch_requests)
+  - [Batch Requests](#batch-requests)
 
 - [Configuration](#configuration)
 

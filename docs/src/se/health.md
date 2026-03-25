@@ -8,21 +8,21 @@
 
 - [API](#api)
 
-  - [Enabling Health Support](#_enabling_health_support_and_built_in_health_checks_in_your_application)
+  - [Enabling Health Support](#enabling-health-support-and-built-in-health-checks-in-your-application)
 
-  - [Writing Custom Health Checks](#_writing_custom_health_checks)
+  - [Writing Custom Health Checks](#writing-custom-health-checks)
 
-  - [Kubernetes Probes](#_kubernetes_probes)
+  - [Kubernetes Probes](#kubernetes-probes)
 
-  - [Troubleshooting Probes](#_troubleshooting_probes)
+  - [Troubleshooting Probes](#troubleshooting-probes)
 
 - [Configuration](#configuration)
 
 - [Examples](#examples)
 
-  - [JSON Response Example](#_json_response_example)
+  - [JSON Response Example](#json-response-example)
 
-  - [Kubernetes Example](#_kubernetes_example)
+  - [Kubernetes Example](#kubernetes-example)
 
 - [Additional Information](#additional-information)
 
@@ -387,17 +387,17 @@ WebServer server = WebServer.builder()
 
 You can control the thresholds for built-in health checks in either of two ways:
 
-- Create the health checks individually using their builders instead of using the `HealthChecks` convenience class. Follow the JavaDoc links in the [table](#built-in-health-checks-table) above.
+- Create the health checks individually using their builders instead of using the `HealthChecks` convenience class. Follow the JavaDoc links in the [table](#built-in-health-checks) above.
 
-- Using configuration as explained in [Configuration](#_configuration).
+- Using configuration as explained in [Configuration](#configuration).
 
 ### Kubernetes Probes
 
-- [Liveness Probe](#_liveness_probe)
+- [Liveness Probe](#liveness-probe)
 
-- [Readiness Probe](#_readiness_probe)
+- [Readiness Probe](#readiness-probe)
 
-- [Startup Probe](#_startup_probe)
+- [Startup Probe](#startup-probe)
 
 Probes is the term used by Kubernetes to describe health checks for containers ([Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes)).
 
@@ -482,7 +482,7 @@ kubectl get event --field-selector involvedObject.name=${POD_NAME}
 
 ## Configuration
 
-Built-in health checks can be configured using the config property keys described in this [table](#built-in-health-checks-table).
+Built-in health checks can be configured using the config property keys described in this [table](#built-in-health-checks).
 
 Further, you can suppress one or more health checks by setting the configuration item `server.features.observe.observers.health.exclude` to a comma-separated list of the health check names you want to exclude. The same table lists the name names for the built-in health checks.
 

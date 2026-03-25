@@ -18,19 +18,19 @@
 
 - [Additional Information](#additional-information)
 
-  - [Coordinator](#_coordinator)
+  - [Coordinator](#coordinator)
 
-  - [MicroTx LRA Coordinator](#_microtx_lra_coordinator)
+  - [MicroTx LRA Coordinator](#microtx-lra-coordinator)
 
-  - [Helidon LRA Coordinator](#_helidon_lra_coordinator)
+  - [Helidon LRA Coordinator](#helidon-lra-coordinator)
 
-  - [Narayana](#_narayana)
+  - [Narayana](#narayana)
 
 - [Reference](#reference)
 
 ## Overview
 
-Distributed transactions for microservices are known as SAGA design patterns and are defined by the [MicroProfile Long Running Actions specification](https://download.eclipse.org/microprofile/microprofile-lra-2.0/microprofile-lra-spec-2.0.html). Unlike well known XA protocol, LRA is asynchronous and therefore much more scalable. Every LRA JAX-RS resource ([participant](#_participant)) defines endpoints to be invoked when transaction needs to be *completed* or *compensated*.
+Distributed transactions for microservices are known as SAGA design patterns and are defined by the [MicroProfile Long Running Actions specification](https://download.eclipse.org/microprofile/microprofile-lra-2.0/microprofile-lra-spec-2.0.html). Unlike well known XA protocol, LRA is asynchronous and therefore much more scalable. Every LRA JAX-RS resource ([participant](#participant)) defines endpoints to be invoked when transaction needs to be *completed* or *compensated*.
 
 ## Maven Coordinates
 
@@ -52,13 +52,13 @@ To enable Long Running Actions, add the following dependency to your project’s
 
 ## Usage
 
-The LRA transactions need to be coordinated over REST API by the LRA coordinator. [Coordinator](#_coordinator) keeps track of all transactions and calls the `@Compensate` or `@Complete` endpoints for all participants involved in the particular transaction. LRA transaction is first started, then joined by [participant](#_participant). The participant reports the successful finish of the transaction by calling it complete. The coordinator then calls the JAX-RS *complete* endpoint that was registered during the join of each [participant](#_participant). As the completed or compensated participants don’t have to be on same instance, the whole architecture is highly scalable.
+The LRA transactions need to be coordinated over REST API by the LRA coordinator. [Coordinator](#coordinator) keeps track of all transactions and calls the `@Compensate` or `@Complete` endpoints for all participants involved in the particular transaction. LRA transaction is first started, then joined by [participant](#participant). The participant reports the successful finish of the transaction by calling it complete. The coordinator then calls the JAX-RS *complete* endpoint that was registered during the join of each [participant](#participant). As the completed or compensated participants don’t have to be on same instance, the whole architecture is highly scalable.
 
 <figure>
 <img src="../images/lra/lra-complete-lb.svg" alt="Complete" />
 </figure>
 
-If an error occurs during the LRA transaction, the participant reports a cancellation of LRA to the coordinator. [Coordinator](#_coordinator) calls compensate on all the joined participants.
+If an error occurs during the LRA transaction, the participant reports a cancellation of LRA to the coordinator. [Coordinator](#coordinator) calls compensate on all the joined participants.
 
 <figure>
 <img src="../images/lra/lra-compensate-lb-error.svg" alt="Cancel" />
@@ -80,7 +80,7 @@ The Participant, or Compensator, is an LRA resource with at least one of the JAX
 
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html)
 
-Marks JAX-RS method which should run in LRA context and needs to be accompanied by at least minimal set of mandatory participant methods([Compensate](#compensate-participant-method) or [AfterLRA](#after-participant-method)).
+Marks JAX-RS method which should run in LRA context and needs to be accompanied by at least minimal set of mandatory participant methods([Compensate](#compensate) or [AfterLRA](#afterlra)).
 
 LRA options:
 
@@ -100,7 +100,7 @@ LRA options:
 
   - [NESTED](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#NESTED) create and join new LRA nested in the incoming LRA context
 
-- [timeLimit](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#timeLimit--) max time limit before LRA gets cancelled automatically by [coordinator](#_coordinator)
+- [timeLimit](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#timeLimit--) max time limit before LRA gets cancelled automatically by [coordinator](#coordinator)
 
 - [timeUnit](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#timeUnit--) time unit if the timeLimit value
 
@@ -131,9 +131,9 @@ public Response startLra(@HeaderParam(LRA_HTTP_CONTEXT_HEADER) URI lraId,
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/Compensate.html)
 
 > [!CAUTION]
-> Expected to be called by LRA [coordinator](#_coordinator) only!
+> Expected to be called by LRA [coordinator](#coordinator) only!
 
-Compensate method is called by a [coordinator](#_coordinator) when LRA is cancelled, usually by error during execution of method body of [@LRA annotated method](#lra-method). If the method responds with 500 or 202, coordinator will eventually try the call again. If participant has [@Status annotated method](#status-participant-method), [coordinator](#_coordinator) retrieves the status to find out if retry should be done.
+Compensate method is called by a [coordinator](#coordinator) when LRA is cancelled, usually by error during execution of method body of [@LRA annotated method](#lra). If the method responds with 500 or 202, coordinator will eventually try the call again. If participant has [@Status annotated method](#status), [coordinator](#coordinator) retrieves the status to find out if retry should be done.
 
 #### JAX-RS variant with supported LRA context values:
 
@@ -166,9 +166,9 @@ public void compensate(URI lraId) {
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/Complete.html)
 
 > [!CAUTION]
-> Expected to be called by LRA [coordinator](#_coordinator) only!
+> Expected to be called by LRA [coordinator](#coordinator) only!
 
-Complete method is called by [coordinator](#_coordinator) when LRA is successfully closed. If the method responds with 500 or 202, coordinator will eventually try the call again. If participant has [@Status annotated method](#status-participant-method), [coordinator](#_coordinator) retrieves the status to find out if retry should be done.
+Complete method is called by [coordinator](#coordinator) when LRA is successfully closed. If the method responds with 500 or 202, coordinator will eventually try the call again. If participant has [@Status annotated method](#status), [coordinator](#coordinator) retrieves the status to find out if retry should be done.
 
 #### JAX-RS variant with supported LRA context values:
 
@@ -201,9 +201,9 @@ public void complete(URI lraId) {
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/Forget.html)
 
 > [!CAUTION]
-> Expected to be called by LRA [coordinator](#_coordinator) only!
+> Expected to be called by LRA [coordinator](#coordinator) only!
 
-[Complete](#complete-participant-method) and [compensate](#complete-participant-method) methods can fail(500) or report that compensation/completion is in progress(202). In such case participant needs to be prepared to report its status over [@Status annotated method](#status-participant-method) to [coordinator](#_coordinator). When [coordinator](#_coordinator) decides all the participants have finished, method annotated with @Forget is called.
+[Complete](#complete) and [compensate](#compensate) methods can fail(500) or report that compensation/completion is in progress(202). In such case participant needs to be prepared to report its status over [@Status annotated method](#status) to [coordinator](#coordinator). When [coordinator](#coordinator) decides all the participants have finished, method annotated with @Forget is called.
 
 #### JAX-RS variant with supported LRA context values:
 
@@ -235,7 +235,7 @@ public void forget(URI lraId) {
 
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/Leave.html)
 
-Method annotated with @Leave called with LRA context(with header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER)) informs [coordinator](#_coordinator) that current participant is leaving the LRA. Method body is executed after leave signal is sent. As a result, participant methods complete and compensate won’t be called when the particular LRA ends.
+Method annotated with @Leave called with LRA context(with header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER)) informs [coordinator](#coordinator) that current participant is leaving the LRA. Method body is executed after leave signal is sent. As a result, participant methods complete and compensate won’t be called when the particular LRA ends.
 
 - Header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER) - ID of the LRA transaction
 
@@ -253,15 +253,15 @@ public Response leaveLRA(@HeaderParam(LRA_HTTP_CONTEXT_HEADER) URI lraIdtoLeave)
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/Status.html)
 
 > [!CAUTION]
-> Expected to be called by LRA [coordinator](#_coordinator) only!
+> Expected to be called by LRA [coordinator](#coordinator) only!
 
-If the coordinator’s call to the participant’s method fails, then it will retry the call. If the participant is not idempotent, then it may need to report its state to coordinator by declaring method annotated with @Status for reporting if previous call did change participant status. [Coordinator](#_coordinator) can call it and decide if compensate or complete retry is needed.
+If the coordinator’s call to the participant’s method fails, then it will retry the call. If the participant is not idempotent, then it may need to report its state to coordinator by declaring method annotated with @Status for reporting if previous call did change participant status. [Coordinator](#coordinator) can call it and decide if compensate or complete retry is needed.
 
 #### JAX-RS variant with supported LRA context values:
 
 - Header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER) - ID of the LRA transaction
 
-- [ParticipantStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ParticipantStatus.html) - Status of the participant reported to [coordinator](#_coordinator)
+- [ParticipantStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ParticipantStatus.html) - Status of the participant reported to [coordinator](#coordinator)
 
 ``` java
 @GET
@@ -276,7 +276,7 @@ public Response reportStatus(@HeaderParam(LRA_HTTP_CONTEXT_HEADER) URI lraId) {
 
 - URI with LRA ID
 
-- [ParticipantStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ParticipantStatus.html) - Status of the participant reported to [coordinator](#_coordinator)
+- [ParticipantStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ParticipantStatus.html) - Status of the participant reported to [coordinator](#coordinator)
 
 ``` java
 @Status
@@ -291,7 +291,7 @@ public Response reportStatus(URI lraId) {
 [<sub>javadoc</sub>](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/AfterLRA.html)
 
 > [!CAUTION]
-> Expected to be called by LRA [coordinator](#_coordinator) only!
+> Expected to be called by LRA [coordinator](#coordinator) only!
 
 Method annotated with [@AfterLRA](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/AfterLRA.html) in the same class as the one with @LRA annotation gets invoked after particular LRA finishes.
 
@@ -362,7 +362,7 @@ For more information continue to [MicroProfile Long Running Actions specificatio
 
 ## Examples
 
-The following example shows how a simple LRA participant starts and joins a transaction after calling the '/start-example' resource. When startExample method finishes successfully, close is reported to [coordinator](#_coordinator) and `/complete-example` endpoint is called by coordinator to confirm successful closure of the LRA.
+The following example shows how a simple LRA participant starts and joins a transaction after calling the '/start-example' resource. When startExample method finishes successfully, close is reported to [coordinator](#coordinator) and `/complete-example` endpoint is called by coordinator to confirm successful closure of the LRA.
 
 If an exception occurs during startExample method execution, coordinator receives cancel call and `/compensate-example` is called by coordinator to compensate for cancelled LRA transaction.
 

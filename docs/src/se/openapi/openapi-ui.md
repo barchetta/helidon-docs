@@ -57,11 +57,11 @@ This dependency allows your application to create, configure, and register the `
 
 ## Usage
 
-Make sure your application incorporates Helidon OpenAPI support as described in detail in [the Helidon OpenAPI documentation](../../se/openapi/openapi.md)). Helidon automatically prepares the OpenAPI UI with default settings if you also declare a dependency on the Helidon OpenAPI UI integration component as explained above. The [API](#_api) section below illustrates adding OpenAPI to your application and customizing the UI behavior.
+Make sure your application incorporates Helidon OpenAPI support as described in detail in [the Helidon OpenAPI documentation](../../se/openapi/openapi.md)). Helidon automatically prepares the OpenAPI UI with default settings if you also declare a dependency on the Helidon OpenAPI UI integration component as explained above. The [API](#api) section below illustrates adding OpenAPI to your application and customizing the UI behavior.
 
 After you modify, build, and start your Helidon SE service, you can access the OpenAPI UI by default at `http://your-host:your-port/openapi/ui`. Helidon also uses conventional content negotiation at `http://your-host:your-port/openapi` returning the UI to browsers (or any client that accepts HTML) and the OpenAPI document otherwise.
 
-You can customize the path using either the API or [configuration](#_configuration).
+You can customize the path using either the API or [configuration](#configuration).
 
 The example below shows the UI if you modify the Helidon SE QuickStart greeting application to contain a static OpenAPI file which describes the service endpoints.
 

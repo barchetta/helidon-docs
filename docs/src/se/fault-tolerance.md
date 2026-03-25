@@ -185,7 +185,7 @@ The exact order in which handlers are added to a builder depends on the use case
 
 ## Metrics
 
-The Helidon Fault Tolerance module has support for some basic metrics to monitor certain application conditions. Metrics are disabled by default, but can be enabled programmatically as described in [Enabling Metrics Programmatically](#_enabling_metrics_programmatically), and by including an actual metrics implementation in your classpath. For more information about metrics implementations see [Helidon Metrics](../se/metrics/metrics.md).
+The Helidon Fault Tolerance module has support for some basic metrics to monitor certain application conditions. Metrics are disabled by default, but can be enabled programmatically as described in [Enabling Metrics Programmatically](#enabling-metrics-programmatically), and by including an actual metrics implementation in your classpath. For more information about metrics implementations see [Helidon Metrics](../se/metrics/metrics.md).
 
 The following tables list all the metrics created by the Fault Tolerance module. Note that these metrics are generated per command instance, and that each instance *must* be identified by a unique name —assigned either programmatically by the application developer or automatically by the API.
 
@@ -241,7 +241,7 @@ Retry retry = Retry.builder()
 
 ## Examples
 
-See [API](#_api) section for examples.
+See [API](#api) section for examples.
 
 ## Additional Information
 

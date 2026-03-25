@@ -73,7 +73,7 @@ See the [advanced topics'](advanced-configuration.md#_advanced_config_sources) p
 
 When it reads configuration text from sources, the config system uses config parsers to translate that text into the in-memory data structures representing that configuration.
 
-The config system includes several built-in parsers, such as for the Java properties, YAML, JSON, and HOCON formats. See [this section](#built-in-formats) for how to change your `pom.xml` to make parsers for those formats available to your application. Then your application can invoke the [config builder’s `addParser`](/apidocs/io.helidon.config/io/helidon/config/Config.Builder.html#addParser-io.helidon.config.spi.ConfigParser-) method so that builder will use the parsers you choose.
+The config system includes several built-in parsers, such as for the Java properties, YAML, JSON, and HOCON formats. See [this section](#built-in-support-for-config-formats) for how to change your `pom.xml` to make parsers for those formats available to your application. Then your application can invoke the [config builder’s `addParser`](/apidocs/io.helidon.config/io/helidon/config/Config.Builder.html#addParser-io.helidon.config.spi.ConfigParser-) method so that builder will use the parsers you choose.
 
 You can extend the system with custom parsers of your own. Implement the [`ConfigParser`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigParser.html) interface, then construct a `Config.Builder` using the `addParser` method, passing an instance of your customer parser. Invoke one of the `sources` methods to include a source that uses the custom format and then build the `Config` object.
 
@@ -314,11 +314,11 @@ The links in the following tables lead you to more information about various oth
 
 | Topic | Documentation |
 |----|----|
-| Where config comes from | [Config sources](#config_sources),[Config Profiles](config-profiles.md) |
-| What format config data is expressed in | [Config parsers](#parsers), [supported formats](supported-formats.md) |
+| Where config comes from | [Config sources](#config-sources),[Config Profiles](config-profiles.md) |
+| What format config data is expressed in | [Config parsers](#config-parsers), [supported formats](supported-formats.md) |
 | How to filter, override, and dereference values | [Filters and overrides](advanced-configuration.md#filters-and-overrides) |
 | What happens when config data changes | [Mutability Support](mutability-support.md) |
-| How to deal with loading errors | [Config retry policies](#retry) |
+| How to deal with loading errors | [Config retry policies](#dealing-with-loading-errors-retry-policies) |
 
 Controlling How Config is Loaded
 

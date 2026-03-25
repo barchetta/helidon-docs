@@ -8,9 +8,9 @@
 
 - [Components](#components)
 
-  - [CohereEmbeddingModel](#_cohereembeddingmodel)
+  - [CohereEmbeddingModel](#cohereembeddingmodel)
 
-  - [CohereScoringModel](#_coherescoringmodel)
+  - [CohereScoringModel](#coherescoringmodel)
 
 - [Additional Information](#additional-information)
 

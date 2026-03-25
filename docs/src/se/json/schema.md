@@ -8,9 +8,9 @@
 
 - [Usage](#usage)
 
-  - [Imperative Schema Creation](#_imperative_schema_creation)
+  - [Imperative Schema Creation](#imperative-schema-creation)
 
-  - [Declarative Schema Creation](#_declarative_schema_creation)
+  - [Declarative Schema Creation](#declarative-schema-creation)
 
 ## Overview
 

@@ -104,7 +104,7 @@ public interface GreetRestClient {
 
 Once a client interface is annotated, it can be injected into any CDI bean.
 
-All properties in annotation `RegisterRestClient` can be overridden via configuration as described in [Configuration options](#_configuration_options)
+All properties in annotation `RegisterRestClient` can be overridden via configuration as described in [Configuration options](#configuration-options)
 
 *Example*
 
@@ -184,7 +184,7 @@ interface GreetRestClient {
 }
 ```
 
-Then create a runnable method as described in [Creating new client](#creating-a-new-client), but with baseUri `http://localhost:8080/greet` and the above interface.
+Then create a runnable method as described in [Creating new client](#creating-a-new-client-using-a-builder), but with baseUri `http://localhost:8080/greet` and the above interface.
 
 By calling `GreetRestClient.getDefaultMessage()` you reach the endpoint of Helidon quickstart.
 

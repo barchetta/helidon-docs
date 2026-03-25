@@ -168,7 +168,7 @@ The `ConfigParser.Content` interface defines operations on the content that is t
 
 The application can register parsers for a builder by invoking `Config.Builder#addParser(ConfigParser)`. The config system also uses the Java service loader mechanism to load automatically, for all builders, any parsers listed in the `META-INF/services/io.helidon.config.spi.ConfigParser` resource on the runtime classpath. Prevent automatic loading of parsers for a given builder by invoking `Config.Builder#disableParserServices()`.
 
-`ConfigParser` accepts [`@Weight`](/apidocs/io.helidon.common/io/helidon/common/Weight.html). See [About Priority](#priority-info).
+`ConfigParser` accepts [`@Weight`](/apidocs/io.helidon.common/io/helidon/common/Weight.html). See [About Priority](#about-priority).
 
 Example custom parser implementation listed in `META-INF/services/io.helidon.config.spi.ConfigParser`
 
@@ -217,7 +217,7 @@ The application registers filters and filter providers by passing `ConfigFilter`
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p><a href="/apidocs/io.helidon.config/io/helidon/config/spi/ConfigFilter.html"><code>ConfigFilter</code></a></p>
-<p>Accepts <a href="/apidocs/io.helidon.common/io/helidon/common/Weight.html"><code>@Weight</code></a>. See <a href="#priority-info">About Priority</a>.</p></td>
+<p>Accepts <a href="/apidocs/io.helidon.common/io/helidon/common/Weight.html"><code>@Weight</code></a>. See <a href="#about-priority">About Priority</a>.</p></td>
 <td class="tableblock halign-left valign-top"><p><code>String apply(Config.Key key, String stringValue);</code></p></td>
 <td class="tableblock halign-left valign-top"><p>Accepts a key and the corresponding <code>String</code> value and returns the <code>String</code> which the config system should use for that key.</p></td>
 </tr>
@@ -230,7 +230,7 @@ The `ConfigFilter` JavaDoc describes multiple methods for adding filters to a `C
 
 ***Neither a `ConfigFilter` nor a provider function which furnishes one should access the `Config` instance passed to the provider function.***
 
-Instead, implement the `ConfigFilter.init(Config)` method on the filter. The config system invokes the filters' `init` methods according to the filters [priority](#priority-info).
+Instead, implement the `ConfigFilter.init(Config)` method on the filter. The config system invokes the filters' `init` methods according to the filters [priority](#about-priority).
 
 Recall that whenever any code invokes `Config.get`, the `Config` instance invokes the `apply` method of *all* registered filters. By the time the application retrieves config this way the config system will have run the `init` method on all the filters. *But note that when a filter’s `init` method invokes `Config.get`, the `init` methods of lower-priority filters will not yet have run.*
 
@@ -274,7 +274,7 @@ For `Config.as(GenericType)` - the first two steps are skipped.
 
 The config system also uses the Java `ServiceLoader` mechanism to load automatically, for all builders, any mappers returned by the providers listed in the `META-INF/services/io.helidon.config.spi.ConfigMapperProvider` resource on the runtime classpath. The application can prevent automatic loading of mappers for a given builder by invoking `Config.Builder#disableMapperServices()`. Note that the built-in mappers described in `ConfigMappers` still operate.
 
-Mapper providers accept `@Weight`. See [About Priority](#priority-info).
+Mapper providers accept `@Weight`. See [About Priority](#about-priority).
 
 ![spi ConfigMapperProvider](../../images/config/spi-ConfigMapperProvider.png)
 

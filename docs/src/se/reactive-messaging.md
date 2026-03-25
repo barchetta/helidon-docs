@@ -8,19 +8,19 @@
 
 - [Usage](#usage)
 
-  - [Channel](#_channel)
+  - [Channel](#channel)
 
-  - [Processor](#_processor)
+  - [Processor](#processor)
 
-  - [Message](#_message)
+  - [Message](#message)
 
-  - [Connectors](#_connectors)
+  - [Connectors](#connectors)
 
-    - [Kafka Connector](#_kafka_connector)
+    - [Kafka Connector](#kafka-connector)
 
-    - [JMS Connector](#_jms_connector)
+    - [JMS Connector](#jms-connector)
 
-    - [AQ Connector](#_aq_connector)
+    - [AQ Connector](#aq-connector)
 
 - [Configuration](#configuration)
 
@@ -45,13 +45,13 @@ To enable Reactive Messaging, add the following dependency to your project’s `
 
 Connecting your streams to external services usually requires a lot of boilerplate code for configuration handling, backpressure propagation, acknowledgement and more.
 
-In Helidon there is a system of connectors, emitters and means to orchestrate these tasks called **Reactive Messaging**. It’s basically an API for connecting and configuring connectors and emitters with your reactive streams through [Channels](#_channel).
+In Helidon there is a system of connectors, emitters and means to orchestrate these tasks called **Reactive Messaging**. It’s basically an API for connecting and configuring connectors and emitters with your reactive streams through [Channels](#channel).
 
-Reactive Messaging relates to [MicroProfile Reactive Messaging](../mp/reactivemessaging/introduction.md) as the making of connectors and configuring them can be a repetitive task that ultimately leads to the same results. Helidon SE Reactive Messaging supports the very same configuration format for connectors as its MicroProfile counterpart does. Also, MP Connectors are reusable in Helidon SE Messaging with some limitations such as there is no CDI in Helidon SE. All [Messaging connectors](#_messaging_connector) in Helidon are made to be universally usable by Helidon MP and SE.
+Reactive Messaging relates to [MicroProfile Reactive Messaging](../mp/reactivemessaging/introduction.md) as the making of connectors and configuring them can be a repetitive task that ultimately leads to the same results. Helidon SE Reactive Messaging supports the very same configuration format for connectors as its MicroProfile counterpart does. Also, MP Connectors are reusable in Helidon SE Messaging with some limitations such as there is no CDI in Helidon SE. All [Messaging connectors](#messaging-connector) in Helidon are made to be universally usable by Helidon MP and SE.
 
 ### Channel
 
-A channel is a named pair of `Publisher` and `Subscriber`. Channels can be connected together by [processors](#_processor). Registering a `Publisher` or `Subscriber` for a channel can be done by Messaging API, or configured implicitly using registered [connectors](#_connectors) to generate the `Publisher` or `Subscriber`.
+A channel is a named pair of `Publisher` and `Subscriber`. Channels can be connected together by [processors](#processor). Registering a `Publisher` or `Subscriber` for a channel can be done by Messaging API, or configured implicitly using registered [connectors](#connectors) to generate the `Publisher` or `Subscriber`.
 
 *Example of simple channel:*
 
@@ -67,7 +67,7 @@ Messaging.builder()
 
 ### Processor
 
-Processor is a typical reactive processor acting as a `Subscriber` to upstream and as a `Publisher` to downstream. In terms of reactive messaging, it is able to connect two [channels](#_channel) to one reactive stream.
+Processor is a typical reactive processor acting as a `Subscriber` to upstream and as a `Publisher` to downstream. In terms of reactive messaging, it is able to connect two [channels](#channel) to one reactive stream.
 
 *Example of processor usage:*
 
@@ -101,15 +101,15 @@ The only exception to this are the variants of the methods `Messaging.Builder#li
 
 ### Connectors
 
-Connectors are used to connect [channels](#_channel) to external sources. To make the [creation and usage of connectors](#_messaging_connector) as easy and versatile as possible, Helidon SE Messaging uses the same API for connectors that [MicroProfile Reactive Messaging](../mp/reactivemessaging/introduction.md) does. This allows connectors to be used in both flavors of Helidon with one limitation which is that the connector has to be able to work without CDI.
+Connectors are used to connect [channels](#channel) to external sources. To make the [creation and usage of connectors](#messaging-connector) as easy and versatile as possible, Helidon SE Messaging uses the same API for connectors that [MicroProfile Reactive Messaging](../mp/reactivemessaging/introduction.md) does. This allows connectors to be used in both flavors of Helidon with one limitation which is that the connector has to be able to work without CDI.
 
 Examples of versatile connectors in Helidon include the following:
 
-- [Kafka connector](#_kafka_connector)
+- [Kafka connector](#kafka-connector)
 
-- [JMS connector](#_jms_connector)
+- [JMS connector](#jms-connector)
 
-- [AQ Connector](#_aq_connector)
+- [AQ Connector](#aq-connector)
 
 #### Messaging Connector
 
@@ -648,15 +648,15 @@ Messaging.builder()
 
 ## Configuration
 
-- [Configuration for Messaging Connector](#_configuration_for_messaging_connector)
+- [Configuration for Messaging Connector](#configuration-for-messaging-connector)
 
-- [Explicit Configuration with Config Builder for Kafka Connector](#_explicit_config_with_config_builder_for_kafka_connector)
+- [Explicit Configuration with Config Builder for Kafka Connector](#explicit-config-with-config-builder-for-kafka-connector)
 
-- [Implicit Helidon Configuration for Kafka Connector](#_implicit_helidon_config_for_kafka_connector)
+- [Implicit Helidon Configuration for Kafka Connector](#implicit-helidon-config-for-kafka-connector)
 
-- [Explicit Configuration with Config Builder for JMS Connector](#_explicit_config_with_config_builder_for_jms_connector)
+- [Explicit Configuration with Config Builder for JMS Connector](#explicit-config-with-config-builder-for-jms-connector)
 
-- [Implicit Helidon Configuration for JMS Connector](#_implicit_helidon_config_for_jms_connector)
+- [Implicit Helidon Configuration for JMS Connector](#implicit-helidon-config-for-jms-connector)
 
 ## Reference
 

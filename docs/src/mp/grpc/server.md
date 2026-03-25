@@ -10,9 +10,9 @@
 
 - [Usage](#usage)
 
-  - [Defining a Service](#_defining_a_service)
+  - [Defining a Service](#defining-a-service)
 
-  - [Using Custom Marshalers](#_using_custom_marshalers)
+  - [Using Custom Marshalers](#using-custom-marshalers)
 
 - [Implementing a gRPC Extension](#implementing-a-grpc-extension)
 
@@ -49,7 +49,7 @@ All Helidon gRPC MP annotations are defined in the `Grpc` interface. The followi
 
 - `@Grpc.GrpcMarshaller`: an annotation on a type or method that specifies a named marshaller supplier. This annotation is required when not using Protobuf serialization.
 
-- `@Grpc.Proto`: an annotation for an optional method returning the Protobuf descriptor. For more information see the [gRPC Reflection Service](#_grpc_reflection_service).
+- `@Grpc.Proto`: an annotation for an optional method returning the Protobuf descriptor. For more information see the [gRPC Reflection Service](#grpc-reflection-service).
 
 The following gRPC method types are supported:
 

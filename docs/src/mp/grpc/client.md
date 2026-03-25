@@ -10,15 +10,15 @@
 
 - [Configuration](#configuration)
 
-  - [Configuring TLS](#_configuring_tls)
+  - [Configuring TLS](#configuring-tls)
 
 - [Usage](#usage)
 
-  - [Defining a Client Interface](#_defining_a_client_interface)
+  - [Defining a Client Interface](#defining-a-client-interface)
 
-  - [Injecting Client Proxies](#_injecting_client_proxies)
+  - [Injecting Client Proxies](#injecting-client-proxies)
 
-  - [Injecting Channels](#_injecting_channels)
+  - [Injecting Channels](#injecting-channels)
 
 - [Examples](#examples)
 
@@ -130,7 +130,7 @@ interface StringServiceClient {
 
 - The `@Grpc.GrpcService` annotation is necessary to provide the name of the gRPC service when it differs from the interface name, as it is the case in this example.
 
-- The `@Grpc.GrpcChannel` annotation is the qualifier that supplies the channel name. This is the same name as used in the channel configuration in the examples provided in the [Configuration section](#_configuration).
+- The `@Grpc.GrpcChannel` annotation is the qualifier that supplies the channel name. This is the same name as used in the channel configuration in the examples provided in the [Configuration section](#configuration).
 
 There is no need to write any code to implement the client. The Helidon MP gRPC API will create a dynamic proxy for the interface using the information from the annotations and method signatures.
 
@@ -183,7 +183,7 @@ For example, a class might have an injectable `io.grpc.Channel` field as follows
 
 - The `@Inject` annotation tells CDI to inject the channel.
 
-- The `@Grpc.GrpcChannel` annotation supplies the channel name. This is the same name as used in the channel configuration in the examples provided in the [Configuration section](#_configuration).
+- The `@Grpc.GrpcChannel` annotation supplies the channel name. This is the same name as used in the channel configuration in the examples provided in the [Configuration section](#configuration).
 
 An injected channel can be used, for example, when directly instantiating `protoc` generated stubs.
 

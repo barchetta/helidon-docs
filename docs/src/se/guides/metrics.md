@@ -72,7 +72,7 @@ The built-in meters fall into these categories:
 
 2.  basic key performance indicators for request handling (in the vendor scope).
 
-A later section describes the [key performance indicator meters](#basic-and-extended-kpi) in detail.
+A later section describes the [key performance indicator meters](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) in detail.
 
 The following example demonstrates how to use the other built-in meters. All examples are executed from the root directory of your project (helidon-quickstart-se).
 
@@ -205,17 +205,17 @@ JSON response:
 
 The `base` meters illustrated above provide some insight into the behavior of the JVM in which the server runs.
 
-The `vendor` meter shown above gives an idea of the request traffic the server is handling. See the [later section](#basic-and-extended-kpi) for more information on the basic and extended key performance indicator meters.
+The `vendor` meter shown above gives an idea of the request traffic the server is handling. See the [later section](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) for more information on the basic and extended key performance indicator meters.
 
 #### Controlling Metrics Behavior
 
 By adding a `metrics` section to your application configuration you can control how the Helidon metrics subsystem behaves in any of several ways.
 
-- [Disable metrics subsystem entirely](#disabling-entirely).
+- [Disable metrics subsystem entirely](#disabling-metrics-subsystem-entirely).
 
-- Select whether to collect [extended key performance indicator meters](#basic-and-extended-kpi).
+- Select whether to collect [extended key performance indicator meters](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics).
 
-- Control reporting of [virtual threads meters](#controlling-vthreads).
+- Control reporting of [virtual threads meters](#configuring-virtual-threads-meters).
 
 Your Helidon SE application can also control metrics processing programmatically as described in the following sections.
 

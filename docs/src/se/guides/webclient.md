@@ -39,7 +39,7 @@ export JAVA_HOME=/usr/lib/jvm/jdk-21
 
 - [WebClient usage](#webclient-usage)
 
-- [WebClient Metrics](#WebClient-Metrics)
+- [WebClient Metrics](#webclient-metrics)
 
 ### WebClient Features
 

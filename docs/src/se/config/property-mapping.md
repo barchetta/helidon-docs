@@ -188,7 +188,7 @@ Only in the following unusual situation are the heuristics unable to unambiguous
 
 - The string in the config source is not an exact match with an `enum` value name (such as `red`).
 
-If your application must deal with such cases, write your own function which maps a `Config` node to the correct `enum` value, resolving the ambiguities however makes sense in your use case. Your code tells config to use that function instead of the built-in `enum` conversion when it converts values. A [later section](#customConfigAs) describes this technique which works for all types, not only `enum` types.
+If your application must deal with such cases, write your own function which maps a `Config` node to the correct `enum` value, resolving the ambiguities however makes sense in your use case. Your code tells config to use that function instead of the built-in `enum` conversion when it converts values. A [later section](#custom-conversions) describes this technique which works for all types, not only `enum` types.
 
 ## Converting Configuration to Complex Types
 
@@ -332,7 +332,7 @@ This feature is available in Object mapping module, and is added through Java `S
 
 If you can change the target class you can add any one of the following methods or constructors to the POJO class which the config system will find and use for mapping.
 
-Continuing with the [WebConfig](#WebConfig) example introduced earlier:
+Continuing with the [WebConfig](#continuing-the-web-example) example introduced earlier:
 
 |                                        |
 |----------------------------------------|
@@ -393,11 +393,11 @@ When your application invokes `config.as(WebConfig.class)` the config system
 
 The config system can also interpret your classes as JavaBeans and use the normal bean naming conventions to map configuration data to your POJO classes, using one of these patterns:
 
-1.  [POJO as JavaBean](#pojoAsJavaBean) - The config system treats the target class itself as a JavaBean, assigning values from the config to the bean properties of the POJO class.
+1.  [POJO as JavaBean](#pojo-as-javabean) - The config system treats the target class itself as a JavaBean, assigning values from the config to the bean properties of the POJO class.
 
-2.  [builder as JavaBean](#builderAsJavaBean) - The config system invokes the POJO’s `builder()` method to obtain a builder for that POJO type and treats the *builder* class as a JavaBean, assigning values from the config to the builder’s bean properties and then invoking the builder’s `build` method to create an instance of the target POJO class.
+2.  [builder as JavaBean](#builder-as-javabean) - The config system invokes the POJO’s `builder()` method to obtain a builder for that POJO type and treats the *builder* class as a JavaBean, assigning values from the config to the builder’s bean properties and then invoking the builder’s `build` method to create an instance of the target POJO class.
 
-3.  [POJO with factory method or decorated constructor](#pojoWithFactoryMethodOrConstructor) - The config system finds a `from` method or a constructor on the POJO class itself which accepts annotated arguments, then invokes that method or constructor passing the specified arguments based on the config. The `from` method returns an instance of the POJO class initialized with the values passed as arguments.
+3.  [POJO with factory method or decorated constructor](#target-class-with-annotated-factory-method-or-constructor) - The config system finds a `from` method or a constructor on the POJO class itself which accepts annotated arguments, then invokes that method or constructor passing the specified arguments based on the config. The `from` method returns an instance of the POJO class initialized with the values passed as arguments.
 
 The following sections describe these patterns in more detail.
 

@@ -8,17 +8,17 @@
 
 - [Components](#components)
 
-  - [OpenAiChatModel](#_openaichatmodel)
+  - [OpenAiChatModel](#openaichatmodel)
 
-  - [OpenAiEmbeddingModel](#_openaiembeddingmodel)
+  - [OpenAiEmbeddingModel](#openaiembeddingmodel)
 
-  - [OpenAiImageModel](#_openaiimagemodel)
+  - [OpenAiImageModel](#openaiimagemodel)
 
-  - [OpenAiLanguageModel](#_openailanguagemodel)
+  - [OpenAiLanguageModel](#openailanguagemodel)
 
-  - [OpenAiModerationModel](#_openaimoderationmodel)
+  - [OpenAiModerationModel](#openaimoderationmodel)
 
-  - [OpenAiStreamingChatModel](#_openaistreamingchatmodel)
+  - [OpenAiStreamingChatModel](#openaistreamingchatmodel)
 
 - [Additional Information](#additional-information)
 

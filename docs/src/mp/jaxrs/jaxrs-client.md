@@ -103,7 +103,7 @@ Configuration for this API is all done programmatically as shown in the previous
 
 ## Examples
 
-See [API](#_api) for same simple examples. For additional information, refer to the
+See [API](#api) for same simple examples. For additional information, refer to the
 
 [Jakarta REST Client Specification](https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#client_api).
 

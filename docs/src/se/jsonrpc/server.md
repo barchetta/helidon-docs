@@ -8,7 +8,7 @@
 
 - [Usage](#usage)
 
-  - [Service Implementation](#_service_implementation)
+  - [Service Implementation](#service-implementation)
 
 - [Configuration](#configuration)
 

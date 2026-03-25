@@ -10,21 +10,21 @@
 
 - [API](#api)
 
-  - [Helidon Metrics API](#_helidon_metrics_api)
+  - [Helidon Metrics API](#helidon-metrics-api)
 
 - [Configuration](#configuration)
 
 - [Examples](#examples)
 
-  - [Example Application Code](#_example_application_code)
+  - [Example Application Code](#example-application-code)
 
   - [Example Configuration](#example-configuration)
 
 - [Additional Information](#additional-information)
 
-  - [References](#_references)
+  - [References](#references)
 
-  - [Support for the Prometheus Metrics API](#_support_for_the_prometheus_metrics_api)
+  - [Support for the Prometheus Metrics API](#support-for-the-prometheus-metrics-api)
 
 ## Overview
 
@@ -43,7 +43,7 @@ Metrics is one of the Helidon observability features.
 > metrics.gc-time-type = gauge
 > ```
 >
-> See the [longer discussion below](#controlling-gc-time) in the Configuration section.
+> See the [longer discussion below](#controlling-the-meter-type-for-gctime) in the Configuration section.
 
 ### A Word about Terminology
 
@@ -152,7 +152,7 @@ Helidon’s Micrometer-based metrics implementation includes these ways of publi
 > [!NOTE]
 > The configuration of metrics publishers as described below is a [preview feature](/apidocs/io.helidon.common.features.api/io/helidon/common/features/api/Preview.html) which Helidon intends to keep, but its external interface or behavior might evolve between dot releases.
 
-You can configure publishers in the `publishers` configuration section under the top level `metrics` node or under `server.features.observe.observers.metrics`. If you do not set up publishers explicitly, Helidon uses an inferred Prometheus publisher for backward compatibility. See [this later section](#understanding_inferred) for details.
+You can configure publishers in the `publishers` configuration section under the top level `metrics` node or under `server.features.observe.observers.metrics`. If you do not set up publishers explicitly, Helidon uses an inferred Prometheus publisher for backward compatibility. See [this later section](#understanding-the-inferred-prometheus-publisher) for details.
 
 Publishers in Helidon’s Micrometer-based metrics implementation use Micrometer `MeterRegistry` implementations. For each enabled publisher, Helidon adds the corresponding meter registry to Micrometer’s global registry. This has these important effects:
 
@@ -282,6 +282,7 @@ Clients can request a particular output format from the endpoint.
 
 Formats for `/observe/metrics` output
 
+<a id="scope-specific-retrieval"></a>
 Clients can also limit the report by specifying the scope as a query parameter in the request URL:
 
 - `/observe/metrics?scope=base`
@@ -304,7 +305,7 @@ curl -s -H 'Accept: text/plain' -X GET http://localhost:8080/observe/metrics
 classloader_loadedClasses_count{scope="base",} 5297.0
 ```
 
-See the summary of the [OpenMetrics and Prometheus Format](#_openmetrics_and_prometheus_format) for more information.
+See the summary of the [OpenMetrics and Prometheus Format](#openmetrics-and-prometheus-format) for more information.
 
 *Example Reporting: JSON format*
 
@@ -515,7 +516,7 @@ The Helidon JSON format expresses each meter as either a single value (for examp
 }
 ```
 
-By default, Helidon formats time values contained in JSON output as seconds. You can change this behavior [as described below](#controlling_timer_output).
+By default, Helidon formats time values contained in JSON output as seconds. You can change this behavior [as described below](#controlling-json-timer-output).
 
 ##### Understanding the JSON Metrics Metadata Format
 
@@ -542,7 +543,7 @@ Access the metrics endpoint with an HTTP `OPTIONS` request and the `Accept: appl
 
 Generally, the output for a given meter reflects only the metadata that the application or Helidon code explicitly set on that meter.
 
-One exception is that metadata for a timer always includes the `unit` field. By default, Helidon formats timer data in JSON output as seconds, regardless of any explicit `baseUnit` setting applied to the timers. But as [described below](#controlling_timer_output) you can change this behavior which can lead to different timers being formatted using different units. Checking the metadata is the only way to know for sure what units Helidon used to express a given timer, so Helidon always includes `unit` in timer metadata.
+One exception is that metadata for a timer always includes the `unit` field. By default, Helidon formats timer data in JSON output as seconds, regardless of any explicit `baseUnit` setting applied to the timers. But as [described below](#controlling-json-timer-output) you can change this behavior which can lead to different timers being formatted using different units. Checking the metadata is the only way to know for sure what units Helidon used to express a given timer, so Helidon always includes `unit` in timer metadata.
 
 ##### Controlling JSON Timer Output
 
@@ -636,7 +637,7 @@ To locate an existing meter or register a new one, your code:
 
 The meter registry returns a reference to a previously-registered meter with the specified name and tags or, if none exists, a newly-registered meter. Your code can then operate on the returned meter as needed to record new measurements or retrieve existing data.
 
-The example code in the [Examples](#_examples) section below illustrates how to register, retrieve, and update meters.
+The example code in the [Examples](#examples) section below illustrates how to register, retrieve, and update meters.
 
 #### Understanding Timers, Units, and Output
 
@@ -644,7 +645,7 @@ Your application can assign the meter builder’s [`Meter.Builder baseUnit`](/ap
 
 Note that, regardless of the `baseUnit` setting for a `Timer`, by convention and specification Prometheus output expresses time values in `seconds`.
 
-By default, the same is true of Helidon’s JSON format: timer values are displayed in `seconds` regardless of any timer’s `baseUnit` setting. You can override this as described in the [Controlling Timer Output](#controlling_timer_output) section, in which case the JSON output for each timer reflects its `baseUnit` setting.
+By default, the same is true of Helidon’s JSON format: timer values are displayed in `seconds` regardless of any timer’s `baseUnit` setting. You can override this as described in the [Controlling Timer Output](#controlling-json-timer-output) section, in which case the JSON output for each timer reflects its `baseUnit` setting.
 
 ### Accessing the Underlying Implementation: `unwrap`
 
@@ -690,6 +691,7 @@ Certain default configuration values depend on the fact that you are using Helid
 | <span id="a12103-gc-time-type"></span> [`gc-time-type`](../../config/io_helidon_metrics_api_GcTimeType.md) | `VALUE` | `i.h.m.a.GcTimeType` | `COUNTER` | Whether the `gc.time` meter should be registered as a gauge (vs |
 | <span id="aa1220-rest-request-enabled"></span> `rest-request-enabled` | `VALUE` | `Boolean` |   | Whether automatic REST request metrics should be measured (as indicated by the deprecated config key `rest-request-enabled`, the config key using a hyphen instead of a dot separator) |
 
+<a id="flavor-specific-defaults"></a>
 | Key                | Default Value |
 |--------------------|---------------|
 | `app-tag-name`     | `app`         |
@@ -944,11 +946,11 @@ accessctr_total{scope="application",} 1.0
 
 Metrics configuration is quite extensive and powerful and, therefore, a bit complicated. The rest of this section illustrates some of the most common scenarios:
 
-- [Disable metrics entirely.](#config-disable)
+- [Disable metrics entirely.](#disable-metrics-subsystem)
 
-- [Choose whether to report virtual threads meters](#config-virtual-threads).
+- [Choose whether to report virtual threads meters](#configuring-virtual-threads-meters).
 
-- [Choose whether to collect extended key performance indicator metrics.](#config-kpi)
+- [Choose whether to collect extended key performance indicator metrics.](#collecting-basic-and-extended-key-performance-indicator-kpi-meters)
 
 #### Disable Metrics Subsystem
 
@@ -1040,9 +1042,9 @@ server:
 
 - [Maven Coordinates](#maven-coordinates)
 
-- [Usage](#_usage)
+- [Usage](#usage)
 
-- [API](#_api)
+- [API](#api)
 
 Helidon provides optional support for the Prometheus metrics API.
 

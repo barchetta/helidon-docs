@@ -32,7 +32,7 @@ To enable Neo4j, add the following dependency to your project’s `pom.xml` (see
 ```
 
 > [!NOTE]
-> Check [Neo4j Metrics propagation](#_neo4j_metrics_propagation) and [Neo4j Health Checks](#_neo4j_health_checks) for additional dependencies for *Neo4j* `Metrics` and `Health Checks` integration.
+> Check [Neo4j Metrics propagation](#neo4j-metrics-propagation) and [Neo4j Health Checks](#neo4j-health-checks) for additional dependencies for *Neo4j* `Metrics` and `Health Checks` integration.
 
 ## Usage
 

@@ -8,7 +8,7 @@
 
 - [Components](#components)
 
-  - [MockChatModel](#_mockchatmodel)
+  - [MockChatModel](#mockchatmodel)
 
 - [Additional Information](#additional-information)
 

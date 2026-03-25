@@ -53,7 +53,7 @@ To control the behavior of the OpenAPI feature programmatically, you can add and
 
 #### Create and Register `OpenApiFeature` in your application
 
-Helidon SE provides the [`OpenApiFeature`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeature.html) class which your application uses to assemble the in-memory model and expose the `/openapi` endpoint to clients. You can create an instance either using a static `create` method or by instantiating its [`Builder`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeatureConfig.Builder.html). The [example below](#register_openapifeature) illustrates one way to do this.
+Helidon SE provides the [`OpenApiFeature`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeature.html) class which your application uses to assemble the in-memory model and expose the `/openapi` endpoint to clients. You can create an instance either using a static `create` method or by instantiating its [`Builder`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeatureConfig.Builder.html). The [example below](#register-openapifeature-explicitly) illustrates one way to do this.
 
 #### Furnish OpenAPI information about your endpoints
 
@@ -73,7 +73,7 @@ In addition, a client can specify the HTTP header `Accept` as either `applicatio
 
 ## API
 
-Helidon SE provides an API for creating and setting up the REST endpoint which serves OpenAPI documents to clients at the `/openapi` path. Use either static methods on [`OpenApiFeature`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeature.html) or use its [`Builder`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeatureConfig.Builder.html). Then add that instance or builder to your application’s routing. The [example](#register_openapifeature) below shows how to do this.
+Helidon SE provides an API for creating and setting up the REST endpoint which serves OpenAPI documents to clients at the `/openapi` path. Use either static methods on [`OpenApiFeature`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeature.html) or use its [`Builder`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeatureConfig.Builder.html). Then add that instance or builder to your application’s routing. The [example](#register-openapifeature-explicitly) below shows how to do this.
 
 ## Configuration
 

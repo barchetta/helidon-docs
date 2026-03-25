@@ -8,9 +8,9 @@
 
 - [Components](#components)
 
-  - [GoogleAiGeminiChatModel](#_googleaigeminichatmodel)
+  - [GoogleAiGeminiChatModel](#googleaigeminichatmodel)
 
-  - [GoogleAiGeminiStreamingChatModel](#_googleaigeministreamingchatmodel)
+  - [GoogleAiGeminiStreamingChatModel](#googleaigeministreamingchatmodel)
 
 - [Additional Information](#additional-information)
 

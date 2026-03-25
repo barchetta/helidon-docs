@@ -8,7 +8,7 @@
 
 - [Components](#components)
 
-  - [CoherenceEmbeddingStore](#_coherenceembeddingstore)
+  - [CoherenceEmbeddingStore](#coherenceembeddingstore)
 
 - [Additional Information](#additional-information)
 

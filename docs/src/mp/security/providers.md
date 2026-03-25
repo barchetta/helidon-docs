@@ -6,20 +6,20 @@ Helidon provides the following security providers for endpoint protection:
 
 | Provider | Type | Outbound supported | Description |
 |----|----|----|----|
-| [OIDC Provider](#OIDC-Provider) | Authentication | ✅ | Open ID Connect supporting JWT, Scopes, Groups and OIDC code flow |
-| [HTTP Basic Authentication](#_http_basic_authentication_provider) | Authentication | ✅ | HTTP Basic Authentication support |
-| [HTTP Digest Authentication](#_http_digest_authentication_provider) | Authentication | 🚫 | HTTP Digest Authentication support |
-| [Header Assertion](#_header_authentication_provider) | Authentication | ✅ | Asserting a user based on a header value |
-| [HTTP Signatures](#_http_signatures_provider) | Authentication | ✅ | Protecting service to service communication through signatures |
-| [IDCS Roles](#_idcs_role_mapper) | Role Mapping | 🚫 | Retrieves roles from IDCS provider for authenticated user |
-| [ABAC Authorization](#_abac_provider) | Authorization | 🚫 | Attribute based access control authorization policies |
+| [OIDC Provider](#oidc-provider) | Authentication | ✅ | Open ID Connect supporting JWT, Scopes, Groups and OIDC code flow |
+| [HTTP Basic Authentication](#http-basic-authentication-provider) | Authentication | ✅ | HTTP Basic Authentication support |
+| [HTTP Digest Authentication](#http-digest-authentication-provider) | Authentication | 🚫 | HTTP Digest Authentication support |
+| [Header Assertion](#header-authentication-provider) | Authentication | ✅ | Asserting a user based on a header value |
+| [HTTP Signatures](#http-signatures-provider) | Authentication | ✅ | Protecting service to service communication through signatures |
+| [IDCS Roles](#idcs-role-mapper) | Role Mapping | 🚫 | Retrieves roles from IDCS provider for authenticated user |
+| [ABAC Authorization](#abac-provider) | Authorization | 🚫 | Attribute based access control authorization policies |
 
 The following providers are no longer evolved:
 
 | Provider | Type | Outbound supported | Description |
 |----|----|----|----|
-| [Google Login](#_google_login_provider) | Authentication | ✅ | **Deprecated!** Authenticates a token from request against Google servers |
-| [JWT Provider](#_jwt_provider) | Authentication | ✅ | JWT tokens passed from frontend |
+| [Google Login](#google-login-provider) | Authentication | ✅ | **Deprecated!** Authenticates a token from request against Google servers |
+| [JWT Provider](#jwt-provider) | Authentication | ✅ | JWT tokens passed from frontend |
 
 #### OIDC Provider
 
@@ -546,7 +546,7 @@ and the custom tenant configuration discovery can be provided by implementing SP
 
 ##### How does that work?
 
-Multi-tenant support requires to obtain tenant name from the incoming request. OIDC configuration is selected based on the received tenant name. The way this tenant name has to be provided is configured via `tenant-id-style` configuration. See [How to enable tenants](#tenant-enable) for more information. After matching tenant configuration with the received name, the rest of the OIDC flow if exactly the same as in [How does OIDC work](#oidc-workflow).
+Multi-tenant support requires to obtain tenant name from the incoming request. OIDC configuration is selected based on the received tenant name. The way this tenant name has to be provided is configured via `tenant-id-style` configuration. See [How to enable tenants](#multiple-tenants) for more information. After matching tenant configuration with the received name, the rest of the OIDC flow if exactly the same as in [How does OIDC work](#how-does-it-work).
 
 Base OIDC configuration is treated as a default tenant, which is used, if no tenant name is provided. This default tenant is having `@default` name specified.
 
@@ -1027,11 +1027,11 @@ public class AbacResource {
 
 **The following validators are implemented:**
 
-- [Roles](#_role_validator)
+- [Roles](#role-validator)
 
-- [Scopes](#_scope_validator)
+- [Scopes](#scope-validator)
 
-- [EL Policy](#_expression_language_policy_validator)
+- [EL Policy](#expression-language-policy-validator)
 
 ##### Role Validator
 

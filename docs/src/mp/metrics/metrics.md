@@ -37,7 +37,7 @@ Metrics is one of the Helidon observability features.
 > metrics.gc-time-type = gauge
 > ```
 >
-> so your service complies with the MicroProfile Metrics 5.1 specification. See the [longer discussion below](#controlling-gc-time) in the Configuration section.
+> so your service complies with the MicroProfile Metrics 5.1 specification. See the [longer discussion below](#controlling-the-metric-type-for-gctime) in the Configuration section.
 
 ## Maven Coordinates
 
@@ -115,7 +115,7 @@ Helidon’s Micrometer-based metrics implementation includes these ways of publi
 > [!NOTE]
 > The configuration of metrics publishers as described below is a [preview feature](/apidocs/io.helidon.common.features.api/io/helidon/common/features/api/Preview.html) which Helidon intends to keep, but its external interface or behavior might evolve between dot releases.
 
-You can configure publishers in the `publishers` configuration section under the top level `metrics` node or under `server.features.observe.observers.metrics`. If you do not set up publishers explicitly, Helidon uses an inferred Prometheus publisher for backward compatibility. See [this later section](#understanding_inferred) for details.
+You can configure publishers in the `publishers` configuration section under the top level `metrics` node or under `server.features.observe.observers.metrics`. If you do not set up publishers explicitly, Helidon uses an inferred Prometheus publisher for backward compatibility. See [this later section](#understanding-the-inferred-prometheus-publisher) for details.
 
 Publishers in Helidon’s Micrometer-based metrics implementation use Micrometer `MeterRegistry` implementations. For each enabled publisher, Helidon adds the corresponding meter registry to Micrometer’s global registry. This has these important effects:
 
@@ -245,6 +245,8 @@ Clients can request a particular output format from the endpoint.
 
 Formats for `/metrics` output
 
+<a id="scope-specific-retrieval"></a>
+
 Clients can also limit the report by specifying the scope as a query parameter in the request URL:
 
 - `/metrics?scope=base`
@@ -267,7 +269,7 @@ curl -s -H 'Accept: text/plain' -X GET http://localhost:8080/metrics
 classloader_loadedClasses_count{mp_scope="base",} 5297.0
 ```
 
-See the summary of the [OpenMetrics and Prometheus Format](#_openmetrics_and_prometheus_format) for more information.
+See the summary of the [OpenMetrics and Prometheus Format](#openmetrics-and-prometheus-format) for more information.
 
 *Example Reporting: JSON format*
 
@@ -478,7 +480,7 @@ The Helidon JSON format expresses each metric as either a single value (for exam
 }
 ```
 
-By default, Helidon formats time values contained in JSON output as seconds. You can change this behavior [as described below](#controlling_timer_output).
+By default, Helidon formats time values contained in JSON output as seconds. You can change this behavior [as described below](#controlling-json-timer-output).
 
 ##### Understanding the JSON Metrics Metadata Format
 
@@ -505,7 +507,7 @@ Access the metrics endpoint with an HTTP `OPTIONS` request and the `Accept: appl
 
 Generally, the output for a given metric reflects only the metadata that the application or Helidon code explicitly set on that metric.
 
-One exception is that metadata for a timer always includes the `unit` field. By default, Helidon formats timer data in JSON output as seconds, regardless of any explicit `baseUnit` setting applied to the timers. But as [described below](#controlling_timer_output) you can change this behavior which can lead to different timers being formatted using different units. Checking the metadata is the only way to know for sure what units Helidon used to express a given timer, so Helidon always includes `unit` in timer metadata.
+One exception is that metadata for a timer always includes the `unit` field. By default, Helidon formats timer data in JSON output as seconds, regardless of any explicit `baseUnit` setting applied to the timers. But as [described below](#controlling-json-timer-output) you can change this behavior which can lead to different timers being formatted using different units. Checking the metadata is the only way to know for sure what units Helidon used to express a given timer, so Helidon always includes `unit` in timer metadata.
 
 ##### Controlling JSON Timer Output
 
@@ -606,7 +608,7 @@ Either of the following techniques gets a `MetricRegistry` reference. Remember t
             return registryFactory.getRegistry(scope);
         }
     }
-    ```
+```
 
   - Invoke the static `getInstance()` method on the `RegistryFactory` class.
 
@@ -619,13 +621,13 @@ Either of the following techniques gets a `MetricRegistry` reference. Remember t
             return RegistryFactory.getInstance().getRegistry(scope);
         }
     }
-    ```
+```
 
 Once it has a reference to a `MetricRegistry` your code can use the reference to register new metrics, look up previously-registered metrics, and remove metrics.
 
 ### Working with Metrics in CDI Extensions
 
-You can work with metrics inside your own CDI extensions, but be careful to do so at the correct point in the CDI lifecycle. Configuration can influence how the metrics system behaves, as the [configuration](#config-intro) section below explains. Your code should work with metrics only after the Helidon metrics system has initialized itself using configuration. One way to accomplish this is to deal with metrics in a method that observes the Helidon `RuntimeStart` CDI event, which the [extension example below](#extension_example) illustrates.
+You can work with metrics inside your own CDI extensions, but be careful to do so at the correct point in the CDI lifecycle. Configuration can influence how the metrics system behaves, as the [configuration](#configuration) section below explains. Your code should work with metrics only after the Helidon metrics system has initialized itself using configuration. One way to accomplish this is to deal with metrics in a method that observes the Helidon `RuntimeStart` CDI event, which the [extension example below](#extension_example) illustrates.
 
 ## Configuration
 
@@ -661,6 +663,7 @@ Certain default configuration values depend on the fact that you are using Helid
 | <span id="a12103-gc-time-type"></span> [`gc-time-type`](../../config/io_helidon_metrics_api_GcTimeType.md) | `VALUE` | `i.h.m.a.GcTimeType` | `COUNTER` | Whether the `gc.time` meter should be registered as a gauge (vs |
 | <span id="aa1220-rest-request-enabled"></span> `rest-request-enabled` | `VALUE` | `Boolean` |   | Whether automatic REST request metrics should be measured (as indicated by the deprecated config key `rest-request-enabled`, the config key using a hyphen instead of a dot separator) |
 
+<a id="flavor-specific-defaults"></a>
 | Key                | Default Value |
 |--------------------|---------------|
 | `app-tag-name`     | `mp_app`      |
@@ -669,6 +672,7 @@ Certain default configuration values depend on the fact that you are using Helid
 
 Default Values Specific to Helidon MP
 
+<a id="controlling-the-metric-type-for-gctime"></a>
 ### Controlling the Metric Type for `gc.time`
 
 To date Helidon 4 releases have implemented the system-provided metric `gc.time` as a counter. In fact, a gauge is more suitable for the approximate time the JVM has spent doing garbage collection, and beginning with MicroProfile Metrics 5.1 the TCK relies on `gc.time` being a gauge.
@@ -1177,6 +1181,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 #### Working with Metrics in CDI Extensions
 
+<a id="extension_example"></a>
 You can work with metrics from your own CDI extension by observing the `RuntimeStart` event.
 
 *CDI Extension that works correctly with metrics*
@@ -1206,13 +1211,13 @@ Helidon does not prevent you from working with metrics earlier than the `Runtime
 
 Metrics configuration is quite extensive and powerful and, therefore, a bit complicated. The rest of this section illustrates some of the most common scenarios:
 
-- [Disable metrics entirely.](#config-disable)
+- [Disable metrics entirely.](#disable-metrics-subsystem)
 
-- [Choose whether to report virtual threads metrics](#config-virtual-threads).
+- [Choose whether to report virtual threads metrics](#configuring-virtual-threads-metrics).
 
-- [Choose whether to collect extended key performance indicator metrics.](#config-kpi)
+- [Choose whether to collect extended key performance indicator metrics.](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics)
 
-- [Control `REST.request` metrics collection.](#config-rest-request)
+- [Control `REST.request` metrics collection.](#enable-restrequest-metrics)
 
 #### Disable Metrics Subsystem
 

@@ -8,13 +8,13 @@
 
 - [Components](#components)
 
-  - [OciGenAiChatModel](#_ocigenaichatmodel)
+  - [OciGenAiChatModel](#ocigenaichatmodel)
 
-  - [OciGenAiStreamingChatModel](#_ocigenaistreamingchatmodel)
+  - [OciGenAiStreamingChatModel](#ocigenaistreamingchatmodel)
 
-  - [OciGenAiCohereChatModel](#_ocigenaicoherechatmodel)
+  - [OciGenAiCohereChatModel](#ocigenaicoherechatmodel)
 
-  - [OciGenAiCohereStreamingChatModel](#_ocigenaicoherestreamingchatmodel)
+  - [OciGenAiCohereStreamingChatModel](#ocigenaicoherestreamingchatmodel)
 
 - [Additional Information](#additional-information)
 

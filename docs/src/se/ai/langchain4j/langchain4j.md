@@ -10,21 +10,21 @@
 
 - [General Concepts](#general-concepts)
 
-  - [LangChain4j Providers](#_providers)
+  - [LangChain4j Providers](#providers)
 
-  - [Supplier Factory](#_supplier_factory)
+  - [Supplier Factory](#supplier-factory)
 
 - [Configuration](#configuration)
 
-  - [Configuration Migration Guide](#_configuration_migration_guide)
+  - [Configuration Migration Guide](#configuration-migration-guide)
 
 - [Declarative AI](#declarative-ai)
 
-  - [AI Services](#_ai_services)
+  - [AI Services](#ai-services)
 
-  - [Agents](#_agents)
+  - [Agents](#agents)
 
-  - [Agentic Workflow](#_agentic_workflow)
+  - [Agentic Workflow](#agentic-workflow)
 
 - [Tools (Callback Functions)](#tools-callback-functions)
 
@@ -91,7 +91,7 @@ Some features of the integration may require adding other dependencies. Check th
 
 ### General Concepts
 
-LangChain4j integration in Helidon is orchestrating LangChain4j AiServices and Agents as named singleton declarative service beans. Singletons can be referenced by their names and created either by configuration-driven [providers](#_providers) or manually as any other declarative Helidon service bean, with [supplier factory](#_supplier_factory), for example.
+LangChain4j integration in Helidon is orchestrating LangChain4j AiServices and Agents as named singleton declarative service beans. Singletons can be referenced by their names and created either by configuration-driven [providers](#providers) or manually as any other declarative Helidon service bean, with [supplier factory](#supplier-factory), for example.
 
 #### Providers
 
@@ -258,7 +258,7 @@ langchain4j:
       model-name: "gpt-4o-mini"
 ```
 
-New configuration as documented in [Configuration](#_configuration):
+New configuration as documented in [Configuration](#configuration):
 
 ``` yaml
 langchain4j:

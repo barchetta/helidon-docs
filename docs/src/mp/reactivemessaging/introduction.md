@@ -40,17 +40,17 @@ To include health checks for Messaging add the following dependency:
 
 ## Usage
 
-- [Channels](#_channels)
+- [Channels](#channels)
 
-- [Emitter](#_emitter)
+- [Emitter](#emitter)
 
-- [Connector](#_connector)
+- [Connector](#connector)
 
-- [Message](#_message)
+- [Message](#message)
 
-- [Acknowledgement](#_acknowledgement)
+- [Acknowledgement](#acknowledgement)
 
-- [Health Check](#_health_check)
+- [Health Check](#health-check)
 
 ### Channels
 
@@ -60,7 +60,7 @@ Reactive messaging uses named channels to connect one source (upstream) with one
 <img src="../../images/msg/channel.svg" alt="Messaging Channel" />
 </figure>
 
-Channels can be connected either to [emitter](#_emitter) (1), [producing method](#_producing_method) (2) or [connector](#_connector) (3) on the upstream side. And [injected publisher](#_injected_publisher) (4), [consuming method](#_consuming_method) (5) or [connector](#_connector) (6) on the downstream.
+Channels can be connected either to [emitter](#emitter) (1), [producing method](#producing-method) (2) or [connector](#connector) (3) on the upstream side. And [injected publisher](#injected-publisher) (4), [consuming method](#consuming-method) (5) or [connector](#connector) (6) on the downstream.
 
 #### Consuming Method
 
@@ -68,7 +68,7 @@ Consuming methods can be connected to the channel’s downstream to consume the 
 
 Consuming method can function in two ways:
 
-- consume every message coming from the stream connected to the [channels](#_channels) - invoked per each message
+- consume every message coming from the stream connected to the [channels](#channels) - invoked per each message
 
 - prepare reactive stream’s subscriber and connect it to the channel - invoked only once during the channel construction
 
@@ -129,7 +129,7 @@ public MyBean(@Channel("example-channel-1") Multi<String> multiChannel) {
 
 The annotation has one required attribute `value` that defines the [channel](https://download.eclipse.org/microprofile/microprofile-reactive-messaging-3.0/microprofile-reactive-messaging-spec-3.0.html#_channel) name.
 
-The annotated [messaging method](#terms) can function in two ways:
+The annotated messaging method can function in two ways:
 
 - produce exactly one message to the stream connected to the [channel](https://download.eclipse.org/microprofile/microprofile-reactive-messaging-3.0/microprofile-reactive-messaging-spec-3.0.html#_channel)
 
