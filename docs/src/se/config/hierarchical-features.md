@@ -51,7 +51,7 @@ Each config node (except the root) has a non-null key. Here is the formal defini
 
 *The ABNF syntax of config key*
 
-``` abnf
+``` text
 config-key = *1( key-token *( "." key-token ) )
  key-token = *( unescaped / escaped )
  unescaped = %x00-2D / %x2F-7D / %x7F-10FFFF
