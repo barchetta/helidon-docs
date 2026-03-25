@@ -251,7 +251,7 @@ cd helidon-quickstart-mp-2
 
 *Replace `META-INF/microprofile-config.properties` with the following:*
 
-``` bash
+``` properties
 app.greeting=Hello From MP-2
 tracing.service=helidon-mp-2
 

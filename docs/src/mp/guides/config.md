@@ -140,7 +140,7 @@ Change a configuration parameter in the default configuration resource file, `ME
 
 *Change `app.greeting` in the `META-INF/microprofile-config.properties` from `Hello` to `HelloFromMPConfig`:*
 
-``` bash
+``` properties
 app.greeting=HelloFromMPConfig
 ```
 

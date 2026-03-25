@@ -55,7 +55,7 @@ clientConfig.property(HelidonProperties.CONFIG, config.get("my.webclient"));
 
 If not provided as the value of the `HelidonProperties.CONFIG` property as shown above, the connector will look for WebClient configuration rooted at `jersey.connector.webclient`. For example, the following YAML config file can be used to set some socket options and turn off 100-continue support for all WebClient instances created by the connector:
 
-``` properties
+``` yaml
 jersey:
   connector:
     webclient:

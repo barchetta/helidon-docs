@@ -128,7 +128,7 @@ All spans sent by Helidon to Jaeger need to be associated with a service. Specif
 
 *Add the following line to `META-INF/microprofile-config.properties`:*
 
-``` bash
+``` properties
 tracing.service=helidon-mp-1
 ```
 
@@ -321,7 +321,7 @@ cd helidon-quickstart-mp-2
 
 *Replace `META-INF/microprofile-config.properties` with the following:*
 
-``` bash
+``` properties
 app.greeting=Hello From MP-2
 tracing.service=helidon-mp-2
 
@@ -430,7 +430,7 @@ The following example demonstrate how to use Jaeger from a Helidon application r
 
 *Add the following line to `META-INF/microprofile-config.properties`:*
 
-``` bash
+``` properties
 tracing.host=jaeger
 ```
 

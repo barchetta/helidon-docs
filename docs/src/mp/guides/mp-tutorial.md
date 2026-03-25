@@ -482,7 +482,7 @@ It is possible to disable metrics by adding properties to the `microprofile-conf
 
 *Disable a metric*
 
-``` bash
+``` properties
 metrics.base.classloader.currentLoadedClass.count.enabled=false
 ```
 
