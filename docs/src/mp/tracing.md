@@ -336,7 +336,7 @@ curl -i http://localhost:8080/greet/outbound
 
 *Response body*
 
-``` hocon
+``` json
 {
   "message": "Hello From MP-2 World!" 
 }

@@ -157,7 +157,7 @@ java -jar target/helidon-quickstart-mp.jar
 curl http://localhost:8080/greet
 ```
 
-``` hocon
+``` json
 {
   "message": "HelloFromMPConfig World!" 
 }
@@ -184,7 +184,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFromEnvironment World!" 
 }
@@ -210,7 +210,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFromSystemProperty World!" 
 }
@@ -593,7 +593,7 @@ curl http://localhost:31143/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFromConfigFile World!" 
 }

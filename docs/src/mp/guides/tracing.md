@@ -405,7 +405,7 @@ curl -i http://localhost:8080/greet/outbound
 
 - The request went to the service on `8080`, which then invoked the service at `8081` to get the greeting.
 
-``` hocon
+``` json
 {
   "message": "Hello From MP-2 World!" 
 }

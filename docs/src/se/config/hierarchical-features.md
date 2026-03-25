@@ -69,7 +69,7 @@ The following example is in [HOCON](https://github.com/lightbend/config/blob/mas
 
 *HOCON `application.conf` file*
 
-``` hocon
+``` text
 app {
     greeting = "Hello"
     page-size = 20

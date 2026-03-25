@@ -473,7 +473,7 @@ curl -i http://localhost:8080/greet/outbound
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "Hello From SE-2 World!" 
 }

@@ -360,7 +360,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response (partial):*
 
-``` hocon
+``` json
 {
   "io.helidon.examples.quickstart.mp.GreetingCards.any-card":2 
 }
@@ -489,7 +489,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response (partial):*
 
-``` hocon
+``` json
 {
   "anyCard": 1,
   "specialEventCard": 2 
@@ -549,7 +549,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response (partial):*
 
-``` hocon
+``` json
 {
   "anyCard": 1,
   "birthdayCard": 1,
@@ -629,7 +629,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response (partial):*
 
-``` hocon
+``` json
 {
   "anyCard": 2,
   "birthdayCard": 3,
@@ -703,7 +703,7 @@ curl -H "Accept: application/json"  http://localhost:8080/metrics/application
 
 *JSON response from `/metrics/application`:*
 
-``` hocon
+``` json
 {
   "cardCount": 0,
   "io.helidon.examples.quickstart.mp.GreetingCardsAppMetrics.appUpTimeSeconds": 6 

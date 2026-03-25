@@ -144,7 +144,7 @@ This time the `curl` output shows not only the HTTP status—​as 200 instead o
 
 *Health check details*
 
-``` hocon
+``` json
 {
   "status": "UP", 
   "checks": [ 

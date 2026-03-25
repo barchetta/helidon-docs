@@ -846,7 +846,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response:*
 
-``` hocon
+``` text
 {
   "io.helidon.examples.quickstart.mp.GreetingCards.any-card": 2, //  
   "personalizedGets": 0,
@@ -989,7 +989,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response from `/metrics?scope=application`:*
 
-``` hocon
+``` json
 {
   "birthdayCard": 1,
   "personalizedGets": 0,
@@ -1076,7 +1076,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response from `/metrics/application`:*
 
-``` hocon
+``` json
 {
   "birthdayCard": 3,
   "personalizedGets": 0,
@@ -1159,7 +1159,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/metrics?scope=applica
 
 *JSON response from `/metrics/application`:*
 
-``` hocon
+``` json
 {
   "personalizedGets": 0,
   "allGets": {

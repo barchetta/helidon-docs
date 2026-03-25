@@ -249,7 +249,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFrom-config.properties World!" 
 }
@@ -283,7 +283,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFrom-application.yaml World!" 
 }
@@ -327,7 +327,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFrom-config-file.properties World!" 
 }
@@ -393,7 +393,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFromFileInDirectoryConf World!" 
 }
@@ -426,7 +426,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFromFileInDirectoryConf World!"
 }
@@ -469,7 +469,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFrom-application.yaml World!" 
 }
@@ -509,7 +509,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "HelloFrom-config-file.properties World!" 
 }
@@ -693,7 +693,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "Updated HelloFrom-config-file.properties World!" 
 }
@@ -740,7 +740,7 @@ curl http://localhost:8080/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "Hello World!" 
 }
@@ -866,7 +866,7 @@ curl http://localhost:31143/greet
 
 *JSON response:*
 
-``` hocon
+``` json
 {
   "message": "Updated HelloFrom-config-file.properties World!" 
 }
