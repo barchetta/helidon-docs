@@ -46,7 +46,7 @@ The following sections briefly illustrate each approach.
 
 To enable CORS, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../about/managing-dependencies.md)).
 
-``` highlight
+``` xml
 <dependency>
     <groupId>io.helidon.webserver</groupId>
     <artifactId>helidon-webserver-cors</artifactId>
@@ -87,7 +87,7 @@ This example, based on the QuickStart greeting app, uses the CORS API to influen
 
 The following code shows one way to prepare your application’s routing to support CORS.
 
-``` highlight
+``` java
 CorsFeature corsFeature = CorsFeature.builder() // (1)
         .addPath(path -> path // (2)
                 .pathPattern("/greet/*") // (3)
@@ -136,7 +136,7 @@ Recall that simply by adding the `io.helidon.webserver:helidon-webserver-cors` a
 
 To use this automatic support, make sure your configuration contains a `cors` section which contains CORS path configuration as described below and as shown in the following example.
 
-``` highlight
+``` yaml
 cors:
   paths:
     - "path-pattern": "/greeting"
@@ -183,7 +183,7 @@ Use configuration to control whether and how each of the built-in services works
 
 In the `cors` configuration section add a block for each built-in service using its path as described in the CORS configuration section. The following example restricts sharing of the `/observe/health` resource, provided by the health built-in service, to only the origin `https://there.com`.
 
-``` highlight
+``` yaml
 cors:
   paths:
     - "path-pattern": "/observe/health"
@@ -200,12 +200,12 @@ If you have edited the Helidon SE QuickStart application as described in the pre
 
 Build and run the QuickStart application as usual.
 
-``` highlight
+``` bash
 mvn package
 java -jar target/helidon-quickstart-se.jar
 ```
 
-``` highlight
+``` text
 WEB server is up! http://localhost:8080/greet
 ```
 
@@ -213,13 +213,13 @@ WEB server is up! http://localhost:8080/greet
 
 The metrics service rejects attempts to access metrics on behalf of a disallowed origin.
 
-``` highlight
+``` bash
 curl -i -H "Origin: https://other.com" http://localhost:8080/observe/metrics
 ```
 
 Curl output
 
-``` highlight
+``` bash
 HTTP/1.1 403 Forbidden
 Date: Mon, 11 May 2020 11:08:09 -0500
 transfer-encoding: chunked
@@ -228,13 +228,13 @@ connection: keep-alive
 
 But accesses from `foo.com` succeed.
 
-``` highlight
+``` bash
 curl -i -H "Origin: https://foo.com" http://localhost:8080/observe/metrics
 ```
 
 Curl output
 
-``` highlight
+``` bash
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://foo.com
 Content-Type: text/plain
@@ -252,11 +252,11 @@ base_classloader_loadedClasses_count 3568
 
 The health service rejects requests from origins not specifically approved.
 
-``` highlight
+``` bash
 curl -i -H "Origin: https://foo.com" http://localhost:8080/observe/health
 ```
 
-``` highlight
+``` bash
 HTTP/1.1 403 Forbidden
 Date: Mon, 11 May 2020 12:06:55 -0500
 transfer-encoding: chunked
@@ -265,11 +265,11 @@ connection: keep-alive
 
 And responds successfully only to cross-origin requests from `https://there.com`.
 
-``` highlight
+``` bash
 curl -i -H "Origin: https://there.com" http://localhost:8080/observe/health
 ```
 
-``` highlight
+``` bash
 HTTP/1.1 200 OK
 Access-Control-Allow-Origin: https://there.com
 Content-Type: application/json

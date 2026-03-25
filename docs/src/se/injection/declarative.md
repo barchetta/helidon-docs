@@ -32,7 +32,7 @@ To create a declarative application, use the annotations provided in our Helidon
 
 In addition, the following section must be added to the `build` of the Maven `pom.xml` to enable annotation processors that generate the necessary code:
 
-``` highlight
+``` xml
 <plugins>
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -84,7 +84,7 @@ A Helidon Declarative application should be started using the generated applicat
 
 Example of a declarative main class
 
-``` highlight
+``` java
 @Service.GenerateBinding // generated binding to bypass discovery and runtime binding
 public static class Main {
     public static void main(String[] args) {
@@ -175,7 +175,7 @@ Annotations on method parameters:
 
 Example of an HTTP Server Endpoint
 
-``` highlight
+``` java
 @RestServer.Endpoint // identifies this class as a server endpoint
 @Http.Path("/greet") // serve this endpoint on /greet context root (path)
 @Service.Singleton   // a singleton service (single instance within a service registry)
@@ -241,7 +241,7 @@ Annotations on method parameters:
 
 Example of a Typed HTTP Client
 
-``` highlight
+``` java
 @RestClient.Endpoint("${greet-service.client.uri:http://localhost:8080}")
 @RestClient.Header(name = HeaderNames.USER_AGENT_NAME, value = "my-client")
 interface GreetClient {
@@ -271,7 +271,7 @@ Method Annotations:
 
 Example of Fault Tolerance Fallback
 
-``` highlight
+``` java
 @Service.Singleton
 static class AlgorithmService {
     @Ft.Fallback(value = "fallbackAlgorithm", applyOn = IOException.class)
@@ -299,7 +299,7 @@ Method annotations:
 
 Example of a fixed rate scheduled method
 
-``` highlight
+``` java
 @Service.Singleton
 static class CacheService {
     @Scheduling.FixedRate("PT5S")
@@ -329,7 +329,7 @@ To use validation, the proper dependency must be added to your `pom.xml`, and an
 
 Helidon validation module:
 
-``` highlight
+``` xml
 <dependency>
     <groupId>io.helidon.validation</groupId>
     <artifactId>helidon-validation</artifactId>
@@ -450,7 +450,7 @@ A type annotated with `@Validation.Validated` will have validation code generate
 
 Example of a validated type
 
-``` highlight
+``` java
 @Validation.Validated
 record MyType(@Validation.String.Pattern(".*valid.*") @Validation.NotNull String validString,
               @Validation.Integer.Min(42) int validInt) {
@@ -459,7 +459,7 @@ record MyType(@Validation.String.Pattern(".*valid.*") @Validation.NotNull String
 
 Example of a validated method call using a validated type
 
-``` highlight
+``` java
 @Service.Singleton
 static class ValidatedService {
     @Validation.String.NotBlank // validates the response
@@ -474,7 +474,7 @@ A custom "compound" annotation can be created to simplify usage.
 
 Example of a compound annotation
 
-``` highlight
+``` java
 @Validation.NotNull
 @Validation.String.NotBlank
 public @interface NonNullNotBlank {
@@ -485,7 +485,7 @@ A custom constraint annotation can be created (and act as a compound annotation 
 
 Example of a custom constraint annotation
 
-``` highlight
+``` java
 @Validation.NotNull // will add not-null constraint as well
 @Validation.Constraint
 public @interface CustomConstraint {
@@ -496,7 +496,7 @@ For each constraint annotation, there MUST be a service that validates it.
 
 Example of constraint validation provider
 
-``` highlight
+``` java
 @Service.Singleton
 @Service.NamedByType(CustomConstraint.class)
 static class CustomConstraintValidatorProvider implements ConstraintValidatorProvider {
@@ -581,7 +581,7 @@ The example below shows additional tags. The counter on method `counted` will ha
 
 Example of a counted method with type tags and counter tags
 
-``` highlight
+``` java
 @Service.Singleton
 @Metrics.Tag(key = "service", value = "Metered")
 static class MeteredService {
@@ -596,7 +596,7 @@ A gauge is a method that returns a `Number`, and is invoked by the metrics imple
 
 Example of a gauge
 
-``` highlight
+``` java
 @Service.Singleton
 static class ServiceWithAGauge {
     private volatile int percentage = 0;
@@ -628,7 +628,7 @@ The following example shows annotation on a type. This would make all methods tr
 
 Example of traced type
 
-``` highlight
+``` java
 @Service.Singleton
 @Tracing.Traced(tags = @Tracing.Tag(key = "service", value = "TracedService"),
                 kind = Span.Kind.SERVER)
@@ -639,7 +639,7 @@ A traced method with an explicit span name, adding a tag with a constant value, 
 
 Annotated traced method
 
-``` highlight
+``` java
 @Http.GET
 @Http.Path("/greet")
 @Tracing.Traced(value = "explicit-name", tags = @Tracing.Tag(key = "custom", value = "customValue"))
@@ -708,7 +708,7 @@ Annotations on method parameters:
 
 Example of a WebSocket Server Endpoint
 
-``` highlight
+``` java
 @WebSocketServer.Endpoint
 @Http.Path("/websocket/echo")
 @Service.Singleton
@@ -774,7 +774,7 @@ Annotations on method parameters:
 
 Example of a WebSocket Client Endpoint
 
-``` highlight
+``` java
 // will use `ws.connection` configuration key, and if not present, default to http://localhost:8080
 @WebSocketClient.Endpoint("${ws.connection:http://localhost:8080}")
 @Http.Path("/echo/{count}")
@@ -789,7 +789,7 @@ static class EchoClient {
 
 Example of a component connecting the websocket
 
-``` highlight
+``` java
 @Service.Singleton
 static class EchoClientUser {
     private final EchoClientFactory clientFactory;
@@ -831,7 +831,7 @@ Annotations on endpoint method (must be an `OPTIONS` method):
 
 Example of a CORS protected endpoint
 
-``` highlight
+``` java
 @Service.Singleton
 @Http.Path("/cors")
 static class CorsEndpoint {

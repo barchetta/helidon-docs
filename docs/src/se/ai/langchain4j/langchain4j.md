@@ -62,7 +62,7 @@ Helidon provides a LangChain4j integration module that simplifies the use of Lan
 
 To enable LangChain4j Integration, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../../about/managing-dependencies.md)).
 
-``` highlight
+``` xml
 <dependency>
     <groupId>io.helidon.integrations.langchain4j</groupId>
     <artifactId>helidon-integrations-langchain4j</artifactId>
@@ -71,7 +71,7 @@ To enable LangChain4j Integration, add the following dependency to your project�
 
 Include the following annotation processor in the `<build><plugins>` section of `pom.xml`:
 
-``` highlight
+``` xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
@@ -101,7 +101,7 @@ Helidon LangChain4j providers are extensions that enable integration with a rang
 
 Once you have configured named model, like `cheaper-model` on the example above, you can reference it from AiServices and Agents via `@Ai.ChatModel` or `@Ai.StreamingChatModel` annotations by its name:
 
-``` highlight
+``` java
 @Ai.Service
 @Ai.ChatModel("cheaper-model") //<1>
 public interface ChefAiService {
@@ -143,7 +143,7 @@ Supplier Factory provides another way to create and register LangChain4j compone
 
 The example below demonstrates a supplier factory for `MistralAiChatModel`.
 
-``` highlight
+``` java
 @Service.Singleton
 @Service.Named("custom-chat-model") //(1)
 class ChatModelFactory implements Supplier<ChatModel> {
@@ -165,7 +165,7 @@ class ChatModelFactory implements Supplier<ChatModel> {
 
 To use such a manually created model, reference it by name.
 
-``` highlight
+``` java
 @Ai.Service
 @Ai.ChatModel("custom-chat-model") //<1>
 public interface ChefAiService {
@@ -193,7 +193,7 @@ Key concepts:
 
 - **Overrides**: Component configuration overrides provider defaults during merge.
 
-``` highlight
+``` yaml
 langchain4j:
   providers:
     foo-bar-provider-name:
@@ -248,7 +248,7 @@ Changes in 4.4:
 
 Pre 4.4 configuration:
 
-``` highlight
+``` yaml
 langchain4j:
   open-ai:
     # Models were referenced by the provider name, in this case 'open-ai'
@@ -260,7 +260,7 @@ langchain4j:
 
 New configuration as documented in [Configuration](#_configuration):
 
-``` highlight
+``` yaml
 langchain4j:
   models:
     # Custom model names are required, to be referencable, in this case 'cheaper-model'
@@ -305,7 +305,7 @@ Helidon’s LangChain4j integration provides a specialized set of annotations fo
 
 To create an AI Service define an interface and annotate it with `@Ai.Service`.
 
-``` highlight
+``` java
 @Ai.Service
 public interface ChatAiService {
     String chat(String question);
@@ -314,14 +314,14 @@ public interface ChatAiService {
 
 In Helidon, AI Service implementations are created as singleton declarative service beans. Unlike agents, AI Service names are optional. If you do not provide a name, the service is typically consumed by its interface type. If you provide a name (`@Ai.Service("name")`), that name becomes a declarative bean name for config, qualified injection, and lookup.
 
-``` highlight
+``` java
 @Ai.Service("chat-assistant")
 public interface NamedChatAiService {
     String chat(String question);
 }
 ```
 
-``` highlight
+``` java
 @Service.Singleton
 public class ChatEndpoint {
     private final ChatAiService defaultChatService;
@@ -339,7 +339,7 @@ public class ChatEndpoint {
 
 2.  Qualified injection for explicitly named AI Service bean.
 
-``` highlight
+``` java
 ChatAiService defaultService = Services.get(ChatAiService.class); //(1)
 NamedChatAiService namedService = Services.getNamed(NamedChatAiService.class, "chat-assistant"); //(2)
 ```
@@ -356,7 +356,7 @@ LangChain4j agents are AI services enhanced for agentic workflows. In Helidon, e
 
 To define a named agent create an interface using `@Ai.Agent` and annotate the method with LangChain4j `@Agent`:
 
-``` highlight
+``` java
 @Ai.Agent("cli-expert")
 @Ai.ChatModel("custom-model-name")
 @Ai.McpClients("cli-tools-mcp-server")
@@ -374,7 +374,7 @@ public interface CliExpert {
 
 Agent names are required (`@Ai.Agent("…​")`), can be arbitrary, and become declarative service bean names in Helidon. Use stable, descriptive names because these names are used for configuration (`langchain4j.agents.<name>`), injection, and programmatic lookup.
 
-``` highlight
+``` java
 @Service.Singleton
 public class CliCoordinator {
     private final CliExpert cliExpert;
@@ -387,7 +387,7 @@ public class CliCoordinator {
 
 1.  The qualifier value must match the agent name from `@Ai.Agent("cli-expert")`. This is the declarative style: `CliCoordinator` is a Helidon declarative bean and the named agent is injected by the service registry.
 
-``` highlight
+``` java
 CliExpert cliExpert = Services.getNamed(CliExpert.class, "cli-expert"); //(1)
 String answer = cliExpert.answer("How do I generate a Helidon SE project?");
 ```
@@ -408,7 +408,7 @@ The following workflow example illustrates how declarative composition works in 
 
 For example, `@SequenceAgent` runs listed subagents in order and shares intermediate outputs through workflow variables in the agentic context - a shared execution state where one agent writes values (for example via `outputKey`) and later agents read them (for example through `@V` parameters). In this workflow, `FlavorClassifierAgent` runs first and stores `flavor`, then `FlavorRouterAgent` uses that value to select the appropriate expert and produce the final `response` output key. For more details about agentic context and workflow state, see [LangChain4j Agents documentation](https://docs.langchain4j.dev/tutorials/agents).
 
-``` highlight
+``` java
 @Ai.Agent("helidon-expert")
 public interface HelidonExpertAgent {
 
@@ -422,7 +422,7 @@ public interface HelidonExpertAgent {
 
 `FlavorClassifierAgent` classifies the incoming request and writes `flavor` used for routing. This also demonstrates a specialized agent pattern: a focused subagent adds structured information to the agentic context, so later subagents can make better decisions without repeating the same analysis:
 
-``` highlight
+``` java
 @Ai.Agent("flavor-classifier")
 @Ai.ChatModel("cheap-model")
 public interface FlavorClassifierAgent {
@@ -434,7 +434,7 @@ public interface FlavorClassifierAgent {
 
 Example of conditional agent is `FlavorRouterAgent`, which conditionally activates one expert subagent based on the classified flavor. `@ConditionalAgent` evaluates activation conditions for configured subagents using values already present in agentic context. In this example, `activateSeExpert` and `activateMpExpert` both read `flavor` from context (`@V("flavor")`) and enable only the matching expert. The active subagent then runs and its result is used as the router output, so the workflow can continue with the response from the selected specialized agent:
 
-``` highlight
+``` java
 @Ai.Agent("flavor-router")
 public interface FlavorRouterAgent {
 
@@ -458,7 +458,7 @@ public interface FlavorRouterAgent {
 
 Last example is specialized agent `HelidonSeExpert`, focused on Helidon SE questions. As described in LangChain4j agents concepts, agents are most effective when they have a clear, narrow responsibility and the exact capabilities needed for that responsibility. This agent reads workflow input from agentic context via `@V("question")`, uses an SE-focused prompt with a selected chat model, content retriever, and tools, and writes its result back to agentic context through `outputKey = "lastResponse"` for downstream workflow steps (see [LangChain4j Agents documentation](https://docs.langchain4j.dev/tutorials/agents)):
 
-``` highlight
+``` java
 @Ai.Agent("helidon-se-expert")
 @Ai.ChatModel("expensive-model")
 @Ai.ContentRetriever("se-content-retriever")
@@ -476,7 +476,7 @@ In LangChain4j, tools are callback functions that the language model can invoke 
 
 To expose a method in a Helidon service as a tool, annotate it with the `@Tool` annotation from `dev.langchain4j.agent.tool.Tool`, as shown in the example below:
 
-``` highlight
+``` java
 @Service.Singleton
 public class OrderService {
 
@@ -501,7 +501,7 @@ In Helidon, guardrails can be regular singleton declarative service beans. When 
 
 The following snippet shows an input guardrail implemented as a Helidon singleton bean:
 
-``` highlight
+``` java
 @Service.Singleton
 public class ForbiddenWordsInputGuardrail implements InputGuardrail {
 
@@ -526,7 +526,7 @@ public class ForbiddenWordsInputGuardrail implements InputGuardrail {
 
 Guardrails can be attached declaratively on an agent method using `@InputGuardrails` and `@OutputGuardrails` annotations:
 
-``` highlight
+``` java
 @Ai.Agent("helidon-se-expert")
 @Ai.ChatModel("expensive-model")
 public interface HelidonSeExpert {
@@ -540,7 +540,7 @@ public interface HelidonSeExpert {
 
 Guardrails on Agents can be overridden by a named agent configuration:
 
-``` highlight
+``` yaml
 langchain4j:
   agents:
     helidon-se-expert:

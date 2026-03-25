@@ -16,7 +16,7 @@ For this 30 minute tutorial, you will need the following:
 
 Verify Prerequisites
 
-``` highlight
+``` bash
 java -version
 mvn --version
 docker --version
@@ -25,7 +25,7 @@ kubectl version
 
 Setting JAVA_HOME
 
-``` highlight
+``` bash
 # On Mac
 export JAVA_HOME=`/usr/libexec/java_home -v 21`
 
@@ -40,7 +40,7 @@ Use the Helidon SE Maven archetype to create a simple project that can be used f
 
 Run the Maven archetype
 
-``` highlight
+``` bash
 mvn -U archetype:generate -DinteractiveMode=false \
     -DarchetypeGroupId=io.helidon.archetypes \
     -DarchetypeArtifactId=helidon-quickstart-se \
@@ -80,7 +80,7 @@ The generated source code is already configured for both metrics and health chec
 
 Metrics dependencies in the generated `pom.xml`:
 
-``` highlight
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.webserver.observe</groupId>
@@ -102,7 +102,7 @@ With these dependencies in your project, Helidon’s auto-discovery of webserver
 
 Build the application and then run it:
 
-``` highlight
+``` bash
 mvn package
 java -jar target/helidon-quickstart-se.jar
 ```
@@ -113,13 +113,13 @@ java -jar target/helidon-quickstart-se.jar
 
 Verify the metrics endpoint in a new terminal window:
 
-``` highlight
+``` bash
 curl http://localhost:8080/observe/metrics
 ```
 
 Text response (partial):
 
-``` highlight
+``` text
 # HELP classloader_loadedClasses_count Displays the number of classes that are currently loaded in the Java virtual machine.
 # TYPE classloader_loadedClasses_count gauge
 classloader_loadedClasses_count{scope="base",} 4878.0
@@ -141,13 +141,13 @@ You can get the same data in JSON format.
 
 Verify the metrics endpoint with an HTTP accept header:
 
-``` highlight
+``` bash
 curl -H "Accept: application/json"  http://localhost:8080/observe/metrics
 ```
 
 JSON response:
 
-``` highlight
+``` json
 {
   "base": {
     "gc.total;name=G1 Young Generation": 2,
@@ -191,13 +191,13 @@ You can get a single metric by specifying the scope and name as query parameters
 
 Get the Helidon `requests.count` meter:
 
-``` highlight
+``` bash
 curl -H "Accept: application/json"  'http://localhost:8080/observe/metrics?scope=vendor&name=requests.count'
 ```
 
 JSON response:
 
-``` highlight
+``` json
 {
   "requests.count": 6
 }
@@ -225,7 +225,7 @@ You can disable the metrics subsystem entirely using configuration:
 
 Configuration properties file disabling metrics
 
-``` highlight
+``` yaml
 server:
   features:
     observe:
@@ -238,7 +238,7 @@ A Helidon SE application can disable metrics processing programmatically.
 
 Disable all metrics behavior
 
-``` highlight
+``` java
 ObserveFeature observe = ObserveFeature.builder()   // (1)
         .addObserver(MetricsObserver.builder() // (2)
                              .enabled(false) // (3)
@@ -285,7 +285,7 @@ Helidon SE also includes additional, extended KPI metrics which are disabled by 
 
 You can enable and control these meters using configuration:
 
-``` highlight
+``` yaml
 server:
   features:
     observe:
@@ -301,7 +301,7 @@ Your Helidon SE application can also control the KPI settings programmatically.
 
 Assign KPI metrics behavior from code
 
-``` highlight
+``` java
 KeyPerformanceIndicatorMetricsConfig kpiConfig =
         KeyPerformanceIndicatorMetricsConfig.builder() // (1)
                 .extended(true) // (2)
@@ -368,7 +368,7 @@ To enable the meters describing virtual threads include a config setting as show
 
 Enabling virtual thread meters
 
-``` highlight
+``` yaml
 metrics:
   virtual-threads:
     enabled: true
@@ -380,7 +380,7 @@ Helidon measures pinned virtual threads only when the thread is pinned for a len
 
 Setting virtual thread pinning threshold to 100 ms
 
-``` highlight
+``` yaml
 metrics:
   virtual-threads:
     pinned:
@@ -403,13 +403,13 @@ You can get the metadata for any scope, such as `/observe/metrics?scope=base`, a
 
 Get the metrics metadata using HTTP OPTIONS method:
 
-``` highlight
+``` bash
  curl -X OPTIONS -H "Accept: application/json"  'http://localhost:8080/observe/metrics?scope=base'
 ```
 
 JSON response (truncated):
 
-``` highlight
+``` json
 {
    "classloader.loadedClasses.count": {
       "type": "gauge",
@@ -442,7 +442,7 @@ The `Counter` meter is a monotonically increasing number. The following example 
 
 Create a new class named `GreetingCards` with the following code:
 
-``` highlight
+``` java
 public class GreetingCards implements HttpService {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Map.of());
@@ -480,7 +480,7 @@ public class GreetingCards implements HttpService {
 
 Update the `routing` method in the main class as follows:
 
-``` highlight
+``` java
 static void routing(HttpRouting.Builder routing) {
     routing
             .register("/greet", new GreetService())
@@ -493,14 +493,14 @@ static void routing(HttpRouting.Builder routing) {
 
 Build and run the application, then invoke the endpoints below:
 
-``` highlight
+``` bash
 curl http://localhost:8080/cards
 curl -H "Accept: application/json" 'http://localhost:8080/observe/metrics?scope=application'
 ```
 
 JSON response:
 
-``` highlight
+``` json
 {
   "cardCount": 1 // (1)
 }
@@ -516,7 +516,7 @@ In the following example, a `Timer` meter measures the duration of a method’s 
 
 Replace the `GreetingCards` class with the following code:
 
-``` highlight
+``` java
 public class GreetingCards implements HttpService {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Map.of());
@@ -556,7 +556,7 @@ public class GreetingCards implements HttpService {
 
 Build and run the application, then invoke the endpoints below:
 
-``` highlight
+``` bash
 curl http://localhost:8080/cards
 curl http://localhost:8080/cards
 curl -H "Accept: application/json"  'http://localhost:8080/observe/metrics?scope=application'
@@ -564,7 +564,7 @@ curl -H "Accept: application/json"  'http://localhost:8080/observe/metrics?scope
 
 JSON response:
 
-``` highlight
+``` json
 {
   "cardTimer": {
     "count": 2,
@@ -589,7 +589,7 @@ The `DistributionSummary` meter calculates the distribution of a set of values w
 
 Replace the `GreetingCards` class with the following code:
 
-``` highlight
+``` java
 public class GreetingCards implements HttpService {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Map.of());
@@ -629,14 +629,14 @@ public class GreetingCards implements HttpService {
 
 Build and run the application, then invoke the endpoints below:
 
-``` highlight
+``` bash
 curl http://localhost:8080/cards
 curl -H "Accept: application/json"  'http://localhost:8080/observe/metrics?scope=application'
 ```
 
 JSON response:
 
-``` highlight
+``` json
 {
   "cardDist": {
     "count": 1000,
@@ -661,7 +661,7 @@ The `Gauge` meter measures a value that is maintained by code outside the metric
 
 Replace the `GreetingCards` class with the following code:
 
-``` highlight
+``` java
 public class GreetingCards implements HttpService {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Map.of());
@@ -694,13 +694,13 @@ public class GreetingCards implements HttpService {
 
 Build and run the application, then invoke the endpoint below:
 
-``` highlight
+``` bash
 curl -H "Accept: application/json"  'http://localhost:8080/observe/metrics?scope=application
 ```
 
 JSON response:
 
-``` highlight
+``` json
 {
   "temperature": 46.582132737739066 // (1)
 }
@@ -716,13 +716,13 @@ The following example shows how to integrate the Helidon SE application with Kub
 
 Stop the application and build the docker image:
 
-``` highlight
+``` bash
 docker build -t helidon-metrics-se .
 ```
 
 Create the Kubernetes YAML specification, named `metrics.yaml`, with the following content:
 
-``` highlight
+``` yaml
 kind: Service
 apiVersion: v1
 metadata:
@@ -771,17 +771,17 @@ spec:
 
 Create and deploy the application into Kubernetes:
 
-``` highlight
+``` bash
 kubectl apply -f ./metrics.yaml
 ```
 
 Get the service information:
 
-``` highlight
+``` bash
 kubectl get service/helidon-metrics
 ```
 
-``` highlight
+``` text
 NAME             TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 helidon-metrics   NodePort   10.99.159.2   <none>        8080:31143/TCP   8s # (1)
 ```
@@ -790,7 +790,7 @@ helidon-metrics   NodePort   10.99.159.2   <none>        8080:31143/TCP   8s # (
 
 Verify the metrics endpoint using port `30116`, your port will likely be different:
 
-``` highlight
+``` bash
 curl http://localhost:31143/metrics
 ```
 
@@ -804,7 +804,7 @@ The metrics service that you just deployed into Kubernetes is already annotated 
 
 Install Prometheus and wait until the pod is ready:
 
-``` highlight
+``` bash
 helm install stable/prometheus --name metrics
 export POD_NAME=$(kubectl get pods --namespace default -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
 kubectl get pod $POD_NAME
@@ -812,13 +812,13 @@ kubectl get pod $POD_NAME
 
 You will see output similar to the following. Repeat the `kubectl get pod` command until you see `2/2` and `Running`. This may take up to one minute.
 
-``` highlight
+``` text
 metrics-prometheus-server-5fc5dc86cb-79lk4   2/2     Running   0          46s
 ```
 
 Create a port-forward, so you can access the server URL:
 
-``` highlight
+``` bash
 kubectl --namespace default port-forward $POD_NAME 7090:9090
 ```
 
@@ -830,13 +830,13 @@ You can now delete the Kubernetes resources that were just created during this e
 
 Delete the Prometheus Kubernetes resources:
 
-``` highlight
+``` bash
 helm delete --purge metrics
 ```
 
 Delete the application Kubernetes resources:
 
-``` highlight
+``` bash
 kubectl delete -f ./metrics.yaml
 ```
 

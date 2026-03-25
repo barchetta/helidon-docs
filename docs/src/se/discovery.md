@@ -30,7 +30,7 @@ To enable Helidon Discovery, add the following dependency to your project’s `p
 
 `pom.xml`
 
-``` highlight
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.discovery</groupId>
@@ -57,7 +57,7 @@ You can acquire a [`io.helidon.discovery.Discovery` object](/apidocs/io.helidon.
 
 Acquiring a `Discovery` object using Helidon Inject
 
-``` highlight
+``` java
 import java.util.Objects;
 import io.helidon.discovery.Discovery;
 import io.helidon.service.registry.Service;
@@ -86,7 +86,7 @@ You can acquire a [`io.helidon.discovery.Discovery` object](/apidocs/io.helidon.
 
 Acquiring a `Discovery` object using the Helidon Service Registry
 
-``` highlight
+``` java
 import io.helidon.discovery.Discovery;
 import io.helidon.service.registry.Services;
 
@@ -111,7 +111,7 @@ To discover a named application’s URIs, call the [`Discovery#uris(String, URI)
 
 Discovering URIs
 
-``` highlight
+``` java
 import java.net.URI;
 import java.util.SequencedSet;
 import io.helidon.discovery.DiscoveredUri;
@@ -147,7 +147,7 @@ To use the Helidon Eureka Discovery provider, add the following dependency to yo
 
 `pom.xml`
 
-``` highlight
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.discovery.providers</groupId>
@@ -177,7 +177,7 @@ To do this, you specify attributes about the internal [HTTP client](webclient.md
 
 `application.yaml`
 
-``` highlight
+``` yaml
 discovery: #(1)
   eureka: #(2)
     client: #(3)
@@ -204,7 +204,7 @@ The Helidon Eureka Discovery provider uses a local cache of discovered URIs by d
 
 `application.yaml`
 
-``` highlight
+``` yaml
 discovery: #(1)
   eureka: #(2)
     cache: #(3)
@@ -237,7 +237,7 @@ The Helidon Eureka Discovery provider can be configured to prefer IP addresses i
 
 `application.yaml`
 
-``` highlight
+``` yaml
 discovery: # (1)
   eureka: # (2)
     preferIpAddress: false # (3)
@@ -255,7 +255,7 @@ In some testing scenarios, it may be useful to disable the Helidon Eureka Discov
 
 `application.yaml`
 
-``` highlight
+``` yaml
 discovery: # (1)
   eureka: # (2)
     enabled: false # (3)
@@ -285,7 +285,7 @@ To include the Helidon Web Client Discovery integration in your project, you add
 
 `pom.xml`
 
-``` highlight
+``` xml
 <dependencies>
     <dependency>
         <groupId>io.helidon.webclient</groupId>
@@ -318,7 +318,7 @@ Because the Helidon Web Client Discovery integration is fundamentally a [Web Cli
 
 `application.yaml`
 
-``` highlight
+``` yaml
 webclient:
   services:
     discovery: # (1)
@@ -334,7 +334,7 @@ To mark URIs requested by a Web Client as subject to discovery, and to use disco
 
 `application.yaml`
 
-``` highlight
+``` yaml
 webclient:
   services:
     discovery:
