@@ -9,7 +9,7 @@ Table of Contents
 - [`OPTIONS` in CORS, `@OPTIONS` in JAX-RS, and Technical Reality](#options-in-cors-options-in-jax-rs-and-technical-reality)
 - [The Bottom Line](#the-bottom-line)
 
-### The Resource
+## The Resource
 
 At the heart of cross-origin resource sharing is the *resource* itself. CORS lets you control how a given resource should be shared among various origins. All the attributes of CORS — whether authentication should be used, what headers can be passed through on CORS-controlled requests, and so on — pertain to a given resource.
 
@@ -19,7 +19,7 @@ In Helidon, the
 
 annotations map directly to those CORS sharing attributes. It would be natural, then, to use `@Cors.` to annotate the single Java element in the application that represents a resource.
 
-### Methods, Resources, and Subresources in JAX-RS Resource Classes
+## Methods, Resources, and Subresources in JAX-RS Resource Classes
 
 Unfortunately, there is no single Java element that is sure to correspond one-to-one with a JAX-RS resource, for two reasons.
 
@@ -31,12 +31,12 @@ Although no single endpoint method by itself fully represents the resource, at l
 
 But which endpoint method, and why?
 
-### `OPTIONS` in CORS, `@OPTIONS` in JAX-RS, and Technical Reality
+## `OPTIONS` in CORS, `@OPTIONS` in JAX-RS, and Technical Reality
 
 The `OPTIONS` HTTP method plays an important role in CORS. While the CORS protocol *applies* to all HTTP methods, it *relies on* `OPTIONS` — with suitable headers — to represent CORS pre-flight requests. From that point of view, the `OPTIONS` HTTP method has a more prominent place in CORS than the other methods.
 
 In a JAX-RS resource class, the `@OPTIONS` annotation denotes which endpoint method should receive incoming `OPTIONS` HTTP requests for a resource. Therefore, we could view a Java method annotated with `@OPTIONS` as somewhat distinguished in the same way that we think of the `OPTIONS` HTTP method as distinguished within the CORS protocol.
 
-### The Bottom Line
+## The Bottom Line
 
 If you want a resource to participate in CORS, Helidon MP needs you to implement the `@OPTIONS` endpoint method for the resource, even if the method does nothing. Given that you have to write that method, and given that any endpoint method uniquely identifies its resource, the `@OPTIONS` method is a reasonable place to ask you to annotate with `@Cors.*` annotations.

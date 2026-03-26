@@ -1,10 +1,10 @@
 # io.helidon.common.tls.RevocationConfig
 
-### Description
+## Description
 
 Certificate revocation configuration.
 
-### Usages
+## Usages
 
 - [`clients.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
 
@@ -20,7 +20,7 @@ Certificate revocation configuration.
 
 - [`server.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
 
-### Configuration options
+## Configuration options
 
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

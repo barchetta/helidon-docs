@@ -747,7 +747,7 @@ WebClient.builder()
         .build();
 ```
 
-# Context Propagation
+## Context Propagation
 
 WebClient supports the capability to propagate values from `io.helidon.common.context.Context` over HTTP headers.
 
@@ -778,15 +778,15 @@ client:
 
 Full configuration reference:
 
-# io.helidon.webclient.context.WebClientContextService
+### io.helidon.webclient.context.WebClientContextService
 
-## Description
+#### Description
 
 Configuration of WebClient transport level propagation of context values.
 
-## Usages
+#### Usages
 
-## Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Description |
 |----|----|----|----|
@@ -794,7 +794,7 @@ Configuration of WebClient transport level propagation of context values.
 
 See the [manifest](../config/manifest.md) for all available types.
 
-# Reference
+## Reference
 
 - [Helidon Webclient API](/apidocs/io.helidon.webclient.api/module-summary.html)
 

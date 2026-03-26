@@ -1,26 +1,21 @@
 # Advanced Configuration Topics
 
-### Contents
+## Contents
 
 - [Overview](#overview)
-
 - [Advanced Config Sources](#advanced-config-sources)
-
 - [Advanced Config Parsers](#advanced-config-parsers)
-
 - [Config Keys with . in name](#config-keys-with-in-name)
-
 - [Filters, Overrides and Token Substitution](#filters-overrides-and-token-substitution)
-
 - [Executors for Asynchronous Config Activity](#executors-for-asynchronous-config-activity)
 
-### Overview
+## Overview
 
 This section discusses several advanced topics related to Helidon configuration.
 
-### Advanced Config Sources
+## Advanced Config Sources
 
-#### Environment Variables Config Source
+### Environment Variables Config Source
 
 The config system supports using environment variables as a config source, and is enabled by default. Since environment variable names are normally restricted to alphanumeric characters and underscore, this config source *adds* aliases that enable setting or overriding config entries with dotted and/or hyphenated keys.
 
@@ -44,7 +39,7 @@ For each such name, two aliases are added with the names mapped as follows:
 
 3.  Convert the result of step 2 to lowercase and add as an alias, e.g. `"APP.GREETING"` is added as `"app.greeting"` and `"APP.PAGE-SIZE"` is added as `"app.page-size"`.
 
-#### Directory Config Source
+### Directory Config Source
 
 The config system supports using a file system directory as a config source. Each *non-directory* file in the directory becomes a config entry: the file name is the key and the contents of that file are used as the corresponding config `String` value.
 
@@ -95,11 +90,11 @@ assert secrets.get("password") // (4)
 
 Remember that your application can process the contents of a given file as configuration. See the [config sources](introduction.md#config_sources) section and the [`ConfigSources.file`](/apidocs/io.helidon.config/io/helidon/config/ConfigSources.html#file-java.lang.String-) JavaDoc.
 
-#### In-memory Config Sources
+### In-memory Config Sources
 
 The config system provides several ways to create a `Config` tree from data already in memory. See the [`ConfigSources` javadoc](/apidocs/io.helidon.config/io/helidon/config/ConfigSources.html) for further details. The numerous variants of the `from` method construct `ConfigSource` or `Builder<ConfigSource>` instances.
 
-##### Subtree of Another `Config`
+#### Subtree of Another `Config`
 
 ``` java
 Config anotherConfig = Config.create(classpath("application.conf"));
@@ -108,21 +103,21 @@ Config config = Config.create(
         ConfigSources.create(anotherConfig.get("data")));
 ```
 
-##### `Properties` Object
+#### `Properties` Object
 
 ``` java
 Config config = Config.create(
         ConfigSources.create(System.getProperties()).build()); // (1)
 ```
 
-##### `String` of a Given Media Type
+#### `String` of a Given Media Type
 
 ``` java
 Config config = Config.create();
 ConfigSources.create("app.greeting = Hi", MediaTypes.create("text", "x-java-properties"));
 ```
 
-##### `Map`
+#### `Map`
 
 ``` java
 Config config = Config.create(
@@ -130,7 +125,7 @@ Config config = Config.create(
                 .build()); // (1)
 ```
 
-##### *ad hoc* Config Nodes
+#### *ad hoc* Config Nodes
 
 ``` java
 Config config = Config.create(
@@ -144,13 +139,13 @@ Config config = Config.create(
 
 1.  `ConfigSources.create` variants for `Properties` or `Map` arguments return a `MapConfigSource.Builder` instance.
 
-#### Multi-Source Configs and Composite Config Sources
+### Multi-Source Configs and Composite Config Sources
 
 Although the examples above use a single source, you can build a single `Config` from multiple sources.
 
-##### Handling Key Collisions
+#### Handling Key Collisions
 
-###### Prefixed Config Sources
+##### Prefixed Config Sources
 
 Sometimes you might want to create a single config tree from multiple sources but in a way that keeps the config from different sources in different subtrees.
 
@@ -213,7 +208,7 @@ assert config.get("data.providers.0.name") // (6)
 
 This technique can be useful, for example, if multiple sources contain keys that might overlap; assigning different prefixes to the keys from different sources gives your application a way to access all config elements distinctly even if their keys would otherwise conflict.
 
-###### Merging Strategies
+##### Merging Strategies
 
 When creating config from multiple sources, it is possible that the same key comes from multiple sources. By default, earlier sources in the list have higher priority than later ones. This means that if the same key appears in two or more sources, then the source earlier in the list prevails.
 
@@ -231,11 +226,11 @@ Config config = Config.builder()
 
 1.  Specifies the merging strategy. This example uses the default fallback merging strategy.
 
-### Advanced Config Parsers
+## Advanced Config Parsers
 
 Config sources and parsers work together to read and translate configuration data from some external form into the corresponding in-memory config tree.
 
-#### How Config Chooses Parsers
+### How Config Chooses Parsers
 
 Although most applications are explicit about the config sources they use in building a `Config`, the config system often has to figure out what parser to use. It does so by:
 
@@ -243,15 +238,15 @@ Although most applications are explicit about the config sources they use in bui
 
 2.  locating a parser that can translate that media type.
 
-##### Identifying the Media Type
+#### Identifying the Media Type
 
-###### By Inference
+##### By Inference
 
 Most applications let the config system try to infer the media type of the config source.
 
 By default, config source implementations use the `io.helidon.common.media.type.MediaTypes` API to infer the source media type from the source, typically (but not always) based on the file type portion of the file path. Helidon media type module has a predefined set of mappings as configured in `common/media-type/src/main/resources/io/helidon/common/media/type/default-media-types.properties`, including the Config supported formats: `.properties`, `.yaml`, `.json` and `.conf`. To handle other formats you can implement and register your own `io.helidon.common.media.type.spi.MediaTypeDetector` Java Service implementations. (Typically, you would also write and register a config parser to translate that format; see [Locating a Parser](#locating-a-parser) below.)
 
-###### By Application Directive
+##### By Application Directive
 
 Your application can specify what media type to use in interpreting a config source. Use this if your application knows the media type but the system might not be able to infer it correctly, either because no type detector would recognize it or because there might be more than one inferred media type.
 
@@ -268,9 +263,9 @@ Config config = Config.create(classpath("props") // (1)
 
 Note that a file type detector *could* be written to also inspect the contents of the file to infer the media type. The detectors provided by Helidon only inspect the suffix in the name of the file.
 
-##### Locating a Parser
+#### Locating a Parser
 
-###### By Inference from `media-type`
+##### By Inference from `media-type`
 
 Each config parser reports which media types it handles. Once the config system has determined a source’s media type, it searches the config parsers associated with the config builder for one that recognizes that media type. It then uses that parser to translate the config in the source into the in-memory config tree.
 
@@ -278,7 +273,7 @@ The application can add one or more parsers to a `Config.Builder` using the `add
 
 If the config system cannot locate a parser that matches the media-type of a source, it throws a `ConfigException` when trying to prepare the configuration.
 
-###### By Application Directive
+##### By Application Directive
 
 Your application can specify which parser to use for a config source. The `AbstractConfigSourceBuilder` class exposes the `parser` method, which accepts the `ConfigParser` to be used for that source. Several methods on `ConfigSources` such as `classpath`, `directory`, and `file` return this builder class.
 
@@ -295,7 +290,7 @@ Config config = Config.create(classpath("props") // (1)
 
 2.  The developer knows the file is in Java Properties format so specifies the properties parser explicitly.
 
-#### Parsing a Config Value as Config
+### Parsing a Config Value as Config
 
 A config value node might contain an entire config document in `String` form, but in a format different from the containing document. Your application can tell the config system to parse such a node as config in a different format and replace the `String` value node in the original tree with the config tree that results from parsing that `String`.
 
@@ -318,7 +313,7 @@ app: > # (1)
 
 1.  The property `app` is itself formatted as a JSON document.
 
-##### Specify Key-to-media-type Mapping
+#### Specify Key-to-media-type Mapping
 
 Specify JSON as media type for node
 
@@ -360,7 +355,7 @@ Because the function passed to `mediaTypeMapping` identifies the `app` node as a
 
 Also, note that the config system replaces the original `String` value node with an object node resulting from parsing that `String` value as JSON.
 
-##### Specify Key-to-parser Mapping
+#### Specify Key-to-parser Mapping
 
 Alternatively, your application could map config keys to the specific parsers you want to use for parsing those keys' values.
 
@@ -382,7 +377,7 @@ Config config = Config.create(
 
 As before, the config system replaces the value node in the containing config tree with the config tree resulting from the additional parse.
 
-### Config Keys with . in name
+## Config Keys with . in name
 
 As described in the [hierarchical features section](hierarchical-features.md#accessByKey) each config node (except the root) has a non-null key.
 
@@ -438,13 +433,13 @@ assert config.get(Key.escapeName("oracle.com")).name().equals("oracle.com"); // 
 
 7.  …​and name `"oracle.com"`.
 
-### Filters, Overrides, and Token Substitution
+## Filters, Overrides, and Token Substitution
 
 When your application retrieves a config value, the config system can transform it before returning the value, according to *filters*, *overrides*, and *tokens*. The config system provides some built-in instances of these you can use, and you can add your own as described in the sections which describe [filters](extensions.md#Config-SPI-ConfigFilter) and [overrides](extensions.md#Config-SPI-OverrideSource).
 
 Your application can add filters and overrides explicitly to a config builder and the config system by default uses the Java service loader mechanism to locate all available filters and overrides and add them automatically to all config builders (unless your code disables that behavior for a given builder).
 
-#### Filters
+### Filters
 
 Each filter accepts a key and the value as defined in the source, and returns the value to be used. The filter can leave the value unchanged or alter it, as it sees fit.
 
@@ -452,7 +447,7 @@ The built-in [value-resolving](/apidocs/io.helidon.config/io/helidon/config/Conf
 
 See the [`ConfigFilter`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigFilter.html) JavaDoc for more information.
 
-#### Overrides
+### Overrides
 
 The overrides feature allows you to create an external document containing key/value pairs which replace the value otherwise returned for the name, and then add that document as an override source to a config builder.
 
@@ -470,7 +465,7 @@ See the
 
 `OverrideSource` JavaDoc for more detail.
 
-#### Tokens
+### Tokens
 
 A token reference is a key token starting with `$`, optionally enclosed between `{` and `}`, i.e. `$ref` or `${ref}`. Even a key composed of more than one token can be referenced in another key, i.e. `${env.ref}`.
 
@@ -504,7 +499,7 @@ Config config = Config.builder()
         .build();
 ```
 
-### Executors for Asynchronous Config Activity
+## Executors for Asynchronous Config Activity
 
 Various parts of the config system work asynchronously:
 
@@ -518,7 +513,7 @@ Various parts of the config system work asynchronously:
 
 Each of these uses an executor to perform its work. The config system provides default executors, but your application can specify different ones if necessary.
 
-#### Executors for Polling Strategy
+### Executors for Polling Strategy
 
 The method `PollingStrategies.regular(Duration)` returns builder for polling strategy. This builder provides `executor` method which your application can invoke, passing a `java.util.concurrent.ScheduledExecutorService` instance it requires for the polling work. By default, each polling strategy instance uses a separate thread pool executor.
 
@@ -548,7 +543,7 @@ Config config = Config.create(
 
 4.  Tells the config system to use the specific executor to poll the `config.properties` config source.
 
-#### Executors for Source Change Events
+### Executors for Source Change Events
 
 Recall that when a change watcher detects a change in a source, it informs interested parties of the changes. By default, each `Config.Builder` arranges for the resulting `Config` tree to use a shared executor that reuses available threads from a pool, creating new threads as needed. The same executor is used for actually reloading the source.
 
@@ -578,7 +573,7 @@ Config config = Config.builder()
 
 3.  Uses the same `Executor` and event buffer size for the config source as for the override source above.
 
-#### Retry Policy Custom Executor
+### Retry Policy Custom Executor
 
 You can control which executor a retry policy should use for its work. The `RetryPolicies.repeat(int retries)` method returns a [SimpleRetryPolicy.Builder](/apidocs/io.helidon.config/io/helidon/config/SimpleRetryPolicy.Builder.html). Your application can invoke the retry policy builder’s `executorService` method to specify which `ScheduledExecutorService` instance it should use to schedule and execute delayed retries. By default, the config system uses a separate thread pool executor for each retry policy instance.
 

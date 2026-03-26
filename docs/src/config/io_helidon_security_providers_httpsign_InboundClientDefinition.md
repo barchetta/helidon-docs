@@ -1,12 +1,12 @@
 # io.helidon.security.providers.httpsign.InboundClientDefinition
 
-### Description
+## Description
 
 Configuration of inbound client.
 
-### Usages
+## Usages
 
-### Configuration options
+## Configuration options
 
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

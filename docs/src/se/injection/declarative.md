@@ -1,14 +1,12 @@
 # Declarative
 
-### Contents
+## Contents
 
 - [Overview](#overview)
-
 - [Usage](#usage)
-
 - [Features](#features)
 
-### Overview
+## Overview
 
 Helidon declarative programming model allows inversion of control style programming with all the performance benefits of Helidon SE.
 
@@ -26,7 +24,7 @@ Our declarative approach has the following advantages:
 |----|----|
 | Note | Helidon Declarative is an incubating feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon. |
 
-### Usage
+## Usage
 
 To create a declarative application, use the annotations provided in our Helidon SE modules (details under [Features](#features)), and the maven plugin described in [Injection: Startup](injection.md#generate-binding) to generate the binding.
 
@@ -50,7 +48,7 @@ In addition, the following section must be added to the `build` of the Maven `po
 </plugins>
 ```
 
-### Features
+## Features
 
 The following features are currently implemented:
 
@@ -97,7 +95,7 @@ public static class Main {
 }
 ```
 
-#### Configuration
+### Configuration
 
 Configuration can be injected as a whole into any service, or a specific configuration option can be injected using `@Configuration.Value`. Default values can be defined using annotations in `@Default`
 
@@ -113,7 +111,7 @@ Annotations:
 
 Example of usage can be seen below in HTTP Server Endpoint example.
 
-#### HTTP Server Endpoint
+### HTTP Server Endpoint
 
 To create an HTTP endpoint, simply annotate a class with `@RestServer.Endpoint`, and add at least one method annotated with one of the HTTP method annotations, such as `@Http.GET`.
 
@@ -199,7 +197,7 @@ static class GreetEndpoint {
 }
 ```
 
-#### Typed HTTP Client
+### Typed HTTP Client
 
 To create a typed HTTP client, create an interface annotated with `RestClient.Endpoint`, and at least one method annotated with one fo the HTTP method annotations, such as `@Http.GET`. Methods can only have parameters annotated with one of the `Http` qualifiers.
 
@@ -251,7 +249,7 @@ interface GreetClient {
 }
 ```
 
-#### Fault Tolerance
+### Fault Tolerance
 
 Fault tolerance annotations allow adding features to methods on services. The annotations can be added to any method that supports interception (i.e. methods that are not private).
 
@@ -287,7 +285,7 @@ static class AlgorithmService {
 }
 ```
 
-#### Scheduling
+### Scheduling
 
 Scheduling allows service methods to be invoked periodically.
 
@@ -321,7 +319,7 @@ Configuration expressions is a reference to a configuration key, with optional d
 
 `${config.key:default-value}`
 
-#### Validation
+### Validation
 
 Validation provides an ability to validate service method parameters and return types. This is achieved through constraint annotations and type validation.
 
@@ -336,7 +334,7 @@ Helidon validation module:
 </dependency>
 ```
 
-##### Constraint Annotations
+#### Constraint Annotations
 
 A "Constraint Annotation" is any annotation directly annotated with `io.helidon.validation.Validation`. Helidon Validation provides a set of built-in validation constraints, though custom constraints can be created, or existing constraints can be combined.
 
@@ -442,11 +440,11 @@ Supported types for calendar/time validations:
 
 - `java.time.chrono.ThaiBuddhistDate`
 
-##### Type Validation
+#### Type Validation
 
 A type annotated with `@Validation.Validated` will have validation code generated. Usage of that type can be marked with `@Validation.Valid` - if such an annotation is present, and it is on a field of another validated type, or it is a parameter, return type, or a type argument of a parameter/return type of a service method, the object instance will be validated using a generated interceptor.
 
-##### Usage
+#### Usage
 
 Example of a validated type
 
@@ -533,7 +531,7 @@ static class CustomConstraintValidatorProvider implements ConstraintValidatorPro
 }
 ```
 
-#### Security
+### Security
 
 Security provides protection of WebServer endpoints.
 
@@ -557,7 +555,7 @@ Supported annotations:
 
 - `jakarta.annotation.security.RolesAllowed` - same as above (`RoleValidator.Roles`)
 
-#### Metrics
+### Metrics
 
 Add support for the following meters:
 
@@ -608,7 +606,7 @@ static class ServiceWithAGauge {
 }
 ```
 
-#### Tracing
+### Tracing
 
 Add support for tracing of methods. This feature will add a new span for each annotated method (or all methods on an annotated type).
 
@@ -648,7 +646,7 @@ String greet(@Http.HeaderParam("User-Agent") @Tracing.ParamTag String userAgent)
 }
 ```
 
-#### WebSocket Server
+### WebSocket Server
 
 To create a WebSocket endpoint, simply annotate a class with `@WebSocketServer.Endpoint`, and add at least one method annotated with one of the WebSocket method annotations, such as `@WebSocket.OnMessage`.
 
@@ -720,7 +718,7 @@ static class EchoEndpoint {
 }
 ```
 
-#### WebSocket Client
+### WebSocket Client
 
 To create a WebSocket client endpoint, simply annotate a class with `@WebSocketClient.Endpoint`, and add at least one method annotated with one of the WebSocket method annotations, such as `@WebSocket.OnMessage`.
 
@@ -807,7 +805,7 @@ static class EchoClientUser {
 }
 ```
 
-#### WebServer CORS
+### WebServer CORS
 
 CORS can be configured through Helidon Config, the root key is `cors`.
 
@@ -853,6 +851,6 @@ static class CorsEndpoint {
 
 4.  Configure max age to be 3 minutes
 
-#### Health Checks
+### Health Checks
 
 To add a declarative health check, create a service that implements io.helidon.health.HealthCheck or produces an instance of it. The WebServer health observer discovers all such services and uses them to contribute to the health response. Because the lookup is performed only once, you must not use the @Service.PerRequest scope. The recommended scope is @Service.Singleton.

@@ -1,14 +1,12 @@
 # Security Providers
 
-### Contents
+## Contents
 
 - [Implemented Security Providers](#implemented-security-providers)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Reference](#reference)
 
-### Implemented Security Providers
+## Implemented Security Providers
 
 Helidon provides the following security providers for endpoint protection:
 
@@ -29,11 +27,11 @@ The following providers are no longer evolved:
 | [Google Login](#google-login-provider) | Authentication | ✅ | **Deprecated**! Authenticates a token from request against Google servers |
 | [JWT Provider](#jwt-provider) | Authentication | ✅ | JWT tokens passed from frontend |
 
-### OIDC Provider
+## OIDC Provider
 
 Open ID Connect security provider.
 
-#### Maven Coordinates
+### Maven Coordinates
 
 Maven dependency
 
@@ -44,7 +42,7 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
 In Helidon SE, we need to register the redirection support with routing (in addition to `SecurityFeature` that integrates with `WebServer`). This is not required when `redirect` is set to false.
 
@@ -59,7 +57,7 @@ WebServer.builder()
         .build();
 ```
 
-##### Configuration options
+#### Configuration options
 
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -405,7 +403,7 @@ Security#encrypt(String, byte[)&lt;/code&gt; and &lt;code&gt;Security#decrypt(St
 </tbody>
 </table>
 
-###### Deprecated Options
+##### Deprecated Options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -413,7 +411,7 @@ Security#encrypt(String, byte[)&lt;/code&gt; and &lt;code&gt;Security#decrypt(St
 | <span id="aa965f-proxy-protocol"></span> `proxy-protocol` | `VALUE` | `String` | `http` | Proxy protocol to use when proxy is used |
 | <span id="abf0b4-relative-uris"></span> `relative-uris` | `VALUE` | `Boolean` | `false` | Can be set to `true` to force the use of relative URIs in all requests, regardless of the presence or absence of proxies or no-proxy lists |
 
-#### Example code
+### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/idcs-login) on GitHub.
 
@@ -435,7 +433,7 @@ security:
             header: "X-Internal-Auth"
 ```
 
-#### How does it work?
+### How does it work?
 
 At Helidon startup, if OIDC provider is configured, the following will happen:
 
@@ -473,7 +471,7 @@ Helidon obtains a token from request (from cookie, header, or query parameter):
 
 6.  Handling is returned to security to process other security providers
 
-#### Multiple tenants
+### Multiple tenants
 
 The OIDC provider also supports multiple tenants. To enable this feature, it is required to do several steps.
 
@@ -539,9 +537,9 @@ and the custom tenant configuration discovery can be provided by implementing SP
 
 `io.helidon.security.providers.oidc.common.spi.TenantConfigProvider`
 
-##### Available tenant config options
+#### Available tenant config options
 
-###### Configuration options
+##### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -567,7 +565,7 @@ and the custom tenant configuration discovery can be provided by implementing SP
 | <span id="a3ab59-token-endpoint-uri"></span> `token-endpoint-uri` | `VALUE` | `URI` |   | URI of a token endpoint used to obtain a JWT based on the authentication code |
 | <span id="aa43d0-validate-jwt-with-jwk"></span> `validate-jwt-with-jwk` | `VALUE` | `Boolean` | `true` | Use JWK (a set of keys to validate signatures of JWT) to validate tokens |
 
-##### How does that work?
+#### How does that work?
 
 Multi-tenant support requires to obtain tenant name from the incoming request. OIDC configuration is selected based on the received tenant name. The way this tenant name has to be provided is configured via `tenant-id-style` configuration. See [How to enable tenants](#multiple-tenants) for more information. After matching tenant configuration with the received name, the rest of the OIDC flow if exactly the same as in [How does OIDC work](#how-does-it-work).
 
@@ -575,15 +573,15 @@ Base OIDC configuration is treated as a default tenant, which is used, if no ten
 
 It is also important to note, that each tenant configuration is based on the default tenant configuration (base OIDC configuration), and therefore its configuration do not need to change all the properties, if they do not differ from the base OIDC configuration.
 
-### CORS Settings
+## CORS Settings
 
 CORS is (now) a single component configured either through config (key `cors`), or programmatically via `io.helidon.webserver.cors.CorsFeature`. To add proper CORS setup for the OIDC endpoint, use one of these. Component specific CORS setup will be removed from Helidon.
 
-#### HTTP Basic Authentication Provider
+### HTTP Basic Authentication Provider
 
 HTTP Basic authentication support
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -594,9 +592,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -606,7 +604,7 @@ Maven dependency
 | <span id="a9be1e-realm"></span> `realm` | `VALUE` | `String` | `helidon` | Set the realm to use when challenging users |
 | <span id="a18d67-users"></span> [`users`](../../config/io_helidon_security_providers_httpauth_ConfigUserStore_ConfigUser.md) | `LIST` | `i.h.s.p.h.C.ConfigUser` |   | Set user store to validate users |
 
-##### Example code
+#### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/outbound-override) on GitHub.
 
@@ -637,7 +635,7 @@ security:
           password: "${CLEAR=changeit}"
 ```
 
-##### How does it work?
+#### How does it work?
 
 See <a href="https://tools.ietf.org/html/rfc7617" class="bare">https://tools.ietf.org/html/rfc7617</a>.
 
@@ -673,11 +671,11 @@ Java service loader service `io.helidon.security.providers.httpauth.spi.UserStor
 
 Basic authentication uses base64 encoded username and password and passes it over the network. Base64 is only encoding, not encryption - so anybody that gets hold of the header value can learn the actual username and password of the user. This is a security risk and an attack vector that everybody should be aware of before using HTTP Basic Authentication. We recommend using this approach only for testing and demo purposes.
 
-#### HTTP Digest Authentication Provider
+### HTTP Digest Authentication Provider
 
 HTTP Digest authentication support
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -688,9 +686,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -703,7 +701,7 @@ Maven dependency
 | <span id="abd869-server-secret"></span> `server-secret` | `LIST` | `String` |   | The nonce is encrypted using this secret - to make sure the nonce we get back was generated by us and to make sure we can safely time-out nonce values |
 | <span id="a97822-users"></span> [`users`](../../config/io_helidon_security_providers_httpauth_ConfigUserStore_ConfigUser.md) | `LIST` | `i.h.s.p.h.C.ConfigUser` |   | Set user store to obtain passwords and roles based on logins |
 
-##### Example code
+#### Example code
 
 Configuration example
 
@@ -722,7 +720,7 @@ security:
         roles: ["user", "admin"]
 ```
 
-##### How does it work?
+#### How does it work?
 
 See <a href="https://tools.ietf.org/html/rfc7616" class="bare">https://tools.ietf.org/html/rfc7616</a>.
 
@@ -742,11 +740,11 @@ Java service loader service `io.helidon.security.providers.httpauth.spi.UserStor
 
 These authentication schemes should be *obsolete*, though they provide a very easy way to test a protected resource.
 
-#### Header Authentication Provider
+### Header Authentication Provider
 
 Asserts user or service identity based on a value of a header.
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -757,9 +755,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -771,7 +769,7 @@ Maven dependency
 | <span id="aa8e94-principal-type"></span> [`principal-type`](../../config/io_helidon_security_SubjectType.md) | `VALUE` | `i.h.s.SubjectType` | `USER` | Principal type this provider extracts (and also propagates) |
 | <span id="a0309f-propagate"></span> `propagate` | `VALUE` | `Boolean` | `false` | Whether to propagate identity |
 
-##### Example code
+#### Example code
 
 Configuration example
 
@@ -793,7 +791,7 @@ security:
             header: "X-Service-Auth"
 ```
 
-##### How does it work?
+#### How does it work?
 
 This provider inspects a specified request header and extracts the username/service name from it and asserts it as current subject’s principal.
 
@@ -809,11 +807,11 @@ The following options exist when propagating identity: 1. We propagate the curre
 
 When using this provider, you must be sure the header cannot be explicitly configured by a user or another service. All requests should go through a gateway that removes this header from inbound traffic, and only configures it for authenticated users/services. Another option is to use this with fully trusted parties (such as services within a single company, on a single protected network not accessible to any users), and of course for testing and demo purposes.
 
-#### HTTP Signatures Provider
+### HTTP Signatures Provider
 
 Support for HTTP Signatures.
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -824,9 +822,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -838,7 +836,7 @@ Maven dependency
 | <span id="a4938a-realm"></span> `realm` | `VALUE` | `String` | `helidon` | Realm to use for challenging inbound requests that do not have "Authorization" header in case header is `HttpSignHeader#AUTHORIZATION` and singatures are not optional |
 | <span id="a4ba7d-sign-headers"></span> [`sign-headers`](../../config/io_helidon_security_providers_httpsign_SignedHeadersConfig_HeadersConfig.md) | `LIST` | `i.h.s.p.h.S.HeadersConfig` |   | Override the default inbound required headers (e.g |
 
-##### Example code
+#### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/webserver-signatures) on GitHub.
 
@@ -879,23 +877,23 @@ security:
                   key.alias: "myPrivateKey"
 ```
 
-##### Signature basics
+#### Signature basics
 
 - standard: based on <a href="https://tools.ietf.org/html/draft-cavage-http-signatures-03" class="bare">https://tools.ietf.org/html/draft-cavage-http-signatures-03</a>
 
 - key-id: an arbitrary string used to locate signature configuration - when a request is received the provider locates validation configuration based on this id (e.g. HMAC shared secret or RSA public key). Commonly used meanings are: key fingerprint (RSA); API Key
 
-##### How does it work?
+#### How does it work?
 
 **Inbound Signatures** We act as a server and another party is calling us with a signed HTTP request. We validate the signature and assume identity of the caller.
 
 **Outbound Signatures** We act as a client and we sign our outgoing requests. If there is a matching `outbound` target specified in configuration, its configuration will be applied for signing the outgoing request, otherwise there is no signature added
 
-#### IDCS Role Mapper
+### IDCS Role Mapper
 
 A role mapper to retrieve roles from Oracle IDCS.
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -906,9 +904,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Single-tenant IDCS Role Mapper
+#### Single-tenant IDCS Role Mapper
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -917,9 +915,9 @@ Maven dependency
 | <span id="a630af-oidc-config"></span> [`oidc-config`](../../config/io_helidon_security_providers_oidc_common_OidcConfig.md) | `VALUE` | `i.h.s.p.o.c.OidcConfig` |   | Use explicit `io.helidon.security.providers.oidc.common.OidcConfig` instance, e.g |
 | <span id="a477d4-subject-types"></span> [`subject-types`](../../config/io_helidon_security_SubjectType.md) | `LIST` | `i.h.s.SubjectType` | `USER` | Add a supported subject type |
 
-##### Multi-tenant IDCS Role Mapper
+#### Multi-tenant IDCS Role Mapper
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -930,7 +928,7 @@ Maven dependency
 | <span id="a2275a-oidc-config"></span> [`oidc-config`](../../config/io_helidon_security_providers_oidc_common_OidcConfig.md) | `VALUE` | `i.h.s.p.o.c.OidcConfig` |   | Use explicit `io.helidon.security.providers.oidc.common.OidcConfig` instance, e.g |
 | <span id="ab2c38-subject-types"></span> [`subject-types`](../../config/io_helidon_security_SubjectType.md) | `LIST` | `i.h.s.SubjectType` | `USER` | Add a supported subject type |
 
-##### Example code
+#### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/idcs-login/) on GitHub.
 
@@ -947,15 +945,15 @@ security:
             identity-uri: "IDCS identity server address"
 ```
 
-##### How does it work?
+#### How does it work?
 
 The provider asks the IDCS server to provide list of roles for the currently authenticated user. The result is cached for a certain period of time (see `cache-config` above).
 
-#### ABAC Provider
+### ABAC Provider
 
 Attribute based access control authorization provider.
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -966,16 +964,16 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
 | <span id="a4f520-fail-if-none-validated"></span> `fail-if-none-validated` | `VALUE` | `Boolean` | `true` | Whether to fail if NONE of the attributes is validated |
 | <span id="a52725-fail-on-unvalidated"></span> `fail-on-unvalidated` | `VALUE` | `Boolean` | `true` | Whether to fail if any attribute is left unvalidated |
 
-##### Example code
+#### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/attribute-based-access-control) on GitHub.
 
@@ -987,7 +985,7 @@ security:
     - abac:
 ```
 
-##### Configuration options
+#### Configuration options
 
 The following table shows all configuration options of the provider and their default values
 
@@ -996,7 +994,7 @@ The following table shows all configuration options of the provider and their de
 | `fail-on-unvalidated` | `true` | "Unvalidated" means: an attribute is defined, but there is no validator available for it |
 | `fail-if-none-validated` | `true` | "None validated" means: there was not a single attribute that was validated |
 
-##### How does it work?
+#### How does it work?
 
 ABAC uses available validators and validates them against attributes of the authenticated user.
 
@@ -1056,7 +1054,7 @@ public class AbacResource {
 
 - [EL Policy](#expression-language-policy-validator)
 
-##### Role Validator
+#### Role Validator
 
 Checks whether user/service is in either of the required role(s).
 
@@ -1084,7 +1082,7 @@ public class AbacResource {
 }
 ```
 
-###### Interaction with JAX-RS sub-resource locators
+##### Interaction with JAX-RS sub-resource locators
 
 When using sub-resource locators in JAX-RS, the roles allowed are collected from each "level" of execution: - Application class annotations - Resource class annotations + resource method annotations - Sub-resource class annotations + sub-resource method annotations - Sub-resource class annotations + sub-resource method annotations (for every sub-resource on the path)
 
@@ -1094,7 +1092,7 @@ The `RolesAllowed` or `Roles` annotation to be used is the last one in the path 
 
 *Example 2:* There is a `RolesAllowed("admin")` defined on a sub-resource locator resource class and a `RolesAllowed("user")` defined on the method of the sub-resource that provides the response. In this case the required role is `user`.
 
-##### Scope Validator
+#### Scope Validator
 
 Checks whether user has all the required scopes.
 
@@ -1123,7 +1121,7 @@ public class AbacResource {
 }
 ```
 
-##### Expression Language Policy Validator
+#### Expression Language Policy Validator
 
 Policy executor using Java EE policy expression language (EL)
 
@@ -1165,13 +1163,13 @@ server:
             abac.policy-validator.statement: "\\${env.time.year >= 2017}"
 ```
 
-#### Google Login Provider
+### Google Login Provider
 
 Authenticates a token from request against Google identity provider
 
 This provider is deprecated and will be removed in a future version of Helidon. Please use our OpenID Connect security provider instead.
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -1182,9 +1180,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -1196,7 +1194,7 @@ Maven dependency
 | <span id="a7871a-realm"></span> `realm` | `VALUE` | `String` | `helidon` | Set the authentication realm to build challenge, defaults to "helidon" |
 | <span id="af185f-token"></span> [`token`](../../config/io_helidon_security_util_TokenHandler.md) | `VALUE` | `i.h.s.u.TokenHandler` | `` `Authorization` header with `bearer` prefix `` | Token provider to extract Google access token from request, defaults to "Authorization" header with a "bearer " prefix |
 
-##### Example code
+#### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/google-login) on GitHub.
 
@@ -1209,7 +1207,7 @@ security:
         client-id: "Google client id"
 ```
 
-##### How does it work?
+#### How does it work?
 
 We expect to receive a token (with sufficient scopes) from the inbound request, such as when using the Google login button on a page. The page has access to the token in javascript and can send it to backend with every request in a header field (`Authorization` with \`bearer \` prefix is assumed by default).
 
@@ -1241,11 +1239,11 @@ We build a subject from the Google token with the following attributes filled (i
 
 **Outbound security** The token will be propagated to outbound calls if an outbound target exists that matches the invoked endpoint (see `outbound` configuration above).
 
-#### JWT Provider
+### JWT Provider
 
 JWT token authentication and outbound security provider.
 
-##### Setup
+#### Setup
 
 Maven dependency
 
@@ -1256,9 +1254,9 @@ Maven dependency
 </dependency>
 ```
 
-##### Overview
+#### Overview
 
-##### Configuration options
+#### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -1277,7 +1275,7 @@ Maven dependency
 | <span id="ab60c1-sign-token-jwt-issuer"></span> `sign-token.jwt-issuer` | `VALUE` | `String` |   | Issuer used to create new JWTs |
 | <span id="a8cde7-use-jwt-groups"></span> `use-jwt-groups` | `VALUE` | `Boolean` | `true` | Claim `groups` from JWT will be used to automatically add groups to current subject (may be used with `jakarta.annotation.security.RolesAllowed` annotation) |
 
-##### Example code
+#### Example code
 
 See the [example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/security/outbound-override) on GitHub.
 
@@ -1303,7 +1301,7 @@ security:
             jwt-audience: "http://1.partner-service"
 ```
 
-##### How does it work?
+#### How does it work?
 
 JSON Web Token (JWT) provider has support for authentication and outbound security.
 
@@ -1311,7 +1309,7 @@ Authentication is based on validating the token (signature, valid before etc.) a
 
 For outbound, we support either token propagation (e.g. the token from request is propagated further) or support for generating a brand new token based on configuration of this provider.
 
-### Reference
+## Reference
 
 - [Helidon Security Examples](https://github.com/oracle/helidon/tree/mainexamples/security)
 

@@ -1,16 +1,16 @@
 # io.helidon.security.providers.oidc.common.OidcConfig
 
-### Description
+## Description
 
 Open ID Connect configuration.
 
-### Usages
+## Usages
 
 - [`security.providers.idcs-role-mapper.oidc-config`](../config/io_helidon_security_providers_idcs_mapper_IdcsMtRoleMapperProvider.md#a2275a-oidc-config)
 
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config`](../config/io_helidon_security_providers_idcs_mapper_IdcsMtRoleMapperProvider.md#a2275a-oidc-config)
 
-### Configuration options
+## Configuration options
 
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -468,7 +468,7 @@ Security#encrypt(String, byte[)&lt;/code&gt; and &lt;code&gt;Security#decrypt(St
 </tbody>
 </table>
 
-#### Deprecated Options
+### Deprecated Options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|

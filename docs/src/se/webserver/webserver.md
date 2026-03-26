@@ -730,7 +730,7 @@ Any other port defined in your application may include an `error-handling` secti
 | <span id="af626f-trust-manager-factory-algorithm"></span> `trust-manager-factory-algorithm` | `VALUE` | `String` |   | Trust manager factory algorithm |
 
 <a id="server-features"></a>
-# Server Features
+## Server Features
 
 Server features provide additional functionality to the WebServer, through modification of the server configuration, listener configuration, or routing.
 
@@ -752,7 +752,7 @@ The following table shows available server features and their weight. The highes
 | [Observability](../../se/observability.md) | 80 |
 
 <a id="context"></a>
-## Context
+### Context
 
 Context feature adds a filter that executes all requests within the context of `io.helidon.common.context.Context`. A `Context` instance is available on `ServerRequest` even if this feature is not added. This feature adds support for obtaining request context through `io.helidon.common.context.Contexts.context()`.
 
@@ -769,17 +769,17 @@ To enable execution of routes within Context, add the following dependency to pr
 
 Context feature can be configured, all options shown below are also available both in config, and programmatically when using builder.
 
-# io.helidon.webserver.context.ContextFeature
+#### io.helidon.webserver.context.ContextFeature
 
-## Description
+##### Description
 
 Configuration of context feature.
 
-## Usages
+##### Usages
 
 - [`server.features.context`](../../config/io_helidon_webserver_spi_ServerFeature.md#a57af2-context)
 
-## Configuration options
+##### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -790,7 +790,7 @@ Configuration of context feature.
 See the [manifest](../../config/manifest.md) for all available types.
 
 <a id="access-log"></a>
-## Access Log
+### Access Log
 
 Access logging in Helidon is done by a dedicated module that can be added to WebServer and configured.
 
@@ -805,7 +805,7 @@ To enable Access logging add the following dependency to project’s `pom.xml`:
 </dependency>
 ```
 
-### Configuring Access Log in Your Code
+#### Configuring Access Log in Your Code
 
 `AccessLogFeature` is discovered automatically by default, and configured through `server.features.access-log`. You can also configure this feature in code by registering it with WebServer (which will replace the discovered feature).
 
@@ -816,7 +816,7 @@ WebServer.builder()
                             .build());
 ```
 
-### Configuring Access Log in a Configuration File
+#### Configuring Access Log in a Configuration File
 
 Access log can be configured as follows:
 
@@ -832,17 +832,17 @@ server:
 
 All options shown below are also available programmatically when using builder.
 
-# io.helidon.webserver.accesslog.AccessLogFeature
+#### io.helidon.webserver.accesslog.AccessLogFeature
 
-## Description
+##### Description
 
 Configuration of access log feature.
 
-## Usages
+##### Usages
 
 - [`server.features.access-log`](../../config/io_helidon_webserver_spi_ServerFeature.md#a42c97-access-log)
 
-## Configuration options
+##### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -855,17 +855,17 @@ Configuration of access log feature.
 See the [manifest](../../config/manifest.md) for all available types.
 
 <a id="supported-technologies"></a>
-# Supported Technologies
+## Supported Technologies
 
 <a id="http2-support"></a>
-# HTTP/2 Support
+### HTTP/2 Support
 
 Helidon supports HTTP/2 upgrade from HTTP/1, HTTP/2 without prior knowledge, HTTP/2 with prior knowledge, and HTTP/2 with ALPN over TLS. HTTP/2 support is enabled in WebServer by default when it’s artifact is available on classpath.
 
 > [!WARNING]
 > For HTTP/2 `request.content().hasEntity()` returns `true` by default. It returns `false` only if the request’s header frame includes the `END_STREAM` flag or the `Content‑Length` header is present with a value of `0`.
 
-## Maven Coordinates
+#### Maven Coordinates
 
 To enable HTTP/2 support add the following dependency to your project’s `pom.xml`.
 
@@ -877,13 +877,13 @@ To enable HTTP/2 support add the following dependency to your project’s `pom.x
 ```
 
 <a id="static-content-support"></a>
-# Static Content Support
+### Static Content Support
 
 Static content is served through a `StaticContentFeature`. As with other server features, it can be configured through config, or registered with server config builder.
 
 Static content supports serving of files from classpath, or from any readable directory on the file system. Each content handler must include a location, and can provide a context that will be registered with the WebServer (defaults to `/`).
 
-## Maven Coordinates
+#### Maven Coordinates
 
 To enable Static Content Support add the following dependency to your project’s `pom.xml`.
 
@@ -894,7 +894,7 @@ To enable Static Content Support add the following dependency to your project’
 </dependency>
 ```
 
-## Registering Static Content
+#### Registering Static Content
 
 To register static content based on a file system (`/pictures`), and classpath (`/`):
 
@@ -944,7 +944,7 @@ server:
 See [Static Content Feature Configuration Reference](../../config/io_helidon_webserver_staticcontent_StaticContentFeature.md) for details of configuration options.
 
 <a id="media-types-support"></a>
-# Media types support
+### Media Types Support
 
 WebServer and WebClient share the HTTP media support of Helidon, and any supported media type can be used in both. The media type support is automatically discovered from classpath. Programmatic support is of course enabled as well through `MediaContext`.
 
@@ -971,11 +971,11 @@ The following table lists JSON media supports:
 
 - JSON-B and Jackson have lower weight, so they are used only when no other media type matched the object being written or read
 
-## JSON-P Support
+#### JSON-P Support
 
 The WebServer supports JSON-P. When enabled, you can send and receive JSON-P objects transparently.
 
-### Maven Coordinates
+##### Maven Coordinates
 
 To enable JSON Support add the following dependency to your project’s `pom.xml`.
 
@@ -986,7 +986,7 @@ To enable JSON Support add the following dependency to your project’s `pom.xml
 </dependency>
 ```
 
-### Usage
+##### Usage
 
 *Handler that receives and returns JSON objects*
 
@@ -1023,11 +1023,11 @@ curl --noproxy '*' -X POST -H "Content-Type: application/json" \
 {"message":"Hello Joe"}
 ```
 
-## JSON-B Support
+#### JSON-B Support
 
 The WebServer supports the [JSON-B specification](http://json-b.net/). When this support is enabled, Java objects will be serialized to and deserialized from JSON automatically using [Yasson](https://github.com/eclipse-ee4j/yasson), an implementation of the [JSON-B specification](https://jakarta.ee/specifications/jsonb/3.0/jakarta-jsonb-spec-3.0.html).
 
-### Maven Coordinates
+##### Maven Coordinates
 
 To enable JSON-B Support add the following dependency to your project’s `pom.xml`.
 
@@ -1038,11 +1038,11 @@ To enable JSON-B Support add the following dependency to your project’s `pom.x
 </dependency>
 ```
 
-### Configuration
+##### Configuration
 
 It is possible to configure the Jsonb instance via programmatic or configuration-based approach. When configured over the configuration, all the configured value types need to be selected correctly according to the JSON-B spec and placed to the right section.
 
-#### Configuration options
+###### Configuration options
 
 | Key | Kind | Type | Description |
 |----|----|----|----|
@@ -1050,7 +1050,7 @@ It is possible to configure the Jsonb instance via programmatic or configuration
 | <span id="ad0c9b-class-properties"></span> `class-properties` | `MAP` | `Class` | Jsonb `Class` configuration properties |
 | <span id="acf561-properties"></span> `properties` | `MAP` | `String` | Jsonb `String` configuration properties |
 
-#### Example
+###### Example
 
 *Example JSON-B configuration*
 
@@ -1062,7 +1062,7 @@ jsonb:
     jsonb.property-naming-strategy: "LOWER_CASE_WITH_DASHES"
 ```
 
-### Usage
+##### Usage
 
 Now that automatic JSON serialization and deserialization facilities have been set up, you can register a `Handler` that works with Java objects instead of raw JSON. Deserialization from and serialization to JSON will be handled according to the [JSON-B specification](https://jcp.org/en/jsr/detail?id=367).
 
@@ -1109,11 +1109,11 @@ curl --noproxy '*' -X POST -H "Content-Type: application/json" \
 {"name":"Joe"}
 ```
 
-## Jackson Support
+#### Jackson Support
 
 The WebServer supports [Jackson](https://github.com/FasterXML/jackson#jackson-project-home-github). When this support is enabled, Java objects will be serialized to and deserialized from JSON automatically using Jackson.
 
-### Maven Coordinates
+##### Maven Coordinates
 
 To enable Jackson Support add the following dependency to your project’s `pom.xml`.
 
@@ -1124,17 +1124,17 @@ To enable Jackson Support add the following dependency to your project’s `pom.
 </dependency>
 ```
 
-### Configuration
+##### Configuration
 
 It is possible to configure the Jackson ObjectMapper instance via programmatic or configuration-based approach.
 
-#### Configuration options
+###### Configuration options
 
 | Key | Kind | Type | Description |
 |----|----|----|----|
 | <span id="a0b69d-properties"></span> `properties` | `MAP` | `Boolean` | Jackson configuration properties |
 
-#### Example
+###### Example
 
 *Example Jackson configuration*
 
@@ -1144,7 +1144,7 @@ jackson:
     FAIL_ON_UNKNOWN_PROPERTIES: false
 ```
 
-### Usage
+##### Usage
 
 Now that automatic JSON serialization and deserialization facilities have been set up, you can register a `Handler` that works with Java objects instead of raw JSON. Deserialization from and serialization to JSON will be handled by [Jackson](https://github.com/FasterXML/jackson#jackson-project-home-github).
 
@@ -1196,11 +1196,11 @@ curl --noproxy '*' -X POST -H "Content-Type: application/json" \
 {"name":"Joe"}
 ```
 
-## Gson Support
+#### Gson Support
 
 The WebServer supports [Gson](https://github.com/google/gson#gson). When this support is enabled, Java objects will be serialized to and deserialized from JSON automatically using Gson.
 
-### Maven Coordinates
+##### Maven Coordinates
 
 To enable Gson Support add the following dependency to your project’s `pom.xml`.
 
@@ -1211,17 +1211,17 @@ To enable Gson Support add the following dependency to your project’s `pom.xml
 </dependency>
 ```
 
-### Configuration
+##### Configuration
 
 It is possible to configure the Gson instance via programmatic or configuration-based approach.
 
-#### Configuration options
+###### Configuration options
 
 | Key | Kind | Type | Description |
 |----|----|----|----|
 | <span id="a26a07-properties"></span> `properties` | `MAP` | `Boolean` | Gson configuration properties |
 
-#### Example
+###### Example
 
 *Example Gson configuration*
 
@@ -1231,7 +1231,7 @@ gson:
     serialize-nulls: false
 ```
 
-### Usage
+##### Usage
 
 Now that automatic JSON serialization and deserialization facilities have been set up, you can register a `Handler` that works with Java objects instead of raw JSON. Deserialization from and serialization to JSON will be handled by [Gson](++https://github.com/google/gson#gson).
 
@@ -1284,7 +1284,7 @@ curl --noproxy '*' -X POST -H "Content-Type: application/json" \
 ```
 
 <a id="http-content-encoding"></a>
-# HTTP Content Encoding
+### HTTP Content Encoding
 
 HTTP encoding can improve bandwidth utilization and transfer speeds in certain scenarios. It requires a few extra CPU cycles for compressing and uncompressing, but these can be offset if data is transferred over low-bandwidth network links.
 
@@ -1292,7 +1292,7 @@ A client advertises the compression encodings it supports at request time, and t
 
 Handlers can encode the response and set the appropriate header to preempt encoding by the WebServer. For instance, if a Handler sets the `Content-Encoding: gzip` header then the response will not be additionally compressed.
 
-## Configuring HTTP Encoding
+#### Configuring HTTP Encoding
 
 HTTP encoding support is discovered automatically by WebServer from the classpath, or it can be customized programmatically.
 
@@ -1309,7 +1309,7 @@ WebServer.builder()
 
 Or use a config file using the following options:
 
-### Configuration options
+##### Configuration options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
@@ -1323,14 +1323,14 @@ The following providers are currently available (simply add the library on the c
 | **gzip** | GzipEncoding | `io.helidon.http.encoding:helidon-http-encoding-gzip` |
 | **deflate** | DeflateSupport | `io.helidon.http.encoding:helidon-http-encoding-deflate` |
 
-## HTTP Compression Negotiation
+#### HTTP Compression Negotiation
 
 HTTP compression negotiation is controlled by clients using the `Accept-Encoding` header. The value of this header is a comma-separated list of encodings. The WebServer will select one of these encodings for compression purposes; it currently supports `gzip` and `deflate`.
 
 For example, if the request includes `Accept-Encoding: gzip, deflate`, and HTTP compression has been enabled as shown above, the response shall include the header `Content-Encoding: gzip` and a compressed payload.
 
 <a id="proxy-protocol-support"></a>
-# Proxy Protocol Support
+### Proxy Protocol Support
 
 The [Proxy Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) provides a way to convey client information across reverse proxies or load balancers which would otherwise be lost given that new connections are established for each network hop. Often times, this information can be carried in HTTP headers, but not all proxies support this feature. Helidon is capable of parsing a proxy protocol header (i.e., a network preamble) that is based on either V1 or V2 of the protocol, thus making client information available to service developers.
 
@@ -1352,7 +1352,7 @@ server:
   enable-proxy-protocol: true
 ```
 
-## Accessing Proxy Protocol Data
+#### Accessing Proxy Protocol Data
 
 There are two ways in which the header data can be accessed in your application. One way is by obtaining the protocol data directly from a request as shown next:
 
@@ -1376,7 +1376,7 @@ rules.get("/", (req, res) -> {
 
 Alternatively, the WebServer also makes the original client source address and source port available in the HTTP headers `X-Forwarded-For` and `X-Forwarded-Port`, respectively. In some cases, it is just simpler to inspect these headers instead of getting the complete `ProxyProtocolData` instance as shown above.
 
-## Accessing Proxy Protocol V2 Data
+#### Accessing Proxy Protocol V2 Data
 
 The binary (V2) version of the Proxy Protocol includes additional information beyond that found in the text (V1) protocol version. The V2 version exposes a proxy command type (LOCAL or PROXY), allows source and destination addresses to be Unix domain sockets, and supports structured metadata using Tag-Length-Value (TLV) encoded structures. Helidon makes this additional information available through the `ProxyProtocolV2Data` interface, which extends `ProxyProtocolData`.
 
@@ -1402,7 +1402,7 @@ rules.get("/", (req, res) -> {
 ```
 
 <a id="additional-information"></a>
-# Additional Information
+## Additional Information
 
 Here is the code for a minimalist web application that runs on a random free port:
 
@@ -1426,7 +1426,7 @@ public static void main(String[] args) {
 - The server is bound to a random free port.
 
 <a id="reference"></a>
-# Reference
+## Reference
 
 - [Helidon WebServer JavaDoc](/apidocs/io.helidon.webserver/module-summary.html)
 

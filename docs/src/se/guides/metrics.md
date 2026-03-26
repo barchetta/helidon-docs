@@ -2,7 +2,7 @@
 
 This guide describes how to create a sample Helidon {h1-prefix} project that can be used to run some basic examples using both built-in and custom meters with Helidon.
 
-### What You Need
+## What You Need
 
 For this 30 minute tutorial, you will need the following:
 
@@ -34,7 +34,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 21`
 export JAVA_HOME=/usr/lib/jvm/jdk-21
 ```
 
-#### Create a Sample Helidon SE Project
+### Create a Sample Helidon SE Project
 
 Use the Helidon SE Maven archetype to create a simple project that can be used for the examples in this guide.
 
@@ -50,7 +50,7 @@ mvn -U archetype:generate -DinteractiveMode=false \
     -Dpackage=io.helidon.examples.quickstart.se
 ```
 
-#### Using the Built-In Meters
+### Using the Built-In Meters
 
 Helidon provides three built-in scopes of metrics: base, vendor, and application. Here are the metric endpoints:
 
@@ -207,7 +207,7 @@ The `base` meters illustrated above provide some insight into the behavior of th
 
 The `vendor` meter shown above gives an idea of the request traffic the server is handling. See the [later section](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) for more information on the basic and extended key performance indicator meters.
 
-#### Controlling Metrics Behavior
+### Controlling Metrics Behavior
 
 By adding a `metrics` section to your application configuration you can control how the Helidon metrics subsystem behaves in any of several ways.
 
@@ -219,7 +219,7 @@ By adding a `metrics` section to your application configuration you can control 
 
 Your Helidon SE application can also control metrics processing programmatically as described in the following sections.
 
-##### Disabling Metrics Subsystem Entirely
+#### Disabling Metrics Subsystem Entirely
 
 You can disable the metrics subsystem entirely using configuration:
 
@@ -269,7 +269,7 @@ These builders and interfaces also have methods which accept `Config` objects re
 
 With metrics processing disabled, Helidon never updates any meters and the `/observe/metrics` endpoints respond with `404`.
 
-##### Collecting Basic and Extended Key Performance Indicator (KPI) Metrics
+#### Collecting Basic and Extended Key Performance Indicator (KPI) Metrics
 
 Any time you include the Helidon metrics module in your application, Helidon tracks a basic performance indicator meter: a `Counter` of all requests received (`requests.count`).
 
@@ -340,7 +340,7 @@ WebServer server = WebServer.builder() // (7)
 
 7.  Add the `ObserveFeature` to the `WebServer`.
 
-##### Controlling Meters Related to Virtual Threads Behavior
+#### Controlling Meters Related to Virtual Threads Behavior
 
 Helidon optionally maintains several meters related to virtual threads as summarized in the next table. Helidon might rely on Java Flight Recorder (JFR) events and JMX MBeans in computing the meter values. Be aware that limitations or changes in the values provided by these sources are outside the control of Helidon.
 
@@ -358,9 +358,9 @@ Table 1. Meters for Virtual Threads {.tableblock .frame-all .grid-all .stretch}
 
 <sup>1</sup> Distribution summaries can discard stale data, so the `recentPinned` summary might not reflect all thread pinning activity. <sup>1</sup> Distribution summaries can discard stale data, so the `recentPinned` summary might not reflect all thread pinning activity.
 
-##### Configuring Virtual Threads Meters
+#### Configuring Virtual Threads Meters
 
-###### Enabling Virtual Threads Meters
+##### Enabling Virtual Threads Meters
 
 Gathering data to compute the meters for virtual threads is designed to be as efficient as possible, but doing so still imposes a load on the server and by default Helidon does not report meters related to virtual threads.
 
@@ -374,7 +374,7 @@ metrics:
     enabled: true
 ```
 
-###### Controlling Measurements of Pinned Virtual Threads
+##### Controlling Measurements of Pinned Virtual Threads
 
 Helidon measures pinned virtual threads only when the thread is pinned for a length of time at or above a threshold. Control the threshold as shown in the example below.
 
@@ -389,7 +389,7 @@ metrics:
 
 The threshold value is a `Duration` string, such as `PT0.100S` for 100 milliseconds.
 
-#### Metrics Metadata
+### Metrics Metadata
 
 Each meter has associated metadata that includes:
 
@@ -428,7 +428,7 @@ JSON response (truncated):
 }
 ```
 
-#### Application-Specific Metrics Data
+### Application-Specific Metrics Data
 
 This section demonstrates how to use application-specific meters and integrate them with Helidon, starting from a Helidon SE QuickStart application.
 
@@ -436,7 +436,7 @@ It is the application’s responsibility to create and update the meters at runt
 
 In all of these examples, the code uses a meter builder specific to the type of meter needed to register a new meter or locate a previous-registered meter.
 
-##### Counter Meter
+#### Counter Meter
 
 The `Counter` meter is a monotonically increasing number. The following example demonstrates how to use a `Counter` to track the number of times the `/cards` endpoint is called.
 
@@ -508,7 +508,7 @@ JSON response:
 
 1.  The count value is one since the method was called once.
 
-##### Timer Meter
+#### Timer Meter
 
 The `Timer` meter aggregates durations.
 
@@ -583,7 +583,7 @@ JSON response:
 
 Helidon updated the timer statistics for each of the two accesses to the `/cards` endpoint.
 
-##### Distribution Summary Meters
+#### Distribution Summary Meters
 
 The `DistributionSummary` meter calculates the distribution of a set of values within ranges. This meter does not relate to time at all. The following example records a set of random numbers in a `DistributionSummary` meter when the `/cards` endpoint is invoked.
 
@@ -655,7 +655,7 @@ JSON response:
 
 The `DistributionSummary.Builder` allows your code to configure other aspects of the summary, such as bucket boundaries and percentiles to track.
 
-##### Gauge Metric
+#### Gauge Metric
 
 The `Gauge` meter measures a value that is maintained by code outside the metrics subsystem. As with other meters, the application explicitly registers a gauge. When the `/observe/metrics` endpoint is invoked, Helidon retrieves the value of each registered `Gauge`. The following example demonstrates how a `Gauge` is used to get the current temperature.
 
@@ -708,9 +708,9 @@ JSON response:
 
 1.  The current (random) temperature. Accessing the endpoint again returns a different value.
 
-#### Integration with Kubernetes and Prometheus
+### Integration with Kubernetes and Prometheus
 
-##### Kubernetes Integration
+#### Kubernetes Integration
 
 The following example shows how to integrate the Helidon SE application with Kubernetes.
 
@@ -798,7 +798,7 @@ curl http://localhost:31143/metrics
 |----|----|
 | Note | Leave the application running in Kubernetes since it will be used for Prometheus integration. |
 
-##### Prometheus Integration
+#### Prometheus Integration
 
 The metrics service that you just deployed into Kubernetes is already annotated with `prometheus.io/scrape:`. This will allow Prometheus to discover the service and scrape the metrics. This example shows how to install Prometheus into Kubernetes, then verify that it discovered the Helidon metrics in your application.
 
@@ -824,7 +824,7 @@ kubectl --namespace default port-forward $POD_NAME 7090:9090
 
 Now open your browser and navigate to <a href="http://localhost:7090/targets" class="bare"><code>http://localhost:7090/targets</code></a>. Search for helidon on the page, and you will see your Helidon application as one of the Prometheus targets.
 
-##### Final Cleanup
+#### Final Cleanup
 
 You can now delete the Kubernetes resources that were just created during this example.
 
@@ -840,7 +840,7 @@ Delete the application Kubernetes resources:
 kubectl delete -f ./metrics.yaml
 ```
 
-#### Summary
+### Summary
 
 This guide demonstrated how to use metrics in a Helidon SE application using various combinations of meters and scopes.
 

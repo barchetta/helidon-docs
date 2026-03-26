@@ -1,26 +1,18 @@
 # Extensions
 
-### Contents
+## Contents
 
 - [Overview](#overview)
-
 - [Configuring an Extension](#configuring-an-extension)
-
 - [Config-SPI-ConfigSource](#configsource-spi)
-
 - [Config-SPI-ConfigParser](#configparser-spi)
-
 - [Config-SPI-OverrideSource](#overridesource-spi)
-
 - [Config-SPI-ConfigFilter](#configfilter-spi)
-
 - [Config-SPI-ConfigMapperProvider](#configmapperprovider-spi)
-
 - [Change Support SPI](#change-support-spi)
-
 - [Config-SPI-RetryPolicy](#retrypolicy-spi)
 
-### Overview
+## Overview
 
 Developer-provided extensions influence how the config system behaves.
 
@@ -62,7 +54,7 @@ The extension mechanism of Config can also use Java `ServiceLoader`. For this pu
 
 The config system itself implements several of these SPIs, as noted in the sections below.
 
-### Configuring an Extension
+## Configuring an Extension
 
 You can configure a custom extension in two ways:
 
@@ -70,7 +62,7 @@ You can configure a custom extension in two ways:
 
 2.  Automatic configuration using a Java service loader
 
-#### Manual Configuration with Builder
+### Manual Configuration with Builder
 
 The following example shows configuration of all possible extensions with `Config` (all custom extension have a name prefix `My`):
 
@@ -87,7 +79,7 @@ Config config = Config.builder()
         .build();
 ```
 
-#### Automatic Configuration Using a Service Loader
+### Automatic Configuration Using a Service Loader
 
 The following extensions are loaded using a service loader for any configuration instance, and do not require an explicit setup:
 
@@ -114,11 +106,11 @@ sources:
 
 The config system would iterate through all `ConfigSourceProvider` implementations found through Java `ServiceLoader` based on their [weight](/apidocs/io.helidon.common/io/helidon/common/Weight.html). First provider that returns `true` when `supports("my-type")` is called would be used, and an instance of a `ConfigSource` created using `create("my-type", config)`, where `config` is located on the node of `properties` from config profile.
 
-#### About Priority
+### About Priority
 
 The config system invokes extensions of a given type in priority order. Developers can express the relative importance of an extension by annotating the service implementation class with [`@Weight`](/apidocs/io.helidon.common/io/helidon/common/Weight.html). The default value is 100. The higher the weight, the more important the extension is.
 
-### ConfigSource SPI
+## ConfigSource SPI
 
 The config system includes built-in support for several types of sources (for example, Java `String`, `Readable`, `Properties`, and `Map` objects - see [`ConfigSources`](/apidocs/io.helidon.config/io/helidon/config/ConfigSources.html)). Implement a [`ConfigSource`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigSource.html) to load raw configuration data from a type of source that the config system does not already support.
 
@@ -150,7 +142,7 @@ Some methods provided are not always mandatory, yet they are part of the APIs to
 
 - ParsableSource.mediaType() - return the configured or "guessed" media type of this source, see `io.helidon.common.media.type.MediaTypes`, if not returned, media type must be present on `Content`, or provided through media type mapping
 
-### ConfigParser SPI
+## ConfigParser SPI
 
 The parsing step converts config data in some format into the corresponding in-memory representation of config `ObjectNode`s. The config system can already parse several data formats (for example Java `Properties`, YAML, and HOCON). Implement the [`ConfigParser`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigParser.html) SPI to allow the config system to handle additional formats.
 
@@ -176,7 +168,7 @@ Example custom parser implementation listed in `META-INF/services/io.helidon.con
 my.module.MyConfigParser
 ```
 
-### OverrideSource SPI
+## OverrideSource SPI
 
 When the application retrieves a configuration value the config system first uses the relevant config sources and filters. It then applies any *overrides* the application has provided. Each override has:
 
@@ -194,7 +186,7 @@ Figure 5. OverrideSource SPI
 
 Note that override sources can also implement `PollableSource`, and `WatchableSource` to add change support.
 
-### ConfigFilter SPI
+## ConfigFilter SPI
 
 Before returning a `String` from `Config.value()` the config system applies any *filters* set up on the `Config.Builder` used to create the config tree that contains the config node of interest. The application provides filters as implementations of the [`ConfigFilter`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigFilter.html) interface. Each filter is a function which accepts a `Config.Key` and an input `String` value and returns a `String` value the config system should use for that key going forward. The filter can return the original value or return some other value.
 
@@ -224,7 +216,7 @@ The application registers filters and filter providers by passing `ConfigFilter`
 </tbody>
 </table>
 
-#### Initializing Filters
+### Initializing Filters
 
 The `ConfigFilter` JavaDoc describes multiple methods for adding filters to a `Config.Builder`. Some accept a `ConfigFilter` directly and some accept a provider function which, when passed a `Config` instance, returns a `ConfigFilter`.
 
@@ -238,7 +230,7 @@ Recall that whenever any code invokes `Config.get`, the `Config` instance invoke
 
 Figure 6. ConfigFilter SPI
 
-### ConfigMapperProvider SPI
+## ConfigMapperProvider SPI
 
 The config system provides built-in mappings from `String` values to various Java types. (See [`ConfigMappers`](/apidocs/io.helidon.config/io/helidon/config/ConfigMappers.html).)
 
@@ -288,11 +280,11 @@ Reference custom mapper provider implementation in `META-INF/services/io.helidon
 my.module.MyConfigMapperProvider
 ```
 
-### Change Support SPI
+## Change Support SPI
 
 Once it loads a `Config` tree from `ConfigSource`, the config system does not itself change the in-memory `Config` tree. Even so, the underlying data available via the tree’s `ConfigSource`s can change. Implementations of [`PollingStrategy`](/apidocs/io.helidon.config/io/helidon/config/spi/PollingStrategy.html) may trigger regular check whether a source has new data. Implementation of [`ChangeWatcher`](/apidocs/io.helidon.config/io/helidon/config/spi/ChangeWatcher.html) may watch the underlying source for changes and trigger an update.
 
-#### PollingStrategy SPI
+### PollingStrategy SPI
 
 An implementation of `PollingStrategy` gets an instance to poll, and triggers its `poll` method. The result of `poll` method may be used to update the polling strategy schedule.
 
@@ -308,7 +300,7 @@ Figure 8. PollingStrategy SPI
 
 To support polling strategies that can be configured in config profile, also implement the `PollingStrategyProvider` Java service loader SPI.
 
-#### ChangeWatcher SPI
+### ChangeWatcher SPI
 
 An implementation of `ChangeWatcher` gets the underlying source information and a change listener. The "watcher" then watches for changes of the source and notifies the listener when a change occurs.
 
@@ -324,7 +316,7 @@ Figure 9. ChangeWatcher SPI
 
 To support change watchers that can be configured in config profile, also implement the `ChangeWatcherProvider` Java service loader SPI.
 
-### RetryPolicy SPI
+## RetryPolicy SPI
 
 The builder for each `ConfigSource` and `OverrideSource` accepts a [`RetryPolicy`](/apidocs/io.helidon.config/io/helidon/config/spi/RetryPolicy.html) governing if and how the source should deal with failures loading the underlying data.
 

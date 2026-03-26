@@ -1,40 +1,25 @@
 # LangChain4j
 
-### Contents
+## Contents
 
 - [Overview](#overview)
-
 - [Features](#features)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [General Concepts](#general-concepts)
-
   - [LangChain4j Providers](#providers)
-
   - [Supplier Factory](#supplier-factory)
-
 - [Configuration](#configuration)
-
   - [Configuration Migration Guide](#configuration-migration-guide)
-
 - [Declarative AI](#declarative-ai)
-
   - [AI Services](#ai-services)
-
   - [Agents](#agents)
-
   - [Agentic Workflow](#agentic-workflow)
-
 - [Tools (Callback Functions)](#tools-callback-functions)
-
 - [Guardrails](#guardrails)
-
 - [Observability (ChatModelListeners)](#observability-chatmodellisteners)
-
 - [Additional Information](#additional-information)
 
-### Overview
+## Overview
 
 [LangChain4j](https://github.com/langchain4j/langchain4j) is a Java framework for building AI-powered applications using Large Language Models (LLMs). It provides seamless integration with multiple LLM providers, including OpenAI, Cohere, Hugging Face, and others. Key features include AI Services and Agents for model interaction, support for Retrieval-Augmented Generation (RAG) to enhance responses with external data, and tools for working with embeddings and knowledge retrieval.
 
@@ -44,7 +29,7 @@ Helidon provides a LangChain4j integration module that simplifies the use of Lan
 |----|----|
 | Note | LangChain4j integration is a preview feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon. |
 
-### Features
+## Features
 
 - **Integration with Helidon Inject**
 
@@ -58,7 +43,7 @@ Helidon provides a LangChain4j integration module that simplifies the use of Lan
 
   Supports [LangChain4j’s AI Services](https://docs.langchain4j.dev/tutorials/ai-services/) and [Agents](https://docs.langchain4j.dev/tutorials/agents/) within the declarative programming model, allowing for clean, easy-to-manage code structures.
 
-### Maven Coordinates
+## Maven Coordinates
 
 To enable LangChain4j Integration, add the following dependency to your project’s `pom.xml` (see [Managing Dependencies](../../../about/managing-dependencies.md)).
 
@@ -89,11 +74,11 @@ Include the following annotation processor in the `<build><plugins>` section of 
 
 Some features of the integration may require adding other dependencies. Check the corresponding sections for additional information.
 
-### General Concepts
+## General Concepts
 
 LangChain4j integration in Helidon is orchestrating LangChain4j AiServices and Agents as named singleton declarative service beans. Singletons can be referenced by their names and created either by configuration-driven [providers](#providers) or manually as any other declarative Helidon service bean, with [supplier factory](#supplier-factory), for example.
 
-#### Providers
+### Providers
 
 Helidon LangChain4j providers are extensions that enable integration with a range of AI vendors. Each provider is identified and configured using a unique key. You can define multiple named models, reuse provider-level configuration, or override it with model-specific properties.
 
@@ -137,7 +122,7 @@ Providers available out of the box:
 |----|----|
 | Note | Missing your favorite AI vendor already supported by LangChain4j? You can generate your own Helidon integration with our [**LangChain4j Model Provider Generator**](codegen-provider.md) or use the supplier factory! |
 
-#### Supplier Factory
+### Supplier Factory
 
 Supplier Factory provides another way to create and register LangChain4j components. It is useful for creating components that are not yet natively supported by the integration, such as ChatModels, Embedding Models, Embedding Stores or Content Retrievers. This method is not limited to LangChain4j and suitable for creating and registering other classes.
 
@@ -179,7 +164,7 @@ public interface ChefAiService {
 
 1.  Custom name selected in the supplier factory above
 
-### Configuration
+## Configuration
 
 Helidon LangChain4j uses a unified configuration that separates **providers** (shared configuration) from **named components** such as models, embedding stores, content retrievers, services, and agents. Components are enabled by default; add `enabled: false` to disable a component entry explicitly.
 
@@ -228,7 +213,7 @@ langchain4j:
       uri: http://foo-bar-mcp-server:1234/foo
 ```
 
-#### Configuration Migration Guide
+### Configuration Migration Guide
 
 |  |  |
 |----|----|
@@ -244,7 +229,7 @@ Changes in 4.4:
 
 - You can configure multiple models of the same type by adding multiple entries under `langchain4j.models`.
 
-##### Example Migration
+#### Example Migration
 
 Pre 4.4 configuration:
 
@@ -270,7 +255,7 @@ langchain4j:
       model-name: "gpt-4o-mini"
 ```
 
-### Declarative AI
+## Declarative AI
 
 LangChain4j AI Services provide a declarative and type-safe way to define AI-powered functionality. It allows combining chat models, retrieval-augmented generation (RAG), chat memory, and other building blocks to create sophisticated AI-driven workflows. Read more about it in [LangChain4j documentation](https://docs.langchain4j.dev/tutorials/ai-services).
 
@@ -297,7 +282,7 @@ Both AI Services and Agents can be configured with the following Helidon annotat
 | `Ai.Tools` | Specifies the classes with tools. In case a singleton service bean of the same type exists, its instance is supplied. |
 | `Ai.McpClients` | Specifies the name/s of a `McpClient` in the service registry that implements `ToolProvider` to use in the annotated Ai Service. `McpToolProvider` is created from these clients. Mutually exclusive with `Ai.ToolProvider`. |
 
-#### AI Services
+### AI Services
 
 AI Service is defined by a Java interface. It’s a pure LangChain4j component. Refer to [LangChain4j documentation](https://docs.langchain4j.dev/tutorials/ai-services) to read more details about it.
 
@@ -350,7 +335,7 @@ NamedChatAiService namedService = Services.getNamed(NamedChatAiService.class, "c
 
 Named AI services can be configured under `langchain4j.services`, where values in configuration override annotation values.
 
-#### Agents
+### Agents
 
 LangChain4j agents are AI services enhanced for agentic workflows. In Helidon, each agent is a named declarative singleton service. Agent configuration can be set using annotations and overridden by Helidon config under `langchain4j.agents`. Compared to [AI Services](https://docs.langchain4j.dev/tutorials/ai-services), which are typically used as typed service-layer entry points, agents are designed to collaborate inside workflows and pure agentic systems ([Agents documentation](https://docs.langchain4j.dev/tutorials/agents)). In practice, agents keep AI Service capabilities but add agentic composition concerns such as explicit agent identity and workflow state exchange. The key difference is that agent results are commonly written into shared agentic context (for example via `outputKey`) so that other agents can consume them in subsequent workflow steps.
 
@@ -398,7 +383,7 @@ Agents can be configured or overridden using `langchain4j.agents.<agent-name>` e
 
 ![LangChain4j agents in Helidon](../../../images/lc4j/agents.svg)
 
-##### Agentic Workflow
+#### Agentic Workflow
 
 Helidon supports LangChain4j declarative agentic workflows such as sequence and conditional agents. Each subagent remains a named Helidon service, and agentic systems can be composed using declarative annotations like `@SequenceAgent` and `@ConditionalAgent`. Helidon follows the LangChain4j declarative agent API, so many other agent types from LangChain4j can be used in the same way. For the full set of patterns and annotations, see the [LangChain4j Agents documentation](https://docs.langchain4j.dev/tutorials/agents).
 
@@ -470,7 +455,7 @@ public interface HelidonSeExpert {
 }
 ```
 
-### Tools (Callback Functions)
+## Tools (Callback Functions)
 
 In LangChain4j, tools are callback functions that the language model can invoke during a conversation to perform specific tasks, retrieve information, or execute external logic. These tools extend the model’s capabilities beyond simple text generation, allowing it to dynamically interact with external systems. For instance, a tool might query a database, call an external API, or perform calculations. Based on user input, the model can decide to call a tool, interpret its response, and incorporate it into the conversation for a more context-aware and multi-step interaction.
 
@@ -493,7 +478,7 @@ public class OrderService {
 
 For more details, read the [LangChain4j Documentation on Tools](https://docs.langchain4j.dev/tutorials/tools#high-level-tool-api).
 
-### Guardrails
+## Guardrails
 
 LangChain4j guardrails validate input and output around model calls and help enforce application-level policies, for example: scope checks, prompt-injection protection, output validation, retries, or reprompts. For guardrail concepts and behavior details, see the [LangChain4j Guardrails documentation](https://docs.langchain4j.dev/tutorials/guardrails).
 
@@ -550,13 +535,13 @@ langchain4j:
         - com.example.FooBarOutputGuardrail
 ```
 
-### Observability (ChatModelListeners)
+## Observability (ChatModelListeners)
 
 While LangChain4j doesn’t provide Observability out-of-box, it provides for user to supplement it using `ChatModelListener`. For more details, read the [LangChain4j Documentation on Observability](https://docs.langchain4j.dev/tutorials/observability/).
 
 Helidon provides `MetricsChatModelListener` which generates metrics that follow the [OpenTelemetry Semantic Conventions for GenAI Metrics v1.36.0](https://github.com/open-telemetry/semantic-conventions/blob/v1.36.0/docs/gen-ai/gen-ai-metrics.md). This is done out-of-box for Chat API calls.
 
-### Additional Information
+## Additional Information
 
 - [LangChain4j documentation](https://docs.langchain4j.dev/)
 

@@ -1,12 +1,12 @@
 # io.helidon.dbclient.jdbc.JdbcParametersConfig
 
-### Description
+## Description
 
 JDBC parameters setter configuration.
 
-### Usages
+## Usages
 
-### Configuration options
+## Configuration options
 
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

@@ -1,16 +1,16 @@
 # io.helidon.security.providers.oidc.OidcProvider
 
-### Description
+## Description
 
 Open ID Connect security provider.
 
-### Usages
+## Usages
 
 - [`security.providers.oidc`](../config/io_helidon_security_spi_SecurityProvider.md#aab762-oidc)
 
 - [`server.features.security.security.providers.oidc`](../config/io_helidon_security_spi_SecurityProvider.md#aab762-oidc)
 
-### Configuration options
+## Configuration options
 
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -356,7 +356,7 @@ Security#encrypt(String, byte[)&lt;/code&gt; and &lt;code&gt;Security#decrypt(St
 </tbody>
 </table>
 
-#### Deprecated Options
+### Deprecated Options
 
 | Key | Kind | Type | Default Value | Description |
 |----|----|----|----|----|
