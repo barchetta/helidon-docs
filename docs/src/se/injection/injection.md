@@ -249,7 +249,6 @@ The service registry manages the lifecycle of services. To ensure a method is in
 
 - [`@Service.PostConstruct`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.PostConstruct.html) – Invokes the annotated method after the instance has been created and fully injected.
 - [`@Service.PreDestroy`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.PreDestroy.html) – Invokes the annotated method when the service is no longer in use by the registry. (Such as if the intended scope ends)
-
   - [`@Service.PerLookup`](/apidocs/io.helidon.service.registry/io/helidon/service/registry/Service.PerLookup.html) – PreDestroy annotated method is not invoked, since it is not managed by the service registry after the injection.
   - **Other scopes** – The pre-destroy method is invoked when the scope is deactivated (e.g. for singletons this happens during registry or JVM shutdown).
 

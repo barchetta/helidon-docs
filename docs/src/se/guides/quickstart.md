@@ -41,9 +41,7 @@ curl -X GET http://localhost:8080/greet/Jose
 Congratulations! You now have a working Helidon SE application. You can use it to:
 
 - Experiment with Helidon SE features and services
-
   - Try out the [Health service and the Metrics service](#track-health-and-metrics)
-
 - [Build a Docker Image](#build-a-docker-image)
 - [Deploy it to Kubernetes](#deploy-application-to-kubernetes)
 - [Build GraalVM Native and Custom Java Runtime Images](#build-graalvm-native-and-custom-java-runtime-images)

@@ -71,11 +71,9 @@ With the OpenAPI UI displayed, follow these steps to access one of your serviceâ
 2.  The UI expands the operation, showing any input parameters and the possible responses. Click the "Try it out" button in the operationâ€™s row.
 3.  The UI now allows you to type into the input parameter field(s) to the right of each parameter name. Enter any required parameter values (first highlighted rectangle) and any non-required values you wish, then click "Execute" (highlighted arrow).
 4.  Just below the "Execute" button the UI shows several sections:  
-
     - the equivalent `curl` command for submitting the request with your inputs,
     - the URL used for the request, and
     - a new "Server response" section (second highlighted rectangle) containing several items from the response:  
-
       - HTTP status code
       - body
       - headers

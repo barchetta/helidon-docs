@@ -50,7 +50,6 @@ For each resource class in your application:
 
 1.  Identify the resources and sub-resources—​in other words, the paths—​declared in the resource class which you want to support CORS.
 2.  For each of those resources and sub-resources which should support CORS:
-
     1.  Find or create a Java method annotated with `@OPTIONS` and with the correct `@Path`.
     2.  To that `@OPTIONS` Java method add a Helidon [`@Cors.*`](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.html) annotation(s) that describes the cross-origin sharing you want for that resource.
 

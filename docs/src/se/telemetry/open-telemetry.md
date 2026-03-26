@@ -21,10 +21,8 @@ Helidon SE supports OpenTelemetry in several important ways:
 
 - Implements the [neutral Helidon tracing API](../../se/tracing.md) using OpenTelemetry
 - Allows users to assign OpenTelemetry settings as follows:
-
   - Declaratively, using Helidon config under the top-level `telemetry` config key
   - Programmatically, using the OpenTelemetry SDK API and the Helidon OpenTelemetry API
-
 - Conforms to the [OpenTelemetry semantic conventions](https://github.com/open-telemetry/semantic-conventions/blob/v1.58.0/docs/http/http-spans.md#http-server) for automatically-created spans and metrics for HTTP requests
 - Allows [publishing Helidon metrics](../../se/metrics/metrics.md#usage-publishing) to backend systems using OTLP.
 
@@ -35,9 +33,7 @@ Helidon’s config support for OpenTelemetry has certain config attributes which
 The Helidon OpenTelemetry configuration format, the Helidon OpenTelemetry API, and this documentation all follow this hierarchy:
 
 - [Top-level telemetry](#top-level-config)
-
   - Signals
-
     - [Tracing](#tracing-config)
     - [Metrics](#metrics-config)
     - [Logging](#logger-config)

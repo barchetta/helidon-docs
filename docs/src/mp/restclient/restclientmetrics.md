@@ -139,7 +139,6 @@ To create this REST client metrics example follow these steps.
 
     - Times all outbound method invocations using separate timers for each method.
     - Counts the number of times a request is sent to get the default greeting message.
-
 3.  Add a new resource class, similar to the `GreetService` resource class, but which delegates all incoming requests using the REST client.
 
     ``` java
@@ -225,7 +224,6 @@ To create this REST client metrics example follow these steps.
     ```
 
 7.  Look for two types of metrics:
-
     1.  Counter:
 
         ``` text

@@ -183,11 +183,8 @@ Helidon MP also supports custom TLS configuration.
 You can set the following properties:
 
 - Server truststore
-
   - Keystore with trusted certificates
-
 - Private key and certificate
-
   - Server certificate which will be used in TLS handshake
 
 *META-INF/microprofile-config.properties - Server configuration*
@@ -434,11 +431,9 @@ When you prepare the connections in your server you can include the following op
 
 - enabled or disabled
 - which type or types of requested URI discovery to use:
-
   - `FORWARDED` - uses the `Forwarded` header
   - `X_FORWARDED` - uses the `X-Forwarded-*` headers
   - `HOST` - uses the `Host` header
-
 - what intermediate nodes to trust
 
 When your application receives a request Helidon iterates through the discovery types you set up for the receiving connection, gathering information from the corresponding header(s) for that type. If the request does not have the corresponding header(s), or your settings do not trust the intermediate nodes reflected in those headers, then Helidon tries the next discovery type you set up. Helidon uses the `HOST` discovery type if you do not set up discovery yourself or if, for a particular request, it cannot assemble the request information using any discovery type you did set up for the socket.

@@ -107,13 +107,10 @@ This use case demonstrates generating an immutable class with a builder from a b
 ### Specification
 
 1.  Blueprint Requirements:
-
     - Must be a package-private interface.
     - Its name must end with `Blueprint`. The prototype’s name will be the blueprint’s name without this suffix.
     - Options are defined as getter methods.
-
 2.  Generated Output:
-
     - Prototype is a part of your module public API.
     - The prototype class is placed in the same package as the blueprint.
     - Generated files can be found in the `./target/generated-sources/annotations` directory.

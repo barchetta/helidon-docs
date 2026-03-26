@@ -66,17 +66,13 @@ In order to support GraalVM `native-image` we have had to re-implement how CDI i
 - You can no longer start the CDI container yourself.
 - You can only run a single instance of Server in a JVM.
 - If you use `SeContainerInitializer` you will get an exception.
-
   - This can be worked around by configuration property `mp.initializer.allow=true`, and warning can be removed using `mp.initializer.no-warn=true`
   - Once `SeContainerInitializer` is used you can no longer use MP with `native-image`
-
 - You can no longer provide a `Context` instance. The root context is now built-in.
 - `MpService` and `MpServiceContext` have been removed.
-
   - Methods from context have been moved to `JaxRsCdiExtension` and `ServerCdiExtension`. These can be accessed from CDI extension through `BeanManager.getExtension`.
   - Methods `register` can be used on current `io.helidon.context.Context`
   - `MpService` equivalent is a CDI extension. All Helidon services were refactored to CDI extension (you can use these for reference).
-
 - `Server.cdiContainer` is removed, use `CDI.current()` instead.
 
 ## Metrics

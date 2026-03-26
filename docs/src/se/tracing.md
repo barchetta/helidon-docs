@@ -229,7 +229,6 @@ Helidon also uses Java service loading to locate listeners and register them aut
 
 1.  Implement the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) interface.
 2.  Declare your implementation as a service provider:
-
     1.  Create the file `META-INF/services/io.helidon.tracing.SpanListener` containing a line with the fully-qualified name of your class which implements `SpanListener`.
     2.  If your service has a `module-info.java` file add the following line to it:
 

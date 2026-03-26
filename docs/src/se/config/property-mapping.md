@@ -212,10 +212,8 @@ In this approach, everywhere your application needs to perform this conversion i
 In this approach, your application:
 
 1.  Tells each `Config.Builder` that needs to know about the custom mapper by either:
-
     1.  registering an instance of your mapper by invoking `Config.Builder.addMapper`, or
     2.  implementing [`ConfigMapperProvider`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigMapperProvider.html) so it returns an instance of your mapper (see the JavaDoc for complete information) and creating or editing the file `io.helidon.config.spi.ConfigMapperProvider` so it contains a line with the fully-qualified class name of your `ConfigMapperProvider`. The config system will use the Java service loader to find and invoke all `ConfigMapperProvider` classes listed and add the mappers they provide to each `Config.Builder` automatically.
-
 2.  Converts using the mapper by invoking the `Config.as` method which accepts the target type to convert to, *not* the mapper itself that does the conversion.
 
 If your application converts to the same target type in several places in the code, this approach allows you to change which mapper it uses by changing only the *registration* of the mapper, not each use of it.

@@ -195,13 +195,9 @@ All MicroProfile Config-compatible property names for Helidon MP’s named data 
 </div>
 
 - The name of a given configuration property always begins with the ***objecttype*** portion: a fully-qualified Java class name of the object being configured. Configuration for Helidon MP’s named data source integration concerns the behavior of `javax.sql.DataSource` objects, so Helidon MP’s named data source integration configuration property names begin with `javax.sql.DataSource`.
-
   - A period (`.`) separates the *objecttype* portion from the rest of the property name.
-
 - The ***datasourcename*** portion, the name of the data source being configured, comes next. It cannot contain a period (`.`).
-
   - A period (`.`) separates the *datasourcename* portion from the rest of the property name.
-
 - The ***propertyname*** portion, identifying the connection-pool- or vendor-supplied-`DataSource`-specific configuration property name, comes last. It may contain periods (`.`).
 
 As an example, configuration to set an imaginary `foo.bar` property on the `test` data source’s associated connection pool or vendor-specific `DataSource` to `baz` looks like this in Java `.properties` format:

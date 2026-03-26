@@ -735,7 +735,6 @@ Helidon also uses Java service loading to locate listeners and register them aut
 
 1.  Implement the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) interface.
 2.  Declare your implementation as a service provider:
-
     1.  Create the file `META-INF/services/io.helidon.tracing.SpanListener` containing a line with the fully-qualified name of your class which implements `SpanListener`.
     2.  If your service has a `module-info.java` file add the following line to it:
 
@@ -772,7 +771,5 @@ Refer to the following references for additional information:
 
 - [MicroProfile OpenTracing specification](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/microprofile-opentracing-spec-3.0.html)
 - [MicroProfile OpenTracing Javadoc](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/apidocs)
-
   - [OpenTelemetry API](https://opentelemetry.io/docs/instrumentation/js/api/tracing/)
-
 - [Helidon Javadoc](/apidocs/index.html?overview-summary.html)

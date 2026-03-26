@@ -536,5 +536,4 @@ Helidon provides `MetricsChatModelListener` which generates metrics that follow 
 
 - [LangChain4j documentation](https://docs.langchain4j.dev/)
 - Components Reference
-
   - [Code generated Lc4j Provider](codegen-provider.md)

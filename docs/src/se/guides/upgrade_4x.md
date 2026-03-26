@@ -405,19 +405,14 @@ Metrics has changed significantly in Helidon 4.x. For more information, see [Hel
 ### Security
 
 - Changed modules:
-
   - `helidon-security-integration-grpc` was removed
   - `helidon-security-integration-jersey` moved to the module `helidon-microprofile-security`
   - `helidon-security-integration-jersey-client` moved to the module `helidon-microprofile-security`
   - `helidon-security-integration-webserver` moved to the module `helidon-webserver-security`
-
 - Significant class name changes:
-
   - `OidcSupport` was renamed to `OidcFeature`
   - `WebSecurity` was renamed to `SecurityFeature`
-
 - Other:
-
   - `SynchronousProvider removed` - `SynchronousProvider` usage is no longer needed, since all security providers are synchronous.
 
 ### Global Configuration

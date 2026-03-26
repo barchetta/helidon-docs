@@ -464,10 +464,8 @@ WebClient currently supports several built-in services, namely
 - `metrics`
 - `tracing`
 - `telemetry` (following OpenTelemetry semantic conventions)
-
   - `metrics`
   - `tracing`
-
 - `security`.
 
 #### Enabling the service

@@ -72,12 +72,9 @@ public class HelloWorld {
 
 - Read [Get Started](../about/prerequisites.md) and learn how to set up your environment.
 - Try out Helidon with the Quick Start tutorials:
-
   - [Helidon SE Quick Start](../se/guides/quickstart.md)
   - [Helidon MP Quick Start](../mp/guides/quickstart.md)
-
 - If you’re using an earlier version of Helidon, read the Helidon Upgrade Guides for guidance on how to move to the latest version:
-
   - [Helidon SE 4.x Upgrade Guide](../se/guides/upgrade_4x.md)
   - [Helidon MP 4.x Upgrade Guide](../mp/guides/upgrade_4x.md)
 

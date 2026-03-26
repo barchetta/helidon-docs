@@ -166,20 +166,14 @@ To create your first client:
 3.  Navigate to the left menu, into configure section, click on `Clients`. This window displays a table with every client from the realm.
 4.  Click on `Create client`.
 5.  Fill the following:
-
     1.  `Client ID` : `myClientID`
     2.  `Client Protocol` : `OpenID Connect`
-
 6.  Press `Next`
 7.  `Capability config` step
-
     1.  Enable `Client authentication`
     2.  Enable `Authorization`
-
 8.  Press `Next`
-
     1.  Update `Valid Redirect URIs` : <http://localhost:7987/*>
-
 9.  Click on `Save`.
 
 A new tab named `Credentials` is created. Click on it to access this new tab.
@@ -323,10 +317,8 @@ The tests must be skipped, otherwise it produces test failure. As the `/greet` e
 3.  Enter the following into URL : `http://localhost:7987/greet`.
 4.  Keycloak redirect you to its login page.
 5.  Enter the username and associated password:
-
     1.  `Username` : `myUser`
     2.  `Password`: `password`
-
 6.  After successful log in, keycloak redirect you to the `http://localhost:7987/greet` endpoint and print Hello word.
 7.  Press `Ctrl+C` to stop the application.
 

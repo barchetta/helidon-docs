@@ -107,13 +107,9 @@ docker run --rm -p 8082:8082 -p 9092:9092 --name=h2 -it h2db
 A database stores the books from the library. H2 is a java SQL database that is easy to use and lightweight. If H2 is not installed on your machine, here are few steps to quickly download and set it up:
 
 1.  Download the latest H2 version from the official website: <https://www.h2database.com/html/main.html>
-
     - Note: Windows operating system users can download the Windows Installer.
-
 2.  Unzip the downloaded file into your directory.
-
     - Only the h2-{latest-version}.jar, located in the h2/bin folder, will be needed.
-
 3.  Open a terminal window and run the following command to start H2:.
 
 *Replace `{latest-version}` with your current H2 version:*

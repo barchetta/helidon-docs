@@ -409,7 +409,6 @@ The handler forwards the request to the downstream handlers by *nexting*. There 
   - handler for any HTTP method using the `/hello` path
   - business logic implementation
   - forward the current request to the downstream handler
-
 - throw an exception to forward to [error handling](#error-handling)
 
   ``` java
@@ -474,11 +473,9 @@ When you prepare the connections in your server you can include the following op
 
 - enabled or disabled
 - which type or types of requested URI discovery to use:
-
   - `FORWARDED` - uses the `Forwarded` header
   - `X_FORWARDED` - uses the `X-Forwarded-*` headers
   - `HOST` - uses the `Host` header
-
 - what intermediate nodes to trust
 
 When your application invokes `request.requestedUri()` Helidon iterates through the discovery types you set up for the receiving connection, gathering information from the corresponding header(s) for that type. If the request does not have the corresponding header(s), or your settings do not trust the intermediate nodes reflected in those headers, then Helidon tries the next discovery type you set up. Helidon uses the `HOST` discovery type if you do not set up discovery yourself or if, for a particular request, it cannot assemble the request information using any discovery type you did set up for the socket.
