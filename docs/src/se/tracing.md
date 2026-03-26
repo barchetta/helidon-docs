@@ -3,21 +3,13 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Configuration](#configuration)
-
 - [Additional Information](#additional-information)
-
   - [Jaeger Tracing](#jaeger-tracing)
-
   - [Zipkin Tracing](#zipkin-tracing)
-
   - [OpenTelemetry Tracing](#opentelemetry-tracing)
-
 - [Reference](#reference)
 
 ## Overview

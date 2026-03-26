@@ -3,9 +3,7 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
 
 ## Overview

@@ -3,15 +3,10 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Components](#components)
-
   - [GoogleAiGeminiChatModel](#googleaigeminichatmodel)
-
   - [GoogleAiGeminiStreamingChatModel](#googleaigeministreamingchatmodel)
-
 - [Additional Information](#additional-information)
 
 ## Overview

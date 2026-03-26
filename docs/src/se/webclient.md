@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Configuring the WebClient](#configuring-the-webclient)
-
 - [Examples](#examples)
 
 ## Overview

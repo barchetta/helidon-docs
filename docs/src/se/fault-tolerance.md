@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [API](#api)
-
 - [Examples](#examples)
-
 - [Additional Information](#additional-information)
 
 ## Overview

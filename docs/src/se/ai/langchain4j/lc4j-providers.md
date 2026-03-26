@@ -3,11 +3,8 @@
 ## Contents
 
 - [Maven Coordinates](#maven-coordinates)
-
 - [Content Retriever](#content-retriever)
-
 - [In-Memory Embedding Store](#in-memory-embedding-store)
-
 - [Additional Information](#additional-information)
 
 ## Maven Coordinates

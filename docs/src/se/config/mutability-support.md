@@ -3,11 +3,8 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Using Config Metadata](#using-config-metadata)
-
 - [Responding to Changes in Config Sources](#responding-to-changes-in-config-sources)
-
 - [Accessing Always-current Values](#accessing-always-current-values)
 
 ## Overview

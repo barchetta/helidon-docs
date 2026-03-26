@@ -3,9 +3,7 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [JSON Binding](#json-binding)
-
 - [JSON Processor](#json-processor)
 
 ## Overview

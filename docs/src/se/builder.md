@@ -3,17 +3,11 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Use Cases](#use-cases)
-
   - [Generate a class with a builder](#generate-a-class-with-a-builder)
-
   - [Add support for reading data from configuration](#add-support-for-reading-data-from-configuration)
-
   - [Creating a runtime type](#creating-a-runtime-type)
-
 - [API](#api)
 
 ## Overview

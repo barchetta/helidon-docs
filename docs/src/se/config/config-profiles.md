@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Profile Options](#profile-options)
-
 - [Profile Config Source](#profile-config-sources)
-
 - [Profile Files](#profile-files)
-
 - [Declarative](#declarative)
 
 ## Overview

@@ -3,21 +3,13 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
   - [Configuring Authentication](#configuring-authentication)
-
   - [Accessing OCI Services](#accessing-oci-services)
-
   - [Region Information](#region-information)
-
   - [Instance Metadata Service Instance Information](#instance-metadata-service-instance-information)
-
 - [Configuration](#configuration)
-
 - [References](#references)
 
 ## Overview

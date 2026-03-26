@@ -3,23 +3,14 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [API](#api)
-
 - [Configuration](#configuration)
-
   - [Configuring TLS](#configuring-tls)
-
 - [Usage](#usage)
-
   - [Defining a Client Interface](#defining-a-client-interface)
-
   - [Injecting Client Proxies](#injecting-client-proxies)
-
   - [Injecting Channels](#injecting-channels)
-
 - [Examples](#examples)
 
 ## Overview

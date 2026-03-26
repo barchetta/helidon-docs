@@ -3,17 +3,11 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Config](#config)
-
 - [Consuming Messages](#consuming-messages)
-
 - [Producing Messages](#producing-messages)
-
 - [NACK Strategy](#nack-strategy)
-
 - [Examples](#examples)
 
 ## Overview

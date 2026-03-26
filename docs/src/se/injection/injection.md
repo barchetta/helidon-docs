@@ -3,35 +3,20 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Basic terms](#basic-terms)
-
 - [How are services defined?](#how-are-services-defined)
-
 - [Injection points](#injection-points)
-
 - [Scopes](#scopes)
-
 - [Build time](#build-time)
-
 - [Basic injection example](#basic-injection-example)
-
 - [Service Lifecycle](#service-lifecycle)
-
 - [Qualifiers](#qualifiers)
-
 - [Factories](#factories)
-
 - [Interceptors](#interceptors)
-
 - [Events](#events)
-
 - [Programmatic Lookup](#programmatic-lookup)
-
 - [Startup](#startup)
 
 ## Overview

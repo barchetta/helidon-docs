@@ -3,17 +3,11 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Configuration Node Types](#configuration-node-types)
-
 - [Configuration Key](#configuration-key)
-
 - [In-memory Representation of Configuration](#in-memory-representation-of-configuration)
-
 - [Access by Key](#access-by-key)
-
 - [Access by General Navigation](#access-by-general-navigation)
-
 - [Detaching a Config Subtree](#detaching-a-config-subtree)
 
 ## Overview

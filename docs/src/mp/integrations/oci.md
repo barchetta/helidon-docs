@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Authentication](#authentication)
-
 - [Accessing OCI Services](#accessing-oci-services)
-
 - [References](#references)
 
 ## Overview

@@ -3,15 +3,10 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Usage](#usage)
-
 - [Installation](#installation)
-
 - [Configuration](#configuration)
-
 - [Logging](#logging)
-
 - [Related Documentation](#related-documentation)
 
 ## Overview

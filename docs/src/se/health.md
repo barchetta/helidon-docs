@@ -3,27 +3,16 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [API](#api)
-
   - [Enabling Health Support](#enabling-health-support-and-built-in-health-checks-in-your-application)
-
   - [Writing Custom Health Checks](#writing-custom-health-checks)
-
   - [Kubernetes Probes](#kubernetes-probes)
-
   - [Troubleshooting Probes](#troubleshooting-probes)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
-
   - [JSON Response Example](#json-response-example)
-
   - [Kubernetes Example](#kubernetes-example)
-
 - [Additional Information](#additional-information)
 
 ## Overview

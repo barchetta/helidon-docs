@@ -3,15 +3,10 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Examples](#examples)
-
 - [Local Testing](#local-testing)
-
 - [References](#references)
 
 ## Overview

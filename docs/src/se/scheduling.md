@@ -3,21 +3,13 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Configuration](#configuration)
-
 - [Cron](#cron)
-
 - [Fixed Rate](#fixed-rate)
-
 - [Task Management](#task-management)
-
 - [Examples](#examples)
-
 - [Reference](#reference)
 
 ## Overview

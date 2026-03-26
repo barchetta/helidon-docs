@@ -3,23 +3,14 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [API](#api)
-
 - [Usage](#usage)
-
   - [Defining a Service](#defining-a-service)
-
   - [Using Custom Marshalers](#using-custom-marshalers)
-
 - [Implementing a gRPC Extension](#implementing-a-grpc-extension)
-
 - [gRPC Reflection Service](#grpc-reflection-service)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
 
 ## Overview

@@ -3,27 +3,16 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [API](#api)
-
   - [Helidon Metrics API](#helidon-metrics-api)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
-
   - [Example Application Code](#example-application-code)
-
   - [Example Configuration](#example-configuration)
-
 - [Additional Information](#additional-information)
-
   - [References](#references)
-
   - [Support for the Prometheus Metrics API](#support-for-the-prometheus-metrics-api)
 
 ## Overview

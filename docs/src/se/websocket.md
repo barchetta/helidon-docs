@@ -3,11 +3,8 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Example](#example)
-
 - [Reference](#reference)
 
 ## Overview

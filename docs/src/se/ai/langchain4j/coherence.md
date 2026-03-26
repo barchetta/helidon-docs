@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Components](#components)
-
   - [CoherenceEmbeddingStore](#coherenceembeddingstore)
-
 - [Additional Information](#additional-information)
 
 ## Overview

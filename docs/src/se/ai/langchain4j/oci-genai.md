@@ -3,19 +3,12 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Components](#components)
-
   - [OciGenAiChatModel](#ocigenaichatmodel)
-
   - [OciGenAiStreamingChatModel](#ocigenaistreamingchatmodel)
-
   - [OciGenAiCohereChatModel](#ocigenaicoherechatmodel)
-
   - [OciGenAiCohereStreamingChatModel](#ocigenaicoherestreamingchatmodel)
-
 - [Additional Information](#additional-information)
 
 ## Overview

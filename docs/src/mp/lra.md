@@ -3,29 +3,17 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [API](#api)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
-
 - [Testing](#testing)
-
 - [Additional Information](#additional-information)
-
   - [Coordinator](#coordinator)
-
   - [MicroTx LRA Coordinator](#microtx-lra-coordinator)
-
   - [Helidon LRA Coordinator](#helidon-lra-coordinator)
-
   - [Narayana](#narayana)
-
 - [Reference](#reference)
 
 ## Overview

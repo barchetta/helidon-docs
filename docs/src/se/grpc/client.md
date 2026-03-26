@@ -3,23 +3,14 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
   - [Generated Stubs](#generated-stubs)
-
   - [Service Descriptors](#service-descriptors)
-
   - [Client URI Suppliers](#client-uri-suppliers)
-
   - [Client Interceptors](#client-interceptors)
-
   - [Metrics](#metrics)
-
   - [Tracing](#tracing)
-
 - [Configuration](#configuration)
 
 ## Overview

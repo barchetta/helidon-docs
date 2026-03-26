@@ -3,25 +3,15 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Annotation Processor](#annotation-processor)
-
 - [Usage](#usage)
-
 - [Helidon Config](#helidon-config)
-
 - [MP Application](#mp-application)
-
 - [Repository Interface](#repository-interface)
-
 - [Pagination](#pagination)
-
 - [Dynamic Ordering](#dynamic-ordering)
-
 - [Persistence Session Access](#persistence-session-access)
-
 - [Transactions](#transactions)
 
 ## Overview

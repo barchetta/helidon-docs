@@ -3,27 +3,16 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
   - [Channel](#channel)
-
   - [Processor](#processor)
-
   - [Message](#message)
-
   - [Connectors](#connectors)
-
     - [Kafka Connector](#kafka-connector)
-
     - [JMS Connector](#jms-connector)
-
     - [AQ Connector](#aq-connector)
-
 - [Configuration](#configuration)
-
 - [Reference](#reference)
 
 ## Overview

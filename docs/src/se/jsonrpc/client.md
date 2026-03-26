@@ -3,17 +3,11 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
   - [Simple Requests](#simple-requests)
-
   - [Batch Requests](#batch-requests)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
 
 ## Overview

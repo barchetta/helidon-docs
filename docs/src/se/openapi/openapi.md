@@ -3,15 +3,10 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [API](#api)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
 
 ## Overview

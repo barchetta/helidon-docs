@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Configuration](#configuration)
-
 - [Helidon Test](#helidon-test-with-mock-connector)
 
 ## Overview

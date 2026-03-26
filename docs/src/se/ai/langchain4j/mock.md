@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Components](#components)
-
   - [MockChatModel](#mockchatmodel)
-
 - [Additional Information](#additional-information)
 
 ## Overview

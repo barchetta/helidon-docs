@@ -3,13 +3,9 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
   - [Imperative Schema Creation](#imperative-schema-creation)
-
   - [Declarative Schema Creation](#declarative-schema-creation)
 
 ## Overview

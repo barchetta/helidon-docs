@@ -3,9 +3,7 @@
 ## Contents
 
 - [Maven Coordinates](#maven-coordinates)
-
 - [Retrieval-Augmented Generation](#retrieval-augmented-generation)
-
 - [Additional Information](#additional-information)
 
 ## Maven Coordinates

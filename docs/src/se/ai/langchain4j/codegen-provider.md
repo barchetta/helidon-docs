@@ -3,15 +3,10 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Lc4j Provider](#lc4j-provider)
-
 - [Configuration](#configuration)
-
 - [Injectable Properties](#injectable-properties)
-
 - [Default Injectable Properties](#default-injectable-properties)
 
 ## Overview

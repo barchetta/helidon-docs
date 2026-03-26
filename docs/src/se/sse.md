@@ -3,19 +3,12 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Server API](#server-api)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Client API](#client-api)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [Additional Information](#additional-information)
 
 ## Overview

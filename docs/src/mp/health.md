@@ -3,17 +3,11 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [REST Endpoints](#rest-endpoints)
-
 - [Configuration](#configuration)
-
 - [Examples](#examples)
-
 - [Reference](#reference)
 
 ## Overview

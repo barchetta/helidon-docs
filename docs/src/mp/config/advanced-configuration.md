@@ -3,15 +3,10 @@
 ## Contents
 
 - [Creating MicroProfile Config Sources for Manual Setup of Config](#creating-microprofile-config-sources-for-manual-setup-of-config)
-
 - [Creating Custom Config Sources](#creating-custom-config-sources)
-
 - [Creating MicroProfile Config Sources from meta-config](#creating-microprofile-config-sources-from-meta-config)
-
 - [Extending Meta-Config to Create a Custom Config Source Type](#extending-meta-config-to-create-a-custom-config-source-type)
-
 - [Creating MicroProfile Config Source from Helidon SE Config Source](#creating-microprofile-config-source-from-helidon-se-config-source)
-
 - [Creating MicroProfile Config Source from Helidon SE Config Instance](#creating-microprofile-config-source-from-helidon-se-config-instance)
 
 ## Creating MicroProfile Config Sources for Manual Setup of Config

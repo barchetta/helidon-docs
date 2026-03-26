@@ -3,9 +3,7 @@
 ## Contents
 
 - [Maven Coordinates](#maven-coordinates)
-
 - [In-Process Embedding Model](#in-process-embedding-model)
-
 - [Additional Information](#additional-information)
 
 ## Maven Coordinates

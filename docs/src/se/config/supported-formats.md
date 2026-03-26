@@ -3,9 +3,7 @@
 ## Contents
 
 - [Overview](#overview)
-
 - [Additional Config Formats and Parsers](#additional-config-formats-and-parsers)
-
 - [Additional Config Source Types](#additional-config-source-types)
 
 ## Overview
