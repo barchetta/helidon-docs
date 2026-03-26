@@ -25,9 +25,8 @@
 
 Helidon provides a LangChain4j integration module that simplifies the use of LangChain4j in Helidon applications.
 
-|  |  |
-|----|----|
-| Note | LangChain4j integration is a preview feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon. |
+> [!NOTE]
+> LangChain4j integration is a preview feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon.
 
 ## Features
 
@@ -118,9 +117,8 @@ Providers available out of the box:
 | [**Coherence Embedding Store**](coherence.md) | `coherence` | Coherence as embedding and chat memory store |
 | [**Mock**](mock.md) | `helidon-mock` | Mockable chat model for deterministic testing |
 
-|  |  |
-|----|----|
-| Note | Missing your favorite AI vendor already supported by LangChain4j? You can generate your own Helidon integration with our [**LangChain4j Model Provider Generator**](codegen-provider.md) or use the supplier factory! |
+> [!NOTE]
+> Missing your favorite AI vendor already supported by LangChain4j? You can generate your own Helidon integration with our [**LangChain4j Model Provider Generator**](codegen-provider.md) or use the supplier factory!
 
 ### Supplier Factory
 
@@ -144,9 +142,8 @@ class ChatModelFactory implements Supplier<ChatModel> {
 
 1.  Custom name of the resulting declarative service bean referencable from Ai Services or Agents
 
-|  |  |
-|----|----|
-| Note | Supplier factories can be **standalone** or **static inner** classes. |
+> [!NOTE]
+> Supplier factories can be **standalone** or **static inner** classes.
 
 To use such a manually created model, reference it by name.
 
@@ -212,9 +209,8 @@ langchain4j:
 
 ### Configuration Migration Guide
 
-|  |  |
-|----|----|
-| Warning | The configuration format has changed in version 4.4 in a backward-incompatible way |
+> [!WARNING]
+> The configuration format has changed in version 4.4 in a backward-incompatible way.
 
 Changes in 4.4:
 
@@ -463,9 +459,8 @@ public class OrderService {
 }
 ```
 
-|  |  |
-|----|----|
-| Note | If you are using Helidon MP, to enable `@Tool`-annotated methods in CDI beans, you must annotate the CDI bean with the `@Ai.Tool` qualifier. |
+> [!NOTE]
+> If you are using Helidon MP, to enable `@Tool`-annotated methods in CDI beans, you must annotate the CDI bean with the `@Ai.Tool` qualifier.
 
 For more details, read the [LangChain4j Documentation on Tools](https://docs.langchain4j.dev/tutorials/tools#high-level-tool-api).
 

@@ -17,9 +17,8 @@ Our declarative approach has the following advantages:
 - It is based on [Helidon Injection](injection.md#Overview)
 - Declarative features are in the same modules as Helidon SE features (i.e. does not require additional dependencies)
 
-|  |  |
-|----|----|
-| Note | Helidon Declarative is an incubating feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon. |
+> [!NOTE]
+> Helidon Declarative is an incubating feature. The APIs shown here are subject to change. These APIs will be finalized in a future release of Helidon.
 
 ## Usage
 

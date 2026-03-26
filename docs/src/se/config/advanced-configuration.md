@@ -362,9 +362,8 @@ As before, the config system replaces the value node in the containing config tr
 
 As described in the [hierarchical features section](hierarchical-features.md#accessByKey) each config node (except the root) has a non-null key.
 
-|  |  |
-|----|----|
-| Important | To emphasize, the dot character (“.”) has special meaning as a name separator in keys. To include a dot as a character in a key escape it as “~1”. |
+> [!IMPORTANT]
+> To emphasize, the dot character (“.”) has special meaning as a name separator in keys. To include a dot as a character in a key escape it as “~1”.
 
 For example, the following configuration file contains two object nodes with names `oracle` and `oracle.com`.
 

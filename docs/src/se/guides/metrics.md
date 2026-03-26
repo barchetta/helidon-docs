@@ -60,9 +60,8 @@ Helidon provides three built-in scopes of metrics: base, vendor, and application
 
 Applications can add their own custom scopes as well simply by specifying a custom scope name when registering a meter.
 
-|      |                                                              |
-|------|--------------------------------------------------------------|
-| Note | The `/observe/metrics` endpoint returns data for all scopes. |
+> [!NOTE]
+> The `/observe/metrics` endpoint returns data for all scopes.
 
 The built-in meters fall into these categories:
 
@@ -103,9 +102,9 @@ mvn package
 java -jar target/helidon-quickstart-se.jar
 ```
 
-|  |  |
-|----|----|
-| Note | Metrics output can be returned in either text format (the default), or JSON. The text format uses OpenMetrics (Prometheus) Text Format, see <a href="https://prometheus.io/docs/instrumenting/exposition_formats/#text-format-details" class="bare">https://prometheus.io/docs/instrumenting/exposition_formats/#text-format-details</a>. |
+> [!NOTE]
+> Metrics output can be returned in either text format (the default), or JSON.
+> The text format uses OpenMetrics (Prometheus) Text Format, see https://prometheus.io/docs/instrumenting/exposition_formats/#text-format-details
 
 Verify the metrics endpoint in a new terminal window:
 
@@ -763,9 +762,8 @@ Verify the metrics endpoint using port `30116`, your port will likely be differe
 curl http://localhost:31143/metrics
 ```
 
-|  |  |
-|----|----|
-| Note | Leave the application running in Kubernetes since it will be used for Prometheus integration. |
+> [!NOTE]
+> Leave the application running in Kubernetes since it will be used for Prometheus integration.
 
 #### Prometheus Integration
 
