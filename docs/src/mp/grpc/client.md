@@ -33,9 +33,7 @@ To enable gRPC MicroProfile Clients, add the following dependency to your projec
 The following annotations are used to work with Helidon MP gRPC clients:
 
 - `@Grpc.GrpcChannel` - an annotation used to inject a gRPC channel.
-
 - `@Grpc.GrpcProxy` - an annotation used to mark an injection point for a gRPC service client proxy.
-
 - `@Grpc.GrpcService` - an annotation used to specify the name of a gRPC service to connect to.
 
 ## Configuration
@@ -52,11 +50,8 @@ grpc:
 ```
 
 - Channels are configured in the `channels` section under `grpc.client`.
-
 - The name of the channel as referred to in the application code.
-
 - The host name for the channel (defaults to localhost).
-
 - The port number for the channel (defaults to 1408).
 
 While most client applications only connect to a single server, it is possible to configure multiple (an array of) named channels if the client needs to connect to multiple servers.
@@ -120,7 +115,6 @@ interface StringServiceClient {
 ```
 
 - The `@Grpc.GrpcService` annotation is necessary to provide the name of the gRPC service when it differs from the interface name, as it is the case in this example.
-
 - The `@Grpc.GrpcChannel` annotation is the qualifier that supplies the channel name. This is the same name as used in the channel configuration in the examples provided in the [Configuration section](#configuration).
 
 There is no need to write any code to implement the client. The Helidon MP gRPC API will create a dynamic proxy for the interface using the information from the annotations and method signatures.
@@ -153,7 +147,6 @@ public class MyAppBean {
 ```
 
 - The `@Inject` annotation tells CDI to inject the client implementation.
-
 - The `@Grpc.GrpcProxy` annotation is used by the CDI container to match the injection point to the gRPC MP API provider.
 
 When the CDI container instantiates `MyAppBean`, it will inject a dynamic proxy into the `stringServiceClient` field, and then provide the necessary logic for the proxy methods to convert a method call into a gRPC call.
@@ -173,7 +166,6 @@ For example, a class might have an injectable `io.grpc.Channel` field as follows
 ```
 
 - The `@Inject` annotation tells CDI to inject the channel.
-
 - The `@Grpc.GrpcChannel` annotation supplies the channel name. This is the same name as used in the channel configuration in the examples provided in the [Configuration section](#configuration).
 
 An injected channel can be used, for example, when directly instantiating `protoc` generated stubs.

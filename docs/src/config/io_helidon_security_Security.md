@@ -7,7 +7,6 @@ Configuration of security providers, integration and other security options.
 ## Usages
 
 - [`security`](../config/config_reference.md#ac4d0b-security)
-
 - [`server.features.security.security`](../config/io_helidon_webserver_security_SecurityFeature.md#ad067b-security)
 
 ## Configuration options

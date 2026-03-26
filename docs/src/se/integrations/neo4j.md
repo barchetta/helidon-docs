@@ -158,7 +158,6 @@ record MovieRepository(Driver driver) {
 ```
 
 - Constructor with `Neo4j` driver parameter
-
 - Use `Neo4j` driver to extract all Movies
 
 Movies can now be returned as JSON objects:
@@ -204,11 +203,8 @@ System.out.println("WEB server is up! http://localhost:" + server.port() + "/api
 ```
 
 - Use of `Neo4j` support object to initialise and configure the driver.
-
 - Use of `Neo4jMetricsSupport` to add *Neo4j* metrics to `/metrics` output.
-
 - Use of `Neo4jHealthCheck` to add *Neo4j* health support.
-
 - Register `MovieService` in *Routing*.
 
 Now build and run.
@@ -300,5 +296,4 @@ Health checks for Neo4j will be included in `/health` endpoint output.
 ## References
 
 - [Neo4j official website](https://neo4j.com/)
-
 - [Neo4j Java developer guide](https://neo4j.com/developer/java/)

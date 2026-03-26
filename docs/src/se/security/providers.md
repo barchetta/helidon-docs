@@ -438,7 +438,6 @@ security:
 At Helidon startup, if OIDC provider is configured, the following will happen:
 
 1.  `client-id`, `client-secret`, and `identityUri` are validated - these must provide values
-
 2.  Unless all resources are configured as local resources, the provider attempts to contact the `oidc-metadata.resource` endpoint to retrieve all endpoints
 
 At runtime, depending on configuration…​
@@ -446,29 +445,19 @@ At runtime, depending on configuration…​
 If a request comes without a token or with insufficient scopes:
 
 1.  If `redirect` is set to `true` (default), request is redirected to the authorization endpoint of the identity server. If set to false, `401` is returned
-
 2.  User authenticates against the identity server
-
 3.  The identity server redirects back to Helidon service with a code
-
 4.  Helidon service contacts the identity server’s token endpoint, to exchange the code for a JWT
-
 5.  The JWT is stored in a cookie (if cookie support is enabled, which it is by default)
-
 6.  Helidon service redirects to original endpoint (on itself)
 
 Helidon obtains a token from request (from cookie, header, or query parameter):
 
 1.  Token is parsed as a singed JWT
-
 2.  We validate the JWT signature either against local JWK or against the identity server’s introspection endpoint depending on configuration
-
 3.  We validate the issuer and audience of the token if it matches the configured values
-
 4.  A subject is created from the JWT, including scopes from the token
-
 5.  We validate that we have sufficient scopes to proceed, and return `403` if not
-
 6.  Handling is returned to security to process other security providers
 
 ### Multiple tenants
@@ -476,9 +465,7 @@ Helidon obtains a token from request (from cookie, header, or query parameter):
 The OIDC provider also supports multiple tenants. To enable this feature, it is required to do several steps.
 
 1.  To enable the default multi-tenant support, add the `multi-tenant: true` option to the OIDC provider configuration
-
 2.  Specify the desired way to provide the tenant name. This step is done over adding the `tenant-id-style` configuration option. For more information, see the table below
-
 3.  Add the tenants section to the OIDC provider configuration
 
 ``` yaml
@@ -652,15 +639,12 @@ Subject is created based on the username and roles provided by the user store.
 When identity propagation is configured, there are several options for identifying username and password to propagate:
 
 1.  We propagate the current username and password (inbound request must be authenticated using basic authentication).
-
 2.  We use username and password from an explicitly configured property (See `EndpointConfig.PROPERTY_OUTBOUND_ID` and `EndpointConfig.PROPERTY_OUTBOUND_SECRET`)
-
 3.  We use username and password associated with an outbound target (see example configuration above)
 
 Identity is propagated only if:
 
 1.  There is an outbound target configured for the endpoint
-
 2.  Or there is an explicitly configured username/password for the current request (through request property)
 
 **Custom user store**
@@ -880,7 +864,6 @@ security:
 #### Signature basics
 
 - standard: based on <a href="https://tools.ietf.org/html/draft-cavage-http-signatures-03" class="bare">https://tools.ietf.org/html/draft-cavage-http-signatures-03</a>
-
 - key-id: an arbitrary string used to locate signature configuration - when a request is received the provider locates validation configuration based on this id (e.g. HMAC shared secret or RSA public key). Commonly used meanings are: key fingerprint (RSA); API Key
 
 #### How does it work?
@@ -1001,19 +984,14 @@ ABAC uses available validators and validates them against attributes of the auth
 Combinations of `fail-on-unvalidated` and `fail-if-none-validated`:
 
 1.  `true` & `true`: Will fail if any attribute is not validated and if any has failed validation
-
 2.  `false` & `true`: Will fail if there is one or more attributes present and NONE of them is validated or if any has failed validation, Will NOT fail if there is at least one validated attribute and any number of not validated attributes (and NONE failed)
-
 3.  `false` & `false`: Will fail if there is any attribute that failed validation, Will NOT fail if there are no failed validation or if there are NONE validated
 
 Any attribute of the following objects can be used:
 
 - environment (such as time of request) - e.g. env.time.year
-
 - subject (user) - e.g. subject.principal.id
-
 - subject (service) - e.g. service.principal.id
-
 - object (must be explicitly invoked by developer in code, as object cannot be automatically added to security context) - e.g. object.owner
 
 This provider checks that all defined ABAC validators are validated. If there is a definition for a validator that is not checked, the request is denied (depending on configuration as mentioned above).
@@ -1049,9 +1027,7 @@ public class AbacResource {
 **The following validators are implemented:**
 
 - [Roles](#role-validator)
-
 - [Scopes](#scope-validator)
-
 - [EL Policy](#expression-language-policy-validator)
 
 #### Role Validator
@@ -1214,27 +1190,18 @@ We expect to receive a token (with sufficient scopes) from the inbound request, 
 Once we receive the token in Helidon, we parse it and:
 
 1.  Validate if it timed out locally
-
 2.  Return a cached response (see `EvictableCache` with default values)
-
 3.  Otherwise verify using Google API - `GoogleIdTokenVerifier`
 
 We build a subject from the Google token with the following attributes filled (if in token):
 
 - userId
-
 - email
-
 - name
-
 - emailVerified
-
 - locale
-
 - family_name
-
 - given_name
-
 - picture (URL)
 
 **Outbound security** The token will be propagated to outbound calls if an outbound target exists that matches the invoked endpoint (see `outbound` configuration above).
@@ -1312,19 +1279,11 @@ For outbound, we support either token propagation (e.g. the token from request i
 ## Reference
 
 - [Helidon Security Examples](https://github.com/oracle/helidon/tree/mainexamples/security)
-
 - [Helidon OIDC JavaDoc](/apidocs/io.helidon.security.providers.oidc/module-summary.html)
-
 - [Helidon HTTP Authentication JavaDoc](/apidocs/io.helidon.security.providers.httpauth/module-summary.html)
-
 - [Helidon Header Authentication JavaDoc](/apidocs/io.helidon.security.providers.header/module-summary.html)
-
 - [Helidon HTTP Signature JavaDoc](/apidocs/io.helidon.security.providers.httpsign/module-summary.html)
-
 - [Helidon IDCS Role Mapper JavaDoc](/apidocs/io.helidon.security.providers.idcs.mapper/module-summary.html)
-
 - [Helidon ABAC JavaDoc](/apidocs/io.helidon.security.providers.abac/module-summary.html)
-
 - [Helidon Google Login JavaDoc](/apidocs/io.helidon.security.providers.google.login/module-summary.html)
-
 - [Helidon JWT JavaDoc](/apidocs/io.helidon.security.providers.jwt/module-summary.html)

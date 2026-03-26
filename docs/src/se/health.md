@@ -22,11 +22,8 @@ It’s a good practice to monitor your microservice’s health to ensure that it
 A typical health check combines the statuses of all the dependencies that affect availability and the ability to perform correctly:
 
 - Network Latency
-
 - Storage
-
 - Database
-
 - Other Services (used by your application)
 
 ## Maven Coordinates
@@ -56,11 +53,8 @@ Optional dependency to use built-in health checks:
 The health subsystem is part of the observability support. As a result, your application includes health support by default provided your project meets several conditions:
 
 - Your project depends on the `helidon-webserver-observe-health` component as described above.
-
 - (Optional) Your project depends on the `helidon-health-checks` component (if you want the built-in health checks).
-
 - Your code allows the webserver’s automatic feature discovery (enabled by default).
-
 - Your code allows the observe feature’s automatic observer discovery (also enabled by default).
 
 If you disable either type of automatic discovery you can add the observe feature to the webserver explicitly, and you can add the health observer to the observe feature explicitly, customizing the behavior of each programmatically if you wish. You can also use configuration to tailor some of the behavior of the health component (such as changing the URI path from `/observe/health` to something else).
@@ -74,7 +68,6 @@ A health check is a Java functional interface that returns a new `HealthCheckRes
 Your code registers a custom health check by invoking a method on Helidon-provided types in one of the following ways:
 
 - Pass the name and type of the health check and a `Supplier` of a `HealthCheckResponse` such as a method reference or a lambda expression.
-
 - Pass an instance of a class which implements the `HealthCheck` interface.
 
 Within an application different techniques might make sense for different custom health checks, depending on the complexity of the logic for computing the status for each check. The various styles are functionally equivalent; for a given custom health check choose the style which enhances the readability and clarity of your code. The examples below, in no particular order, implement the same custom health check functionality in different ways to illustrate.
@@ -110,15 +103,10 @@ ObserveFeature observe = ObserveFeature.builder()
 ```
 
 - Apply configuration to auto-discovered observers (e.g., health, metrics).
-
 - Augment the web server by adding the `ObserveFeature` containing the `HealthObserver`. This replaces the auto-discovered health observer.
-
 - Include the Helidon-supplied health checks.
-
 - Add the custom health check, passing a reference to the method which returns the health check responses.
-
 - Set the type of the custom health check.
-
 - Set the name of the custom health check.
 
 #### Option 2: Using an in-line lambda expression
@@ -143,17 +131,11 @@ ObserveFeature observe = ObserveFeature.builder()
 ```
 
 - Augment the web server by adding the `ObserveFeature` containing the `HealthObserver`.
-
 - Add the custom health check passing a lambda expression supplying the health check response.
-
 - In the lambda, set the health check response status.
-
 - Still in the lambda, set a detail associated with the health check response.
-
 - Still in the lambda, build the health check response.
-
 - Set the type of the custom health check.
-
 - Set the name of the custom health check.
 
 Note that the logic in the lambda expression runs every time Helidon probes the added health check, so the values passed to `status` and `detail` are recomputed every time.
@@ -189,11 +171,8 @@ class SlowStartHealthCheck implements HealthCheck {
 ```
 
 - Implement the `io.helidon.health.HealthCheck` interface. The default health check name is the simple class name of the implementing class. Your code can override the `name()` method to return a different name. (Not shown in this example)
-
 - The default health check type is `LIVENESS` so this implementation overrides `type()` to declare a `READINESS` check.
-
 - Sets a detail value `time` associated with the response to the current time.
-
 - Reports `DOWN` until at least eight seconds have passed since the server start-up, then reports `UP` thereafter.
 
 *Registering a `HealthCheck` instance*
@@ -208,7 +187,6 @@ ObserveFeature observe = ObserveFeature.builder()
 ```
 
 - Augment the web server by adding the `ObserveFeature` containing the `HealthObserver`.
-
 - Instantiate the custom health check class and add the instance to the `HealthObserver`.
 
 #### Adding Observability (including the Custom Health Checks) to Helidon
@@ -369,23 +347,18 @@ WebServer server = WebServer.builder()
 ```
 
 - Disables automatic registration of the built-in health checks.
-
 - Adds the specific built-in check(s) you want.
-
 - Adds a custom check (in a previously-prepared variable `hc`).
 
 You can control the thresholds for built-in health checks in either of two ways:
 
 - Create the health checks individually using their builders instead of using the `HealthChecks` convenience class. Follow the JavaDoc links in the [table](#built-in-health-checks) above.
-
 - Using configuration as explained in [Configuration](#configuration).
 
 ### Kubernetes Probes
 
 - [Liveness Probe](#liveness-probe)
-
 - [Readiness Probe](#readiness-probe)
-
 - [Startup Probe](#startup-probe)
 
 Probes is the term used by Kubernetes to describe health checks for containers ([Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes)).
@@ -393,17 +366,13 @@ Probes is the term used by Kubernetes to describe health checks for containers (
 There are three types of probes:
 
 - *liveness*: Indicates whether the container is running
-
 - *readiness*: Indicates whether the container is ready to service requests
-
 - *startup*: Indicates whether the application in the container has started
 
 You can implement probes using the following mechanisms:
 
 1.  Running a command inside a container
-
 2.  Sending an `HTTP` request to a container
-
 3.  Opening a `TCP` socket to a container
 
 A microservice exposed to HTTP traffic will typically implement both the liveness probe and the readiness probe using HTTP requests. If the microservice takes a significant time to initialize itself, you can also define a startup probe, in which case Kubernetes does not check liveness or readiness probes until the startup probe returns success.
@@ -427,9 +396,7 @@ The liveness probe is used to verify the container has become unresponsive. For 
 We recommend the following:
 
 - Avoid checking dependencies in a liveness probe.
-
 - Set `timeoutSeconds` to avoid excessive probe failures.
-
 - Acknowledge startup times with `initialDelaySeconds`.
 
 #### Readiness Probe
@@ -442,9 +409,7 @@ The readiness probe is used to avoid routing requests to the pod until it is rea
 We recommend the following:
 
 - Be conservative when checking shared dependencies.
-
 - Be aggressive when checking local dependencies.
-
 - Set `failureThreshold` according to `periodSeconds` in order to accommodate temporary errors.
 
 #### Startup Probe
@@ -463,7 +428,6 @@ kubectl get event --field-selector involvedObject.name=${POD_NAME}
 ```
 
 - Get the effective pod name by filtering pods with the label `app=acme`.
-
 - Filter the events for the pod.
 
 > [!TIP]
@@ -555,19 +519,12 @@ WebServer server = WebServer.builder()
 ```
 
 - The health service for the `liveness` probe is exposed at `/health/live`.
-
 - Using the built-in health checks for the `liveness` probe.
-
 - The health service for the `readiness` probe is exposed at `/health/ready`.
-
 - Using a custom health check for a pseudo database that is always `UP`.
-
 - Route the `observe` feature exclusively on the `observe` socket.
-
 - The default socket uses port 8080 for the default routes.
-
 - The default route: returns It works! for any request.
-
 - The `observe` socket uses port 8081 for the "/observe" routes.
 
 *Kubernetes descriptor:*
@@ -628,15 +585,10 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
-
 - The HTTP endpoint for the liveness probe.
-
 - The liveness probe configuration.
-
 - The HTTP endpoint for the readiness probe.
-
 - The readiness probe configuration.
 
 ## Additional Information

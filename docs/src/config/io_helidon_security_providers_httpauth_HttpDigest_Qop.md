@@ -7,7 +7,6 @@ This type is an enumeration.
 ## Usages
 
 - [`security.providers.http-digest-auth.qop`](io_helidon_security_providers_httpauth_HttpDigestAuthProvider.md#af980a-qop)
-
 - [`server.features.security.security.providers.http-digest-auth.qop`](io_helidon_security_providers_httpauth_HttpDigestAuthProvider.md#af980a-qop)
 
 ## Allowed Values

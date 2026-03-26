@@ -63,9 +63,7 @@ langchain4j:
 ```
 
 - Creates a named embedding model singleton bean (`foo-bar-embedding-model`) in Helidon.
-
 - Sets provider defaults for in-process embedding model creation.
-
 - Uses the named in-process embedding model from the service registry.
 
 For `type: custom`, configure model and tokenizer paths and pooling mode:
@@ -82,11 +80,8 @@ langchain4j:
 ```
 
 - Uses user-provided ONNX model.
-
 - Required for custom type.
-
 - Required for custom type.
-
 - Required for custom type; maps to LangChain4j pooling mode.
 
 If `type: custom` is selected but any of `path-to-model`, `path-to-tokenizer`, or `pooling-mode` is missing, Helidon fails startup with a configuration exception.
@@ -117,7 +112,5 @@ Configuration properties:
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [Lc4j Built-in Providers](lc4j-providers.md)
-
 - [Retrieval-Augmented Generation (RAG)](rag.md)

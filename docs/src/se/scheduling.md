@@ -218,5 +218,4 @@ FixedRate.builder()
 ## Reference
 
 - [Cron-utils GitHub page](https://github.com/jmrozanec/cron-utils)
-
 - [Helidon Scheduling JavaDoc](/apidocs/io.helidon.microprofile.scheduling/io/helidon/microprofile/scheduling/package-summary.html)

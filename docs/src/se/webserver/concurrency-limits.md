@@ -105,9 +105,7 @@ None of the strategies shown above enables queues by default.
 For more information about configuring these Concurrency Limit strategies see:
 
 - [FixedLimit](../../config/io_helidon_common_concurrency_limits_FixedLimit.md)
-
 - [ThroughputLimit](../../config/io_helidon_common_concurrency_limits_ThroughputLimit.md)
-
 - [AimdLimit](../../config/io_helidon_common_concurrency_limits_AimdLimit.md)
 
 ## Metrics

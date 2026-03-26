@@ -119,9 +119,7 @@ Update the `pom.xml` file and add the following OpenTelemetry dependency to the 
 ```
 
 - Helidon Tracing dependencies.
-
 - Observability features for tracing.
-
 - OpenTelemetry tracing provider.
 
 Helidon offers several tracing providers: OpenTelemetry, Zipkin, and Jaeger (deprecated). All spans sent by Helidon to the backend need to be associated with a service, assigned by the `tracing.service` setting in the example below.
@@ -164,7 +162,6 @@ curl http://localhost:8080/greet
 The Jaeger backend provides a web-based UI at <http://localhost:16686> where you can see a visual representation of the traces and spans within them.
 
 1.  From the `Service` drop list select `helidon-se-1`. This name corresponds to the `tracing.service` setting you assigned in the `application.yaml` config file.
-
 2.  Click on the UI Find Traces button. Notice that you can change the look-back time to restrict the trace list. You will see a trace for each `curl` command you ran to access the application.
 
 <figure>
@@ -209,15 +206,10 @@ private void getDefaultMessageHandler(ServerRequest request,
 ```
 
 - Create a new `Span` using the global tracer.
-
 - Set the parent of the new span to the span from the `Request` if available.
-
 - Start the span.
-
 - Make the new span the current span, returning a `Scope` which is auto-closed.
-
 - End the span normally after the response is sent.
-
 - End the span with an exception if one was thrown.
 
 *Build the application and run it:*
@@ -305,9 +297,7 @@ cd helidon-quickstart-se-2
 ```
 
 - Helidon Tracing API.
-
 - Observability features for tracing.
-
 - OpenTelemetry tracing provider.
 
 *Replace `src/main/resources/application.yaml` with the following:*
@@ -491,13 +481,9 @@ Refresh the Jaeger UI trace listing page and notice that there is a trace across
 Note several things about the display:
 
 1.  The top-level span `helidon-se-1 HTTP Request` includes all the work across *both* services.
-
 2.  `helidon-se-1 outboundMessageHandler` is the custom span you added to the first service `/outbound` endpoint code.
-
 3.  `helidon-se-1 GET-http://localhost:8080/greet` captures the work the `WebClient` is doing in sending a request to the second service. Helidon adds these spans automatically to each outbound `WebClient` request.
-
 4.  `helidon-se-2 HTTP Request` represents the arrival of the request sent by the first service’s `WebClient` at the second service’s `/greet` endpoint.
-
 5.  `helidon-se-2 getDefaultMessageHandler` is the custom span you added to the second service `/greet` endpoint code.
 
 You can now stop your second service, it is no longer used in this guide.
@@ -611,7 +597,6 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
 
 *Create and deploy the application into Kubernetes:*
@@ -669,13 +654,9 @@ docker rm -f jaeger
 Applications and libraries can register listeners to be notified at several moments during the lifecycle of every Helidon span:
 
 - Before a new span starts
-
 - After a new span has started
-
 - After a span ends
-
 - After a span is activated (creating a new scope)
-
 - After a scope is closed
 
 The next sections explain how you can write and add a listener and what it can do. See the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) Javadoc for more information.
@@ -753,11 +734,9 @@ Create a `SpanListener` instance and invoke the `Tracer#register(SpanListener)` 
 Helidon also uses Java service loading to locate listeners and register them automatically on all `Tracer` objects. Follow these steps to add a listener service provider.
 
 1.  Implement the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) interface.
-
 2.  Declare your implementation as a service provider:
 
     1.  Create the file `META-INF/services/io.helidon.tracing.SpanListener` containing a line with the fully-qualified name of your class which implements `SpanListener`.
-
     2.  If your service has a `module-info.java` file add the following line to it:
 
         ``` java
@@ -784,19 +763,14 @@ Order in which Helidon Invokes Listener Methods
 This guide has demonstrated how to use the Helidon SE tracing feature with Jaeger. You have learned to do the following:
 
 - Enable tracing within a service
-
 - Use tracing with JAX-RS
-
 - Use the Jaeger REST API and UI
-
 - Use tracing across multiple services
-
 - Integrate tracing with Kubernetes
 
 Refer to the following references for additional information:
 
 - [MicroProfile OpenTracing specification](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/microprofile-opentracing-spec-3.0.html)
-
 - [MicroProfile OpenTracing Javadoc](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/apidocs)
 
   - [OpenTelemetry API](https://opentelemetry.io/docs/instrumentation/js/api/tracing/)

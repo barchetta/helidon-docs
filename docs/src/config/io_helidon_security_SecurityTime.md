@@ -7,7 +7,6 @@ Time used in security, configurable.
 ## Usages
 
 - [`security.environment.server-time`](../config/io_helidon_security_Security.md#a53e2d-environment-server-time)
-
 - [`server.features.security.security.environment.server-time`](../config/io_helidon_security_Security.md#a53e2d-environment-server-time)
 
 ## Configuration options

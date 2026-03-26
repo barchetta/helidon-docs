@@ -18,9 +18,7 @@
 Helidon MP simplifies how you can use Micrometer for application-specific metrics:
 
 - The endpoint `/micrometer`: A configurable endpoint that exposes metrics according to which Micrometer meter registry responds to the HTTP request.
-
 - The Micrometer annotations `@Timed` and `@Counted`.
-
 - Configuration to tailor the Prometheus and other Micrometer meter registries.
 
 In Helidon 4.4.0-SNAPSHOT, Micrometer support is separate from the Helidon MP metrics API and the built-in Helidon metrics.
@@ -116,7 +114,6 @@ public JsonObject getMessage(@PathParam("name") String name) {
 ```
 
 - Use `@Timed` to time and count both `GET` methods.
-
 - Use `@Counted` to count the accesses to the `GET` method that returns a personalized greeting.
 
 ### Using the Helidon-provided Micrometer `MeterRegistry` from Code

@@ -7,7 +7,6 @@ This type is an enumeration.
 ## Usages
 
 - [`data.sources.sql.provider.hikari.transaction-isolation`](io_helidon_data_sql_datasource_hikari_HikariDataSourceConfig.md#a77b10-transaction-isolation)
-
 - [`data.sources.sql.provider.jdbc.transaction-isolation`](io_helidon_data_sql_datasource_jdbc_JdbcDataSourceConfig.md#aa1bc5-transaction-isolation)
 
 ## Allowed Values

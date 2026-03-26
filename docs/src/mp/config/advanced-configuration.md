@@ -69,13 +69,9 @@ resolver.registerConfig(config, null);
 ```
 
 - Creates MicroProfile Config Source builder.
-
 - Adds environment variables.
-
 - Adds a custom map.
-
 - Builds the MicroProfile Config Source.
-
 - Registers the config, so it can be used by other components
 
 ### Create YAML MicroProfile Config Source
@@ -97,11 +93,8 @@ Custom Config Sources are loaded using the Java Service Loader pattern, by imple
 The interface `org.eclipse.microprofile.config.spi.ConfigSource` requires implementation of the following methods:
 
 - `String getName()`
-
 - `Map<String, String> getProperties()`
-
 - `String getValue(String key)`
-
 - `getOrdinal()`
 
 ### Example of a Custom Config Source
@@ -140,11 +133,8 @@ public class CustomConfigSource implements ConfigSource {
 ```
 
 - Returns the name of the Config Source to use for logging or analysis of configured values.
-
 - Returns the properties in this Config Source as a map.
-
 - Returns the value of the requested key, or `null` if the key is not available
-
 - Returns the ordinal of this Config Source.
 
 ## Creating MicroProfile Config Sources from meta-config
@@ -180,33 +170,19 @@ sources:
 ```
 
 - If configured to `true`, config sources discovered through service loader will be added
-
 - If configured to `true`, converters discovered through service loader will be added
-
 - If configured to `true`, default config sources (system properties, environment variables, and \`META-INF/microprofile-config.properties) will be added
-
 - Loads the environment variables config source.
-
 - Loads the system properties config source.
-
 - Loads a properties file
-
 - Location of the file: `/conf/prod.properties` on the file system
-
 - Custom ordinal, if not defined, the value defined in the file, or default value is used. The source precedence order is the order of appearance in the file. The default is 100.
-
 - The file is optional (if not optional and no file is found, the bootstrap fails)
-
 - Loads a YAML file
-
 - Location of the file: `META-INF/database.yaml` on the classpath
-
 - Loads a HOCON file
-
 - Location of the file: `custom-application.conf` on the classpath
-
 - Loads a JSON file
-
 - Location of the file: `conf/custom-application.json` relative to the directory of where the app was executed on the file system.
 
 **Important Note:** To enable support for `HOCON` and `JSON` types, add the following dependency to your project’s pom.xml.
@@ -225,7 +201,6 @@ Helidon meta-config by default supports the following types: environment-variabl
 The interface `io.helidon.config.mp.spi.MpMetaConfigProvider` requires implementation of the following methods:
 
 - `Set<String> supportedTypes()`
-
 - `List<? extends ConfigSource> create(String type, Config metaConfig, String profile);`
 
 ### Example of a Meta-Config Custom Type
@@ -281,21 +256,13 @@ public class CustomMpMetaConfigProvider implements MpMetaConfigProvider {
 ```
 
 - Returns the names of the types that will be supported in this meta-config.
-
 - Processes config source from file system if `path` is provided.
-
 - Method to parse config source from a specified `path`
-
 - Processes config source from classpath location if `classpath` is provided.
-
 - Method to parse config source from a specified `classpath`
-
 - Processes config source from URL location if `location` is provided.
-
 - Method to parse config source from a specified `url`
-
 - Returns an empty result if set to `optional` and config source is not found.
-
 - Throws a ConfigException if not set to `optional` and config source is not found.
 
 ## Creating MicroProfile Config Source from Helidon SE Config Source
@@ -327,5 +294,4 @@ Config config = ConfigProviderResolver.instance()
 ```
 
 - Creates a config source from Helidon Config.
-
 - Creates a MicroProfile config instance using Helidon Config.

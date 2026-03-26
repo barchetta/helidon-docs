@@ -7,7 +7,6 @@ IDCS role mapping provider.
 ## Usages
 
 - [`security.providers.idcs-role-mapper`](../config/io_helidon_security_spi_SecurityProvider.md#af9608-idcs-role-mapper)
-
 - [`server.features.security.security.providers.idcs-role-mapper`](../config/io_helidon_security_spi_SecurityProvider.md#af9608-idcs-role-mapper)
 
 ## Configuration options

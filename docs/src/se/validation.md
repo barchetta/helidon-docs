@@ -13,7 +13,6 @@ Validation checks values against constraints.
 There are two ways to use validation features in Helidon SE:
 
 1.  Have a `@Validation.Validated` annotated type and use a `TypeValidator` service to validate it
-
 2.  Invoke the constraint checks directly using `Validators` static methods
 
 The feature fit with our [Helidon Declarative](../se/injection/declarative.md#Dec-Validation), which is a preview feature.
@@ -36,7 +35,6 @@ To enable Validation, add the following dependency to your project’s `pom.xml`
 ```
 
 - Helidon validation dependency.
-
 - WebServer integration with validation, to provide correct HTTP status on validation failures
 
 ## Usage
@@ -127,13 +125,9 @@ var response = context.response();
 ```
 
 - Get the constraint validation provider from the registry, named by the annotation it handles
-
 - Create a new validation context (can be used to validate multiple constraints)
-
 - Create a new validator for a specific type and annotation
-
 - Check the constraint using the validator and the provided instance (instance must match the type provided in previous step)
-
 - Get a validation response from the context
 
 And the second throws an exception if validation failed:
@@ -149,11 +143,7 @@ context.throwOnFailure();
 ```
 
 - Get the constraint validation provider from the registry, named by the annotation it handles
-
 - Create a new validation context (can be used to validate multiple constraints)
-
 - Create a new validator for a specific type and annotation
-
 - Check the constraint using the validator and the provided instance (instance must match the type provided in previous step)
-
 - Throw and exception in case any of the checks failed

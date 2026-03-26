@@ -7,7 +7,6 @@ Attribute Based Access Control provider.
 ## Usages
 
 - [`security.providers.abac`](../config/io_helidon_security_spi_SecurityProvider.md#a4ca40-abac)
-
 - [`server.features.security.security.providers.abac`](../config/io_helidon_security_spi_SecurityProvider.md#a4ca40-abac)
 
 ## Configuration options

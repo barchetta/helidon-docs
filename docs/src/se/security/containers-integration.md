@@ -18,7 +18,6 @@ To integrate [web server](../webserver/webserver.md), add the following dependen
 There are two steps to configure security with WebServer:
 
 1.  Create a security instance and register it with the server.
-
 2.  Protect server routes with optional security features.
 
 *Example using builders*
@@ -35,7 +34,6 @@ WebServer.builder()
 ```
 
 - Register the security feature in the web server, enforce authentication by default
-
 - Protect this route with authentication (from defaults) and role "user"
 
 *Example using configuration*
@@ -52,7 +50,6 @@ WebServer.builder()
 ```
 
 - Helper method to load both security and web server security from configuration
-
 - Security for this route is defined in the configuration
 
 *Example using configuration (YAML)*
@@ -79,11 +76,8 @@ Note: `defaults` section in configuration is related to paths on WebServer confi
 There are several endpoints provided by Helidon services, such as:
 
 - Health endpoint (`/health`)
-
 - Metrics endpoint (`/metrics`)
-
 - OpenAPI endpoint (`/openapi`)
-
 - Configured static content (can use any path configured)
 
 These endpoints are all implemented using Helidon WebServer and as such can be protected only through Security integration with WebServer.
@@ -119,17 +113,11 @@ security:
 ```
 
 - Attribute based access control provider that checks roles and scopes
-
 - The provider(s) used in your application, such as `oidc`
-
 - Default configuration for paths configured below in `paths` section
-
 - Protection of `/metrics` and all nested paths with `admin` role required
-
 - Protection of `/health` and all nested paths with `monitor` role required
-
 - Protection of `/openapi` and all nested paths with `openapi` scope required
-
 - Protection of static content configured on `/static` path with either `user` or `monitor` role required
 
 If you need to use a properties file, such as `microprofile-config.properties`, you can convert the file by using index based numbers for arrays, such as:

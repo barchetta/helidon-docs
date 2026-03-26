@@ -100,7 +100,6 @@ For more information about the Quickstart application and other endpoints it sup
 You can build a native executable in 2 different ways:
 
 - With a local installation of GraalVM
-
 - Using Docker
 
 ### Local build

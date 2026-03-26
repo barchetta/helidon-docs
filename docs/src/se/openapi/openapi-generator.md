@@ -19,13 +19,11 @@ Use the OpenAPI generator release 7.6.0 or later which this document describes.
 In the vocabulary of the tool, there are two *generators* for Helidon:
 
 - `java-helidon-client` (hereafter the Helidon client generator)
-
 - `java-helidon-server` (hereafter the Helidon server generator).
 
 Each of these generators supports two *libraries*:
 
 - `mp` - for Helidon MP code generation
-
 - `se` - for Helidon SE code generation
 
 Use the Helidon *client* generator and its `se` library to create a Helidon SE client based on [Helidon WebClients](../../se/webclient.md). The resulting client library works with any server that implements the API declared in the OpenAPI document you specified when you ran the generator. The client library provides an abstraction similar to remote procedure calls (RPC). To access a remote service that implements the endpoints declared in the OpenAPI document, your code uses the generated client library first to establish a connection to the remote service and then to call remote service endpoints by invoking local methods passing POJO business objects or Java types as arguments.
@@ -35,9 +33,7 @@ Use the tool’s Helidon *server* generator and its `se` library to create serve
 You can run the OpenAPI generators in three ways:
 
 - using the OpenAPI generator CLI
-
 - using the OpenAPI generator Maven plug-in
-
 - using the online OpenAPI generator website
 
 The rest of this document walks you through [how to use](#usage) each technique and how to [configure](#configuration) the generators to produce the code you want.
@@ -78,9 +74,7 @@ The OpenAPI generators support a substantial, powerful, and sometimes bewilderin
 For complete lists see these pages:
 
 - [generic options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/usage.md#generate)
-
 - [Helidon client generator options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/generators/java-helidon-client.md) and
-
 - [Helidon server generator options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/generators/java-helidon-server.md)
 
 The OpenAPI generator loosely divides its settings into three types:
@@ -366,7 +360,6 @@ Among the many configuration settings available to you, some you should particul
 This section covers two major topics:
 
 - [Planning your use of the OpenAPI generators](#planning-your-use-of-the-openapi-generators)
-
 - [Running the generators](#running-the-openapi-generators)
 
 ### Planning Your Use of the OpenAPI Generators
@@ -429,9 +422,7 @@ When you generate a Helidon SE client, the generated code contains a separate AP
 Earlier we listed the ways you can run the OpenAPI generator:
 
 - using the OpenAPI generator CLI
-
 - using the OpenAPI generator Maven plug-in
-
 - using the online OpenAPI generator website
 
 The next sections describe each of these techniques in detail.
@@ -480,7 +471,6 @@ java -jar ${path-to-generator}/openapi-generator-cli.jar \
 The key differences between the commands are:
 
 - the generator selected by the `-g` option (`client` vs. `server`),
-
 - the artifact ID and package names (`client` vs. `server`).
 
 You could use these two commands together to generate a server submodule and a client submodule in a pre-existing multi-module Maven project. Remember that the resulting client project can access any server which implements the API described in the `petstore.yaml` OpenAPI document, whether it was generated using the OpenAPI generator tool or not.
@@ -596,11 +586,8 @@ public class PetServiceImpl extends PetService {
 ```
 
 - Business logic: create a very simple data store - a real app would use a database.
-
 - Business logic: make sure the pet being added does not already exist. Send the invalid request status code if it does.
-
 - Business logic: add the pet to the data store.
-
 - Prepare and send the `200` response.
 
 If a response has any *required* response parameters you would pass them as parameters to the `builder` method. Add *optional* response parameters using other generated builder methods. The following example illustrates this for the `findPetsByTags` operation and its `response` output parameter.
@@ -631,15 +618,10 @@ public class PetServiceImpl extends PetService {
 ```
 
 - Uses the same data store as in the earlier example.
-
 - The `tags` parameter conveys the tag values to be matched in selecting pets to report. Other generated code extracts the runtime argument’s value from the request and then automatically passes it to the method.
-
 - Collects all pets with any tag that matches any of the selection tags passed in.
-
 - Uses the generated `Response200` to prepare the response.
-
 - Assigns the optional `response` output parameter—​the list of matching `Pet` objects.
-
 - Send the response using the prepared response information.
 
 Write each of the `handleXxx` methods appropriately so they implement the business logic you need and send the response.
@@ -651,11 +633,8 @@ The generator creates a `ResponseNNN` Java `record` for each operation response 
 Generated code takes care of the following work:
 
 - Route each request to the method which should respond.
-
 - Extract each incoming parameter from the request and convert it to the correct type, applying any validation declared in the OpenAPI document.
-
 - Pass the extracted parameters to the developer-written `handleXxx` method.
-
 - Assemble required and optional response parameters and send the response.
 
 You can override any of the generated behavior by adding code to the generated API implementation class you are already editing to customize the `handleXxx` methods and by writing new classes which extend some of the generated classes.
@@ -669,7 +648,6 @@ To change the way routing occurs, simply override the `routing` method in your `
 For each operation in an API the generator creates an inner class and, for each incoming parameter for that operation, a method which extracts and validates the parameter. Override how a parameter is extracted by following these steps, using the `AddPetOp` as an example.
 
 1.  Write a class which extends the inner class for the operation.
-
 2.  In that subclass override the relevant method.
 
     *Customized `AddPetOp` class*
@@ -692,9 +670,7 @@ For each operation in an API the generator creates an inner class and, for each 
     ```
 
     - Extracts the parameter from the request. This happens to use the same logic as in the generated method but you can customize that as well if you need to.
-
     - Apply any relevant validations. This silly but illustrative example rejects any pet name that starts with a lower-case letter.
-
     - Return the extracted value, properly typed.
 
 3.  In the implementation class for the API (`PetServiceImpl`) override the `createAddPetOp` method so it returns an instance of your new subclass `AddPetOpCustom` of the operation inner class `AddPetOp`.
@@ -725,9 +701,7 @@ The generated Helidon SE client includes the class `ApiClient`. This class corre
 To invoke the remote service your code must:
 
 1.  Create an instance of `ApiClient` using an `ApiClient.Builder`.
-
 2.  Use that `ApiClient` instance to instantiate a `PetApi` object.
-
 3.  Invoke the methods on the `PetApi` object to access the remote services and then retrieve the returned result value.
 
 The following sections explain these steps.
@@ -758,7 +732,6 @@ public class ExampleClient {
 ```
 
 - The same `ApiClient` instance can be reused to invoke multiple APIs handled by the same server.
-
 - Creates an `ApiClient` instance using default settings from the OpenAPI document.
 
 Your code relies fully on the automatic `WebClient`. In many cases, this approach works very well, especially if the OpenAPI document correctly declares the servers and their URIs.
@@ -786,9 +759,7 @@ public class ExampleClient {
 ```
 
 - Stores a reusable `ApiClient`.
-
 - A real app would fully set up the `ObjectMapper`.
-
 - Sets the object mapper for use in the `ApiClient.Builder` 's internal `WebClientConfig.Builder`.
 
 ##### Adjusting the Automatic `WebClientConfig.Builder`
@@ -815,13 +786,9 @@ public class ExampleClient {
 ```
 
 - Stores a reusable `AppClient`.
-
 - Creates a new `AppClient` builder.
-
 - Access the `` ApiClient.Builder’s automatic `WebClientConfig.Builder `` instance.
-
 - Adjusts a setting of the `WebClientConfig.Builder` directly.
-
 - Builds the `ApiClient` which implicitly builds the `WebClient` from the now-adjusted internal `WebClientConfig.Builder`.
 
 The automatic `WebClientConfig.Builder` retains information derived from the OpenAPI document unless your code overrides those specific settings.
@@ -850,17 +817,11 @@ public class ExampleClient {
 ```
 
 - Stores a reusable `AppClient`.
-
 - Creates a new `WebClientConfig.Builder`.
-
 - Sets the connection timeout directly on the `WebClientConfig.Builder`.
-
 - Sets the base URI on the `WebClienConfig.Builder`.
-
 - Creates a new \`ApiClient.Builder'.
-
 - Sets the `WebClientConfig.Builder` which the `ApiClient.Builder` should use (instead of the one it prepares internally).
-
 - Builds the `ApiClient` which uses the newly-assigned `WebClientConfig.Builder` in the process.
 
 Note that this approach entirely replaces the internal, automatically-prepared `WebClientConfig.Builder` with yours; it *does not* merge the new builder with the internal one. In particular, any information from the OpenAPI document the generator used to prepare the internal `WebClientConfig.Builder` is lost.
@@ -887,9 +848,7 @@ public class ExampleClient {
 ```
 
 - Stores a reusable `AppClient`.
-
 - Stores a reusable `PetApi` for invoking pet-related operations.
-
 - Initializes and saves the `PetApi` instance using the previously-prepared `apiClient`.
 
 #### Invoking Remote Endpoints
@@ -911,7 +870,6 @@ The `ApiResponse` interface exposes two methods your code can use to work with t
 In the Helidon WebClient model, the first part of the response message can arrive (the status and headers are available) before the entity in the body of the response is readable. So there are two events associated with an incoming HTTP response:
 
 1.  when the response *excluding* the entity content has arrived, and
-
 2.  when your code can begin consuming the entity content.
 
 You can adopt different styles of retrieving the results, depending on the specific needs of the code you are writing.
@@ -930,7 +888,6 @@ void findAvailablePets() {
 ```
 
 - Use the previously-prepared `petApi` to find pets that have the `available` status.
-
 - Retrieve the typed result from the `ApiResponse`.
 
 ##### Access with status checking
@@ -957,11 +914,8 @@ void findAvailablePets() {
 ```
 
 - Start the remote service invocation.
-
 - Wait for the HTTP response status and headers to arrive.
-
 - Check the status in the HTTP response.
-
 - Wait for the content to arrive, extracting the result and converting it to the proper type.
 
 This code also blocks the current thread, first to wait for the initial response and then to wait for the result content.
@@ -969,9 +923,6 @@ This code also blocks the current thread, first to wait for the initial response
 ## References
 
 - [OpenAPI Generator Official Website](https://openapi-generator.tech)
-
 - [OpenAPI Generator GitHub Repository](https://github.com/OpenAPITools/openapi-generator)
-
 - [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md)
-
 - [Helidon WebClient documentation](../../se/webclient.md)

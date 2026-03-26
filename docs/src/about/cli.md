@@ -53,7 +53,6 @@ If you get a "the developer cannot be verified" warning when you run the Helidon
 ### Install the Helidon CLI on Windows
 
 1.  Install PowerShell and Visual C++ Redistributable Runtime. See [Helidon on Windows](windows.md).
-
 2.  Run the following command to download and install the Helidon CLI on Windows systems:
 
     ``` powershell
@@ -71,17 +70,11 @@ After you install the Helidon CLI, you can use it to manage your Helidon project
 You can use the Helidon CLI to quickly create a new Helidon project.
 
 1.  Open a command-line interface and navigate to the directory where you want to create the project.
-
 2.  Run `helidon init`.
-
 3.  Choose a **Helidon Version**.
-
 4.  Choose a **Helidon Flavor**: SE or MP.
-
 5.  Choose an **Application Type**. If you chose Helidon SE, the OCI option is not available.
-
 6.  Select a JSON library. If you chose Helidon MP, the JSON-P option is not available.
-
 7.  Customize your project by specifying a `groupId`, an `artifactId`, a `version`, and a `package name`.
 
 The Helidon CLI will create a new project folder in your current directory.
@@ -91,9 +84,7 @@ The Helidon CLI will create a new project folder in your current directory.
 You can use the Helidon CLI development loop feature to test changes to your application as you make them. When the development loop is active, the Helidon CLI will automatically recompile and restart your application so you can see the effects of your changes immediately.
 
 1.  Navigate to the Helidon project’s home directory.
-
 2.  Run `helidon dev` to enable the development loop.
-
 3.  In another terminal window or an IDE, make and save changes to your application’s source code.
 
 The build runs after each change. If you make an invalid change, the build fails until the error is fixed.

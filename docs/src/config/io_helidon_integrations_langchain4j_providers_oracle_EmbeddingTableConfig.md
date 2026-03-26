@@ -9,7 +9,6 @@ N/A
 ## Usages
 
 - [`langchain4j.providers.oracle.embedding-table`](../config/io_helidon_integrations_langchain4j_providers_oracle_OracleEmbeddingStoreConfig.md#aa5553-embedding-table)
-
 - [`langchain4j.providers.oracle.oracle`](../config/config_reference.md#a4e373-langchain4j-providers-oracle-oracle)
 
 ## Configuration options

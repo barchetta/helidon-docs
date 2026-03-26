@@ -20,7 +20,6 @@ OpenAPI support in Helidon SE draws its inspiration from MicroProfile OpenAPI bu
 The OpenAPI support in Helidon SE performs two main tasks:
 
 - Build an in-memory model of the REST API your service implements.
-
 - Expose the model in text format (YAML or JSON) via the `/openapi` endpoint.
 
 To construct the model, Helidon gathers information about the service API from a static OpenAPI document file packaged as part of your service.
@@ -116,9 +115,7 @@ server:
 ```
 
 - The `port` and `host` settings are for the server as a whole, not specifically for OpenAPI.
-
 - The `openapi` subsection within `features` contains OpenAPI settings.
-
 - Changes the endpoint for returning the OpenAPI document from the default `/openapi` to `/myopenapi`.
 
 Most Helidon SE applications need only add the dependency as explained above; Helidon discovers and registers OpenAPI automatically. The example below shows how to create and register `OpenApiFeature` explicitly instead.

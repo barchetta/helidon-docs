@@ -7,7 +7,6 @@ Configuration of CORS for a specific path.
 ## Usages
 
 - [`cors.paths`](../config/io_helidon_webserver_cors_CorsFeature.md#a44bb0-paths)
-
 - [`server.features.cors.paths`](../config/io_helidon_webserver_cors_CorsFeature.md#a44bb0-paths)
 
 ## Configuration options

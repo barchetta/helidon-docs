@@ -7,31 +7,18 @@ Resources from a java keystore (PKCS12, JKS etc.).
 ## Usages
 
 - [`clients.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`clients.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`security.providers.oidc.webclient.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`security.providers.oidc.webclient.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.features.security.security.providers.oidc.webclient.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.features.security.security.providers.oidc.webclient.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.sockets.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.sockets.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.tls.private-key.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
-
 - [`server.tls.trust.keystore`](../config/io_helidon_common_pki_Keys.md#ad6e47-keystore)
 
 ## Configuration options

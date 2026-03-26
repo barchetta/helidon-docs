@@ -7,7 +7,6 @@ Configuration of temporary storage for classpath based handlers.
 ## Usages
 
 - [`server.features.static-content.classpath.temporary-storage`](../config/io_helidon_webserver_staticcontent_ClasspathHandlerConfig.md#a19deb-temporary-storage)
-
 - [`server.features.static-content.temporary-storage`](../config/io_helidon_webserver_staticcontent_StaticContentFeature.md#a0dc23-temporary-storage)
 
 ## Configuration options

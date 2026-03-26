@@ -17,9 +17,7 @@ Helidon Builder is an API designed for generating immutable objects using the bu
 ### Terminology
 
 - **Blueprint**: A package-private interface that serves as the source for code generation.
-
 - **Prototyped**: The generated code extending the blueprint. It is part of the public API and includes the fluent builder implementation and static factory methods.
-
 - **Runtime Type**: An optional, user-defined type created using the prototype. It is useful for constructing custom objects beyond the generated prototype.
 
 ### High Level Example
@@ -46,31 +44,20 @@ ServiceConfig serviceConfig = ServiceConfig.builder()
 ### Features
 
 - Reflection-free implementation; no bytecode manipulation.
-
 - Support for inheritance in prototypes and blueprints.
-
 - Automatic Javadoc generation.
-
 - Seamless integration with Helidon Config for property initialization, default values, and advanced customization.
-
 - Optional generation of factory, prototype, and builder methods.
-
 - Supports `List`, `Set`, and `Map` collections.
-
 - Explicit default value support for common types (`String`, `int`, `long`, `boolean`, etc.).
-
 - Enumeration support.
 
 ### Limitations
 
 - Prototypes are generated in the same package as their blueprints.
-
 - Blueprints must be package-private interfaces.
-
 - Classes are not supported as blueprints.
-
 - `null` values are not allowed; use `Optional` instead.
-
 - Collection types are fixed to `ArrayList`, `LinkedHashSet`, and `LinkedHashMap`.
 
 ## Maven Coordinates
@@ -122,17 +109,13 @@ This use case demonstrates generating an immutable class with a builder from a b
 1.  Blueprint Requirements:
 
     - Must be a package-private interface.
-
     - Its name must end with `Blueprint`. The prototype’s name will be the blueprint’s name without this suffix.
-
     - Options are defined as getter methods.
 
 2.  Generated Output:
 
     - Prototype is a part of your module public API.
-
     - The prototype class is placed in the same package as the blueprint.
-
     - Generated files can be found in the `./target/generated-sources/annotations` directory.
 
 ### Example
@@ -148,9 +131,7 @@ interface ServiceConfigBlueprint {
 ```
 
 - Marks the interface as a blueprint for code generation.
-
 - Must be package-private and named with a `Blueprint` suffix. The prototype’s name will be `ServiceConfig`.
-
 - Getter method for field `name`.
 
 After building the project, a prototype `ServiceConfig` will be generated.
@@ -177,15 +158,10 @@ public interface ServiceConfig extends ServiceConfigBlueprint, Prototype.Api {
 ```
 
 - Marker annotation specifying that this interface was generated.
-
 - Generated interface extending the given blueprint. The interface name is a blueprint name with "Blueprint" suffix removed.
-
 - Static method returning a generated builder.
-
 - Static method returning a generated builder initialized with the field value from given instance.
-
 - Factory method creating an instance with default values.
-
 - Generated builder.
 
 The generated `ServiceConfig` can be used as follows:
@@ -206,15 +182,10 @@ This scenario extends the basic builder functionality by enabling the generated 
 ### Specification
 
 1.  The blueprint must be annotated with `@Prototype.Configured` to enable configuration-based initialization.
-
 2.  Each field initialized from the configuration must be annotated with `@Option.Configured`.
-
 3.  Default values can be set using `@Option.Default`. If a configuration value is missing, the default is used.
-
 4.  `null` values are not supported; use `Optional` for optional fields.
-
 5.  Lists, Sets, and Maps are supported and initialized from configuration.
-
 6.  You can customize and validate fields using the @Option API. Advanced programmatic customization is possible by implementing a custom `BuilderDecorator` via `@Prototype.Blueprint(decorator = MyDecorator.class)`.
 
 ### Example
@@ -237,9 +208,7 @@ interface ServiceConfigBlueprint {
 ```
 
 - Specifies that this blueprint can be configured with the root key `service` in the configuration.
-
 - Marks the field `name` as configurable. By default, the configuration key is derived from the method name in dash-separated format.
-
 - Sets a default value for `pageSize` if it is not defined in the configuration.
 
 The generated prototype includes a `create` method that accepts a `Config` instance:
@@ -265,7 +234,6 @@ service.page-size=10
 Helidon Builder supports a range of customization options:
 
 - **Field Validation:** Add constraints or validations using annotations like `@Option.AllowedValues` or `@Option.Required`.
-
 - **Field Transformation:** Use a custom `BuilderDecorator` to modify field values during the build process.
 
 For additional customization details, see the [API](#api) section.
@@ -282,7 +250,6 @@ To enable runtime object creation, follow these guidelines:
     The blueprint must extend `Prototype.Factory<RuntimeType>`, where `RuntimeType` is the desired runtime type.
 
 2.  This option has been removed, as it is redundant (`@PrototypedBy`), this annotation is deprecated and will be eventually removed; it has no function now
-
 3.  **Runtime Type Interface:**  
     The runtime type must implement `RuntimeType.Api<Prototype>` to indicate the prototype it is based on.
 
@@ -304,7 +271,6 @@ To enable runtime object creation, follow these guidelines:
 Note that requirements 3 - 5 can be omitted when using a third party runtime type (i.e. `PrivateKey`), in such a case the setup should be:
 
 1.  Create a blueprint that extends `Prototype.Factory<RuntimeType>` (same as above)
-
 2.  Add a custom method annotated with `@Prototype.RuntimeTypeFactoryMethod` (custom methods can be configured on blueprint using `@Prototype.CustomMethods`, the custom method is a static method with signature `RuntimeType create(Prototype)`), method name is arbitrary
 
 This will generate a prototype that has a method `build()` that builds the `RuntimeType`.
@@ -332,11 +298,8 @@ public class Service implements RuntimeType.Api<ServiceConfig> {
 ```
 
 - Implements the RuntimeType.Api\<ServiceConfig\> interface.
-
 - Provides a builder for the runtime type.
-
 - Creates a runtime object from a prototype.
-
 - Creates a runtime object from a consumer-configured prototype builder.
 
 Blueprint definition:

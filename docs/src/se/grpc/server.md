@@ -22,9 +22,7 @@ The Helidon gRPC server provides a framework for building [gRPC](http://grpc.io/
 Using the Helidon gRPC framework to implement your services offers several advantages:
 
 - Unified programming model: You can define both HTTP and gRPC services using a consistent, intuitive model, reducing the learning curve for developers.
-
 - Simplified development: The framework includes helper methods that make service implementation significantly easier.
-
 - Integrated deployment: You can host gRPC and HTTP endpoints on the same WebServer instance, even sharing the same port.
 
 ## Maven Coordinates
@@ -62,11 +60,8 @@ private static GrpcRouting.Builder createRouting(Config config) {
 ```
 
 - Register `GreetFeature` instance.
-
 - Register `EchoService` instance.
-
 - Register `MathService` instance.
-
 - Register a custom unary gRPC route
 
 Both standard gRPC services that implement the `io.grpc.BindableService` interface (typically created by extending generated server-side stubs and overriding their methods) and Helidon gRPC services that implement the io.helidon.grpc.server.GrpcService interface can be registered.
@@ -139,15 +134,10 @@ class EchoService implements GrpcService {
 ```
 
 - Specify the proto descriptor in order to provide the necessary type information and enable Protobuf marshalling.
-
 - Define the unary method `Echo` and map it to the `this::echo` handler.
-
 - Create a handler for the `Echo` method, using Protobuf message types for request and response.
-
 - Extract the message string from the request.
-
 - Create the response containing the extracted message.
-
 - Send the response back to the client by completing the response observer.
 
 > [!NOTE]
@@ -226,7 +216,6 @@ WebServer.builder()
 ```
 
 - Configure HTTP routing of the server
-
 - Configure gRPC routing of the server
 
 ### Configuring the gRPC Reflection Service
@@ -271,5 +260,4 @@ Compression is always *enabled* by default in Helidon, but can be disabled as sh
 The following gRPC examples for Helidon SE are available:
 
 - [gRPC SE Example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/webserver/grpc)
-
 - [Multiple protocols on a single WebServer](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/webserver/protocols)

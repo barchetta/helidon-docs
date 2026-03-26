@@ -7,7 +7,6 @@ This type is an enumeration.
 ## Usages
 
 - [`metrics.publishers.otlp.aggregation-temporality`](io_helidon_metrics_providers_micrometer_OtlpPublisher.md#a5a031-aggregation-temporality)
-
 - [`server.features.observe.observers.metrics.publishers.otlp.aggregation-temporality`](io_helidon_metrics_providers_micrometer_OtlpPublisher.md#a5a031-aggregation-temporality)
 
 ## Allowed Values

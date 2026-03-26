@@ -261,5 +261,4 @@ This guide demonstrated how to create tests for MicroProfile applications in a J
 Refer to the following references for additional information:
 
 - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
-
 - [Testing with JUnit 5](../testing/testing.md)

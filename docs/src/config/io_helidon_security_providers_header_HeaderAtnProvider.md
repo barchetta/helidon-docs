@@ -7,7 +7,6 @@ Security provider that extracts a username (or service name) from a header.
 ## Usages
 
 - [`security.providers.header-atn`](../config/io_helidon_security_spi_SecurityProvider.md#a58e34-header-atn)
-
 - [`server.features.security.security.providers.header-atn`](../config/io_helidon_security_spi_SecurityProvider.md#a58e34-header-atn)
 
 ## Configuration options

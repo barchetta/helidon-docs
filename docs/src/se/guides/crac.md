@@ -24,7 +24,6 @@ For this 10 minute tutorial, you will need the following:
 There are two JDK builds with CRaC support as of now to choose from.
 
 - [Azul Zulu](https://www.azul.com/downloads/?version=java-21-lts&package=jdk-crac#zulu)
-
 - [BellSoft Liberica JDK](https://bell-sw.com/pages/downloads/?package=jdk-crac&version=java-21)
 
 In this example we will use Azul implementation with Warp CRaC engine. Warp CRaC engine allows creating snapshots without elevated privileges. That not only simplifies the example, but it is very practical for K8s usage.

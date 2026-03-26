@@ -102,7 +102,6 @@ For more information about the Quickstart application and other endpoints it sup
 You can build a custom runtime image in 2 different ways:
 
 - Locally, on your desktop
-
 - Using Docker
 
 ### Local Build

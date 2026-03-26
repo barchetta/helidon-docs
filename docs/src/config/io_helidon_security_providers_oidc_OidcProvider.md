@@ -7,7 +7,6 @@ Open ID Connect security provider.
 ## Usages
 
 - [`security.providers.oidc`](../config/io_helidon_security_spi_SecurityProvider.md#aab762-oidc)
-
 - [`server.features.security.security.providers.oidc`](../config/io_helidon_security_spi_SecurityProvider.md#aab762-oidc)
 
 ## Configuration options

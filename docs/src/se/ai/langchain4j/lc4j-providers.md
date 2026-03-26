@@ -22,7 +22,6 @@ In Helidon, this provider creates LangChain4j content retrievers from configurat
 In a typical RAG setup (see [RAG](rag.md)), a named retriever references:
 
 - an `EmbeddingModel` (`embedding-model`)
-
 - an `EmbeddingStore<TextSegment>` (`embedding-store`)
 
 Each entry under `langchain4j.content-retrievers` becomes a named singleton declarative service bean in the Helidon service registry. You can attach it to AI services or agents using `@Ai.ContentRetriever("name")`, or inject it directly by name.
@@ -40,11 +39,8 @@ langchain4j:
 ```
 
 - Selects the built-in content retriever provider.
-
 - Explicitly selects the default LangChain4j embedding-store-backed retriever type.
-
 - Names the embedding store bean used for similarity search.
-
 - Sets the embedding model used to convert incoming query text to vectors.
 
 ``` java
@@ -110,9 +106,7 @@ langchain4j:
 ```
 
 - Selects the built-in LangChain4j in-memory embedding store provider.
-
 - Loads previously persisted embeddings and text segments during startup.
-
 - Connects the retriever to the named in-memory embedding store bean.
 
 ``` java
@@ -133,7 +127,6 @@ public class EmbeddingStoreLifecycle {
 ```
 
 - Invoked by Helidon when the singleton service bean is being shut down.
-
 - Persists current in-memory embeddings and segments to JSON file; the same file can be loaded on next startup using `from-file`.
 
 Configuration properties:

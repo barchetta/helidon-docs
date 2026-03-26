@@ -61,9 +61,7 @@ Helidon implements [MicroProfile Health](https://download.eclipse.org/microprofi
 MicroProfile Health supports three types of health checks:
 
 - *Liveness* checks report whether the runtime environment in which the service is running is sufficient to support the work the service performs. The environment is beyond the control of the service itself and typically cannot improve without outside intervention. If a microservice instance reports a `DOWN` liveness check, it should never report `UP` later. It will need to be stopped and a replacement instance created.
-
 - *Readiness* checks report whether the service is *currently* capable of performing its work. A service that reports `DOWN` for its readiness cannot *at the moment* do its job, but at some future point it might become able to do so without requiring a restart.
-
 - *Startup* checks indicate whether the service has started to the point where liveness and readiness checks even make sense. A service reporting `DOWN` for a startup check is still initializing itself and normally will report `UP` soon, assuming it is able to start successfully.
 
 ## REST Endpoints
@@ -174,9 +172,7 @@ Generate Helidon MP Quickstart project following these [instructions](guides/qui
 Helidon has a set of built-in health checks that can report various conditions:
 
 - deadlock detection
-
 - available disk space
-
 - available heap memory
 
 The following example will demonstrate how to use the built-in health checks. These examples are all executed from the root directory of your project (helidon-quickstart-mp).
@@ -263,9 +259,7 @@ public class GreetLivenessCheck implements HealthCheck {
 ```
 
 - Annotation indicating this is a liveness health check.
-
 - Annotation indicating this is a bean instantiated once per application (in Helidon this means just once per runtime).
-
 - Build the HealthCheckResponse with status `UP` and the current time.
 
 *Build and run the application, then verify the custom liveness health endpoint:*
@@ -323,11 +317,8 @@ public class GreetReadinessCheck implements HealthCheck {
 ```
 
 - Annotation indicating that this is a readiness health check.
-
 - Build the `HealthCheckResponse` with status `UP` after five seconds, else `DOWN`.
-
 - Record the time at startup.
-
 - Become ready after 5 seconds.
 
 *Build and run the application. Issue the curl command with -v within five seconds and you will see that the application is not ready:*
@@ -422,11 +413,8 @@ public class GreetStartedCheck implements HealthCheck {
 ```
 
 - Annotation indicating that this is a startup health check.
-
 - Build the `HealthCheckResponse` with status `UP` after eight seconds, else `DOWN`.
-
 - Record the time at startup of Helidon; the application will declare itself as started eight seconds later.
-
 - Become ready after 5 seconds.
 
 *Build and run the application. Issue the curl command with -v within five seconds and you will see that the application has not yet started:*
@@ -490,11 +478,8 @@ curl -v http://localhost:8080/health/started
 When using the health check URLs, you can get the following health check data:
 
 - liveness only - <http://localhost:8080/health/live>
-
 - readiness only - <http://localhost:8080/health/ready>
-
 - startup checks only - <http://localhost:8080/health/started>
-
 - all health check data - <http://localhost:8080/health>
 
 *Get all the health check data, including custom data:*
@@ -525,9 +510,6 @@ Full example code is available [here](https://github.com/helidon-io/helidon-exam
 ## Reference
 
 - [Helidon MicroProfile Health JavaDoc](/apidocs/io.helidon.microprofile.health/module-summary.html)
-
 - [Helidon Built-in Checks JavaDoc](/apidocs/io.helidon.health.checks/module-summary.html)
-
 - [MicroProfile Health Specification](https://download.eclipse.org/microprofile/microprofile-health-4.0/microprofile-health-spec-4.0.html)
-
 - [MicroProfile Health on GitHub](https://github.com/eclipse/microprofile-health)

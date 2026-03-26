@@ -9,7 +9,6 @@ prototype.
 ## Usages
 
 - [`openapi`](../config/config_reference.md#a937cb-openapi)
-
 - [`server.features.openapi`](../config/io_helidon_webserver_spi_ServerFeature.md#a582c4-openapi)
 
 ## Configuration options

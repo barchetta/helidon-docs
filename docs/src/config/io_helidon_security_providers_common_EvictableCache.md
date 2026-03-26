@@ -7,7 +7,6 @@ Generic cache with eviction support.
 ## Usages
 
 - [`security.providers.idcs-role-mapper.cache-config`](../config/io_helidon_security_providers_idcs_mapper_IdcsMtRoleMapperProvider.md#a6bc4c-cache-config)
-
 - [`server.features.security.security.providers.idcs-role-mapper.cache-config`](../config/io_helidon_security_providers_idcs_mapper_IdcsMtRoleMapperProvider.md#a6bc4c-cache-config)
 
 ## Configuration options

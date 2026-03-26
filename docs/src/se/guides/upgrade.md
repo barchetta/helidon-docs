@@ -53,15 +53,10 @@ Note the use of `ifPresent()` on the returned `Optional<SpanContext>`.
 ## Configuration
 
 1.  File watching is now done through a `ChangeWatcher` - use of `PollingStrategies.watch()` needs to be refactored to `FileSystemWatcher.create()` and the method to configure it on config source builder has changed to `changeWatcher(ChangeWatcher)`.
-
 2.  Methods on `ConfigSources` now return specific builders (they used to return `AbstractParsableConfigSource.Builder` with a complex type declaration). If you store such a builder in a variable, either change it to the correct type, or use `var`
-
 3.  Some APIs were cleaned up to be aligned with the development guidelines of Helidon. When using Git config source, or etcd config source, the factory methods moved to the config source itself, and the builder now accepts all configuration options through methods
-
 4.  The API of config source builders has been cleaned, so now only methods that are relevant to a specific config source type can be invoked on such a builder. Previously you could configure a polling strategy on a source that did not support polling
-
 5.  There is a small change in behavior of Helidon Config vs. MicroProfile Config: The MP TCK require that system properties are fully mutable (e.g. as soon as the property is changed, it must be used), so MP Config methods work in this manner (with a certain performance overhead). Helidon Config treats System properties as a mutable config source, with an (optional) time based polling strategy. So the change is reflected as well, though not immediately (this is only relevant if you use change notifications).
-
 6.  `CompositeConfigSource` has been removed from `Config`. If you need to configure `MerginStrategy`, you can do it now on `Config` `Builder`
 
 Example of advanced configuration of config:
@@ -89,9 +84,7 @@ Config.builder()
 The configuration approach to `Resource` class was using prefixes which was not aligned with our approach to configuration. All usages were refactored as follows:
 
 1.  The `Resource` class expects a config node `resource` that will be used to read it
-
 2.  The feature set remains unchanged - we support path, classpath, url, content as plain text, and content as base64
-
 3.  Classes using resources are changed as well, such as `KeyConfig` - see details below
 
 ## Media Support
@@ -109,9 +102,7 @@ This replaces `Routing.builder().register(JsonSupport.create())…​`
 The new JSON MediaSupport classes are:
 
 - `io.helidon.http.media.jsonp.JsonpSupport` in module `io.helidon.http.media:helidon-media-jsonp`
-
 - `io.helidon.http.media.jsonb.JsonbSupport` in module `io.helidon.http.media:helidon-media-jsonb`
-
 - `io.helidon.http.media.jackson.JacksonSupport` in module `io.helidon.http.media:helidon-media-jackson`
 
 ## Reactive
@@ -125,7 +116,6 @@ The new JSON MediaSupport classes are:
 Configuration has been updated to use the new `Resource` approach:
 
 1.  `oidc-metadata.resource` is the new key for loading `oidc-metadata` from local resource
-
 2.  `sign-jwk.resource` is the new key for loading signing JWK resource
 
 ## Security: JwtProvider and JwtAuthProvider
@@ -133,7 +123,6 @@ Configuration has been updated to use the new `Resource` approach:
 Configuration has been updated to use the new `Resource` approach:
 
 1.  `jwk.resource` is the new key for loading JWK for verifying signatures
-
 2.  `jwt.resource` is also used for outbound as key for loading JWK for signing tokens
 
 ## PKI Key Configuration
@@ -177,9 +166,7 @@ pem:
 Configuration has been updated to use the new `Resource` approach:
 
 1.  `tls-cert.resource` is the new key for certificate
-
 2.  `tls-key.resource` is the new key for private key
-
 3.  `tl-ca-cert` is the new key for certificate
 
 ## WebServer Configuration
@@ -256,17 +243,10 @@ WebServer.builder()
 ### Other Significant WebServer Deprecations
 
 - `io.helidon.webserver.WebServer.Builder` - all methods that accept `ServerConfiguration` or its builder are deprecated, please use methods on `WebServer.Builder` instead
-
 - `io.helidon.webserver.WebServer.Builder` - all methods for socket configuration that accept a name and socket are deprecated, socket name is now part of socket configuration itself
-
 - `io.helidon.webserver.ResponseHeaders.whenSend()` - please use `whenSent()`
-
 - `io.helidon.webserver.Routing.createServer(ServerConfiguration)` - please use `WebServer.builder()`
-
 - `io.helidon.webserver.Routing.createServer()` - please use `WebServer.builder()`
-
 - `io.helidon.webserver.SocketConfiguration.DEFAULT` - use a builder to create a named configuration
-
 - `` io.helidon.webserver.SocketConfiguration.Builder.ssl(SSLContext) - use `WebServerTls `` instead
-
 - `` io.helidon.webserver.SocketConfiguration.Builder.enabledSSlProtocols(String…​) - use `WebServerTls `` instead

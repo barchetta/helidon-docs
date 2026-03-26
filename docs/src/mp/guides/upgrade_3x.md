@@ -23,39 +23,24 @@ MicroProfile 5.0 lays the foundation for the rapid innovation of MicroProfile AP
 MicroProfile 5.0 is an umbrella for the following specifications and their corresponding versions:
 
 - MicroProfile Config 3.1
-
 - MicroProfile Fault Tolerance 4.0.2
-
 - MicroProfile Health 4.0
-
 - MicroProfile JWT Authentication 2.1
-
 - MicroProfile Metrics 5.1.1
-
 - MicroProfile OpenAPI 3.1.1
-
 - MicroProfile OpenTracing 3.0
-
 - MicroProfile Rest Client 3.0
 
 Helidon 3.x supports the following Jakarta EE specifications:
 
 - CDI (Jakarta Contexts and Dependency Injection) 4.0
-
 - JAX-RS (Jakarta RESTful Web Services) 3.1
-
 - JSON-B (Jakarta JSON Binding) 3.0
-
 - JSON-P (Jakarta JSON Processing) 2.1
-
 - Jakarta Annotations 2.1.1
-
 - Jakarta Persistence API 3.1
-
 - Jakarta Transactions API 2.0
-
 - Jakarta WebSocket API 2.1
-
 - Jakarta Bean Validation 3.0
 
 Corresponding changes to Helidon code were made to support the corresponding specifications' versions.
@@ -153,7 +138,6 @@ Migration from `javax` to `jakarta` namespace is making this release backward in
 Deprecations in the following classes:
 
 - `Resource` - old configuration approach (since 2.0)
-
 - `ThreadPoolSupplier` - Named thread pools (since 2.4.2)
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4363).
@@ -163,15 +147,10 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following classes:
 
 - `ContentReaders` - Methods with alternatives (since 2.0)
-
 - `ContentTypeCharset` - Class with alternative (since 2.0)
-
 - `ContentWriters` - Methods with alternatives (since 2.0)
-
 - `MessageBodyReaderContext` - Methods with alternatives (since 2.0)
-
 - `MessageBodyWriterContext` - Methods with alternatives (since 2.0)
-
 - `ReadableByteChannelPublisher` - Class with alternative (since 2.0)
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4364).
@@ -181,9 +160,7 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following classes:
 
 - `MetricsSupport` - 3 methods, replacing Config with metrics settings
-
 - `KeyPerformanceIndicatorMetricsSettings` - New class in metrics API, for backward compatibility only
-
 - `RegistryFactory` - New class in metrics API, for backward compatibility only
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4365).
@@ -209,7 +186,6 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following class:
 
 - `CoordinatorClient` - multiple methods
-
 - `Headers`
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4368).
@@ -235,7 +211,6 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following class:
 
 - `MetricUtil` - multiple methods
-
 - `MetricsCdiExtension` - multiple methods
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4371).

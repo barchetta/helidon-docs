@@ -96,7 +96,6 @@ WebServer.builder(Routing.builder()
 ```
 
 - Traditional REST routing service registration
-
 - WebSocket setup with Tyrus service
 
 In Helidon 3, WebSocket routing is defined by adding another routing:
@@ -118,7 +117,6 @@ WebServer.builder()
 ```
 
 - Traditional REST routing service registration
-
 - WebSocket routing setup
 
 ## Deprecations
@@ -137,7 +135,6 @@ Use the OCI Java SDK instead. If you use Helidon MP you can inject OCI SDK clien
 Deprecations in the following classes:
 
 - `Resource` - old configuration approach (since 2.0)
-
 - `ThreadPoolSupplier` - Named thread pools (since 2.4.2)
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4363).
@@ -147,15 +144,10 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following classes:
 
 - `ContentReaders` - Methods with alternatives (since 2.0)
-
 - `ContentTypeCharset` - Class with alternative (since 2.0)
-
 - `ContentWriters` - Methods with alternatives (since 2.0)
-
 - `MessageBodyReaderContext` - Methods with alternatives (since 2.0)
-
 - `MessageBodyWriterContext` - Methods with alternatives (since 2.0)
-
 - `ReadableByteChannelPublisher` - Class with alternative (since 2.0)
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4364).
@@ -165,9 +157,7 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following classes:
 
 - `MetricsSupport` - 3 methods, replacing Config with metrics settings
-
 - `KeyPerformanceIndicatorMetricsSettings` - New class in metrics API, for backward compatibility only
-
 - `RegistryFactory` - New class in metrics API, for backward compatibility only
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4365).
@@ -195,7 +185,6 @@ gRPC scope is temporarily smaller in Helidon, please follow issue <https://githu
 Deprecations in the following class:
 
 - `CoordinatorClient` - multiple methods
-
 - `Headers`
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4368).
@@ -221,7 +210,6 @@ More information in the following [Task](https://github.com/oracle/helidon/issue
 Deprecations in the following class:
 
 - `MetricUtil` - multiple methods
-
 - `MetricsCdiExtension` - multiple methods
 
 More information in the following [Task](https://github.com/oracle/helidon/issues/4371).

@@ -48,11 +48,8 @@ server:
 ```
 
 - The feature’s configuration is a child of the `server.features.eureka` node, which lists available `ServerFeature` implementations. This feature is one such implementation.
-
 - Information about the HTTP client the feature uses to communicate with Eureka is a child of this node.
-
 - The `base-uri` needs to identify an available Netflix Eureka Server of at least version 2.0.5. Netflix Eureka Server is commonly made available on port `8761`.
-
 - Configuration under the `client` node is wholly defined by the [`HttpClientConfig`](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientConfig.html) interface.
 
 All other configuration values can be (and ordinarily are) defaulted, but some are best set explicitly:
@@ -69,9 +66,7 @@ server:
 ```
 
 - The feature’s configuration pertaining to the registration itself is a child of the `server.features.eureka.instance` node. Configuration is designed to be familiar to current users of other Netflix Eureka libraries. See the [Helidon Config Reference](../../../config/io_helidon_integrations_eureka_InstanceInfoConfig.md) for a full description of what configuration is allowed.
-
 - The `name` describes the microservice application, not any given instance of it. Its default value is `unknown`, following Netflix Eureka client convention, so it is best to set it explicitly here instead.
-
 - The `hostName` node identifies the host. It defaults to the current host, which may or may not be suitable in your environment. Most of the time you can simply omit this node and use the defaulted value.
 
 Please consult the [Helidon Config Reference](../../../config/io_helidon_integrations_eureka_EurekaRegistrationServerFeature.md) for a full description of the permitted configuration.

@@ -37,9 +37,7 @@ A brief overview of the config system helps clarify its different parts and how 
 These are the main parts of the configuration system:
 
 - `Config` system - allows you to read configuration data in an application
-
 - A config source - a location containing configuration data (File, Map, Properties etc.)
-
 - A config parser - a component capable of transforming bytes into configuration data (such as JSON content, YAML etc.)
 
 ### Config Sources
@@ -47,17 +45,11 @@ These are the main parts of the configuration system:
 Configuration can be loaded from different types of locations and expressed in different formats. The config system includes support for several types of config sources, for example:
 
 1.  Environment variables - the property is a name/value pair.
-
 2.  Java system properties - the property is a name/value pair.
-
 3.  Resources in the classpath - the contents of the resource is parsed according to its inferred format.
-
 4.  File - the contents of the file is parsed according to its inferred format.
-
 5.  Directory - each non-directory file in the directory becomes a config entry: the file name is the key. and the contents of that file are used as the corresponding config String value.
-
 6.  A URL resource - contents is parsed according to its inferred format.
-
 7.  A variety of in-memory data structures (`String`, `Map`, `Properties`)
 
 See the JavaDoc for the [`ConfigSources`](/apidocs/io.helidon.config/io/helidon/config/ConfigSources.html) class for a complete list of the built-in config source types and how to use them.
@@ -152,11 +144,8 @@ int pageSize = config
 For this first example we can see the basic features of `Config`:
 
 - Configuration is a tree of `Config` nodes
-
 - You can use `.` as a tree separator when requesting node values
-
 - Each config value can be retrieved as a typed object, with shortcut methods for the most commonly used types, such as `int`, `String`, `long` and other
-
 - You can immediately provide a default value for the cases the configuration option is not defined in any source
 
 ### Overriding Values
@@ -168,17 +157,13 @@ In order to properly configure your application using configuration sources, you
 For example the default configuration when you use `Config.create()` uses the following config sources in precedence order:
 
 1.  System properties config source
-
 2.  Environment variables config source
-
 3.  A classpath config source called `application.?` where the `?` depends on supported media types currently on the classpath.By default, it is `properties`, but if you have YAML support on classpath, it would be `application.yaml` (a `ConfigParser` may add additional supported suffixes for default file)
 
 Let’s consider the following keys:
 
 1.  System property `answer=42`
-
 2.  Environment variable `ANSWER=38`
-
 3.  A key in a configuration file `answer=36`
 
 When you request `` config.get(`answer ``).asInt().orElse(25)`` , you would get `42 ``
@@ -212,25 +197,17 @@ The `Config` object lets your application retrieve config data as a typed Config
 You can retrieve a `ConfigValue<T>` using the following `as` methods in `Config`:
 
 - `asString()` - to get a string config value
-
 - `asBoolean()` and other accessors for primitive types
-
 - `as(Class)` - to get a value for a type that has a mapper configured
-
 - `as(Generic)` - to get a value for a type supporting generics (such as `Set<String>`)
-
 - `asMap()` - to get a map of key to value pairs
-
 - `asList(Class)` - to get a list of typed values
-
 - `as(Function<Config,T>)` - to get a typed value providing a mapper function
 
 ConfigValue\<T\> can be used to obtain:
 
 - an `Optional<T>` value *from a single node*,
-
 - the `T` value *from a single node* interpreted as a basic Java type (primitive or simple object) already known to the config system (such as a `boolean` or a `Double`), or
-
 - a complex Java type *from a subtree* of the config tree.
 
   The config system automatically knows how to return `List` and `Map` complex types, and you can provide *config mappers* to convert a config subtree to whatever Java types your application needs.
@@ -265,11 +242,8 @@ Nevertheless, we know that configuration sometimes changes, and we may want to r
 In `Config` system, you can do this through change support provided by these components:
 
 1.  `Config.onChange()` API - you can use to add your listener, to be notified of configuration changes
-
 2.  `PollingStrategy` - a component providing regular events to check if a source has changed. This requires support in config sources themselves (see `PollableSource`)
-
 3.  `ChangeWatcher` - a component watching the underlying source for changes. This requires support in config sources themselves (see `WatchableSource`)
-
 4.  `EventConfigSource` - an event source that is capable of notifying about changes itself
 
 If you want to receive `onChange` events, you must configure your Config with at least one source that is capable of providing changes (having a `PollingStrategy` or `ChangeWatcher` configured, or implementing `EventConfigSource`)

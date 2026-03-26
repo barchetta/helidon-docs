@@ -7,7 +7,6 @@ Socket options.
 ## Usages
 
 - [`server.connection-options`](../config/io_helidon_webserver_WebServer.md#ac9c91-connection-options)
-
 - [`server.sockets.connection-options`](../config/io_helidon_webserver_ListenerConfig.md#a251be-connection-options)
 
 ## Configuration options

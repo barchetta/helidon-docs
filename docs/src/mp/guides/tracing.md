@@ -44,9 +44,7 @@ Distributed tracing is a critical feature of microservice based applications, si
 This section explains a few concepts that you need to understand before you get started with tracing.
 
 - In the context of this document, a *service* is synonymous with an application.
-
 - A *span* is the basic unit of work done within a single service, on a single host. Every span has a name, starting timestamp, and duration. For example, the work done by a REST endpoint is a span. A span is associated to a single service, but its descendants can belong to different services and hosts.
-
 - A *trace* contains a collection of spans from one or more services, running on one or more hosts. For example, if you trace a service endpoint that calls another service, then the trace would contain spans from both services. Within a trace, spans are organized as a directed acyclic graph (DAG) and can belong to multiple services, running on multiple hosts. The *OpenTracing Data Model* describes the details at [The OpenTracing Semantic Specification](https://opentracing.io/specification). Spans are automatically created by Helidon as needed during execution of the REST request.
 
 ## Getting Started with Tracing
@@ -230,7 +228,6 @@ public class GreetingProvider {
 ```
 
 - This will enable tracing for all class methods, except for the constructor and methods that are private.
-
 - Remove @Traced for the `getMessage` method.
 
 *Build and run the application, then invoke the endpoints and check the response:*
@@ -273,7 +270,6 @@ public class GreetingProvider {
 ```
 
 - The `getMessage` method will be traced since it is externally invoked by `GreetResource`.
-
 - The `getMessage2` method will not be traced, even with the @Traced annotation, since it is called internally by `getMessage`.
 
 *Build and run the application, then invoke the endpoints:*
@@ -394,7 +390,6 @@ public class GreetResource {
 ```
 
 - This is the `WebTarget` needed to send a request to the second service at port `8081`.
-
 - This is the new endpoint that will call the second service.
 
 *Build and run the application, then invoke the endpoint and check the response:*
@@ -531,7 +526,6 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
 
 *Create and deploy the application into Kubernetes:*
@@ -589,13 +583,9 @@ docker rm -f jaeger
 Applications and libraries can register listeners to be notified at several moments during the lifecycle of every Helidon span:
 
 - Before a new span starts
-
 - After a new span has started
-
 - After a span ends
-
 - After a span is activated (creating a new scope)
-
 - After a scope is closed
 
 The next sections explain how you can write and add a listener and what it can do. See the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) Javadoc for more information.
@@ -673,11 +663,9 @@ Create a `SpanListener` instance and invoke the `Tracer#register(SpanListener)` 
 Helidon also uses Java service loading to locate listeners and register them automatically on all `Tracer` objects. Follow these steps to add a listener service provider.
 
 1.  Implement the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) interface.
-
 2.  Declare your implementation as a service provider:
 
     1.  Create the file `META-INF/services/io.helidon.tracing.SpanListener` containing a line with the fully-qualified name of your class which implements `SpanListener`.
-
     2.  If your service has a `module-info.java` file add the following line to it:
 
         ``` java
@@ -704,19 +692,13 @@ Order in which Helidon Invokes Listener Methods
 This guide has demonstrated how to use the Helidon MP tracing feature with Jaeger. You have learned to do the following:
 
 - Enable tracing within a service
-
 - Use tracing with JAX-RS and CDI beans
-
 - Use the Jaeger UI
-
 - Use tracing across multiple services
-
 - Integrate tracing with Kubernetes
 
 Refer to the following references for additional information:
 
 - [MicroProfile OpenTracing specification](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/microprofile-opentracing-spec-3.0.html)
-
 - [MicroProfile OpenTracing Javadoc](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/apidocs)
-
 - [Helidon Javadoc](/apidocs/index.html?overview-summary.html)

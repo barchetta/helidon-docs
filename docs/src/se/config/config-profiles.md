@@ -17,13 +17,11 @@ Configuration profiles provide a capability to prepare structure of configuratio
 To choose a configuration profile to use at runtime, you can use:
 
 1.  A system property `config.profile`
-
 2.  An environment variable `HELIDON_CONFIG_PROFILE`
 
 There are two ways to define a profile configuration:
 
 1.  Use a config source with a [profile specific name](#profile-config-sources)
-
 2.  Use a [profile file](#profile-files) defining all configuration sources
 
 Configuration profiles can only be used when config is created using the `Config.create()` method without parameters. If you explicitly configure sources, profiles are ignored.
@@ -35,19 +33,12 @@ If a profile is specified, config will load the profile-specific default configu
 Let’s consider the selected profile is `dev`, and we have `yaml` configuration support on classpath; config will look for the following sources (in this order):
 
 1.  `application-dev.yaml` on file system
-
 2.  `application-dev.properties` on file system
-
 3.  `application-dev.yaml` on classpath
-
 4.  `application-dev.properties` on classpath
-
 5.  `application.yaml` on file system
-
 6.  `application.properties` on file system
-
 7.  `application.yaml` on classpath
-
 8.  `application.properties` on classpath
 
 ## Profile Files
@@ -57,11 +48,8 @@ If a profile is specified, config will look for a profile-specific "meta configu
 Let’s consider the selected profile is `dev`, and we have `yaml` configuration support on classpath; config will look for the following profiles (in this order):
 
 1.  `config-profile-dev.yaml` on file system
-
 2.  `config-profile-dev.properties` on file system
-
 3.  `config-profile-dev.yaml` on classpath
-
 4.  `config-profile-dev.properties` on classpath
 
 If any of these files is discovered, it would be used to set up the configuration. In case none is found, the config falls back to [profile specific config sources](#profile-config-sources).
@@ -355,11 +343,8 @@ When using Helidon Declarative programming model (inversion of control, injectio
 The interaction is as follows:
 
 1.  When config profile is defined, only sources from the profile are added (aligned with SE Imperative programming model)
-
 2.  When not using a config profile, `ConfigSource` services are discovered from the service registry, i.e. you can create a custom config source as a `@Service.Singleton`
-
 3.  If you want to have a config source that works both with a config profile, and with the default config instance, there is a solution (see below)
-
 4.  You can also define a `ConfigSourceProvider` as a registry service (and this will work the same as in SE imperative)
 
 ### Designing a config source that integrates with profiles and default config

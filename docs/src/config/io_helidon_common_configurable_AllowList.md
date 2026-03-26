@@ -9,15 +9,10 @@ defines a list of allowed and/or denied matches and tests if a particular value 
 ## Usages
 
 - [`server.protocols.http_1_1.requested-uri-discovery.trusted-proxies`](../config/io_helidon_http_RequestedUriDiscoveryContext.md#acaa10-trusted-proxies)
-
 - [`server.protocols.http_2.requested-uri-discovery.trusted-proxies`](../config/io_helidon_http_RequestedUriDiscoveryContext.md#acaa10-trusted-proxies)
-
 - [`server.requested-uri-discovery.trusted-proxies`](../config/io_helidon_http_RequestedUriDiscoveryContext.md#acaa10-trusted-proxies)
-
 - [`server.sockets.protocols.http_1_1.requested-uri-discovery.trusted-proxies`](../config/io_helidon_http_RequestedUriDiscoveryContext.md#acaa10-trusted-proxies)
-
 - [`server.sockets.protocols.http_2.requested-uri-discovery.trusted-proxies`](../config/io_helidon_http_RequestedUriDiscoveryContext.md#acaa10-trusted-proxies)
-
 - [`server.sockets.requested-uri-discovery.trusted-proxies`](../config/io_helidon_http_RequestedUriDiscoveryContext.md#acaa10-trusted-proxies)
 
 ## Configuration options

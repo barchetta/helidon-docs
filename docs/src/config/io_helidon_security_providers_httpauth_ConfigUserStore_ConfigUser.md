@@ -7,11 +7,8 @@ A user that is loaded from configuration.
 ## Usages
 
 - [`security.providers.http-basic-auth.users`](../config/io_helidon_security_providers_httpauth_HttpBasicAuthProvider.md#a18d67-users)
-
 - [`security.providers.http-digest-auth.users`](../config/io_helidon_security_providers_httpauth_HttpDigestAuthProvider.md#a97822-users)
-
 - [`server.features.security.security.providers.http-basic-auth.users`](../config/io_helidon_security_providers_httpauth_HttpBasicAuthProvider.md#a18d67-users)
-
 - [`server.features.security.security.providers.http-digest-auth.users`](../config/io_helidon_security_providers_httpauth_HttpDigestAuthProvider.md#a97822-users)
 
 ## Configuration options

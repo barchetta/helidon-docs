@@ -15,7 +15,6 @@ JSON Schema is a specification for describing the structure and validation rules
 Helidon provides two complementary ways to work with JSON Schema.
 
 - In the declarative approach, you describe the schema using annotations in a [`JsonSchema`](/apidocs/io.helidon.json.schema/io/helidon/json/schema/JsonSchema.html) class.
-
 - In the imperative approach, you build the schema programmatically with the fluent [`Schema`](/apidocs/io.helidon.json.schema/io/helidon/json/schema/Schema.html) builder API.
 
 Helidon currently supports only schema generation.

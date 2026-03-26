@@ -19,13 +19,11 @@ Use the OpenAPI generator release 7.6.0 or later which this document describes.
 In the vocabulary of the tool, there are two *generators* for Helidon:
 
 - `java-helidon-client` (hereafter the Helidon client generator)
-
 - `java-helidon-server` (hereafter the Helidon server generator).
 
 Each of these generators supports two *libraries*:
 
 - `mp` - for Helidon MP code generation
-
 - `se` - for Helidon SE code generation
 
 Use the Helidon *client* generator and its `mp` library to create a [Helidon MicroProfile REST client](../../mp/restclient/restclient.md). The resulting client library works with any server that implements the API declared in the OpenAPI document you specified when you ran the generator. The client library provides an abstraction similar to remote procedure calls (RPC). To access a remote service that implements the endpoints declared in the OpenAPI document, your code uses the generated client library first to establish a connection to the remote service and then to call remote service endpoints by invoking local methods passing POJO business objects or Java types as arguments.
@@ -35,9 +33,7 @@ Use the tool’s Helidon *server* generator and its `mp` library to create serve
 You can run the OpenAPI generators in three ways:
 
 - using the OpenAPI generator CLI
-
 - using the OpenAPI generator Maven plug-in
-
 - using the online OpenAPI generator website
 
 The rest of this document walks you through [how to use](#usage) each technique and how to [configure](#configuration) the generators to produce the code you want.
@@ -78,9 +74,7 @@ The OpenAPI generators support a substantial, powerful, and sometimes bewilderin
 For complete lists see these pages:
 
 - [generic options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/usage.md#generate)
-
 - [Helidon client generator options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/generators/java-helidon-client.md) and
-
 - [Helidon server generator options](https://github.com/OpenAPITools/openapi-generator/blob/v7.6.0/docs/generators/java-helidon-server.md)
 
 The OpenAPI generator loosely divides its settings into three types:
@@ -366,7 +360,6 @@ Among the many configuration settings available to you, some you should particul
 This section covers two major topics:
 
 - [Planning your use of the OpenAPI generators](#planning-your-use-of-the-openapi-generators)
-
 - [Running the generators](#running-the-openapi-generators)
 
 ### Planning Your Use of the OpenAPI Generators
@@ -422,9 +415,7 @@ When you generate a Helidon MP client, the generated code contains a separate AP
 Earlier we listed the ways you can run the OpenAPI generator:
 
 - using the OpenAPI generator CLI
-
 - using the OpenAPI generator Maven plug-in
-
 - using the online OpenAPI generator website
 
 The next sections describe each of these techniques in detail.
@@ -473,7 +464,6 @@ java -jar ${path-to-generator}/openapi-generator-cli.jar \
 The key differences between the commands are:
 
 - the generator selected by the `-g` option (`client` vs. `server`),
-
 - the artifact ID and package names (`client` vs. `server`).
 
 You could use these two commands together to generate a server submodule and a client submodule in a pre-existing multi-module Maven project. Remember that the resulting client project can access any server which implements the API described in the `petstore.yaml` OpenAPI document, whether it was generated using the OpenAPI generator tool or not.
@@ -579,21 +569,14 @@ public class ExampleOpenApiGenClientResource {
 ```
 
 - Uses a bean-defining annotation so CDI can inject into this class.
-
 - Requests that CDI inject the following field.
-
 - Identifies to Helidon MP that the following field is a REST client.
-
 - Declares the field using the generated `PetApi` type.
-
 - Invokes the remote service using the injected field and the parameter from the incoming request.
 
 ## References
 
 - [OpenAPI Generator Official Website](https://openapi-generator.tech)
-
 - [OpenAPI Generator GitHub Repository](https://github.com/OpenAPITools/openapi-generator)
-
 - [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md)
-
 - [MicroProfile REST Client specification](https://github.com/eclipse/microprofile-rest-client)

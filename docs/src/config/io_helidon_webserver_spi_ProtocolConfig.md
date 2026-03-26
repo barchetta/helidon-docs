@@ -7,7 +7,6 @@ This type is a provider contract.
 ## Usages
 
 - [`server.protocols`](io_helidon_webserver_WebServer.md#abdf05-protocols)
-
 - [`server.sockets.protocols`](io_helidon_webserver_ListenerConfig.md#ad0b48-protocols)
 
 ## Implementations

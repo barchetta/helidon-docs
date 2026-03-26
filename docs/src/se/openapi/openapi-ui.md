@@ -68,23 +68,16 @@ The example below shows the UI if you modify the Helidon SE QuickStart greeting 
 With the OpenAPI UI displayed, follow these steps to access one of your service’s operations.
 
 1.  Find the operation you want to run and click on its row in the list.
-
 2.  The UI expands the operation, showing any input parameters and the possible responses. Click the "Try it out" button in the operation’s row.
-
 3.  The UI now allows you to type into the input parameter field(s) to the right of each parameter name. Enter any required parameter values (first highlighted rectangle) and any non-required values you wish, then click "Execute" (highlighted arrow).
-
 4.  Just below the "Execute" button the UI shows several sections:  
 
     - the equivalent `curl` command for submitting the request with your inputs,
-
     - the URL used for the request, and
-
     - a new "Server response" section (second highlighted rectangle) containing several items from the response:  
 
       - HTTP status code
-
       - body
-
       - headers
 
 The next image shows the screen after you submit the "Returns a personalized greeting" operation.
@@ -124,7 +117,6 @@ If your code invokes the `OpenApiFeature.Builder` `config` method, Helidon autom
 You can control some of the behavior of the UI programmatically in two steps:
 
 1.  Create an [`OpenApiUiConfig.Builder`](/apidocs/io.helidon.integrations.openapi.ui/io/helidon/integrations/openapi/ui/OpenApiUiConfig.Builder.html) and invoke methods on it to set the UI behavior, then invoke the builder’s `build` method to create the `OpenApiUi` object.
-
 2.  Invoke the `addService` method on [`OpenApiFeature.Builder`](/apidocs/io.helidon.openapi/io/helidon/openapi/OpenApiFeatureConfig.Builder.html), passing the `OpenApiUi` object you prepared above.
 
 The following example illustrates these steps, combining configuration with explicit programmatic settings.
@@ -148,13 +140,9 @@ WebServer server = WebServer.builder()
 ```
 
 - Extract the `openapi` config.
-
 - Begin setting up the `OpenApiFeature` builder.
-
 - Create the UI builder.
-
 - Set UI behavior programmatically.
-
 - Set additional UI behavior based on UI configuration.
 
 The order in which your code invokes the methods on `OpenApiUi.Builder` and `OpenApiFeature.Builder` determines the outcome. For instance, the example above adds the UI service to the `OpenApiFeature.Builder` *before* applying configuration to the `OpenApiFeature.Builder`. If the configuration contains a setting for the UI `web-context` value, then the UI uses the configured value and not the programmatic value because your code applies the configuration later. Your code should typically apply configuration *after* setting any values programmatically. Doing so allows users or deployers of your service to set the behavior using configuration according to their particular needs which your code might not be able to anticipate.
@@ -194,9 +182,7 @@ You can use configuration to affect the UI path in these ways:
   ```
 
   - The `port` and `host` settings are for the server as a whole, not specifically for OpenAPI.
-
   - The `openapi` subsection within `features` contains OpenAPI settings.
-
   - Changes the endpoint for returning the OpenAPI document from the default `/openapi` to `/myopenapi`.
 
     In this case, the path for the UI component is your customized OpenAPI path with `/ui` as a suffix. With the example above, the UI responds at `/myopenapi/ui` and Helidon uses standard content negotiation at `/myopenapi` to return either the OpenAPI document or the UI.
@@ -217,7 +203,6 @@ You can use configuration to affect the UI path in these ways:
   ```
 
   - Introduces OpenAPI UI settings
-
   - Specifies an alternate path for the UI
 
     > [!NOTE]

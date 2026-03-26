@@ -11,9 +11,7 @@ FixedLimit
 ## Usages
 
 - [`server.concurrency-limit.fixed`](../config/io_helidon_common_concurrency_limits_Limit.md#aaa497-fixed)
-
 - [`server.features.limits.concurrency-limit.fixed`](../config/io_helidon_common_concurrency_limits_Limit.md#aaa497-fixed)
-
 - [`server.sockets.concurrency-limit.fixed`](../config/io_helidon_common_concurrency_limits_Limit.md#aaa497-fixed)
 
 ## Configuration options

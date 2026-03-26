@@ -70,9 +70,7 @@ MicroProfile Config provides typed access to configuration values, using built-i
 In order to properly configure your application using configuration sources, you need to understand the precedence rules used to merge your configuration data. The default MicroProfile Config Sources ordering is:
 
 - System properties (ordinal=400)
-
 - Environment variables (ordinal=300)
-
 - /META-INF/microprofile-config.properties (ordinal=100)
 
 Each Config Source has an ordinal that determines the priority of the Config Source. A Config Source with higher ordinal has higher priority as compared to the Config Source with lower ordinal. The values taken from the high-priority Config Source overrides the values from low-priority Config Source. The default value is 100.
@@ -222,5 +220,4 @@ Step-by-step guide about using MicroProfile Config in your Helidon MP applicatio
 ## Reference
 
 - [MicroProfile Config Specifications](https://download.eclipse.org/microprofile/microprofile-config-3.1/microprofile-config-spec-3.1.html)
-
 - [MicroProfile Config Javadocs](https://download.eclipse.org/microprofile/microprofile-config-3.1/apidocs)

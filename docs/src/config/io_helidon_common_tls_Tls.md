@@ -7,17 +7,11 @@ TLS configuration - common for server and client.
 ## Usages
 
 - [`clients.tls`](../config/io_helidon_webclient_api_WebClient.md#aba9ef-tls)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.tls`](../config/io_helidon_webclient_api_WebClient.md#aba9ef-tls)
-
 - [`security.providers.oidc.webclient.tls`](../config/io_helidon_webclient_api_WebClient.md#aba9ef-tls)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.tls`](../config/io_helidon_webclient_api_WebClient.md#aba9ef-tls)
-
 - [`server.features.security.security.providers.oidc.webclient.tls`](../config/io_helidon_webclient_api_WebClient.md#aba9ef-tls)
-
 - [`server.sockets.tls`](../config/io_helidon_webserver_ListenerConfig.md#aed6f6-tls)
-
 - [`server.tls`](../config/io_helidon_webserver_WebServer.md#ac9efa-tls)
 
 ## Configuration options

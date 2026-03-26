@@ -78,9 +78,7 @@ static Single<WebServer> startServer() {
 ```
 
 - Server is started in an asynchronous way. A `Single` object is returned.
-
 - Wait for the server to start and print the message in an asynchronous way.
-
 - Gracefully handle exceptions if they occur during the initialization process.
 
 In Helidon 4.x, you can create and configure a server and then wait for it to start. If any exceptions happen, they are handled the traditional way using available language constructions. For example:
@@ -103,9 +101,7 @@ public static void main(String[] args) {
 ```
 
 - Configure the server.
-
 - Start the server. No reactive objects returned.
-
 - Print a message when the server is started.
 
 ### Additional Server Lifecycle Tasks
@@ -155,7 +151,6 @@ If you want full control using the API, you still have that option.
 For more information, see:
 
 - [Observability Feature Support](../observability.md)
-
 - [Media Types Support](../webserver/webserver.md#_media_types_support)
 
 ### Routing Configuration
@@ -183,11 +178,8 @@ private static Routing createRouting(Config config) {
 ```
 
 - Create and configure `Metrics` and `Health` support.
-
 - Create a regular Helidon Service.
-
 - Register `Metrics` and `Health` support as Helidon Services.
-
 - Register the regular Greeting service.
 
 In Helidon 4.x, the Metrics and Health features are automatically discovered and, assuming you added the dependencies to your project, the routing is configured in the following way:
@@ -290,7 +282,6 @@ public class GreetService implements Service {
 ```
 
 - Use the `update()` method to set up routing.
-
 - Handle a `Request` and return a `Response`.
 
 In Helidon 4.x, the same service looks like this:
@@ -322,9 +313,7 @@ public class GreetService implements HttpService {
 ```
 
 - Implement `HttpService` for the `GreetingService`.
-
 - Use `routing(HttpRules rules)` to set up routing.
-
 - Handle a `Request` and return a `Response`.
 
 Learn more about `HttpService` and `Routing` at [Helidon SE WebServer](../webserver/webserver.md).
@@ -418,17 +407,13 @@ Metrics has changed significantly in Helidon 4.x. For more information, see [Hel
 - Changed modules:
 
   - `helidon-security-integration-grpc` was removed
-
   - `helidon-security-integration-jersey` moved to the module `helidon-microprofile-security`
-
   - `helidon-security-integration-jersey-client` moved to the module `helidon-microprofile-security`
-
   - `helidon-security-integration-webserver` moved to the module `helidon-webserver-security`
 
 - Significant class name changes:
 
   - `OidcSupport` was renamed to `OidcFeature`
-
   - `WebSecurity` was renamed to `SecurityFeature`
 
 - Other:

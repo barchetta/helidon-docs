@@ -7,7 +7,6 @@ This type is a provider contract.
 ## Usages
 
 - [`security.secrets.*.config`](io_helidon_security_Security.md#aeab91-secrets---config)
-
 - [`server.features.security.security.secrets.*.config`](io_helidon_security_Security.md#aeab91-secrets---config)
 
 ## Implementations

@@ -7,23 +7,14 @@ Configuration of outbound target.
 ## Usages
 
 - [`security.providers.google-login.outbound.outbound`](../config/io_helidon_security_providers_common_OutboundConfig.md#a54601-outbound)
-
 - [`security.providers.header-atn.outbound`](../config/io_helidon_security_providers_header_HeaderAtnProvider.md#aa4f36-outbound)
-
 - [`security.providers.http-basic-auth.outbound`](../config/io_helidon_security_providers_httpauth_HttpBasicAuthProvider.md#aade93-outbound)
-
 - [`security.providers.jwt.sign-token.outbound`](../config/io_helidon_security_providers_common_OutboundConfig.md#a54601-outbound)
-
 - [`security.providers.oidc.outbound`](../config/io_helidon_security_providers_oidc_OidcProvider.md#acf040-outbound)
-
 - [`server.features.security.security.providers.google-login.outbound.outbound`](../config/io_helidon_security_providers_common_OutboundConfig.md#a54601-outbound)
-
 - [`server.features.security.security.providers.header-atn.outbound`](../config/io_helidon_security_providers_header_HeaderAtnProvider.md#aa4f36-outbound)
-
 - [`server.features.security.security.providers.http-basic-auth.outbound`](../config/io_helidon_security_providers_httpauth_HttpBasicAuthProvider.md#aade93-outbound)
-
 - [`server.features.security.security.providers.jwt.sign-token.outbound`](../config/io_helidon_security_providers_common_OutboundConfig.md#a54601-outbound)
-
 - [`server.features.security.security.providers.oidc.outbound`](../config/io_helidon_security_providers_oidc_OidcProvider.md#acf040-outbound)
 
 ## Configuration options

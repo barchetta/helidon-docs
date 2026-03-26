@@ -165,7 +165,5 @@ This example assumes that port 8888 is reserved for admin users and binds the `M
 ## Reference
 
 - [Eclipse Tyrus](https://projects.eclipse.org/proposals/eclipse-tyrus)
-
 - [WebSocket RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455)
-
 - [Helidon MicroProfile Tyrus Javadoc](/apidocs/io.helidon.microprofile.tyrus/module-summary.html)

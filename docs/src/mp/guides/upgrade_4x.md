@@ -26,11 +26,8 @@ Helidon provides a MicroProfile server implementation (`io.helidon.microprofile.
 Helidon 4.0.0 adds support for [MicroProfile 6.0](https://download.eclipse.org/microprofile/microprofile-6.0/microprofile-spec-6.0.html#microprofile6.0). Key changes include:
 
 - Significant updates to the [MicroProfile Metrics specification](https://download.eclipse.org/microprofile/microprofile-metrics-5.0.0/microprofile-metrics-spec-5.0.0.html).
-
 - Addition of the MicroProfile Telemetry specification which replaces the MicroProfile OpenTracing specification.
-
 - Support for the [Jakarta EE 10 Core Profile](https://jakarta.ee/specifications/coreprofile/10/jakarta-coreprofile-spec-10.0#introduction) (instead of individual Jakarta EE specifications).
-
 - Various minor updates to other MicroProfile specifications. Review the individual MicroProfile specifications for details.
 
 Helidon 4.1.0 adds support for [MicroProfile 6.1](https://download.eclipse.org/microprofile/microprofile-6.1/microprofile-spec-6.1.html#microprofile6.1).

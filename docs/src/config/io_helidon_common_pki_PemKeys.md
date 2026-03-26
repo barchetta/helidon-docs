@@ -7,31 +7,18 @@ PEM files based keys - accepts private key and certificate chain.
 ## Usages
 
 - [`clients.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`clients.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`security.providers.oidc.webclient.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`security.providers.oidc.webclient.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.features.security.security.providers.oidc.webclient.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.features.security.security.providers.oidc.webclient.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.sockets.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.sockets.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.tls.private-key.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
-
 - [`server.tls.trust.pem`](../config/io_helidon_common_pki_Keys.md#a0102e-pem)
 
 ## Configuration options

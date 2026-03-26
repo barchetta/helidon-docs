@@ -1,13 +1,9 @@
 # Features and Benefits of Helidon
 
 - [Open Source with Support](#open-source-with-support)
-
 - [Two API Flavors for Two Programming Styles](#two-api-flavors-for-two-programming-styles)
-
 - [Feature Richness](#feature-richness)
-
 - [Enterprise Features](#enterprise-features)
-
 - [Integrations](#integrations)
 
 ## Open Source with Support
@@ -33,27 +29,17 @@ Helidon intentionally includes many features required by industrial-strength ent
 Helidon integrates with many other technologies that are useful in the implementation of microservices applications, for example:
 
 - Oracle Coherence and Coherence Community Edition, the leading in- memory data grid, which can serve as a distributed cache or system of record for stateful microservices
-
 - The Oracle Cloud Infrastructure (OCI) SDK for Java, for using a wide variety of OCI services from within Helidon applications
-
 - Oracle WebLogic Server (WLS), including
 
   - Bi-directional REST service invocations
-
   - Helidon-to-WLS SOAP web service invocations
-
   - Helidon consumption and production of messages on WLS- hosted JMS destinations
-
   - Single sign-on between Helidon and WLS -hosted services using Oracle Identity Cloud Service
-
   - Distributed transaction coordination between Helidon and WLS
-
   - hosted resources using Oracle MicroTx Free
 
 - Messaging Connectors for JMS, Kafka, and Oracle AQ, to allow Helidon applications to consume and produce messages with those providers
-
 - HashiCorp Vault for accessing securely stored tokens, passwords, API keys, PKI certificates, and other secrets
-
 - Micrometer Metrics, for monitoring Helidon applications using Micrometer
-
 - Neo4j, for using a graph database from within Helidon applications

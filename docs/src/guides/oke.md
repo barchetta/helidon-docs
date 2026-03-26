@@ -30,9 +30,7 @@ docker login \
 ```
 
 - The user name in the format `<tenancy_name>/<username>`.
-
 - The password is the generated token.
-
 - `<region-code>` is the code for the OCI region that you’re using. For example, the region code for Phoenix is `phx`. See [Regions and Availability Domains](https://docs.cloud.oracle.com/iaas/Content/General/Concepts/regions.htm).
 
 *Tag the image that you want to push to the registry:*
@@ -44,7 +42,6 @@ docker tag \
 ```
 
 - the local image to tag
-
 - `<repo-name>` is optional. It is the name of a repository to which you want to push the image (for example, `project01`).
 
 *Push the image to the Registry:*
@@ -79,13 +76,9 @@ kubectl create secret docker-registry \
 ```
 
 - The name of the config secret
-
 - The docker registry (see docker tag step above)
-
 - The user name (see docker login step above)
-
 - The password (see docker login step above)
-
 - The namespace created in the previous step
 
 ### Deploy the Image to Kubernetes
@@ -107,7 +100,6 @@ spec:
 ```
 
 - The config secret name
-
 - The image path
 
 *Deploy the application:*

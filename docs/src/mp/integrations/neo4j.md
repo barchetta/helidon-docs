@@ -168,7 +168,6 @@ public class MovieRepository {
 ```
 
 - `Neo4j` driver constructor injection
-
 - Use of `Neo4j` driver to extract all Movies
 
 Movies can now be returned as JSON objects:
@@ -250,5 +249,4 @@ Health checks for Neo4j will be included in `/health` endpoint output.
 ## References
 
 - [Neo4j official website](https://neo4j.com/)
-
 - [Neo4j Java developer guide](https://neo4j.com/developer/java/)

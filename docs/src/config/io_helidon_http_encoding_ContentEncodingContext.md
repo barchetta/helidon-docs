@@ -7,7 +7,6 @@ Content encoding support to obtain encoders and decoders.
 ## Usages
 
 - [`server.content-encoding`](../config/io_helidon_webserver_WebServer.md#a511a0-content-encoding)
-
 - [`server.sockets.content-encoding`](../config/io_helidon_webserver_ListenerConfig.md#a8f3cb-content-encoding)
 
 ## Configuration options

@@ -7,7 +7,6 @@ Configuration of a server connection (for each connection created by clients).
 ## Usages
 
 - [`server.connection-config`](../config/io_helidon_webserver_WebServer.md#a20877-connection-config)
-
 - [`server.sockets.connection-config`](../config/io_helidon_webserver_ListenerConfig.md#ac4449-connection-config)
 
 ## Configuration options

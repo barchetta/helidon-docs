@@ -7,7 +7,6 @@ Automatic metrics collection settings.
 ## Usages
 
 - [`metrics.auto-http-metrics`](../config/io_helidon_webserver_observe_metrics_MetricsObserver.md#a4b719-auto-http-metrics)
-
 - [`server.features.observe.observers.metrics.auto-http-metrics`](../config/io_helidon_webserver_observe_metrics_MetricsObserver.md#a4b719-auto-http-metrics)
 
 ## Configuration options

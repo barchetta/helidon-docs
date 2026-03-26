@@ -7,7 +7,6 @@ Metrics Observer configuration.
 ## Usages
 
 - [`metrics`](../config/config_reference.md#a01ebb-metrics)
-
 - [`server.features.observe.observers.metrics`](../config/io_helidon_webserver_observe_spi_Observer.md#a574f4-metrics)
 
 ## Configuration options

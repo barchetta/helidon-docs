@@ -546,7 +546,5 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [LangChain4j OciGenAi Documentation](https://docs.langchain4j.dev/integrations/language-models/oci-genai)
-
 - [Oracle Cloud Infrastructure GenAI Services](https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/)

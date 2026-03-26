@@ -62,5 +62,4 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4J Integration](langchain4j.md)
-
 - [langChain4J Coherence Embedding Store Documentation](https://docs.langchain4j.dev/integrations/embedding-stores/coherence)

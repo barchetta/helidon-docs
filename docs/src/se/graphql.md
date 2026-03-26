@@ -76,11 +76,8 @@ static GraphQLSchema buildSchema() {
 The following is a description of each of these steps:
 
 - Define the GraphQL schema.
-
 - Create a `DataFetcher` to return a list of hellos in different languages.
-
 - Wire up the `DataFetcher` s.
-
 - Generate the GraphQL schema.
 
 ## Configuration

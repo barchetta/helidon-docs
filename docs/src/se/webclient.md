@@ -69,11 +69,8 @@ WebClient client = WebClient.builder()
 WebClient offers a set of request methods that are used to specify the type of action to be performed on a given resource. Below are some examples of request methods:
 
 - `get()`
-
 - `post()`
-
 - `put()`
-
 - `method(Method method)`
 
 Check out [HttpClient](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClient.html) API to learn more about request methods. These methods will create a new instance of [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html) which can then be configured to add optional settings that will customize the behavior of the request.
@@ -94,13 +91,9 @@ client.get()
 ```
 
 - Overrides `baseUri` from WebClient
-
 - Adds path to the uri
-
 - Adds query parameter to the request
-
 - Adds fragment to the request
-
 - Adds header to the request
 
 For more information about these optional parameters, check out [ClientRequestBase](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequestBase.html) API, which is a parent class of [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html).
@@ -108,7 +101,6 @@ For more information about these optional parameters, check out [ClientRequestBa
 [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html) class also provides specific header methods that help the user to set a particular header. Some examples of these are:
 
 - `contentType` (MediaType contentType)
-
 - `accept` (MediaType…​ mediaTypes)
 
 For more information about these methods, check out [ClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequest.html) API, which is a parent class of [HttpClientRequest](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/HttpClientRequest.html).
@@ -118,17 +110,11 @@ For more information about these methods, check out [ClientRequest](/apidocs/io.
 Once the request setup is completed, the following methods can be used to send it:
 
 - `HttpClientResponse request()`
-
 - `<E> ClientResponseTyped<E> request(Class<E> type)`
-
 - `<E> E requestEntity(Class<E> type)`
-
 - `HttpClientResponse submit(Object entity)`
-
 - `<T> ClientResponseTyped<T> submit(Object entity, Class<T> requestedType)`
-
 - `HttpClientResponse outputStream(OutputStreamHandler outputStreamConsumer)`
-
 - `<T> ClientResponseTyped<T> outputStream(OutputStreamHandler outputStreamConsumer, Class<T> requestedType)`
 
 Each of the methods will provide a way to allow response to be retrieved in a particular response type. Refer to [ClientRequest API](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/ClientRequest.html) for more details about these methods.
@@ -147,9 +133,7 @@ String entityString = response.entity();
 WebClient currently supports `HTTP/1.1` and `HTTP/2` protocols. Below are the rules on which specific protocol will be used:
 
 - Using plain socket triggers WebClient to process a request using `HTTP/1.1`.
-
 - When using TLS, the client will use ALPN (protocol negotiation) to use appropriate HTTP version (either 1.1, or 2). `HTTP/2` has a higher weight, so it is chosen if supported by both sides.
-
 - A specific protocol can be explicitly selected by calling `HttpClientRequest#protocolId(String)`.
 
 <!-- -->
@@ -159,7 +143,6 @@ WebClient currently supports `HTTP/1.1` and `HTTP/2` protocols. Below are the ru
             .requestEntity(String.class);
 
 - If `HTTP/2` is used, an upgrade attempt will be performed. If it fails, the client falls-back to `HTTP/1.1`.
-
 - The parameter `prior-knowledge` can be defined using `HTTP/2` protocol configuration. Please refer to [Setting Protocol configuration](#setting-protocol-configuration) on how to customize `HTTP/2`. In such a case, `prior-knowledge` will be used and fail if it is unable to switch to `HTTP/2`.
 
 ### Adding Media Support
@@ -167,9 +150,7 @@ WebClient currently supports `HTTP/1.1` and `HTTP/2` protocols. Below are the ru
 Webclient supports the following built-in Helidon Media Support libraries:
 
 1.  JSON Processing (JSON-P)
-
 2.  JSON Binding (JSON-B)
-
 3.  Jackson
 
 They can be activated by adding their corresponding libraries into the classpath. This can simply be done by adding their corresponding dependencies.
@@ -204,7 +185,6 @@ They can be activated by adding their corresponding libraries into the classpath
 Users can also create their own Custom Media Support library and make them work by following either of the approaches:
 
 - Create a Provider of the Custom Media Support and expose it via Service Loader followed by adding the Media Support library to the classpath.
-
 - Explicitly register the Custom Media Support from WebClient.
 
 ``` java
@@ -221,7 +201,6 @@ WebClient.builder()
 Webclient provides three DNS resolver implementations out of the box:
 
 - `Java DNS resolution` is the default.
-
 - `First DNS resolution` uses the first IP address from a DNS lookup. To enable this option, add below dependency:
 
 ``` xml
@@ -358,17 +337,11 @@ client:
 ```
 
 - Client functional settings
-
 - Cookie management
-
 - Default client headers
-
 - Client service configuration
-
 - Protocol configuration
-
 - Proxy configuration
-
 - TLS configuration
 
 ## Examples
@@ -402,7 +375,6 @@ HttpClientResponse response = client.get("/proxiedresource")
 ```
 
 - Proxy instance configured using system settings (environment variables and system properties)
-
 - Configure the proxy per client request
 
 #### Configuring Proxy in the config file
@@ -431,7 +403,6 @@ WebClient.builder()
 ```
 
 - `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
-
 - Passing the client configuration node
 
 ### WebClient TLS Setup
@@ -483,7 +454,6 @@ WebClient.builder()
 ```
 
 - `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
-
 - Passing the client configuration node
 
 ### Adding Service to WebClient
@@ -491,15 +461,11 @@ WebClient.builder()
 WebClient currently supports several built-in services, namely
 
 - [`discovery`](discovery.md#_web_client_discovery_integration)
-
 - `metrics`
-
 - `tracing`
-
 - `telemetry` (following OpenTelemetry semantic conventions)
 
   - `metrics`
-
   - `tracing`
 
 - `security`.
@@ -625,7 +591,6 @@ WebClient.builder()
 ```
 
 - `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
-
 - Passing the client configuration node
 
 <a id="setting-protocol-configuration"></a>
@@ -685,7 +650,6 @@ The telemetry webclient services provide metrics and tracing spans which follow 
 To enable the telemetry webclient services, take the following two steps:
 
 - Add the appropriate dependency.
-
 - Add configuration or code to activate the telemetry services.
 
 To set up metrics and tracing, add the following single dependency to your project:
@@ -797,19 +761,11 @@ See the [manifest](../config/manifest.md) for all available types.
 ## Reference
 
 - [Helidon Webclient API](/apidocs/io.helidon.webclient.api/module-summary.html)
-
 - [Helidon WebClient HTTP/1.1 Support](/apidocs/io.helidon.webclient.http1/module-summary.html)
-
 - [Helidon WebClient HTTP/2 Support](/apidocs/io.helidon.webclient.http2/module-summary.html)
-
 - [Helidon WebClient DNS Resolver First Support](/apidocs/io.helidon.webclient.dns.resolver.first/module-summary.html)
-
 - [Helidon WebClient DNS Resolver Round Robin Support](/apidocs/io.helidon.webclient.dns.resolver.roundrobin/module-summary.html)
-
 - [Helidon WebClient Discovery Support](/apidocs/io.helidon.webclient.discovery/module-summary.html)
-
 - [Helidon WebClient Metrics Support](/apidocs/io.helidon.webclient.metrics/module-summary.html)
-
 - [Helidon WebClient Security Support](/apidocs/io.helidon.webclient.security/module-summary.html)
-
 - [Helidon WebClient Tracing Support](/apidocs/io.helidon.webclient.tracing/module-summary.html)

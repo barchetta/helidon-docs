@@ -56,9 +56,7 @@ mvn -U archetype:generate -DinteractiveMode=false \
 Helidon has a set of built-in health checks:
 
 - deadlock detection
-
 - available disk space
-
 - available heap memory
 
 The following example shows how to use the built-in health checks. These examples are all executed from the root directory of your project (helidon-quickstart-se).
@@ -181,7 +179,6 @@ This time the `curl` output shows not only the HTTP status—​as 200 instead o
 ```
 
 - Overall application health status
-
 - List of individual health checks.
 
 ### Adding Custom Health Checks
@@ -191,7 +188,6 @@ You can add your own custom health checks. These typically assess the conditions
 The following trivial but illustrative example adds a custom start-up check that reports `DOWN` until the server has been running for eight seconds and reports `UP` thereafter. Note the two main steps in the example code:
 
 1.  Create an explicit instance of `ObserveFeature` which contains a custom `HealthObserver` with the custom check.
-
 2.  Add that `ObserveFeature` instance to the `WebServerConfig.Builder` as a feature.
 
 *Updated `Main#main`, augmenting the creation of `WebServer` instance with a custom health check*
@@ -226,27 +222,18 @@ void snippet1(Config config) {
 ```
 
 - Declare a variable for holding the server start-up time. (This is set later in the code.)
-
 - Begin preparing the custom `HealthObserver` according to this app’s specific needs.
-
 - Turn on detailed output in HTTP responses to the health endpoint.
-
 - Add a custom start-up health check:
 
   - Compute the status for the response according to whether the server has been up for at least eight seconds.
-
   - Add a detail to the response reporting the time at which the health check was queried.
-
   - Set the health check type as `STARTUP`.
-
   - Set the health check name to `"warmedUp"`.
 
 - Find and apply configuration for observability observers *other* than health (because we are about to create our own custom `HealthObserver`).
-
 - Add the `HealthObserver` to the `ObserveFeature`.
-
 - Add the `ObserveFeature` instance as a feature to the webserver.
-
 - Record when the server has actually started.
 
 Note that the health check type and name are fixed, whereas the health check recomputes the value of the response every time Helidon queries it.
@@ -333,11 +320,8 @@ Alternatively, you could instead remove the dependency on the `helidon-health-ch
 You can choose which category of health check to retrieve when you access the health endpoint by adding the health check type as an additional part of the resource path:
 
 - liveness only - <http://localhost:8080/observe/health/live>
-
 - readiness only - <http://localhost:8080/observe/health/ready>
-
 - startup only - <http://localhost:8080/observe/health/started>
-
 - all - <http://localhost:8080/observe/health>
 
 *Get only start-up health checks*
@@ -452,11 +436,8 @@ ObserveFeature observe = ObserveFeature.builder()
 ```
 
 - Add built-in health checks.
-
 - Add a custom readiness check.
-
 - Add a custom start-up check.
-
 - Add a custom liveness check.
 
 *Build and run the application, then verify the liveness, readiness, and started endpoints:*
@@ -539,19 +520,12 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
-
 - The HTTP endpoint for the liveness probe.
-
 - The liveness probe configuration.
-
 - The HTTP endpoint for the readiness probe.
-
 - The readiness probe configuration.
-
 - The HTTP endpoint for the startup probe.
-
 - The startup probe configuration.
 
 *Create and deploy the application into Kubernetes:*
@@ -590,11 +564,8 @@ kubectl delete -f ./health.yaml
 This guide demonstrates how to use health checks in a Helidon SE application as follows:
 
 - Access the default health checks
-
 - Create and use custom readiness, liveness, and startup checks
-
 - Customize the health check root path
-
 - Integrate Helidon health check with Kubernetes
 
 Refer to the following reference for additional information:

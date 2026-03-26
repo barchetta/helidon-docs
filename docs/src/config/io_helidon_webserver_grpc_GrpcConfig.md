@@ -9,7 +9,6 @@ N/A
 ## Usages
 
 - [`server.protocols.grpc`](../config/io_helidon_webserver_spi_ProtocolConfig.md#ab66d9-grpc)
-
 - [`server.sockets.protocols.grpc`](../config/io_helidon_webserver_spi_ProtocolConfig.md#ab66d9-grpc)
 
 ## Configuration options

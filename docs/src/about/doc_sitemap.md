@@ -11,7 +11,6 @@ New to Helidon? Start with the [Helidon Documentation](../about/introduction.md)
 Once you’ve settled on your preferred programming framework, visit the Helidon flavor sections of this site for more information.
 
 - [Helidon SE](../se/introduction.md)
-
 - [Helidon MP](../mp/introduction.md)
 
 ### Existing Helidon Users

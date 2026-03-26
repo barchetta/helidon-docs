@@ -65,5 +65,4 @@ For upgrade from Helidon 3.x to 4.x:
 ## Next Steps
 
 - Try the [Helidon MP quickstart guides](../mp/guides/overview.md) to get your first Helidon MP application up and running in minutes.
-
 - Browse the [Helidon Javadocs](/apidocs/index.html?overview-summary.html)

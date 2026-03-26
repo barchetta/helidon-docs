@@ -72,9 +72,7 @@ The following is a list of maven coordinates of all Vault modules available:
 Vault integration supports the following:
 
 - **Secret Engines**: Key/Value version 2, Key/Value version 1, Cubbyhole, PKI, Transit, Database
-
 - **Authentication Methods**: Token, Kubernetes (k8s), AppRole
-
 - **Other Sys Operations and Configurations**
 
 Each of these features is implemented as a separate module, with the Vault class binding them together. Code to set up Vault and obtain a specific secret engine:
@@ -89,15 +87,10 @@ Kv2Secrets secrets = vault.secrets(Kv2Secrets.ENGINE);
 Similar code can be used for any secret engine available:
 
 - Kv2SecretsRx - Key/Value Version 2 Secrets (versioned secrets, default)
-
 - Kv1SecretsRx - Key/Value Version 1 Secrets (unversioned secrets, legacy)
-
 - CubbyholeSecretsRx - Cubbyhole secrets (token bound secrets)
-
 - DbSecretsRx - Database secrets (for generating temporary DB credentials)
-
 - PkiSecretsRx - PKI secrets (for generating keys and X.509 certificates)
-
 - TransitSecretsRx - Transit operations (encryption, signatures, HMAC)
 
 In addition to these features, Vault itself can be authenticated as follows:
@@ -215,7 +208,6 @@ void getSecret(ServerRequest req, ServerResponse res) {
 ```
 
 - Create a secret from request entity.
-
 - Get the secret on a specified path.
 
 ### KV1 Secrets
@@ -268,13 +260,9 @@ void getSecret(ServerRequest req, ServerResponse res) {
 ```
 
 - Disable the secrets engine on the default path.
-
 - Enable the secrets engine on the default path.
-
 - Create a secret from request entity.
-
 - Delete the secret on a specified path.
-
 - Get the secret on a specified path.
 
 ### KV2 Secrets
@@ -316,9 +304,7 @@ void getSecret(ServerRequest req, ServerResponse res) {
 ```
 
 - Create a secret from request entity.
-
 - Delete the secret on a specified path.
-
 - Get the secret on a specified path.
 
 ### Transit secrets
@@ -434,23 +420,14 @@ void verify(ServerRequest req, ServerResponse res) {
 ```
 
 - Enable the secrets engine on the default path.
-
 - Disable the secrets engine on the default path.
-
 - Create the encryption and signature keys.
-
 - Delete the encryption and signature keys.
-
 - Encrypt a secret.
-
 - Decrypt a secret.
-
 - Create an HMAC for text.
-
 - Create a signature for text.
-
 - Verify HMAC.
-
 - Verify signature.
 
 ### Authentication with Kubernetes
@@ -530,11 +507,8 @@ class K8sExample {
 ```
 
 - Run the Kubernetes Authentication by enabling it.
-
 - Create Kubernetes secrets.
-
 - Disable Kubernetes authentication if needed.
-
 - Function used to enable Kubernetes authentication.
 
 ## Local testing

@@ -36,7 +36,6 @@ To enable CORS, add the following dependency to your project’s `pom.xml` (see 
 Once you have planned how each of your resources should support CORS, you specify the CORS behavior in one of two ways:
 
 - add `@Cors.*` annotations to the Java code for the resources, or
-
 - add configuration.
 
 You can do both. CORS configuration for a resource overrides any CORS settings declared using `@Cors.*` in the Java class for the resource.
@@ -50,11 +49,9 @@ Adding CORS behavior to your Helidon MP application involves just a few simple s
 For each resource class in your application:
 
 1.  Identify the resources and sub-resources—​in other words, the paths—​declared in the resource class which you want to support CORS.
-
 2.  For each of those resources and sub-resources which should support CORS:
 
     1.  Find or create a Java method annotated with `@OPTIONS` and with the correct `@Path`.
-
     2.  To that `@OPTIONS` Java method add a Helidon [`@Cors.*`](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.html) annotation(s) that describes the cross-origin sharing you want for that resource.
 
 > [!NOTE]
@@ -67,17 +64,11 @@ For each resource class in your application:
 The following annotations are available:
 
 - [\`@Cors.Defaults](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.Defaults.html) - has no values, applies all defaults (do not combine with annotations below)
-
 - [\`@Cors.AllowOrigins](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.AllowOrigins.html) - value is the allowed origins, defaults to all origins
-
 - [\`@Cors.AllowHeaders](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.AllowHeaders.html) - value is the allowed HTTP header names, defaults to all headers
-
 - [\`@Cors.AllowMethods](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.AllowMethods.html) - value is the allowed HTTP method names, defaults to all methods
-
 - [\`@Cors.ExposeHeaders](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.ExposeHeaders.html) - value is the exposed HTTP header names, defaults to none
-
 - [\`@Cors.AllowCredentials](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.AllowCredentials.html) - value is a boolean, defaults to false
-
 - [\`@Cors.MaxAgeSeconds](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/Cors.MaxAgeSeconds.html) - value is the max age as a number of seconds
 
 ## Configuration
@@ -102,13 +93,9 @@ cors.paths.i.enabled=
 ```
 
 - You can disable CORS processing for all resources by setting `cors.enabled` to `false`. Defaults to `true`.
-
 - Add a block for each resource you want to configure. The index `i` is an integer (0, 1, 2, etc).
-
 - Specify the settings as needed to define the CORS behavior you want for that resource.
-
 - The `max-age` option is a `Duration` string, such as `PT1H` for 1 hour
-
 - The `enabled` setting lets you control whether the system uses that set of CORS configuration. Defaults to `true`.
 
 The system uses the index `i`, not the position in the config file, to identify the settings for a particular resource.
@@ -138,7 +125,6 @@ Each annotation in `Cors` class (except for `Defaults`) is mapped to one of the 
 The [Helidon MP Quickstart application](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/quickstarts/helidon-quickstart-mp) allows users to:
 
 - obtain greetings by sending `GET` requests to the `/greet` resource, and
-
 - change the greeting message by sending a `PUT` request to the `/greet/greeting` resource.
 
 The [Helidon MP CORS Example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/microprofile/cors) shows the basic quickstart example enhanced for CORS.
@@ -146,7 +132,6 @@ The [Helidon MP CORS Example](https://github.com/helidon-io/helidon-examples/tre
 The discussion below describes the changes in the application which:
 
 - permit unrestricted sharing of the resource `/greet`, and
-
 - restrict sharing of the resource `/greet/greeting` so that only the origins `http://foo.com` and `http://there.com` can change the greeting.
 
 ### Adding Annotations
@@ -185,13 +170,9 @@ public class GreetResource {
 ```
 
 - Existing `GreetResource` resource class with path `/greet`.
-
 - Existing `@GET` method for resource `/greet`.
-
 - Existing `@PUT` method for resource `/greet/greeting`.
-
 - New `@OPTIONS` method for `/greet`. (Just like the `@GET` method `getDefaultMessage`, this `@OPTIONS` method does not have a `@Path` annotation; both "inherit" the class-level `@Path` setting `/greet`.) The `@Cors.Defaults` annotation declares default cross-origin sharing which permits sharing via all HTTP methods to all origins.
-
 - New `@OPTIONS` method for `/greet/greeting`. The `@Cors.AllowMethods` annotations specifies sharing only via the `PUT` HTTP method, and the `@Cors.AllowOrigins` specifies sharing only to the two listed origins.
 
 ### Adding Configuration
@@ -209,7 +190,6 @@ cors.paths.1.allow-methods=PUT
 ```
 
 - Enables default CORS settings for the `/greet` resource.
-
 - Sets up sharing for the `/greet/greeting` resource only via `PUT` requests and only from the specified origins.
 
 Or, alternatively, the following configuration example augments the settings from the `@Cors.*` annotations in the code.
@@ -227,7 +207,6 @@ cors.paths.1.allow-origins=https://foo.com
 ```
 
 - Changes the declared settings to restrict cross-origin use of `/greet` to only `GET` and only from `foo.com` and `there.com`.
-
 - Changes the settings for `/greet/greeting` from what they were declared; with this configuration, only the origin `foo.com` is permitted. (The declared setting also allowed `there.com`).
 
 ## Additional Information
@@ -249,7 +228,6 @@ In the `cors` configuration section add a block for each built-in service using 
 The following example restricts sharing of
 
 - the `/health` resource, provided by the health built-in service, to only the origin `https://there.com`, and
-
 - the `/metrics` resource, provided by the metrics built-in service, to only the origin `https://foo.com`.
 
 *Configuration which restricts sharing of the health and metrics resources*

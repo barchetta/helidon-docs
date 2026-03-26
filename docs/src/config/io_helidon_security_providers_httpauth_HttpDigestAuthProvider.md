@@ -7,7 +7,6 @@ Http digest authentication security provider.
 ## Usages
 
 - [`security.providers.http-digest-auth`](../config/io_helidon_security_spi_SecurityProvider.md#a0d898-http-digest-auth)
-
 - [`server.features.security.security.providers.http-digest-auth`](../config/io_helidon_security_spi_SecurityProvider.md#a0d898-http-digest-auth)
 
 ## Configuration options

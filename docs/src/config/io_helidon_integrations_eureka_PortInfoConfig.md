@@ -11,7 +11,6 @@ describing initial Eureka Server service instance registration port details.
 ## Usages
 
 - [`server.features.eureka.instance.port`](../config/io_helidon_integrations_eureka_InstanceInfoConfig.md#a12cb2-port)
-
 - [`server.features.eureka.instance.securePort`](../config/io_helidon_integrations_eureka_InstanceInfoConfig.md#aa21a8-securePort)
 
 ## Configuration options

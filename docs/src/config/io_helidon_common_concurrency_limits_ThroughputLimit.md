@@ -11,9 +11,7 @@ ThroughputLimit
 ## Usages
 
 - [`server.concurrency-limit.throughput`](../config/io_helidon_common_concurrency_limits_Limit.md#a13e9b-throughput)
-
 - [`server.features.limits.concurrency-limit.throughput`](../config/io_helidon_common_concurrency_limits_Limit.md#a13e9b-throughput)
-
 - [`server.sockets.concurrency-limit.throughput`](../config/io_helidon_common_concurrency_limits_Limit.md#a13e9b-throughput)
 
 ## Configuration options

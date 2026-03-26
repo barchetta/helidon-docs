@@ -56,9 +56,7 @@ mvn -U archetype:generate -DinteractiveMode=false \
 Helidon has a set of built-in health checks:
 
 - deadlock detection
-
 - available disk space
-
 - available heap memory
 
 The following example will demonstrate how to use the built-in health checks. These examples are all executed from the root directory of your project (helidon-quickstart-mp).
@@ -145,9 +143,7 @@ public class GreetLivenessCheck implements HealthCheck {
 ```
 
 - Annotation indicating this is a liveness health check.
-
 - Annotation indicating there is a single liveness `HealthCheck` object during the lifetime of the application.
-
 - Build the HealthCheckResponse with status `UP` and the current time.
 
 *Build and run the application, then verify the custom liveness health endpoint*
@@ -210,9 +206,7 @@ public class GreetReadinessCheck implements HealthCheck {
 ```
 
 - Annotation indicating that this is a readiness health check.
-
 - Build the `HealthCheckResponse` with status `UP` after five seconds, else `DOWN`.
-
 - Record the time at startup.
 
 *Build and run the application. Issue the curl command with -v within five seconds, and you will see that the application is not ready:*
@@ -314,9 +308,7 @@ public class GreetStartedCheck implements HealthCheck {
 ```
 
 - Annotation indicating that this is a startup health check.
-
 - Build the `HealthCheckResponse` with status `UP` after eight seconds, else `DOWN`.
-
 - Record the time at startup of Helidon; the application will declare itself as started eight seconds later.
 
 *Build and run the application. Issue the curl command with -v within five seconds, and you will see that the application has not yet started:*
@@ -384,11 +376,8 @@ curl -v http://localhost:8080/health/started
 When using the health check URLs, you can get the following health check data:
 
 - liveness only - <http://localhost:8080/health/live>
-
 - readiness only - <http://localhost:8080/health/ready>
-
 - startup checks only - <http://localhost:8080/health/started>
-
 - all health check data - <http://localhost:8080/health>
 
 *Get all the health check data, including custom data:*
@@ -501,11 +490,8 @@ health:
 ```
 
 - The default port for the application.
-
 - The name of the new socket, it can be any name, this example uses `admin`.
-
 - The port for the `admin` socket.
-
 - The health endpoint, as part of Helidon’s observability support, uses the socket `admin`.
 
 *Build and run the application, then verify the health endpoint using port `8081` and `/myhealth`:*
@@ -601,19 +587,12 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
-
 - The HTTP endpoint for the liveness probe.
-
 - The liveness probe configuration.
-
 - The HTTP endpoint for the readiness probe.
-
 - The readiness probe configuration.
-
 - The HTTP endpoint for the startup probe.
-
 - The startup probe configuration.
 
 *Create and deploy the application into Kubernetes:*
@@ -652,17 +631,12 @@ kubectl delete -f ./health.yaml
 This guide demonstrated how to use health checks in a Helidon MP application as follows:
 
 - Access the default health checks
-
 - Create and use custom readiness, liveness, and startup checks
-
 - Customize the health check root path and port
-
 - Integrate Helidon health check API with Kubernetes
 
 Refer to the following references for additional information:
 
 - [MicroProfile health check specification](https://download.eclipse.org/microprofile/microprofile-health-4.0/microprofile-health-spec-4.0.html)
-
 - [MicroProfile health check Javadoc](https://download.eclipse.org/microprofile/microprofile-health-4.0/apidocs)
-
 - [Helidon Javadoc](/apidocs/index.html?overview-summary.html)

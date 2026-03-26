@@ -112,13 +112,9 @@ If you are using Docker, use Username `admin` and password `admin` as it is the 
 A realm is the place where groups of applications, and their environment, can be created. It gathers :
 
 - One or several applications
-
 - One or several users
-
 - Sessions
-
 - Events
-
 - Clients and their scopes
 
 By default, there is a realm called `Master`. It is used to manage Keycloak. It is not recommended to associate your application with this realm as it could disturb Keycloak functioning.
@@ -126,11 +122,8 @@ By default, there is a realm called `Master`. It is used to manage Keycloak. It 
 To create a new realm to manage your application:
 
 1.  Open Keycloak admin console <http://localhost:8080/admin>.
-
 2.  Hover the mouse over the dropdown in the top-left corner where it says `Keycloack`, and press `Create realm`.
-
 3.  Fill the form by adding the realm name, `myRealm` for example.
-
 4.  Click on `Create` to create the new realm.
 
 To verify that your realm is created, you should see your realm name (or `myRealm` if you followed the example) in the top-left corner where it said `Keycloack` previously.
@@ -144,37 +137,25 @@ Initially there are no users in a new realm. An unlimited number of user can be 
 To create a new user:
 
 1.  Open the Keycloak admin console: <http://localhost:8080/admin>
-
 2.  Click on `Users` in the left menu
-
 3.  Press `Create new user`
-
 4.  Fill the form (Username is the only mandatory field) with this value Username: `myUser`
-
 5.  Click `Create`
 
 A new user is just created, but it needs a password to be able to log in. To initialize it, do this:
 
 1.  Click on `Credentials` at the top of the page, next to `Details`.
-
 2.  Press on `Set Password`.
-
 3.  Fill `Password` and `Password confirmation` with the user password of your choice.
-
 4.  If the `Temporary` field is set to `ON`, the user has to update password on next login. Click `ON` to make it `OFF` and prevent it.
-
 5.  Press `Save`.
-
 6.  A pop-up window is popping off. Click on `Save Password` to confirm the new password.
 
 To verify that the new user is created correctly:
 
 1.  Open the Keycloak account console: `http://localhost:8080/realms/myRealm/account`.
-
 2.  Login with `myUser` and password chosen earlier.
-
 3.  Fill the form with required data.
-
 4.  Save the user details.
 
 You should now be logged-in to the account console where users can manage their accounts.
@@ -184,25 +165,18 @@ You should now be logged-in to the account console where users can manage their 
 To create your first client:
 
 1.  Open the Keycloak admin console: <http://localhost:8080/admin>.
-
 2.  Make sure the current realm is `myRealm` and not `Master`.
-
 3.  Navigate to the left menu, into configure section, click on `Clients`. This window displays a table with every client from the realm.
-
 4.  Click on `Create client`.
-
 5.  Fill the following:
 
     1.  `Client ID` : `myClientID`
-
     2.  `Client Protocol` : `OpenID Connect`
 
 6.  Press `Next`
-
 7.  `Capability config` step
 
     1.  Enable `Client authentication`
-
     2.  Enable `Authorization`
 
 8.  Press `Next`
@@ -214,7 +188,6 @@ To create your first client:
 A new tab named `Credentials` is created. Click on it to access this new tab.
 
 - Select `Client Authenticator` : `Client ID and Secret`
-
 - The client secret is displayed.
 
 Keycloak is now configured and ready. Keep keycloak running on your terminal and open a new tab to set up Helidon.
@@ -280,11 +253,8 @@ security:
 ```
 
 - `client-id` must be the same as the one configure in keycloak.
-
 - The client secret generate by Keycloak during `Create a client` section.
-
 - `identity-uri` is used to redirect the user to keycloak.
-
 - `frontend-uri` will direct you back to the application.
 
 The client secret is the one generate into Keycloak Client Credentials. It must be copy past into `client-id` variable from application.yaml.
@@ -343,21 +313,15 @@ java -jar target/helidon-quickstart-mp.jar
 The tests must be skipped, otherwise it produces test failure. As the `/greet` endpoint for GET request is now protected, its access is limited, and the tests are not built to take oidc security in account.
 
 1.  Open your favourite browser and try to access `http://localhost:7987/greet/Michael`.
-
 2.  You should not be redirected and receive greeting from the application.
-
 3.  Enter the following into URL : `http://localhost:7987/greet`.
-
 4.  Keycloak redirect you to its login page.
-
 5.  Enter the username and associated password:
 
     1.  `Username` : `myUser`
-
     2.  `Password`: `password`
 
 6.  After successful log in, keycloak redirect you to the `http://localhost:7987/greet` endpoint and print Hello word.
-
 7.  Press `Ctrl+C` to stop the application.
 
 From the actual settings, the user needs to log in only once, then Keycloak saves all the connection data.
@@ -458,9 +422,7 @@ mvn clean install
 Keycloak supports many authentication and authorization flows, but only two of them will be shown. This section describes another way you can get an access token or refresh a token or identity token. The identity token contains information about the user. The access token contains access information that the application can use to determine what resources the user is allowed to access. Once expired, the refresh token allows the application to obtain a new access token. As these tokens contain sensitive information, they are valid for a very short period. It is possible to make them last longer in order to let you manipulate them with Postman. To do so:
 
 1.  Open the Keycloak Console.
-
 2.  Click on the `Realm Setting` in the left menu.
-
 3.  Navigate to the `Tokens` tab. You can increase the access token lifespan.
 
 #### Authorization Code Flow
@@ -468,9 +430,7 @@ Keycloak supports many authentication and authorization flows, but only two of t
 The Authorization Code flow is suitable for browser-based applications. It is composed of three main steps:
 
 1.  The browser visits the application. The user is not logged in, so it redirects the browser to Keycloak which requires username and password for authentication.
-
 2.  Keycloak authenticates the user and returns a temporary authorization code as a query parameter in the URL.
-
 3.  The authorization code is used to get access and refresh token from Keycloak token endpoint.
 
 For the first step, paste the following URL into your browser: `http://localhost:8080/realms/myRealm/protocol/openid-connect/auth?client_id=myClientID&response_type=code`. Two query parameters are provided, the client id and the response type. Press enter and Keycloak responds with different URL containing a query parameter `code`. You successfully received the authorization code.

@@ -175,7 +175,5 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [LangChain4j Ollama Documentation](https://docs.langchain4j.dev/integrations/language-models/ollama/)
-
 - [Ollama Website](https://ollama.ai/)

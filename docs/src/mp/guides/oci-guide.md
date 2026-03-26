@@ -53,15 +53,10 @@ You can generate Helidon MP project files for OCI using the Helidon Project Star
 A Helidon Project Starter allows you to choose from a set of archetypes with pre-defined feature sets and lets you customize it by providing a host of options.
 
 1.  Go to the [Helidon Project Starter](https://helidon.io/starter) page on the Helidon website.
-
 2.  Under **Helidon Flavor**, select **Helidon MP** and click **Next**.
-
 3.  Under **Application Type**, select **OCI** and click **Next**.
-
 4.  If you are using this application for testing or development purposes, then under **Customize Project**, leave the values as default and go to the next step. If you want to use the generated project as the basis for a production application, then replace `groupId`, `artifactId` and `package` with values appropriate for your application.
-
 5.  Click **Download** to save the project zip archive to your computer.
-
 6.  Extract the project files.
 
 You can also use the Helidon CLI to generate the Helidon MP OCI project instead.
@@ -176,21 +171,17 @@ curl -X GET http://localhost:8080/greet/Jose
 You can deploy a Helidon application to an Oracle Cloud Infrastructure (OCI) environment, using either OCI Compute or OCI Kubernetes Engine (OKE). Depending on your requirements, one option might be better suited to your needs than the other.
 
 - **OCI Compute** lets you provision and manage Compute hosts, known as instances, to run your applications. Instances can be either bare metal or virtual machines (VM). See [Compute](https://docs.oracle.com/en-us/iaas/Content/Compute/home.htm) in OCI documentation for more information.
-
 - **OKE** is a fully-managed, scalable, and highly available service that you can use to deploy your containerized applications to the cloud. See [Kubernetes Engine](https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm) in OCI documentation for more information.
 
 After you have selected your OCI environment, you can get started with deploying your Helidon applications.
 
 - To learn how to deploy a Helidon MP application on **OCI Compute**, follow the instructions outlined at [Deploying a Helidon OCI MP Application on a Basic OCI Setup](https://github.com/helidon-io/helidon-labs/blob/main/hols/oci-basic-setup/README.md) in the Helidon Labs GitHub repository.
-
 - To learn how to deploy a Helidon MP application on **OCI OKE**, follow the instructions outlined at [Kubernetes: Deploy a Java Helidon Application](https://docs.oracle.com/en-us/iaas/developer-tutorials/tutorials/helidon-k8s/01oci-helidon-k8s-summary.htm) in OCI documentation. Make sure you select **OCI** as the Application Type, and *not* Quickstart.
 
 If you already have an OCI environment, you can deploy the application there instead of setting up a new environment. At minimum, you must configure the following OCI resources to deploy a Helidon application:
 
 - **Compartment**: to organize the OCI resources required for the Helidon project.
-
 - **Dynamic Group**: to group the Compute instances as principal actors required to grant access certain OCI resources using OCI policies.
-
 - **Policies**: to provide access to some OCI resources for Compute instances defined in the OCI Dynamic Group. This project requires access to the Logging and Metrics resources. For example:
 
       ----
@@ -199,9 +190,7 @@ If you already have an OCI environment, you can deploy the application there ins
       ---
 
 - **Compute Instance**: to host the deployed application. Open port `8080` in the firewall. The Helidon application is accessed from port 8080.
-
 - **Virtual Cloud Network (VCN)**: With a `Security List` that contains an ingress security rule that opens port `8080`. The Helidon application is accessed from port 8080.
-
 - **Log and Log Group Resources**: if you plan on using the Custom Logs service.
 
 ### Integrating with OCI Services
@@ -248,9 +237,7 @@ To enable OCI Streaming integration, first you need to create a new stream in OC
 After you have finished creating the stream, make a note of the following values:
 
 - Stream name (on the Stream Details page)
-
 - Messages endpoint (on the Stream Details page)
-
 - OCID of the stream *pool* (on the Stream Pool Details page)
 
 You can also click Kafka Connection Settings (on the Stream Pool Details page) to see an example of Kafka connection settings.
@@ -287,11 +274,8 @@ oci:
 ```
 
 - The name of the OCI tenancy.
-
 - The OCI account user name.
-
 - The OCI authentication token. See [Getting an Auth Token](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm) in OCI documentation.
-
 - The details of the stream which you saved earlier. The `port` should be the standard Kafka port number `9092`.
 
 Then, still in `/server/src/main/resources/application.yaml`, configure messaging channels to use Helidon’s Kafka connector.
@@ -330,13 +314,9 @@ mp.messaging:
 ```
 
 - The OCI stream name (which should match the value that you defined earlier in application.yaml).
-
 - The ID for the stream group
-
 - Kafka client’s property [bootstrap.servers](https://kafka.apache.org/28/documentation.html#consumerconfigs_bootstrap.servers) configuration for all channels using the connector, using the following structure `<oci.test-stream.endpoint>:<oci.test-stream.port>`.
-
 - A username in this structure: `<oci.tenant>/<oci.user>/<oci.test-stream.streampool-ocid>`.
-
 - The OCI authentication token.
 
 After you configure the `helidon-kafka` connector, you can use it on messaging channels to integrate with the OCI Streaming service.

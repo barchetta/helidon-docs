@@ -21,19 +21,16 @@ Helidon MP implements the MicroProfile OpenAPI specification.
 The OpenAPI support in Helidon MP performs two main tasks:
 
 - Build an in-memory model of the REST API your service implements.
-
 - Expose the model in text format (YAML or JSON) via the `/openapi` endpoint.
 
 To construct the model, Helidon gathers information about the service API from whichever of these sources are present in the application:
 
 - a static OpenAPI document file packaged as part of your service;
-
 - a *model reader*
 
   The SPI defines an interface you can implement in your application for programmatically providing part or all of the model;
 
 - OpenAPI annotations;
-
 - a *filter* class
 
   The SPI defines an interface you can implement in your application which can mask parts of the model.
@@ -70,7 +67,6 @@ You can very simply add support for OpenAPI to your Helidon MP application. This
 To use OpenAPI from your Helidon MP app, in addition to adding dependencies as described above:
 
 1.  Furnish OpenAPI information about your application’s endpoints.
-
 2.  Update your application’s configuration (optional).
 
 #### Furnish OpenAPI information about your endpoints
@@ -99,7 +95,6 @@ public JsonObject getDefaultMessage() {
 ```
 
 - `@Operation` gives information about this endpoint.
-
 - `@APIResponse` describes the HTTP response and declares its media type and contents.
 
 You can also define any request parameters the endpoint expects, although this endpoint uses none.
@@ -199,7 +194,6 @@ public Response updateGreeting(JsonObject jsonObject) {
 ```
 
 - With `@Operation` annotation we document the current method.
-
 - With `@RequestBody` annotation we document the content produced. Internal annotations `@Content`, `@Schema` and `@ExampleObjects` are used to give more details about the returned data.
 
 If we want to hide a specific path an `OASFilter` is used.
@@ -362,9 +356,7 @@ The example below tailors the Jandex plug-in configuration to scan not only the 
 ```
 
 - Augments the default configuration.
-
 - Adds a `fileSet` in the form of a `dependency` that is already declared in your project.
-
 - Selects the type or types from the `fileSet` you want to include in the generated index.
 
 You can add more than one dependency and scan for more than a single type. See the [Helidon MP OpenAPI expanded Jandex example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/microprofile/openapi/expanded-jandex) for more information and a complete project that indexes a dependency.
@@ -379,5 +371,4 @@ You can add more than one dependency and scan for more than a single type. See t
 ## Reference
 
 - [MicroProfile OpenAPI GitHub Repository](https://github.com/eclipse/microprofile-open-api)
-
 - [MicroProfile OpenAPI Specification](https://download.eclipse.org/microprofile/microprofile-open-api-3.1.1/microprofile-openapi-spec-3.1.1.html)

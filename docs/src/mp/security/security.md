@@ -37,11 +37,8 @@ Security in Helidon MicroProfile is built on top of Jersey’s and can be enable
 There are several endpoints provided by Helidon services, such as:
 
 - Health endpoint (`/health`)
-
 - Metrics endpoint (`/metrics`)
-
 - OpenAPI endpoint (`/openapi`)
-
 - Configured static content (can use any path configured)
 
 These endpoints are all implemented using Helidon WebServer and as such can be protected only through Security integration with WebServer.
@@ -77,17 +74,11 @@ security:
 ```
 
 - Attribute based access control provider that checks roles and scopes
-
 - The provider(s) used in your application, such as `oidc`
-
 - Default configuration for paths configured below in `paths` section
-
 - Protection of `/metrics` and all nested paths with `admin` role required
-
 - Protection of `/health` and all nested paths with `monitor` role required
-
 - Protection of `/openapi` and all nested paths with `openapi` scope required
-
 - Protection of static content configured on `/static` path with either `user` or `monitor` role required
 
 If you need to use a properties file, such as `microprofile-config.properties`, you can convert the file by using index based numbers for arrays, such as:

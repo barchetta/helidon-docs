@@ -20,7 +20,6 @@
 Helidon SE metrics is a neutral metrics API which provides
 
 - a unified way for Helidon servers to export monitoring data—​telemetry—​to management agents, and
-
 - a unified Java API which all application programmers can use to register and update meters to expose telemetry data from their services.
 
 Metrics is one of the Helidon observability features.
@@ -54,9 +53,7 @@ To enable metrics, add the following dependency to your project’s `pom.xml` (s
 This dependency adds the metrics API and a no-op implementation of that API to your project. The no-op implementation:
 
 - does not register meters in a registry
-
 - does not update meter values
-
 - does not expose the metrics endpoint for reporting meter values.
 
 To include the full-featured metrics implementation and support for the metrics endpoint, add the following dependency to your project:
@@ -133,7 +130,6 @@ Helidon stores all meters in a *meter registry*. Typically, applications use the
 Helidon’s Micrometer-based metrics implementation includes these ways of publishing metrics data to external systems:
 
 - Prometheus/OpenMetrics
-
 - OTLP (OpenTelemetry Protocol)
 
 #### Configuring Publishers
@@ -146,9 +142,7 @@ You can configure publishers in the `publishers` configuration section under the
 Publishers in Helidon’s Micrometer-based metrics implementation use Micrometer `MeterRegistry` implementations. For each enabled publisher, Helidon adds the corresponding meter registry to Micrometer’s global registry. This has these important effects:
 
 - Meters which Helidon or your code registers using the Helidon metrics API are registered in all active Micrometer meter registries.
-
 - Each Helidon meter registered has an implementation in every active Micrometer meter registry.
-
 - When Helidon or your code updates a Helidon meter, Micrometer applies the change to every corresponding meter from each active meter registry.
 
 As a result, configuring more than one active meter registry can affect performance.
@@ -194,7 +188,6 @@ metrics:
 ```
 
 - Introduces the configured publishers.
-
 - Configures an OTLP publisher to transmit every 30 seconds to the given endpoint.
 
 ##### Configuring a Prometheus Publisher
@@ -236,13 +229,9 @@ metrics:
 You can write other publishers by following these steps:
 
 1.  Choose one of the Micrometer `MeterRegistry` implementations for the type of publishing you want to support. (for example [`DatadogMeterRegistry`](https://github.com/micrometer-metrics/micrometer/tree/main/implementations/micrometer-registry-datadog))
-
 2.  Create a config blueprint which exposes the meter registry’s [settable properties from `DatadogConfig`](https://github.com/micrometer-metrics/micrometer/blob/main/implementations/micrometer-registry-datadog/src/main/java/io/micrometer/datadog/DatadogConfig.java).
-
 3.  Write a `DatadogPublisher` class which implements Helidon’s `MetricsPublisher` for Datadog.
-
 4.  Write a `DatadogPublisherProvider` class which implements Helidon’s `MetricsPublisherProvider` for your publisher.
-
 5.  Advertise your provider so Java service loading can find it, creating a `META-INF/services/io.helidon.metrics.spi.PublisherProvider` file listing your implementation class.
 
 Look at Helidon’s [OTLP publisher blueprint]({https://github.com/helidon-io/helidon/tree/main/metrics/providers/micrometer/src/main/java/io/helidon/metrics/providers/micrometer/OtlpPublisherConfigBlueprint.java) and the related types as an example.
@@ -275,9 +264,7 @@ Formats for `/observe/metrics` output
 Clients can also limit the report by specifying the scope as a query parameter in the request URL:
 
 - `/observe/metrics?scope=base`
-
 - `/observe/metrics?scope=vendor`
-
 - `/observe/metrics?scope=application`
 
 Further, clients can narrow down to a specific metric name by adding the name as another query parameter, such as `/observe/metrics?scope=application&name=myCount`.
@@ -332,9 +319,7 @@ OpenMetrics/Prometheus format
 The OpenMetrics/Prometheus output converts meter IDs in these ways:
 
 - Names in camel case are converted to "snake case" and dots are converted to underscores.
-
 - Names include any units specified for the meter.
-
 - For percentiles, the ID includes a tag identifying which percentile the line of output describes.
 
 As the earlier example output showed, for a meter with multiple values, such as a timer or a distribution summary, (with, among others, `max`, `mean`, and `count`), the OpenMetrics/Prometheus output reports a "metric family" which includes a separate family member meter for each of the multiple values. The name for each member in the family is derived from the registered name for the meter plus a suffix indicating which one of the meter’s multiple values the line refers to.
@@ -553,7 +538,6 @@ metrics:
 If you have configured `json-units-default`, Helidon formats each timer’s data as follows:
 
 1.  If code set `baseUnit` on the timer, Helidon uses those units for that timer.
-
 2.  Otherwise, Helidon uses the default units you configured.
 
 To enable the JSON output behavior from Helidon 3, specify `json-units-default` as `NANOSECONDS`.
@@ -565,9 +549,7 @@ If you add the dependencies described above, your service automatically supports
 If you disable auto-discovery, you can add the metrics observer explicitly.
 
 1.  Create an instance of `MetricsObserver`, either directly as shown below or using its builder.
-
 2.  Include the `MetricsObserver` instance in your application’s `ObserveFeature`.
-
 3.  Register your `ObserveFeature` with your `WebServer`.
 
 ``` java
@@ -590,9 +572,7 @@ WebServer server = WebServer.builder()
 To work with Helidon Metrics in your code, follow these steps:
 
 1.  Use the static `globalRegistry` method on the [`Metrics`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/Metrics.html) interface to get a reference to the global [`MeterRegistry`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/MeterRegistry.html) instance.
-
 2.  Use the `MeterRegistry` instance to register new meters and look up previously-registered meters.
-
 3.  Use the meter reference returned from the `MeterRegistry` to update the meter or get its value.
 
 You can also use the `MeterRegistry` to remove an existing meter.
@@ -621,7 +601,6 @@ To register or look up meters programmatically, your service code uses the globa
 To locate an existing meter or register a new one, your code:
 
 1.  Creates a builder of the appropriate type of meter, setting the name and possibly other characteristics of the meter.
-
 2.  Invokes the `MeterRegistry.getOrCreate` method, passing the builder.
 
 The meter registry returns a reference to a previously-registered meter with the specified name and tags or, if none exists, a newly-registered meter. Your code can then operate on the returned meter as needed to record new measurements or retrieve existing data.
@@ -774,15 +753,10 @@ The `paths` section contains zero or more entries, each entry having the followi
 Helidon decides whether to measure incoming requests as follows:
 
 - If you omit the `auto-http-metrics` configuration, Helidon measures all endpoints.
-
 - If you specify the `auto-http-metrics` configuration, by default Helidon does not measure built-in endpoints such as metrics, health, and openapi. You can add items under `auto-http-metrics.paths` to control more exactly which endpoints to measure.
-
 - If you include the `paths` section, Helidon checks a request against the path entries in order. A given request matches an entry if its path matches the path pattern and its HTTP method is in the `methods` list. If there is no `methods` list for an entry, all HTTP methods match the entry.
-
 - If a request matches an entry, the entry’s `enabled` setting determines if the request should be measured.
-
 - If a request matches multiple entries, the first match wins.
-
 - If a request matches no entry, it is measured.
 
 The `auto-http-metrics.sockets` setting controls which sockets are included in the measurements; if not set, Helidon measures requests on all sockets.
@@ -805,9 +779,7 @@ server:
 ```
 
 - Measure `/greet` for only `GET` and `HEAD` requests.
-
 - Do not measure the personalized greeting requests.
-
 - Measure only endpoints on the default socket and the socket named `private`. Endpoints on other sockets (such as if you had an `admin` socket) are not measured.
 
 The [AutoHttpMetricsConfig documentation](../../config/io_helidon_webserver_observe_metrics_AutoHttpMetricsConfig.md) describes the configuration more fully.
@@ -817,7 +789,6 @@ The [AutoHttpMetricsConfig documentation](../../config/io_helidon_webserver_obse
 Helidon SE includes several pre-written example applications illustrating aspects of metrics:
 
 - [Enabling/disabling meters](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/metrics/filtering/se) using `MetricsObserver` and `MetricsConfig`
-
 - [Controlling key performance indicator metrics](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/metrics/kpi) using configuration and `KeyPerformanceIndicatorMetricsSettings`.
 
 The rest of this section shows how to add a custom meter to your code and how to configure the Helidon metrics subsystem.
@@ -869,11 +840,8 @@ public class GreetService implements HttpService {
 ```
 
 - Get the global meter registry.
-
 - Create (or find) a counter named "accessctr" in the global registry.
-
 - Route every request to the `countAccess` method.
-
 - Increment the access counter for every request.
 
 Perform the following steps to see the new counter in action.
@@ -900,7 +868,6 @@ accessctr_total{scope="application",} 0.0
 ```
 
 - Access the metrics endpoint, selecting only application meters.
-
 - Note the counter is zero; we have not accessed a service endpoint yet.
 
 *Access a service endpoint to retrieve a greeting*
@@ -936,9 +903,7 @@ accessctr_total{scope="application",} 1.0
 Metrics configuration is quite extensive and powerful and, therefore, a bit complicated. The rest of this section illustrates some of the most common scenarios:
 
 - [Disable metrics entirely.](#disable-metrics-subsystem)
-
 - [Choose whether to report virtual threads meters](#configuring-virtual-threads-meters).
-
 - [Choose whether to collect extended key performance indicator metrics.](#collecting-basic-and-extended-key-performance-indicator-kpi-meters)
 
 #### Disable Metrics Subsystem
@@ -994,11 +959,8 @@ Any time you include the Helidon metrics module in your application, Helidon tra
 Helidon SE also includes additional, extended KPI meters which are disabled by default:
 
 - current number of requests in-flight - a `Gauge` (`requests.inFlight`) of requests currently being processed
-
 - long-running requests - a `Counter` (`requests.longRunning`) measuring the total number of requests which take at least a given amount of time to complete; configurable, defaults to 10000 milliseconds (10 seconds)
-
 - load - a `Counter` (`requests.load`) measuring the number of requests worked on (as opposed to received)
-
 - deferred - a `Gauge` (`requests.deferred`) measuring delayed request processing (work on a request was delayed after Helidon received the request)
 
 You can enable and control these meters using configuration:
@@ -1030,9 +992,7 @@ server:
 ### Support for the Prometheus Metrics API
 
 - [Maven Coordinates](#maven-coordinates)
-
 - [Usage](#usage)
-
 - [API](#api)
 
 Helidon provides optional support for the Prometheus metrics API.

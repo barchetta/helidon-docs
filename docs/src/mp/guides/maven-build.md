@@ -7,9 +7,7 @@ This guide describes Helidon’s support for Maven projects.
 Helidon supports Maven by providing the following:
 
 1.  The Helidon Application parent POM
-
 2.  Dependency management via the Helidon BOM and Dependencies POMs
-
 3.  The `helidon-maven-plugin`
 
 ## The Helidon Application POM
@@ -17,7 +15,6 @@ Helidon supports Maven by providing the following:
 Helidon examples and projects generated using the [Helidon Quickstart](../../mp/guides/quickstart.md) use a Helidon application POM as their parent. This parent POM provides the following:
 
 1.  Helidon dependency management.
-
 2.  Maven plugin configurations to help in the building and packaging of your Helidon application.
 
 If you want to use your own parent POM, then take a look at the [standalone quickstart example](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/quickstarts/helidon-standalone-quickstart-mp). This example has a standalone POM that you can pattern your own application POM after.
@@ -31,7 +28,6 @@ In Maven, you use Dependency Management to manage the versions of the dependenci
 Helidon provides two POMs that are used together for dependency management:
 
 1.  The Helidon Bill of Materials (BOM) POM (`io.helidon:helidon-bom`): manages the version of Helidon artifacts (to align with the Helidon version).
-
 2.  The Helidon Dependencies POM (`io.helidon:helidon-dependencies`): manages the versions of third party dependencies to ensure consistency across Helidon and your Helidon application. Inherits the Helidon BOM POM.
 
 When you use a Helidon Application POM as your project’s parent pom, you inherit Helidon’s dependency management. If you have your own parent, then you can import Helidon dependency management like this:
@@ -68,7 +64,6 @@ You then declare dependencies on Helidon (and other) components without specifyi
 Helidon provides a Maven plugin that, among other things, provides the following goals:
 
 1.  jlink-image: Build a [custom runtime Java image](../../mp/guides/jlink-image.md).
-
 2.  native-image: Build a [GraalVM native image](../../mp/guides/graalnative.md). Note: this capability is now provided via the [Maven plugin for GraalVM Native Image](https://graalvm.github.io/native-build-tools/latest/maven-plugin.html)
 
 For full documentation of the plugin please see the [Helidon Maven Plugin README](https://github.com/oracle/helidon-build-tools/tree/master/maven-plugins/helidon-maven-plugin).
@@ -76,9 +71,7 @@ For full documentation of the plugin please see the [Helidon Maven Plugin README
 If you use the Helidon application parent POM you will have this plugin configured for you. If you need to customize the `helidon-maven-plugin` you can do so in a few ways:
 
 1.  Passing system properties to Maven on the command line.
-
 2.  Setting system properties in your project’s `pom.xml`
-
 3.  Overriding the plugin configuration by using `pluginManagment`
 
 ### Pass Property on Command Line

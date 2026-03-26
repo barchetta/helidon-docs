@@ -5,9 +5,7 @@ This guide describes how you can extend the Security component.
 The component has the following extension points:
 
 - [Security Providers](#security-providers)
-
 - [Provider Selection Policy](#provider-selection-policy)
-
 - [Framework Integration](#framework-integration)
 
 ## Security Providers
@@ -17,7 +15,6 @@ You can build a custom provider for each type of security concept supported.
 You have two options:
 
 1.  Implement a provider interface and reference it in configuration (or from builder) by class
-
 2.  Implement a provider interface and provide a Java `ServiceLoader` service implementing `io.helidon.security.spi.SecurityProviderService`
 
 The second option allows for easier configuration, as the configuration key can be used without a class definition and creates a default name of a provider.
@@ -43,13 +40,9 @@ To create a custom audit provider, create a class that implements `io.helidon.se
 Implementation may do whatever desired with these messages, e.g.:
 
 - filter them
-
 - log them
-
 - store them to a database
-
 - forward them to an audit component
-
 - discard them
 
 ## Provider Selection Policy
@@ -57,9 +50,7 @@ Implementation may do whatever desired with these messages, e.g.:
 Each request is processed by a single authentication and/or authorization provider. The selection policy provides the security component information about which provider to use. Out of the box, there are three policies:
 
 1.  "First" policy - first configured provider (or explicitly defined default provider) is used by default, if a named provider is requested, it would be used
-
 2.  "Composite" policy - this policy allows for a sequence of providers to be executed (e.g. one request may have more than one provider) - used for example to resolve service and user authentication
-
 3.  "Class" policy - this allows usage of a custom policy defined by fully qualified class name
 
 To create a custom provider selection policy, create a class that implements "io.helidon.security.spi.ProviderSelectionPolicy".
@@ -79,9 +70,7 @@ To create a new integration, an instance of `Security` class is needed, as it ha
 Helidon Security also defines a set of annotations:
 
 - `@Authenticated` - access to resources must follow authentication rules defined by the annotation
-
 - `@Authorized` - access to resources must follow authorization rules defined by the annotation
-
 - `@Audited` - to configure auditing
 
 If the protected resources (in Helidon MP, these are JAX-RS resource classes and methods) can be annotated, the integration component must use these annotations when deciding how to secure the endpoint. For example, the Jersey integration checks whether the @Authenticated annotation exists. If it does, then the integration component attempts to authenticate the request.

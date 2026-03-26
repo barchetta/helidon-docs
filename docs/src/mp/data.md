@@ -168,9 +168,7 @@ The `Data.GenericRepository` interface is extended by additional interfaces that
 A repository interface may contain three kinds of methods:
 
 - Methods inherited from an ancestor interface
-
 - Methods with a query defined via the `@Data.Query` annotation
-
 - Methods with a query defined via the method name
 
 The following `PetRepository` interface contains all of these: inherited methods from `CrudRepository`, the methods `findByName` and `listNameOrderByName` defined by method name, and `selectPetsByCategory` defined by the `@Data.Query` annotation:
@@ -265,7 +263,6 @@ The criteria part of the method name is optional and represents the `WHERE` clau
 Criteria condition keywords are of two types:
 
 - `IgnoreCase` and `Not` modifiers that can appear before the condition keyword
-
 - the condition keyword itself, such as `EndsWith`
 
 A condition keyword can consume method arguments. Each keyword consumes an exact number of arguments. Method arguments are consumed in the same order as the condition keywords appear in the method name.
@@ -407,9 +404,7 @@ Optional<Keeper> selectKeeper(String name, String category);
 Supported return types include:
 
 - the query row type such as an entity class, an entity attribute, or a custom projection
-
 - `List`, `Collection`, `Stream`, or `Optional` with the query row type as the generic parameter
-
 - `Page` or `Slice` with the query row type as the generic parameter
 
 ## Pagination

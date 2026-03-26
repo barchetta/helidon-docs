@@ -41,11 +41,8 @@ Default.
 ## Customize Project
 
 - groupId
-
 - artifactId
-
 - Project Version
-
 - Java package name
 
 ## Download the Project Files
@@ -53,13 +50,8 @@ Default.
 Click **Download** and Project Starter generates the files in a directory named after the `artifactId` value. It mainly contains the following:
 
 - Maven structure
-
 - skeletal application code
-
 - associated unit test code
-
 - example Dockerfile files
-
 - application configuration file(s)
-
 - Readme file with instructions to build and run application/test

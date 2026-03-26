@@ -26,17 +26,13 @@ One use case for this mapping is config overrides in containers, where passing e
 Aliases are produced for any environment variable name that matches *all* the following:
 
 1.  does not begin or end with a `'_'` character
-
 2.  does not contain `"__"`
-
 3.  contains one or more `'_'` characters
 
 For each such name, two aliases are added with the names mapped as follows:
 
 1.  Replace any `"_dash_"` or `"_DASH_"` substrings with `"-"`, e.g. `"APP_PAGE_dash_SIZE"` becomes `"APP_PAGE-SIZE"`.
-
 2.  Replace `'_'` with `'.'` and add as an alias, e.g. `"APP_GREETING"` is added as `"APP.GREETING"` and `"APP_PAGE-SIZE"` is added as `"APP.PAGE-SIZE"`. This mapping is added primarily to support mixed case config keys such as `"app.someCamelCaseKey"`.
-
 3.  Convert the result of step 2 to lowercase and add as an alias, e.g. `"APP.GREETING"` is added as `"app.greeting"` and `"APP.PAGE-SIZE"` is added as `"app.page-size"`.
 
 ### Directory Config Source
@@ -81,11 +77,8 @@ assert secrets.get("password") // (4)
 ```
 
 1.  Loads all files from the `conf/secrets` directory.
-
 2.  No need to use environment variables or system properties as sources in building the `Config`.
-
 3.  The loaded config maps the key `username` to the value `jose`…​
-
 4.  …​and the key `password` to `^ery$ecretP&ssword`.
 
 Remember that your application can process the contents of a given file as configuration. See the [config sources](introduction.md#config_sources) section and the [`ConfigSources.file`](/apidocs/io.helidon.config/io/helidon/config/ConfigSources.html#file-java.lang.String-) JavaDoc.
@@ -195,15 +188,10 @@ assert config.get("data.providers.0.name") // (6)
 ```
 
 1.  Specifies the prefix `app` for the associated source.
-
 2.  `Supplier<ConfigSource>` for the file `app.conf` loaded from the current `classpath`.
-
 3.  Specifies the prefix `data` for the associated source.
-
 4.  Supplier\<ConfigSource\> for the file `app.conf` loaded from the current `classpath`.
-
 5.  Key `app.greeting` combines the `app` prefix and the original key `greeting` from the `app.conf` source.
-
 6.  Key `data.providers.0.name` combines the `data` prefix and the original key `providers.0.name` property from `data.conf` source.
 
 This technique can be useful, for example, if multiple sources contain keys that might overlap; assigning different prefixes to the keys from different sources gives your application a way to access all config elements distinctly even if their keys would otherwise conflict.
@@ -235,7 +223,6 @@ Config sources and parsers work together to read and translate configuration dat
 Although most applications are explicit about the config sources they use in building a `Config`, the config system often has to figure out what parser to use. It does so by:
 
 1.  determining, the best that it can, the media type of the source, and
-
 2.  locating a parser that can translate that media type.
 
 #### Identifying the Media Type
@@ -258,7 +245,6 @@ Config config = Config.create(classpath("props") // (1)
 ```
 
 1.  The config system cannot infer the media type because there is no file type in the path `props`.
-
 2.  The developer knows the file is in Java Properties format so specifies the media type explicitly.
 
 Note that a file type detector *could* be written to also inspect the contents of the file to infer the media type. The detectors provided by Helidon only inspect the suffix in the name of the file.
@@ -287,7 +273,6 @@ Config config = Config.create(classpath("props") // (1)
 ```
 
 1.  The config system cannot infer the media type because there is no file type in the path `props`.
-
 2.  The developer knows the file is in Java Properties format so specifies the properties parser explicitly.
 
 ### Parsing a Config Value as Config
@@ -344,11 +329,8 @@ assert config.get("app.basic-range.1") // (3)
 ```
 
 1.  The source builder’s `mediaTypeMapping` method accepts a function which returns the appropriate media types (if any) for config keys.
-
 2.  The function says to treat the `app` property value as a JSON document and leave other nodes unchanged.
-
 3.  Other properties are loaded as expected.
-
 4.  Property `app` is now a structured object node.
 
 Because the function passed to `mediaTypeMapping` identifies the `app` node as a JSON document, the config system selects the config parser that is registered with the builder which also handles the JSON media type.
@@ -372,7 +354,6 @@ Config config = Config.create(
 ```
 
 1.  Uses the `parserMapping` method to map keys to parser instances.
-
 2.  Tells the config system to use the HOCON parser for translating the `String` value of the `app` key. (HOCON is a superset of JSON.)
 
 As before, the config system replaces the value node in the containing config tree with the config tree resulting from the additional parse.
@@ -420,17 +401,11 @@ assert config.get(Key.escapeName("oracle.com")).name().equals("oracle.com"); // 
 ```
 
 1.  Work with the first `oracle` object as usual. As always you can use the fully-qualified key `oracle.com` or chain `get(key)` calls to access the `com` property value.
-
 2.  Config node `"oracle"` / `"com"` is a leaf node (has type `VALUE`)…​
-
 3.  …​ and has the name `com` (the last token in its key).
-
 4.  The second object has name `oracle.com`. The code must escape the dot in the node’s name using `oracle~1com`.
-
 5.  Or, use the utility method `Config.Key.escapeName(name)` to escape dots or tildes that might be in the node’s name, in this example in `oracle.com`.
-
 6.  The config node `"oracle.com"` has type `OBJECT`…​
-
 7.  …​and name `"oracle.com"`.
 
 ## Filters, Overrides, and Token Substitution
@@ -454,9 +429,7 @@ The overrides feature allows you to create an external document containing key/v
 There are some key differences between overrides and filters.
 
 - Because overrides are loaded from sources those sources can change while your application runs and so the overrides they that prescribe can change.
-
 - The override document can use wildcards in key expressions.
-
 - Overrides can affect only keys that already exist in the original source; filters can supply values even if the key is absent from the config source.
 
 Each override entry consists of a Java properties-format definition. The key is an expression (which can use wildcards) to match config keys read from the current config sources, and the override value is the new value for any key matching the key expression from that entry. Order is important. The config system tests every key expression/value pair one by one in the order they appear in the overrides sources. Once the config system finds an override entry in which the key expression matches the configuration key, the system returns that entry’s value for the key being processed.
@@ -482,9 +455,7 @@ Config config = Config.builder()
 ```
 
 1.  Loads *overrides* from the specified file.
-
 2.  A deployment-specific environment configuration file.
-
 3.  A default configuration containing token references that are resolved using the environment-specific override.
 
 You can disable key and value token replacement separately as the following example shows.
@@ -504,11 +475,8 @@ Config config = Config.builder()
 Various parts of the config system work asynchronously:
 
 - polling strategies to detect changes to config sources,
-
 - publishers to notify your application when such changes occur,
-
 - `Config` instances which subscribe to and respond to change notifications for their underlying sources, and
-
 - retry policies (which might wait between retries).
 
 Each of these uses an executor to perform its work. The config system provides default executors, but your application can specify different ones if necessary.
@@ -536,11 +504,8 @@ Config config = Config.create(
 ```
 
 1.  Prepares a thread pool executor with core pool size set `2`.
-
 2.  Selects the built-in periodic polling strategy.
-
 3.  Tells the config system to use the specific executor to poll the `dev.properties` config source.
-
 4.  Tells the config system to use the specific executor to poll the `config.properties` config source.
 
 ### Executors for Source Change Events
@@ -568,9 +533,7 @@ Config config = Config.builder()
 ```
 
 1.  Prepares a thread pool executor to be shared by selected sources.
-
 2.  Tells the builder that the resulting overrides source should use the specified `Executor` for notifying interested parties of changes and for reloading the override source.
-
 3.  Uses the same `Executor` and event buffer size for the config source as for the override source above.
 
 ### Retry Policy Custom Executor
@@ -590,9 +553,6 @@ Config config = Config.create(
 ```
 
 1.  Prepares a thread pool executor with core pool size set to `2` and a custom `java.util.concurrent.ThreadFactory`.
-
 2.  When the source is flagged as `optional()`, the loading attempt will be repeated as the retry policy defines, but an overall failure will *not* lead to failing the initial load or preventing the source from being polled if so configured.
-
 3.  Uses the built-in *repeating* implementation of `RetryPolicy` that can be used with any config source, but typically for ones that might suffer brief, intermittent outages.
-
 4.  Specifies the executor to use for loading and retries.

@@ -53,7 +53,6 @@ mp.messaging:
 ```
 
 - Kafka client consumer’s property auto.offset.reset configuration for `from-kafka` channel only
-
 - Kafka client’s property [bootstrap.servers](https://kafka.apache.org/28/documentation.html#consumerconfigs_bootstrap.servers) configuration for all channels using the connector
 
 > [!TIP]

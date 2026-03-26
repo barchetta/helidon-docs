@@ -90,9 +90,7 @@ For the DB Client using JDBC implementation and H2 database, you must include th
 ```
 
 - Add the Helidon DB Client
-
 - Specify JDBC or MongoDB
-
 - Add the database JDBC driver (only for JDBC)
 
 ### Use Helidon Config to configure the client.
@@ -112,11 +110,8 @@ db:
 ```
 
 - Source: `jdbc` or `mongoDb`
-
 - Connection: database connection parameters
-
 - Statements: named statements to be used in application
-
 - A ping statement used by health check
 
 ## Using DB Client API Methods
@@ -128,7 +123,6 @@ The Helidon DB Client API contains many methods to run various statements with p
 `DBClient` class has two methods to select whether statements will be executed in transaction or not:
 
 - `execute()`
-
 - `transaction()`
 
 Both methods provide an executor: either `DbExecute` or `DbTransaction`.
@@ -138,15 +132,10 @@ Both methods provide an executor: either `DbExecute` or `DbTransaction`.
 DbExecute class offers many methods for various statements builders:
 
 - DML statements: `createDmlStatement`, `createNamedDmlStatement`
-
 - insert statements: `createInsert`, `createNamedInsert`
-
 - update statements: `createUpdate`, `createNamedUpdate`
-
 - delete statements: `createDelete`, `createNamedDelete`
-
 - query statements: `createQuery`, `createNamedQuery`
-
 - get statements: `createGet`, `createNamedGet`
 
 Methods with "Named" in their name (`createNamedDmlStatement`) expect statement name from statements section of Config, or a named statement configured when the `DbClient` was created using a `Builder`.
@@ -168,11 +157,8 @@ The ordered parameters are equivalent to JDBC `PreparedStatement` parameters.
 Methods to set ordered parameters are:
 
 - `params(List<?> parameters)` with all parameters as List
-
 - `params(Object… parameters)` with all parameters as array
-
 - `indexedParam(Object parameters)` POJO used with registered mapper
-
 - `addParam(Object parameter)` with single parameter, can be called repeatedly
 
 ### Named Parameters
@@ -201,9 +187,7 @@ or as `$<name>` in the MongoDB statement:
 Methods to set named parameters are:
 
 - `params(Map<String, ?> parameters)` with all parameters as Map
-
 - `namedParam(Object parameters)` POJO used with registered mapper
-
 - `addParam(String name, Object parameter)` with single parameter, can be called repeatedly
 
 ### Statement Execution
@@ -266,9 +250,7 @@ System.out.printf("Inserted %d records\n", count);
 Execution of a query statement will always return `Stream<DbRow>>`.
 
 - The stream is populated lazily, result rows can be processed individually
-
 - Use `.map(…)` to map returned result
-
 - Use `.toList()` on the stream to collect all rows
 
 ## Additional Information

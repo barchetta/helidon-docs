@@ -31,15 +31,10 @@ You can scaffold a new Maven project based on these archetypes. See [Helidon CLI
 Once the archetype is selected, the other options have defaults and the project is generated in a directory named after the `artifactId` value. It mainly contains the following:
 
 - Maven structure
-
 - skeletal application code
-
 - associated unit test code
-
 - example Dockerfile files
-
 - application configuration file(s)
-
 - instructions to build and run application/test
 
 ## Using Generated Application

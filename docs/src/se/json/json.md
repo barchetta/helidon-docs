@@ -26,11 +26,8 @@ The JSON Binding module (`helidon-json-binding`) provides high-level object seri
 ### Features
 
 - Automatic conversion between Java objects and JSON
-
 - Custom serializers and deserializers for complex types
-
 - Type-safe binding with generic support
-
 - Extensive configuration and customizations
 
 ### Code Generation
@@ -618,11 +615,8 @@ During the deserialization process, null values are always converted into the em
 **Supported Optional Types:**
 
 - `Optional<T>` - For any object type
-
 - `OptionalInt` - For primitive int values
-
 - `OptionalLong` - For primitive long values
-
 - `OptionalDouble` - For primitive double values
 
 ### Automatic Custom Converter Registration
@@ -644,13 +638,9 @@ A [`JsonBindingFactory`](/apidocs/io.helidon.json.binding/io/helidon/json/bindin
 Binding factories implement the `JsonBindingFactory<T>` interface, which requires:
 
 - `createDeserializer(Class<? extends T> type)` - Creates a deserializer for a specific class type
-
 - `createDeserializer(GenericType<? extends T> type)` - Creates a deserializer for a generic type
-
 - `createSerializer(Class<? extends T> type)` - Creates a serializer for a specific class type
-
 - `createSerializer(GenericType<? extends T> type)` - Creates a serializer for a generic type
-
 - `supportedTypes()` - Returns the set of types this factory can handle
 
 Typical example for the binding factory would be a handling of the Collection. We would have a converter, which has some common logic for this Collection, but we cant hardcode any specific type this common logic should handle, because Collection has a generic parameter and it could be more or less anything. Because of that, this common logic serves as a template and waits till runtime to have some specific type converter assigned based on the runtime type it received.
@@ -673,11 +663,8 @@ The JSON module (`helidon-json`) provides fundamental JSON parsing and generatio
 ### Features
 
 - Streaming JSON parser for efficient processing of large documents
-
 - JSON generator for building JSON output
-
 - Support for all JSON data types
-
 - Memory-efficient processing without loading entire documents
 
 ### JsonParser
@@ -687,11 +674,8 @@ The JSON module (`helidon-json`) provides fundamental JSON parsing and generatio
 #### What it’s used for
 
 - Parsing large JSON documents efficiently
-
 - Streaming JSON processing from files, network streams, or other sources
-
 - Token-by-token JSON parsing with fine-grained control
-
 - Memory-efficient processing of JSON data
 
 #### How to use it
@@ -774,11 +758,8 @@ This approach provides fine-grained control over parsing, allowing you to handle
 #### What it’s used for
 
 - Building JSON documents programmatically
-
 - Streaming JSON generation to files or network streams
-
 - Memory-efficient JSON construction
-
 - Building complex nested JSON structures
 
 #### How to use it

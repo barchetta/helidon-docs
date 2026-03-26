@@ -7,7 +7,6 @@ WebSocket protocol configuration.
 ## Usages
 
 - [`server.protocols.websocket`](../config/io_helidon_webserver_spi_ProtocolConfig.md#ae25cf-websocket)
-
 - [`server.sockets.protocols.websocket`](../config/io_helidon_webserver_spi_ProtocolConfig.md#ae25cf-websocket)
 
 ## Configuration options

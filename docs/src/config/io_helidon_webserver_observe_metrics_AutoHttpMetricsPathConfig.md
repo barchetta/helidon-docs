@@ -7,7 +7,6 @@ Settings for path-based automatic metrics configuration.
 ## Usages
 
 - [`metrics.auto-http-metrics.paths`](../config/io_helidon_webserver_observe_metrics_AutoHttpMetricsConfig.md#a6fb0d-paths)
-
 - [`server.features.observe.observers.metrics.auto-http-metrics.paths`](../config/io_helidon_webserver_observe_metrics_AutoHttpMetricsConfig.md#a6fb0d-paths)
 
 ## Configuration options

@@ -11,7 +11,6 @@ JsonbSupport
 ## Usages
 
 - [`server.media-context.media-supports.jsonb`](../config/io_helidon_http_media_MediaSupport.md#a48832-jsonb)
-
 - [`server.sockets.media-context.media-supports.jsonb`](../config/io_helidon_http_media_MediaSupport.md#a48832-jsonb)
 
 ## Configuration options

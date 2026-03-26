@@ -7,17 +7,11 @@ Represents information about cross origin request sharing.
 ## Usages
 
 - [`openapi.cors`](../config/io_helidon_openapi_OpenApiFeature.md#ab0d30-cors)
-
 - [`security.providers.idcs-role-mapper.oidc-config.cors`](../config/io_helidon_security_providers_oidc_common_OidcConfig.md#a72304-cors)
-
 - [`security.providers.oidc.cors`](../config/io_helidon_security_providers_oidc_OidcProvider.md#ad1309-cors)
-
 - [`server.features.observe.cors`](../config/io_helidon_webserver_observe_ObserveFeature.md#a25a02-cors)
-
 - [`server.features.openapi.cors`](../config/io_helidon_openapi_OpenApiFeature.md#ab0d30-cors)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.cors`](../config/io_helidon_security_providers_oidc_common_OidcConfig.md#a72304-cors)
-
 - [`server.features.security.security.providers.oidc.cors`](../config/io_helidon_security_providers_oidc_OidcProvider.md#ad1309-cors)
 
 ## Configuration options

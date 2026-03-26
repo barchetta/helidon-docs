@@ -7,7 +7,6 @@ Configuration of Health observer.
 ## Usages
 
 - [`health`](../config/config_reference.md#ac9c2c-health)
-
 - [`server.features.observe.observers.health`](../config/io_helidon_webserver_observe_spi_Observer.md#a27684-health)
 
 ## Configuration options

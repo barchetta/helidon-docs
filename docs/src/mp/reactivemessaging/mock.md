@@ -58,7 +58,6 @@ mockConnector
 ```
 
 - Get outgoing channel of given name and payload type
-
 - Request number of expected items and block the thread until items arrive then assert the payloads
 
 ## Configuration
@@ -107,21 +106,12 @@ public class MessagingTest {
 ```
 
 - If you want to add all the beans manually
-
 - Manually add MockConnector bean, so it is accessible by messaging for constructing the channels
-
 - Messaging support in Helidon MP is provided by this CDI extension
-
 - Instruct messaging to use `mock-connector` as an upstream for channel `test-channel-in`
-
 - Generate mock data of `java.lang.Integer`, String is default
-
 - Generate mock data
-
 - Instruct messaging to use `mock-connector` as a downstream for channel `test-channel-out`
-
 - Inject mock connector so we can access publishers and subscribers registered within the mock connector
-
 - Messaging processing method connecting together channels `test-channel-in` and `test-channel-out`
-
 - Actual JUnit 5 test method which is going to block the thread until 3 items are intercepted on `test-channel-out` channel’s downstream and assert those with expected values.

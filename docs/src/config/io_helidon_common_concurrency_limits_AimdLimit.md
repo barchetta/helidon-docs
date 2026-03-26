@@ -11,9 +11,7 @@ io.helidon.common.concurrency.limits.AimdLimit
 ## Usages
 
 - [`server.concurrency-limit.aimd`](../config/io_helidon_common_concurrency_limits_Limit.md#a1db99-aimd)
-
 - [`server.features.limits.concurrency-limit.aimd`](../config/io_helidon_common_concurrency_limits_Limit.md#a1db99-aimd)
-
 - [`server.sockets.concurrency-limit.aimd`](../config/io_helidon_common_concurrency_limits_Limit.md#a1db99-aimd)
 
 ## Configuration options

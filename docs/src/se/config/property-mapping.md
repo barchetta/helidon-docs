@@ -28,7 +28,6 @@ ConfigValue<Boolean> value2 = configNode.as(Boolean.class);
 ```
 
 - Shorthand method
-
 - Generic method (for any type)
 
 <table>
@@ -74,11 +73,8 @@ Built-in Conversions to Simple Types
 </div>
 
 1.  All conversions can throw `MissingValueException` (if no value exists at the requested key and no default is provided) and `ConfigMappingException` (if some error occurred while performing the data mapping).
-
 2.  The `Config.asXXX` methods internally use the Java-provided `XXX.parseXXX` methods, so here a missing or un-parseable string gives `false` because that is how `Boolean.parseBoolean` behaves.
-
 3.  User code defaults the value to `true`.
-
 4.  User code defaults the value to `Boolean.TRUE` if absent; otherwise parses the value using `Boolean.parseBoolean`.
 
 </div>
@@ -120,11 +116,8 @@ Your application code simply passes the enum class type to `config.as(Class<? ex
 The conversion applies the following algorithm to match config values to `enum` names, stopping as soon as it finds a match:
 
 1.  Select an exact match if one exists.
-
 2.  Treat hyphens (`-`) in config strings as underscores (`_`) and select an otherwise exact match if one exists.
-
 3.  Select a *case-insensitive* match (with or without hyphen substitution) if there is *exactly one* such match.
-
 4.  Finding no match or multiple case-insensitive matches, throw a `ConfigMappingException`.
 
 ### Example
@@ -152,15 +145,12 @@ Color warning = config.get("warning")
 ```
 
 - Retrieve the `Config` object corresponding to the key `house.tint`.
-
 - Indicate that, when the value in that `Config` object is converted, Helidon should convert it to a `Color` `enum` value.
-
 - Convert and retrieve the value.
 
   The conversion triggered by invoking `get()` matches the string `blue-green`--expressed in lower case and with a hyphen — to `Color.BLUE_GREEN` using the conversion rules described earlier.
 
 - The config key `car.color` locates the mixed-case string `Red` which the converter matches to `Color.RED`.
-
 - The config key `warning` locates `YELLOW` which the converter matches exactly to `Color.YELLOW`.
 
 ### Why use heuristics in matching strings to `enum` values?
@@ -174,13 +164,11 @@ With the heuristics, Helidon allows users to adopt a common config style and pre
 Remember:
 
 - Helidon always finds exact matches unambiguously, without relying on the heuristics. In our `Color` example the text `BLUE_GREEN` always maps to `Color.BLUE_GREEN`.
-
 - Because hyphens cannot appear in a valid Java `enum` value name, interpreting them as underscores during `enum` conversion introduces no ambiguity.
 
 Only in the following unusual situation are the heuristics unable to unambiguously match a string to an `enum` value:
 
 - The `enum` has values which differ *only* in their case (such as `Red` and `RED`), *and*
-
 - The string in the config source is not an exact match with an `enum` value name (such as `red`).
 
 If your application must deal with such cases, write your own function which maps a `Config` node to the correct `enum` value, resolving the ambiguities however makes sense in your use case. Your code tells config to use that function instead of the built-in `enum` conversion when it converts values. A [later section](#custom-conversions) describes this technique which works for all types, not only `enum` types.
@@ -194,7 +182,6 @@ The [hierarchical features](hierarchical-features.md) section describes the tree
 The `Config` class exposes several methods for mapping a structured config node to a Java `List` or `Map`. The [JavaDoc](/apidocs/io.helidon.config/io/helidon/config/Config.html) contains complete details, but briefly your application can convert a structured `Config` node into:
 
 - a `List<T>` of a given type
-
 - a `Map<String, String>` in which each key is the fully-qualified key `String` for a config entry and the value is its `String` value
 
 ### Custom Conversions
@@ -227,7 +214,6 @@ In this approach, your application:
 1.  Tells each `Config.Builder` that needs to know about the custom mapper by either:
 
     1.  registering an instance of your mapper by invoking `Config.Builder.addMapper`, or
-
     2.  implementing [`ConfigMapperProvider`](/apidocs/io.helidon.config/io/helidon/config/spi/ConfigMapperProvider.html) so it returns an instance of your mapper (see the JavaDoc for complete information) and creating or editing the file `io.helidon.config.spi.ConfigMapperProvider` so it contains a line with the fully-qualified class name of your `ConfigMapperProvider`. The config system will use the Java service loader to find and invoke all `ConfigMapperProvider` classes listed and add the mappers they provide to each `Config.Builder` automatically.
 
 2.  Converts using the mapper by invoking the `Config.as` method which accepts the target type to convert to, *not* the mapper itself that does the conversion.
@@ -373,15 +359,12 @@ public class WebConfig {
 The builder class `WebConfigBuilder` is expected to be a Java Bean with
 
 1.  bean properties named for the config properties of interest, and
-
 2.  a method `WebConfig build()` which creates the mapped instance from the builder’s own bean properties.
 
 When your application invokes `config.as(WebConfig.class)` the config system
 
 1.  finds and invokes the `WebConfig.builder()` method,
-
 2.  assigns the bean properties on the returned builder from the config subtree rooted at `config`, and
-
 3.  invokes the builder’s `build()` method yielding the resulting `WebConfig` instance.
 
 ## Conversions using JavaBean Deserialization
@@ -389,9 +372,7 @@ When your application invokes `config.as(WebConfig.class)` the config system
 The config system can also interpret your classes as JavaBeans and use the normal bean naming conventions to map configuration data to your POJO classes, using one of these patterns:
 
 1.  [POJO as JavaBean](#pojo-as-javabean) - The config system treats the target class itself as a JavaBean, assigning values from the config to the bean properties of the POJO class.
-
 2.  [builder as JavaBean](#builder-as-javabean) - The config system invokes the POJO’s `builder()` method to obtain a builder for that POJO type and treats the *builder* class as a JavaBean, assigning values from the config to the builder’s bean properties and then invoking the builder’s `build` method to create an instance of the target POJO class.
-
 3.  [POJO with factory method or decorated constructor](#target-class-with-annotated-factory-method-or-constructor) - The config system finds a `from` method or a constructor on the POJO class itself which accepts annotated arguments, then invokes that method or constructor passing the specified arguments based on the config. The `from` method returns an instance of the POJO class initialized with the values passed as arguments.
 
 The following sections describe these patterns in more detail.
@@ -489,19 +470,12 @@ public class AppConfig {
 ```
 
 - Public no-parameter constructor.
-
 - Property `greeting` is not customized and will be set from the config node with the key `greeting`, if present in the config.
-
 - Property `pageSize` is matched to the config key `page-size`.
-
 - If the `page-size` config node does not exist, the `pageSize` bean property defaults to `10`.
-
 - Property `basicRange` is matched to the config key `basic-range`.
-
 - If the `basic-range` config node does not exist, a `BasicRangeSupplier` instance will provide the default value.
-
 - The `timestamp` bean property is never set, even if the config contains a node with the key `timestamp`.
-
 - `BasicRangeSupplier` is used to supply the `List<Integer>` default value.
 
 Here is an example of code loading config and mapping part of it to the `AppConfig` bean above.
@@ -527,7 +501,6 @@ assert app.getTimestamp() == null;
 ```
 
 - The config system finds no registered `ConfigMapper` for `AppConfig` and so applies the JavaBean pattern to convert the config to an `AppConfig` instance.
-
 - Because the bean property `timestamp` was marked as transient, the config system did not set it.
 
 ### Builder as JavaBean
@@ -535,9 +508,7 @@ assert app.getTimestamp() == null;
 If the target class includes the public static method `builder()` that returns any object, then the config system will make sure that the return type has a method `build()` which returns an instance of the target class. If so, the config system treats the *builder* as a JavaBean and
 
 1.  invokes the `builder()` method to instantiate the builder class,
-
 2.  treats the *builder* as a JavaBean and maps the `Config` subtree to it,
-
 3.  invokes the builder’s `build()` method to create the new instance of the target class.
 
 You can augment the target class with the public static `builder()` method:
@@ -578,11 +549,8 @@ public static class Builder {
 ```
 
 - The builder’s property `greeting` is not customized and is set from config node with `greeting` key, if one exists.
-
 - The builder’s property `pageSize` maps to the config key `page-size` and defaults to `10` if absent.
-
 - The builder’s property `basicRange` maps to the config key `basic-range` and uses a `BasicRangeSupplier` instance to get a default value if needed.
-
 - Finally, the config system invokes the builder’s public method `build()`, creating the new instance of `AppConfig` for use by the application.
 
 ### Target Class with Annotated Factory Method or Constructor
@@ -604,7 +572,6 @@ public static AppConfig from(
 ```
 
 - The config system invokes the factory method `from(…​)`, passing arguments it has fetched from the correspondingly-named config subtrees. The factory method returns the new initialized `AppConfig` instance. Note the consistent use of `@Value(key = "…​")` on each parameter.
-
 - Because the property `greeting` does not specify a default value the property is **mandatory** and must appear in the configuration source. Otherwise, the config system throws a `ConfigMappingException`.
 
 Alternatively, you can use an annotated constructor instead of a static factory method. Revising the example above, make the constructor public, annotate its parameters, and remove the now-unneeded `from` factory method.
@@ -628,7 +595,6 @@ public AppConfig(
 ```
 
 - Constructor is `public`.
-
 - Each parameter has the `ConfigValue` annotation to at least specify the config key name.
 
 When the application invokes `config.as(AppConfig.class)`, the config system locates the public annotated constructor and invokes it, passing as arguments the data it fetches from the configuration matching the annotation `key` names with the configuration keys.

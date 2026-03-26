@@ -37,9 +37,7 @@ To enable MicroProfile Tracing, either add a dependency on the [helidon-micropro
 This section explains a few concepts that you need to understand before you get started with tracing.
 
 - In the context of this document, a *service* is synonymous with an application.
-
 - A *span* is the basic unit of work done within a single service, on a single host. Every span has a name, starting timestamp, and duration. For example, the work done by a REST endpoint is a span. A span is associated to a single service, but its descendants can belong to different services and hosts.
-
 - A *trace* contains a collection of spans from one or more services, running on one or more hosts. For example, if you trace a service endpoint that calls another service, then the trace would contain spans from both services. Within a trace, spans are organized as a directed acyclic graph (DAG) and can belong to multiple services, running on multiple hosts. The *OpenTracing Data Model* describes the details at [The OpenTracing Semantic Specification](https://opentracing.io/specification). Spans are automatically created by Helidon as needed during execution of the REST request. Additional spans can be added through MP annotation `@Traced` or through OpenTracing APIs.
 
 ## Traced spans
@@ -165,9 +163,7 @@ This is supported ONLY for the span named "HTTP Request" on component "web-serve
 Parameters provided:
 
 1.  Method - HTTP method
-
 2.  Path - path of the request (such as '/greet')
-
 3.  Query - query of the request (may be null)
 
 ## Examples
@@ -313,7 +309,6 @@ public class GreetResource {
 ```
 
 - This is the `WebTarget` needed to send a request to the second service at port `8081`.
-
 - This is the new endpoint that will call the second service.
 
 *Build and run the application, then invoke the endpoint and check the response:*
@@ -453,7 +448,6 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
 
 *Create and deploy the application into Kubernetes:*
@@ -657,11 +651,8 @@ tracing.service=helidon-otel-tracing-example
     tracing.tags.0.direction=north
 
 - Specifies the OpenTelemetry service name.
-
 - Indicates the configured tracer *should not* be made the global tracer (defaults to `true`).
-
 - Assigns an integer-valued tag `example` the value `1`.
-
 - Assigns a string-valued tag `direction` the value `north`.
 
 By default, Helidon tracing support for OpenTelemetry uses OpenTelemetry’s OTLP gRPC exporter. Alternatively, you can choose to use OpenTelemetry’s HTTP exporter using protobuf by setting `exporter-type` to `http/proto`. To use other exporters OpenTelemetry offers, use the Helidon `telemetry` configuration instead of `tracing`.
@@ -671,13 +662,9 @@ By default, Helidon tracing support for OpenTelemetry uses OpenTelemetry’s OTL
 Applications and libraries can register listeners to be notified at several moments during the lifecycle of every Helidon span:
 
 - Before a new span starts
-
 - After a new span has started
-
 - After a span ends
-
 - After a span is activated (creating a new scope)
-
 - After a scope is closed
 
 The next sections explain how you can write and add a listener and what it can do. See the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) Javadoc for more information.
@@ -755,11 +742,9 @@ Create a `SpanListener` instance and invoke the `Tracer#register(SpanListener)` 
 Helidon also uses Java service loading to locate listeners and register them automatically on all `Tracer` objects. Follow these steps to add a listener service provider.
 
 1.  Implement the [`SpanListener`](/apidocs/io.helidon.tracing/io/helidon/tracing/SpanListener.html) interface.
-
 2.  Declare your implementation as a service provider:
 
     1.  Create the file `META-INF/services/io.helidon.tracing.SpanListener` containing a line with the fully-qualified name of your class which implements `SpanListener`.
-
     2.  If your service has a `module-info.java` file add the following line to it:
 
         ``` java
@@ -784,5 +769,4 @@ Order in which Helidon Invokes Listener Methods
 ## Reference
 
 - [MicroProfile Opentracing Specification](https://download.eclipse.org/microprofile/microprofile-opentracing-3.0/microprofile-opentracing-spec-3.0.html)
-
 - [Opentracing Project](https://opentracing.io/)

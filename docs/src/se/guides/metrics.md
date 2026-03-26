@@ -55,9 +55,7 @@ mvn -U archetype:generate -DinteractiveMode=false \
 Helidon provides three built-in scopes of metrics: base, vendor, and application. Here are the metric endpoints:
 
 1.  `/observe/metrics?scope=base` - Base meters
-
 2.  `/observe/metrics?scope=vendor` - Helidon-specific meters
-
 3.  `/observe/metrics?scope=application` - Application-specific metrics data.
 
 Applications can add their own custom scopes as well simply by specifying a custom scope name when registering a meter.
@@ -69,7 +67,6 @@ Applications can add their own custom scopes as well simply by specifying a cust
 The built-in meters fall into these categories:
 
 1.  JVM behavior (in the base scope), and
-
 2.  basic key performance indicators for request handling (in the vendor scope).
 
 A later section describes the [key performance indicator meters](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) in detail.
@@ -95,7 +92,6 @@ Metrics dependencies in the generated `pom.xml`:
 ```
 
 1.  Includes the Helidon observability component for metrics and, as transitive dependencies, the Helidon neutral metrics API and a full-featured implementation of the API.
-
 2.  Includes the built-in meters.
 
 With these dependencies in your project, Helidon’s auto-discovery of webserver features automatically finds and runs the metrics subsystem. You do not need to change any of the generated source code.
@@ -212,9 +208,7 @@ The `vendor` meter shown above gives an idea of the request traffic the server i
 By adding a `metrics` section to your application configuration you can control how the Helidon metrics subsystem behaves in any of several ways.
 
 - [Disable metrics subsystem entirely](#disabling-metrics-subsystem-entirely).
-
 - Select whether to collect [extended key performance indicator meters](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics).
-
 - Control reporting of [virtual threads meters](#configuring-virtual-threads-meters).
 
 Your Helidon SE application can also control metrics processing programmatically as described in the following sections.
@@ -254,15 +248,10 @@ WebServer server = WebServer.builder() // (6)
 ```
 
 1.  Begin preparing the `ObserveFeature`.
-
 2.  Begin preparing the `MetricsObserver`.
-
 3.  Disable metrics.
-
 4.  Complete the `MetricsObserver`.
-
 5.  Complete the `ObserveFeature`.
-
 6.  Create and start the `WebServer` with the `ObserveFeature` (and other settings).
 
 These builders and interfaces also have methods which accept `Config` objects representing the `metrics` node from the application configuration.
@@ -276,11 +265,8 @@ Any time you include the Helidon metrics module in your application, Helidon tra
 Helidon SE also includes additional, extended KPI metrics which are disabled by default:
 
 - current number of requests in-flight - a `Gauge` (`requests.inFlight`) of requests currently being processed
-
 - long-running requests - a `Counter` (`requests.longRunning`) measuring the total number of requests which take at least a given amount of time to complete; configurable, defaults to 10000 milliseconds (10 seconds)
-
 - load - a `Counter` (`requests.load`) measuring the number of requests worked on (as opposed to received)
-
 - deferred - a `Gauge` (`requests.deferred`) measuring delayed request processing (work on a request was delayed after Helidon received the request)
 
 You can enable and control these meters using configuration:
@@ -327,17 +313,11 @@ WebServer server = WebServer.builder() // (7)
 ```
 
 1.  Create a [`KeyPerformanceIndicatorMetricsConfig` instance (via its](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/KeyPerformanceIndicatorMetricsConfig.html) [`Builder`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/KeyPerformanceIndicatorMetricsConfig.Builder.html)) with non-default values.
-
 2.  Enabled extended KPI meters.
-
 3.  Set the long-running request threshold.
-
 4.  Prepare the metrics observer’s builder.
-
 5.  Update the metrics observer’s builder using the just-prepared KPI metrics config.
-
 6.  Add the metrics observer to the `ObserveFeature`.
-
 7.  Add the `ObserveFeature` to the `WebServer`.
 
 #### Controlling Meters Related to Virtual Threads Behavior
@@ -394,9 +374,7 @@ The threshold value is a `Duration` string, such as `PT0.100S` for 100 milliseco
 Each meter has associated metadata that includes:
 
 1.  name: The name of the meter.
-
 2.  units: The unit of the meter such as time (seconds, milliseconds), size (bytes, megabytes), etc.
-
 3.  a description of the meter.
 
 You can get the metadata for any scope, such as `/observe/metrics?scope=base`, as shown below:
@@ -473,9 +451,7 @@ public class GreetingCards implements HttpService {
 ```
 
 1.  Declare a `Counter` member field.
-
 2.  Create and register the `Counter` meter in the global meter registry\`. This `Counter` will exist for the lifetime of the application.
-
 3.  Increment the count.
 
 Update the `routing` method in the main class as follows:
@@ -547,11 +523,8 @@ public class GreetingCards implements HttpService {
 ```
 
 1.  Declare a `Timer` member field.
-
 2.  Create and register the `Timer` metric in the global meter registry.
-
 3.  Create a timer sample which, among other things, automatically records the starting time.
-
 4.  Arrange for the timer sample to be stopped and applied to the `cardTimer` once Helidon sends the response to the client.
 
 Build and run the application, then invoke the endpoints below:
@@ -622,9 +595,7 @@ public class GreetingCards implements HttpService {
 ```
 
 1.  Declare a `DistributionSummary` member field.
-
 2.  Create and register the `DistributionSummary` meter in the global meter registry
-
 3.  Update the distribution summary with a random number multiple times for each request.
 
 Build and run the application, then invoke the endpoints below:
@@ -764,9 +735,7 @@ spec:
 ```
 
 1.  A service of type `NodePort` that serves the default routes on port `8080`.
-
 2.  An annotation that will allow Prometheus to discover and scrape the application pod.
-
 3.  A deployment with one replica of a pod.
 
 Create and deploy the application into Kubernetes:
@@ -845,11 +814,8 @@ kubectl delete -f ./metrics.yaml
 This guide demonstrated how to use metrics in a Helidon SE application using various combinations of meters and scopes.
 
 - Access meters for all three built-in scopes: base, vendor, and application
-
 - Configure meters that are updated by the application when an application REST endpoint is invoked
-
 - Configure a `Gauge` meter
-
 - Integrate Helidon metrics with Kubernetes and Prometheus
 
 Refer to the following references for additional information:

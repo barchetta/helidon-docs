@@ -7,11 +7,8 @@ This type is an enumeration.
 ## Usages
 
 - [`security.providers.idcs-role-mapper.oidc-config.outbound-type`](io_helidon_security_providers_oidc_common_OidcConfig.md#abfd90-outbound-type)
-
 - [`security.providers.oidc.outbound-type`](io_helidon_security_providers_oidc_OidcProvider.md#aebe14-outbound-type)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.outbound-type`](io_helidon_security_providers_oidc_common_OidcConfig.md#abfd90-outbound-type)
-
 - [`server.features.security.security.providers.oidc.outbound-type`](io_helidon_security_providers_oidc_OidcProvider.md#aebe14-outbound-type)
 
 ## Allowed Values

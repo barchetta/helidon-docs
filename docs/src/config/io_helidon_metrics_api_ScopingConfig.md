@@ -9,7 +9,6 @@ N/A
 ## Usages
 
 - [`metrics.scoping`](../config/io_helidon_webserver_observe_metrics_MetricsObserver.md#a2d4d9-scoping)
-
 - [`server.features.observe.observers.metrics.scoping`](../config/io_helidon_webserver_observe_metrics_MetricsObserver.md#a2d4d9-scoping)
 
 ## Configuration options

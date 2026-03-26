@@ -26,9 +26,7 @@ With the help of CDI, Helidon looks for REST `Application` subclasses in your He
 The discovery phase is carried out as follows (in no particular order):
 
 1.  Collect all beans that extend `Application`
-
 2.  Collect all beans annotated with `@Path`
-
 3.  Collect all beans annotated with `@Provider`
 
 If no `Application` subclasses are found, create a *synthetic* `Application` subclass that includes all beans gathered in steps (2) and (3) and set the application path to be "/" —this is the path normally defined using the `@ApplicationPath` annotation. If one or more `Application` subclasses are found, call the `getClasses` and `getSingletons` methods in each subclass using the collections in steps (2) and (3) only as defaults, i.e. if these methods both return empty sets.

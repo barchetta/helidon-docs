@@ -15,17 +15,13 @@ The Helidon MCP Server extension allows you to build and run MCP servers with He
 Key points:
 
 - Separate repository: [helidon-mcp](https://github.com/helidon-io/helidon-mcp)
-
 - Independent lifecycle: Requires Helidon but has its own versioning and release cadence
-
 - Dedicated documentation: Full usage guides, configuration details, and examples are provided directly in the [helidon-mcp documentation](https://github.com/helidon-io/helidon-mcp#documentation)
 
 To get started:
 
 1.  Visit the [helidon-mcp GitHub repository](https://github.com/helidon-io/helidon-mcp).
-
 2.  Follow the setup and usage instructions in the repository’s documentation.
-
 3.  Explore how to expose your Helidon resources as MCP tools, prompts, and data sources.
 
 ## MCP Client

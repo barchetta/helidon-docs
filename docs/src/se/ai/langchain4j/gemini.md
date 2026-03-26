@@ -157,7 +157,5 @@ If `enabled` is set to `false`, the configuration is ignored, and the component 
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [LangChain4j Google AI Gemini Documentation](https://docs.langchain4j.dev/integrations/language-models/google-ai-gemini)
-
 - [Google AI Gemini Website](https://ai.google.dev/gemini-api/docs)

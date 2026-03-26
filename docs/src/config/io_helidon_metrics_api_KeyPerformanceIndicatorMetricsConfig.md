@@ -7,7 +7,6 @@ Config bean for KPI metrics configuration.
 ## Usages
 
 - [`metrics.key-performance-indicators`](../config/io_helidon_webserver_observe_metrics_MetricsObserver.md#a86e3a-key-performance-indicators)
-
 - [`server.features.observe.observers.metrics.key-performance-indicators`](../config/io_helidon_webserver_observe_metrics_MetricsObserver.md#a86e3a-key-performance-indicators)
 
 ## Configuration options

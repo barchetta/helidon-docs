@@ -66,11 +66,8 @@ cd helidon-quickstart-se
 Helidon configuration sources can use different formats for the configuration data. You can specify the format on a per-source basis, mixing and matching formats as required. Here are the supported formats, each with the extension name you should use. By default, Helidon will determine the media type based on the extension name.
 
 - Java Property (.properties)
-
 - JSON (.json)
-
 - YAML (.yaml)
-
 - HOCON (.conf)
 
 The remainder of this document will use these formats in examples and show you how to configure Helidon to parse them.
@@ -94,9 +91,7 @@ Config config = Config.create();
 In order to properly configure your application using configuration sources, you need to understand the precedence rules that Helidon uses to merge your configuration data. By default, Helidon will use the following sources in precedence order:
 
 1.  Java system properties
-
 2.  Environment variables
-
 3.  Configuration specified in `application.yaml`
 
 If any of the Helidon required properties are not specified in one of these source, like `server.port`, then Helidon will use a default value.
@@ -199,15 +194,10 @@ This section will show you how to use a custom configuration with various source
 Here is the full list of external config sources that you can use programmatically.
 
 1.  Environment variables - the property is a name/value pair.
-
 2.  Java system properties - the property is a name/value pair.
-
 3.  Resources in the classpath - the contents of the resource is parsed according to its inferred format.
-
 4.  File - the contents of the file is parsed according to its inferred format.
-
 5.  Directory - each non-directory file in the directory becomes a config entry: the file name is the key. and the contents of that file are used as the corresponding config String value.
-
 6.  A URL resource - contents is parsed according to its inferred format.
 
 You can also define custom sources, such as Git, and use them in your Helidon application. See [Advanced Config](../config/advanced-configuration.md) for more information.
@@ -236,9 +226,7 @@ private static Config buildConfig() {
 ```
 
 - Disable the environment variables as a source.
-
 - Specify the new config.properties resource that is in the `classpath`.
-
 - You must specify the existing `application.yaml` or Helidon will not use it as a configuration source even though it is considered a default source.
 
 *Build and run the application (without the system property). Invoke the endpoint:*
@@ -450,7 +438,6 @@ sources:
 ```
 
 - The source type.
-
 - The name of the mandatory configuration resource.
 
 *Update the `Main` class and replace the `buildConfig` method:*
@@ -496,9 +483,7 @@ sources:
 ```
 
 - The source type specifies a file.
-
 - The name of the mandatory configuration file.
-
 - Specify that the `optional-config-file` file is optional.
 
 *Restart the application, then invoke the endpoint:*
@@ -534,7 +519,6 @@ sources:
 ```
 
 - Environment variables are now used as a source.
-
 - System properties are now used as a source.
 
 You can re-run the previous tests that exercised environment variables and system properties. Swap the two types to see the precedence change. Be sure to unset APP_GREETING after you finish testing.
@@ -616,9 +600,7 @@ greeting.set(appGreetings.get(0).asString().get());
 ```
 
 - Traverse the entire subtree of the `app` node.
-
 - Include only nodes that have the name `greeting`.
-
 - Add the `greeting` node to the collection.
 
 *Build and run the application, then invoke the endpoint:*
@@ -662,7 +644,6 @@ greetingConfig.onChange(cfg -> greeting.set(cfg.asString().orElse("Ciao")));
 ```
 
 - Get the greeting `Config` node.
-
 - Register a listener that will get called by Helidon when the configuration changes. The listener will update the greeting with the new value.
 
 *Build and run the application, then invoke the endpoint:*
@@ -723,7 +704,6 @@ return Config.builder()
 ```
 
 - The `app.greeting` value will be fetched from `/etc/config/config-file.properties` within the container.
-
 - The server port is specified in `application.yaml` within the `helidon-quickstart-se.jar`.
 
 *Replace the `GreetService` constructor with the following code:*
@@ -778,7 +758,6 @@ kind: ConfigMap
 ```
 
 - The file `config-file.properties` will be created within the Kubernetes container.
-
 - The `config-file.properties` file will have this single property defined.
 
 *Create the Kubernetes YAML specification, named `k8s-config.yaml`, with the following contents:*
@@ -832,11 +811,8 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
-
 - Mount the ConfigMap as a volume at `/etc/config`. This is where Kubernetes will create `config-file.properties`.
-
 - Specify the ConfigMap which contains the configuration data.
 
 *Create and deploy the application into Kubernetes:*
@@ -888,19 +864,12 @@ kubectl delete configmap  helidon-configmap
 This guide has demonstrated how to use basic Helidon configuration features. The full configuration documentation, starting with the introduction section at [Helidon Config](../config/introduction.md) has much more information including the following:
 
 - Architecture
-
 - Parsers
-
 - Extensions
-
 - Filters
-
 - Hierarchical Access
-
 - Property Mapping
-
 - Mutability Support
-
 - and more…​
 
 Refer to the following references for additional information:

@@ -7,15 +7,10 @@ This type is an enumeration.
 ## Usages
 
 - [`security.providers.idcs-role-mapper.oidc-config.tenants.token-endpoint-auth`](io_helidon_security_providers_oidc_common_TenantConfig.md#aa5a6b-token-endpoint-auth)
-
 - [`security.providers.idcs-role-mapper.oidc-config.token-endpoint-auth`](io_helidon_security_providers_oidc_common_OidcConfig.md#aad441-token-endpoint-auth)
-
 - [`security.providers.oidc.tenants.token-endpoint-auth`](io_helidon_security_providers_oidc_common_TenantConfig.md#aa5a6b-token-endpoint-auth)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.tenants.token-endpoint-auth`](io_helidon_security_providers_oidc_common_TenantConfig.md#aa5a6b-token-endpoint-auth)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.token-endpoint-auth`](io_helidon_security_providers_oidc_common_OidcConfig.md#aad441-token-endpoint-auth)
-
 - [`server.features.security.security.providers.oidc.tenants.token-endpoint-auth`](io_helidon_security_providers_oidc_common_TenantConfig.md#aa5a6b-token-endpoint-auth)
 
 ## Allowed Values

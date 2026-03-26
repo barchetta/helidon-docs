@@ -37,15 +37,10 @@ To include health checks for Messaging add the following dependency:
 ## Usage
 
 - [Channels](#channels)
-
 - [Emitter](#emitter)
-
 - [Connector](#connector)
-
 - [Message](#message)
-
 - [Acknowledgement](#acknowledgement)
-
 - [Health Check](#health-check)
 
 ### Channels
@@ -65,7 +60,6 @@ Consuming methods can be connected to the channel’s downstream to consume the 
 Consuming method can function in two ways:
 
 - consume every message coming from the stream connected to the [channels](#channels) - invoked per each message
-
 - prepare reactive stream’s subscriber and connect it to the channel - invoked only once during the channel construction
 
 *Example consuming every message from channel `example-channel-2`:*
@@ -95,19 +89,12 @@ Directly injected publisher can be connected as a channel downstream, you can co
 Helidon can inject following types of publishers:
 
 - `Publisher<PAYLOAD>` - Reactive streams publisher with unwrapped payload
-
 - `Publisher<Message<PAYLOAD>>` - Reactive streams publisher with whole message
-
 - `PublisherBuilder<PAYLOAD>` - MP Reactive streams operators publisher builder with unwrapped payload
-
 - `PublisherBuilder<Message<PAYLOAD>>` - MP Reactive streams operators publisher builder with whole message
-
 - `Flow.Publisher<PAYLOAD>` - JDK’s flow publisher with unwrapped payload
-
 - `Flow.Publisher<Message<PAYLOAD>>` - JDK’s flow publisher with whole message
-
 - `Multi<PAYLOAD>` - Helidon flow reactive operators with unwrapped payload
-
 - `Multi<Message<PAYLOAD>>` - Helidon flow reactive operators with whole message
 
 *Example of consuming payloads from channel `example-channel-1` with injected publisher:*
@@ -128,7 +115,6 @@ The annotation has one required attribute `value` that defines the [channel](htt
 The annotated messaging method can function in two ways:
 
 - produce exactly one message to the stream connected to the [channel](https://download.eclipse.org/microprofile/microprofile-reactive-messaging-3.0/microprofile-reactive-messaging-spec-3.0.html#_channel)
-
 - prepare reactive stream’s publisher and connect it to the [channel](https://download.eclipse.org/microprofile/microprofile-reactive-messaging-3.0/microprofile-reactive-messaging-spec-3.0.html#_channel)
 
 *Example producing exactly one message to channel `example-channel-1`:*
@@ -200,9 +186,7 @@ Diagram shows how processing method (2) serves as a downstream to the `my-channe
 Processing method can function in multiple ways:
 
 - process every message
-
 - prepare reactive stream’s processor and connect it between the channels
-
 - on every message prepare new publisher(equivalent to `flatMap` operator)
 
 *Example processing every message from channel `example-channel-1` to channel `example-channel-2`:*
@@ -242,7 +226,6 @@ public Publisher<String> processMessage(String msg) {
 Messaging connector is an application-scoped bean that implements one or both of following interfaces:
 
 - `IncomingConnectorFactory` - connector can create an upstream publisher to produce messages to a channel
-
 - `OutgoingConnectorFactory` - connector can create a downstream subscriber to consume messages from a channel
 
 *Example connector `example-connector`:*
@@ -398,7 +381,6 @@ public CompletionStage<Void> receiveAndAckMessage(Message<String> msg) {
 Messaging in Helidon has built in health probes for liveness and readiness. To activate it add the [health check dependency](#maven-coordinates).
 
 - Liveness - channel is considered UP until `cancel` or `onError` signal is intercepted on it.
-
 - Readiness - channel is considered DOWN until `onSubscribe` signal is intercepted on it.
 
 If you check your health endpoints `/health/live` and `/health/ready` you will discover every messaging channel to have its own probe.
@@ -430,7 +412,6 @@ mp.messaging.incoming.from-connector-channel.connector: example-connector
 ```
 
 - Use connector `example-connector` as a downstream for channel `to-connector-channel` to consume the messages from the channel
-
 - Use connector `example-connector` as an upstream for channel `to-connector-channel` to produce messages to the channel
 
 *Example producing to connector:*
@@ -486,7 +467,6 @@ public class ExampleConnector implements IncomingConnectorFactory {
 ```
 
 - Config context is merged from channel and connector contexts
-
 - Name of the channel requesting publisher as it’s upstream from this connector
 
 *Example of channel to connector mapping config with custom properties:*
@@ -498,9 +478,7 @@ mp.messaging.connector.example-connector.connector-specific-prop: bar
 ```
 
 - Channel → Connector mapping
-
 - Channel configuration properties
-
 - Connector configuration properties
 
 *Example consuming from connector:*
@@ -518,7 +496,5 @@ public void consume(String value) {
 ## Reference
 
 - [Helidon MicroProfile Reactive Messaging](https://helidon.io/docs/v4/apidocs/io.helidon.microprofile.messaging/module-summary.html)
-
 - [MicroProfile Reactive Messaging Specification](https://download.eclipse.org/microprofile/microprofile-reactive-messaging-3.0/microprofile-reactive-messaging-spec-3.0.html)
-
 - [MicroProfile Reactive Messaging on GitHub](https://github.com/eclipse/microprofile-reactive-messaging)

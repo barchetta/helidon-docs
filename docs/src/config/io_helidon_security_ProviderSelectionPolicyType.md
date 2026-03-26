@@ -7,7 +7,6 @@ This type is an enumeration.
 ## Usages
 
 - [`security.provider-policy.type`](io_helidon_security_Security.md#a28411-provider-policy-type)
-
 - [`server.features.security.security.provider-policy.type`](io_helidon_security_Security.md#a28411-provider-policy-type)
 
 ## Allowed Values

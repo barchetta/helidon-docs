@@ -50,9 +50,7 @@ interface GoogleAiGeminiLc4jProvider {
 ```
 
 - Provide actual LangChain4j model we want to generate binding for.
-
 - Name of the provider needs comply with convention and end with `Lc4jProvider`, prefix is used for deriving a config key
-
 - Some properties can be too complex for configuration, we can supply them via injection instead
 
 You may notice that the **safetySettings** property is manually configured in the provider interface, you can do that for the properties that are too complex for setting via configuration. By adding annotation `@Option.RegistryService` you make it injectable from Helidon’s service registry.
@@ -123,7 +121,5 @@ Some properties usual for LangChain4j models are injectable by default to allow 
 Types of properties injectable by default:
 
 - `dev.langchain4j.model.chat.request.ChatRequestParameters` default parameters for all the models
-
 - `dev.langchain4j.http.client.HttpClientBuilder` Custom http client
-
 - `dev.langchain4j.model.chat.listener.ChatModelListener` Chat model listener for observability

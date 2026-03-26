@@ -7,11 +7,8 @@ Outbound configuration for outbound security.
 ## Usages
 
 - [`security.providers.google-login.outbound`](../config/io_helidon_security_providers_google_login_GoogleTokenProvider.md#a6fd85-outbound)
-
 - [`security.providers.jwt.sign-token`](../config/io_helidon_security_providers_jwt_JwtProvider.md#a9294b-sign-token)
-
 - [`server.features.security.security.providers.google-login.outbound`](../config/io_helidon_security_providers_google_login_GoogleTokenProvider.md#a6fd85-outbound)
-
 - [`server.features.security.security.providers.jwt.sign-token`](../config/io_helidon_security_providers_jwt_JwtProvider.md#a9294b-sign-token)
 
 ## Configuration options

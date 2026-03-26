@@ -46,13 +46,9 @@ oci.auth-strategies=config-file,instance_principals,resource_principal
 OCI supports the following client authentication methods:
 
 - `auto` (default value): Cycles through all of the authentication types until one succeeds. By default, this value is set to `config_file,instance_principals,resource_principal`.
-
 - `config_file`: Uses the user authentication specified in `~/.oci/config`.
-
 - `config`: Uses the user authentication specified in the Helidon `microprofile-config.properties` file.
-
 - `instance_principals`: Uses the OCI Compute instance as the authentication and authorization principal. See [Calling Services from an Instance](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm).
-
 - `resource_principal`: Uses OCI resources and services as the authentication and authorization principal, such as serverless functions. This option is similar to the `instance_principals` authentication type. See [About Using Resource Principal to Access Oracle Cloud Infrastructure Resources](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/resource-principal.html).
 
 If your environment is already set up to work with the OCI SDK or the OCI CLI, then it is likely you do not need to perform any additional configuration of the extension. When the extension is added as a dependency, it will self-configure.
@@ -158,5 +154,4 @@ VaultResource(Secrets secrets,
 ## References
 
 - [OciExtension](/apidocs/io.helidon.integrations.oci.sdk.cdi/io/helidon/integrations/oci/sdk/cdi/OciExtension.html) in the Helidon Javadocs
-
 - [OCI SDK Usage Examples](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/integrations/oci) in the Helidon Examples GitHub repository

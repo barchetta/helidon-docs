@@ -121,7 +121,6 @@ Notes
     </table>
 
 2.  Each node’s key is the fully-qualified path using dotted names from the root to that node.
-
 3.  The root has an empty key, empty name, and no value.
 
 </div>
@@ -148,9 +147,7 @@ Config provName5 = config.get("data").get("providers").get("0").get("name");
 ```
 
 - using a single key
-
 - mixed style (composite key and single key)
-
 - navigating one level with each `get` invocation
 
 The `Config.get(key)` method always returns a `Config` object without throwing an exception. If the specified key does not exist the method returns a `Config` node of type `MISSING`. There are several ways your application can tell whether a given config value exists.
@@ -237,11 +234,8 @@ assert appNodeNames.get(2).equals("page-size");
 ```
 
 - Get the ConfigValue with child `Config` instances.
-
 - Map the node list to names using the Java Stream API (if present)
-
 - Use an empty list if the "app" node does not exist
-
 - Check that the list contains the expected child names: `basic-range`, `greeting` and `page-size`.
 
 *List child nodes of a *list* node*
@@ -255,7 +249,6 @@ assert providers.get(1).key().toString().equals("data.providers.1");
 ```
 
 - Get child nodes of the `data.providers` *list* node as a `List` of `Config` instances.
-
 - Check that the list contains the expected child nodes with keys `data.providers.0` and `data.providers.1`.
 
 The `traverse()` method returns a stream of the nodes in the subtree that is rooted at the current configuration node. Depending on the structure of the loaded configuration the stream contains a mix of object, list or leaf value nodes.
@@ -269,7 +262,6 @@ config.get("data.providers")
 ```
 
 - Visit the subtree rooted at the `data.providers` *list* node.
-
 - Prints out following list of nodes (type and key):
 
 ``` text
@@ -291,7 +283,6 @@ config.traverse(node -> !node.name().equals("data"))
 ```
 
 - Visit all *root* sub-nodes, excluding whole `data` tree structure but including others.
-
 - Prints out following list of nodes (type and key):
 
 ``` text
@@ -338,5 +329,4 @@ assert detachedFromAlternate.get("debug").equals("true");
 ```
 
 - Navigation depends on knowing the full structure of the config and so is different for the two cases.
-
 - Detaching so the `web` node is the root can use the same key regardless of where the config subtree came from.

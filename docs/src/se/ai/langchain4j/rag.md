@@ -15,11 +15,8 @@ No additional dependencies are required beyond the [LangChain4j integration core
 To use RAG with LangChai4j in Helidon, we are going to work with several components.
 
 - **ChatModel** – LLM model for which are going to augment the prompts
-
 - **EmbeddingModel** – Special model trained to create embeddings and execute similarity search with the original prompt
-
 - **EmbeddingStore** – A storage for embeddings we are going to search embeddings similar to the original prompt
-
 - **ContentRetriever** - LangChain4j utility actually using embedding model for content retrieval from the embedding store
 
 RAG-capable AI Service or Agent needs to have content retriever configured, `@Ai.ContentRetriever` annotation can be used for that like in the following example:

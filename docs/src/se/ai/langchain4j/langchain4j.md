@@ -171,11 +171,8 @@ Helidon LangChain4j uses a unified configuration that separates **providers** (s
 Key concepts:
 
 - **Providers**: Shared configuration per provider key, with optional defaults for model/embedding store creation.
-
 - **Named components**: Models, embedding stores, content retrievers, services, and agents are named entries and become named singleton beans.
-
 - **Multiple models per provider**: You can configure multiple models for a single provider by adding multiple entries under `langchain4j.models`.
-
 - **Overrides**: Component configuration overrides provider defaults during merge.
 
 ``` yaml
@@ -222,11 +219,8 @@ langchain4j:
 Changes in 4.4:
 
 - Provider configuration now lives under `langchain4j.providers`.
-
 - Models and embedding stores are named entries under `langchain4j.models` and `langchain4j.embedding-stores` etc.
-
 - Providers and components are enabled by default (set `enabled: false` to disable).
-
 - You can configure multiple models of the same type by adding multiple entries under `langchain4j.models`.
 
 #### Example Migration
@@ -262,7 +256,6 @@ LangChain4j AI Services provide a declarative and type-safe way to define AI-pow
 Helidon LangChain4j integration provides two declarative approaches for using AI:
 
 - AI Services
-
 - Agents and Agentic Workflows
 
 Services and Agents are typically Java interfaces annotated with LangChain4j and Helidon annotations, the resulting implementation is created by LangChain4j runtime and wired together by [Helidon as singleton declarative service beans](../../../se/injection/injection.md). You can access those anywhere in Helidon with `Services.get(FooBarAiService.class)` or inject it in another service bean as constructor parameter. Thanks to the CDI bridge, you can inject AI Services and Agents even to Helidon MP CDI beans.
@@ -321,7 +314,6 @@ public class ChatEndpoint {
 ```
 
 1.  Injection by type for unnamed/default AI Service bean.
-
 2.  Qualified injection for explicitly named AI Service bean.
 
 ``` java
@@ -330,7 +322,6 @@ NamedChatAiService namedService = Services.getNamed(NamedChatAiService.class, "c
 ```
 
 1.  Programmatic lookup by type.
-
 2.  Programmatic lookup by declarative bean name.
 
 Named AI services can be configured under `langchain4j.services`, where values in configuration override annotation values.
@@ -544,7 +535,6 @@ Helidon provides `MetricsChatModelListener` which generates metrics that follow 
 ## Additional Information
 
 - [LangChain4j documentation](https://docs.langchain4j.dev/)
-
 - Components Reference
 
   - [Code generated Lc4j Provider](codegen-provider.md)

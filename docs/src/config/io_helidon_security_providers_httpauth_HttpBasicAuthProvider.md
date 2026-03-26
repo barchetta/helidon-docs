@@ -7,7 +7,6 @@ HTTP Basic Authentication provider.
 ## Usages
 
 - [`security.providers.http-basic-auth`](../config/io_helidon_security_spi_SecurityProvider.md#addbd3-http-basic-auth)
-
 - [`server.features.security.security.providers.http-basic-auth`](../config/io_helidon_security_spi_SecurityProvider.md#addbd3-http-basic-auth)
 
 ## Configuration options

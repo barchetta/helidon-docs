@@ -7,11 +7,8 @@ This type is an enumeration.
 ## Usages
 
 - [`security.providers.idcs-role-mapper.oidc-config.pkce-challenge-method`](io_helidon_security_providers_oidc_common_OidcConfig.md#ade967-pkce-challenge-method)
-
 - [`security.providers.oidc.pkce-challenge-method`](io_helidon_security_providers_oidc_OidcProvider.md#a6ccfb-pkce-challenge-method)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.pkce-challenge-method`](io_helidon_security_providers_oidc_common_OidcConfig.md#ade967-pkce-challenge-method)
-
 - [`server.features.security.security.providers.oidc.pkce-challenge-method`](io_helidon_security_providers_oidc_OidcProvider.md#a6ccfb-pkce-challenge-method)
 
 ## Allowed Values

@@ -7,7 +7,6 @@ HTTP/2 server configuration.
 ## Usages
 
 - [`server.protocols.http_2`](../config/io_helidon_webserver_spi_ProtocolConfig.md#a6d68d-http_2)
-
 - [`server.sockets.protocols.http_2`](../config/io_helidon_webserver_spi_ProtocolConfig.md#a6d68d-http_2)
 
 ## Configuration options

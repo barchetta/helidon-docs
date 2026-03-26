@@ -71,17 +71,14 @@ public class HelloWorld {
 ## Next Steps
 
 - Read [Get Started](../about/prerequisites.md) and learn how to set up your environment.
-
 - Try out Helidon with the Quick Start tutorials:
 
   - [Helidon SE Quick Start](../se/guides/quickstart.md)
-
   - [Helidon MP Quick Start](../mp/guides/quickstart.md)
 
 - If you’re using an earlier version of Helidon, read the Helidon Upgrade Guides for guidance on how to move to the latest version:
 
   - [Helidon SE 4.x Upgrade Guide](../se/guides/upgrade_4x.md)
-
   - [Helidon MP 4.x Upgrade Guide](../mp/guides/upgrade_4x.md)
 
 Helidon is an open source framework (developed by Oracle) licensed under Apache License 2.0. You can follow its development at the [Helidon GitHub repository](https://github.com/helidon-io/helidon).

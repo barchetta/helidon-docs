@@ -7,7 +7,6 @@ Open ID Connect configuration.
 ## Usages
 
 - [`security.providers.idcs-role-mapper.oidc-config`](../config/io_helidon_security_providers_idcs_mapper_IdcsMtRoleMapperProvider.md#a2275a-oidc-config)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config`](../config/io_helidon_security_providers_idcs_mapper_IdcsMtRoleMapperProvider.md#a2275a-oidc-config)
 
 ## Configuration options

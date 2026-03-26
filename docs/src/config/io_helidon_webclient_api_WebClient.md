@@ -7,13 +7,9 @@ WebClient configuration.
 ## Usages
 
 - [`clients`](../config/config_reference.md#a7b703-clients)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient`](../config/io_helidon_security_providers_oidc_common_OidcConfig.md#a5fd1a-webclient)
-
 - [`security.providers.oidc.webclient`](../config/io_helidon_security_providers_oidc_OidcProvider.md#a85467-webclient)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient`](../config/io_helidon_security_providers_oidc_common_OidcConfig.md#a5fd1a-webclient)
-
 - [`server.features.security.security.providers.oidc.webclient`](../config/io_helidon_security_providers_oidc_OidcProvider.md#a85467-webclient)
 
 ## Configuration options

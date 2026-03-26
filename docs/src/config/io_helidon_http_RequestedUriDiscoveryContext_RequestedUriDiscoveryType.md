@@ -7,15 +7,10 @@ This type is an enumeration.
 ## Usages
 
 - [`server.protocols.http_1_1.requested-uri-discovery.types`](io_helidon_http_RequestedUriDiscoveryContext.md#a3fdad-types)
-
 - [`server.protocols.http_2.requested-uri-discovery.types`](io_helidon_http_RequestedUriDiscoveryContext.md#a3fdad-types)
-
 - [`server.requested-uri-discovery.types`](io_helidon_http_RequestedUriDiscoveryContext.md#a3fdad-types)
-
 - [`server.sockets.protocols.http_1_1.requested-uri-discovery.types`](io_helidon_http_RequestedUriDiscoveryContext.md#a3fdad-types)
-
 - [`server.sockets.protocols.http_2.requested-uri-discovery.types`](io_helidon_http_RequestedUriDiscoveryContext.md#a3fdad-types)
-
 - [`server.sockets.requested-uri-discovery.types`](io_helidon_http_RequestedUriDiscoveryContext.md#a3fdad-types)
 
 ## Allowed Values

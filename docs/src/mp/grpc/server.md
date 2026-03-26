@@ -37,19 +37,14 @@ Additional dependencies may be required depending on your application needs. See
 All Helidon gRPC MP annotations are defined in the `Grpc` interface. The following annotations are used to implement Helidon MP gRPC services:
 
 - `@Grpc.GrpcService`: an annotation that marks a class as a gRPC service.
-
 - `@Grpc.GrpcMarshaller`: an annotation on a type or method that specifies a named marshaller supplier. This annotation is required when not using Protobuf serialization.
-
 - `@Grpc.Proto`: an annotation for an optional method returning the Protobuf descriptor. For more information see the [gRPC Reflection Service](#grpc-reflection-service).
 
 The following gRPC method types are supported:
 
 - `@Grpc.Unary`: a method that takes a single value (or void) and returns a single value (or void).
-
 - `@Grpc.ServerStreaming`: a method that takes a single value (or void) and returns a stream of values.
-
 - `@Grpc.ClientStreaming`: a method that takes a stream of values and returns a single value (or void).
-
 - `@Grpc.Bidirectional`: a method that takes a stream of values and returns a stream of values.
 
 ## Usage
@@ -158,7 +153,6 @@ public class MyExtension implements GrpcMpExtension {
 ```
 
 - The `configure` method of the extension will be called to allow the extension to add extra configuration to the server.
-
 - In this example, an instance of the `StringService` is registered with the routing, as described in the [gRPC Server Routing](../../se/grpc/server.md#_grpc_server_routing) documentation.
 
 The `GrpcMpExtension` instances are discovered and loaded using the service loader, so for this example above to work, a file `META-INF/services/io.helidon.microprofile.grpc.server.spi.GrpcMpExtension` would need to be created with the name of the extension shown above.

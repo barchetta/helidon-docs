@@ -7,7 +7,6 @@ This type is a provider contract.
 ## Usages
 
 - [`metrics.publishers`](io_helidon_webserver_observe_metrics_MetricsObserver.md#ab5d8d-publishers)
-
 - [`server.features.observe.observers.metrics.publishers`](io_helidon_webserver_observe_metrics_MetricsObserver.md#ab5d8d-publishers)
 
 ## Implementations

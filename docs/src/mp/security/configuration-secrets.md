@@ -36,7 +36,6 @@ Templates
 The config encryption filter has an option that defines whether encryption is required or not. If it’s set to true, which is the default, then:
 
 - Configuration values with \${CLEAR=…​} template will cause an exception when requested.
-
 - The filter fails during bootstrap if `security.config.aes.insecure-passphrase` is configured.
 
 ### Using symmetric encryption (AES)
@@ -60,7 +59,6 @@ The tool returns the string to be entered into configuration as the value of a p
 You can provide a shared secret in a couple of ways:
 
 - in configuration - for testing/demo purposes only - key is `security.config.aes.insecure-passphrase`
-
 - as an environment variable - `SECURE_CONFIG_AES_MASTER_PWD`
 
 ### Using asymmetric encryption (RSA)

@@ -46,9 +46,7 @@ public class ProtectedApplication extends Application {
 The following interfaces and annotations are used to work with JWT in Helidon MP:
 
 - `JsonWebToken` - an interface used in CDI beans *(@RequestScoped)* dependency injection to obtain the JWT of the currently executing caller.
-
 - `@Claim` - an annotation used by CDI bean *(@RequestScoped)* dependency injection to obtain individual claims from the caller’s JWT.
-
 - `ClaimValue` - a proxy interface used with `@Claim` annotation to оbtain the value of a claim by calling `getValue()`.
 
 ## Configuration
@@ -156,5 +154,4 @@ Learn more about JWT authentication at:
 ## Reference
 
 - [MicroProfile JWT Auth Spec](https://download.eclipse.org/microprofile/microprofile-jwt-auth-2.1/microprofile-jwt-auth-spec-2.1.html)
-
 - [MicroProfile JWT Auth GitHub Repository](https://github.com/eclipse/microprofile-jwt-auth)

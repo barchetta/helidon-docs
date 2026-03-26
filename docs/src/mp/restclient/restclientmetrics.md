@@ -35,9 +35,7 @@ Add the MicroProfile Metrics `@Counted` and `@Timed` annotations to REST client 
 Helidon determines metric names according to the [MicroProfile Metrics naming convention](https://download.eclipse.org/microprofile/microprofile-metrics-5.1.1/microprofile-metrics-spec-5.1.1.html#annotated-naming-convention) and supports the following metrics naming features:
 
 - absolute and relative names
-
 - explicit and inferred names
-
 - type-level annotations
 
 When you place annotations at the type level of a REST client interface Helidon registers *different* metrics for each of the REST methods on the interface. This is the same behavior as in normal MicroProfile Metrics when you add metrics annotations at the type level.
@@ -140,7 +138,6 @@ To create this REST client metrics example follow these steps.
     ```
 
     - Times all outbound method invocations using separate timers for each method.
-
     - Counts the number of times a request is sent to get the default greeting message.
 
 3.  Add a new resource class, similar to the `GreetService` resource class, but which delegates all incoming requests using the REST client.
@@ -201,9 +198,7 @@ To create this REST client metrics example follow these steps.
     ```
 
     - Holds the prepared REST client for use by the delegating methods.
-
     - Prepares the REST client. The example shows only one of many ways of doing this step.
-
     - Each delegating method invokes the corresponding REST client method and returns the result from it.
 
       By default, resource classes such as `DelegatingResource` are instantiated for each incoming request, but generally a Helidon server making outbound requests reuses the client data structures and connections. To create and reuse only a single REST client instance this example resource uses the Helidon `LazyValue` utility class so even as the system creates multiple instances of `DelegatingResource` they all reuse the same REST client.
@@ -256,7 +251,5 @@ To create this REST client metrics example follow these steps.
 ## Reference
 
 - [Helidon REST Client documentation](restclient.md)
-
 - [MicroProfile RestClient specification](https://download.eclipse.org/microprofile/microprofile-rest-client-3.0/microprofile-rest-client-spec-3.0.html)
-
 - [MicroProfile Metrics specification](https://download.eclipse.org/microprofile/microprofile-metrics-5.1.1/microprofile-metrics-spec-5.1.1.html)

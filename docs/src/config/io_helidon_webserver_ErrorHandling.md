@@ -9,7 +9,6 @@ N/A
 ## Usages
 
 - [`server.error-handling`](../config/io_helidon_webserver_WebServer.md#a92b62-error-handling)
-
 - [`server.sockets.error-handling`](../config/io_helidon_webserver_ListenerConfig.md#ad35b9-error-handling)
 
 ## Configuration options

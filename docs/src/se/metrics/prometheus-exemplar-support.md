@@ -62,7 +62,6 @@ Add the Helidon tracing component itself:
 ```
 
 - Helidon tracing dependency.
-
 - Observability dependencies for tracing.
 
 To transmit tracing data from your service to a backend, you need to add a tracing provider to your project.

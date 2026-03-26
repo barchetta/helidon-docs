@@ -62,9 +62,7 @@ For this example, add the IBM JBatch implementation and the `derby` embedded DB 
 In this demonstration you will first create sample input and output records and then the following jobs:
 
 - `MyItemReader`
-
 - `MyItemProcessor`
-
 - `MyItemWriter`
 
 Finally, you will create `MyBatchlet` to demonstrate all possible usages of JBatch.
@@ -232,7 +230,6 @@ Add this code to your job descriptor.xml file:
 ```
 
 - The first step of the job includes `MyItemReader`, `MyItemProcessor` and `MyItemWriter`.
-
 - The second step of the job includes `MyBatchlet`.
 
 > [!NOTE]

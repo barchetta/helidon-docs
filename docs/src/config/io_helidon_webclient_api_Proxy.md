@@ -7,13 +7,9 @@ A definition of a proxy server to use for outgoing requests.
 ## Usages
 
 - [`clients.proxy`](../config/io_helidon_webclient_api_WebClient.md#a62d6a-proxy)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.proxy`](../config/io_helidon_webclient_api_WebClient.md#a62d6a-proxy)
-
 - [`security.providers.oidc.webclient.proxy`](../config/io_helidon_webclient_api_WebClient.md#a62d6a-proxy)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.proxy`](../config/io_helidon_webclient_api_WebClient.md#a62d6a-proxy)
-
 - [`server.features.security.security.providers.oidc.webclient.proxy`](../config/io_helidon_webclient_api_WebClient.md#a62d6a-proxy)
 
 ## Configuration options

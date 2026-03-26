@@ -7,7 +7,6 @@ This type is a provider contract.
 ## Usages
 
 - [`security.providers`](io_helidon_security_Security.md#a56406-providers)
-
 - [`server.features.security.security.providers`](io_helidon_security_Security.md#a56406-providers)
 
 ## Implementations

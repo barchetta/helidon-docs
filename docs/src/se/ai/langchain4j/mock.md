@@ -40,7 +40,6 @@ public interface FoodExpertAiService {
 ```
 
 - Naming your AI service makes its configuration easily overridable from Helidon config.
-
 - Chat model name annotation configuration is overridable by Helidon config
 
 To configure `MockChatModel` to be used, for example, in a test scenario you define your model in `application.yaml` and override a chat model name configured by `@Ai.ChatModel` annotation in FoodExpertAiService:

@@ -7,7 +7,6 @@ This type is a provider contract.
 ## Usages
 
 - [`server.media-context.media-supports`](io_helidon_http_media_MediaContext.md#acbfec-media-supports)
-
 - [`server.sockets.media-context.media-supports`](io_helidon_http_media_MediaContext.md#acbfec-media-supports)
 
 ## Implementations

@@ -7,9 +7,7 @@ Configuration of memory cache for static content.
 ## Usages
 
 - [`server.features.static-content.classpath.memory-cache`](../config/io_helidon_webserver_staticcontent_ClasspathHandlerConfig.md#aa63a5-memory-cache)
-
 - [`server.features.static-content.memory-cache`](../config/io_helidon_webserver_staticcontent_StaticContentFeature.md#a1e68a-memory-cache)
-
 - [`server.features.static-content.path.memory-cache`](../config/io_helidon_webserver_staticcontent_FileSystemHandlerConfig.md#af8862-memory-cache)
 
 ## Configuration options

@@ -75,27 +75,17 @@ LRA options:
 - [value](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#value--)
 
   - [REQUIRED](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#REQUIRED) join incoming LRA or create and join new
-
   - [REQUIRES_NEW](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#REQUIRES_NEW) create and join new LRA
-
   - [MANDATORY](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#MANDATORY) join incoming LRA or fail
-
   - [SUPPORTS](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#SUPPORTS) join incoming LRA or continue outside LRA context
-
   - [NOT_SUPPORTED](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#NOT_SUPPORTED) always continue outside LRA context
-
   - [NEVER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#NEVER) Fail with 412 if executed in LRA context
-
   - [NESTED](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.Type.html#NESTED) create and join new LRA nested in the incoming LRA context
 
 - [timeLimit](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#timeLimit--) max time limit before LRA gets cancelled automatically by [coordinator](#coordinator)
-
 - [timeUnit](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#timeUnit--) time unit if the timeLimit value
-
 - [end](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#end--) when false LRA is not closed after successful method execution
-
 - [cancelOn](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#cancelOn--) which HTTP response codes of the method causes LRA to cancel
-
 - [cancelOnFamily](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#cancelOnFamily--) which family of HTTP response codes causes LRA to cancel
 
 Method parameters:
@@ -126,7 +116,6 @@ Compensate method is called by a [coordinator](#coordinator) when LRA is cancell
 #### JAX-RS variant with supported LRA context values:
 
 - Header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER) - ID of the LRA transaction
-
 - Header [LRA_HTTP_PARENT_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_PARENT_CONTEXT_HEADER) - parent LRA ID in case of nested LRA
 
 ``` java
@@ -161,7 +150,6 @@ Complete method is called by [coordinator](#coordinator) when LRA is successfull
 #### JAX-RS variant with supported LRA context values:
 
 - Header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER) - ID of the LRA transaction
-
 - Header [LRA_HTTP_PARENT_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_PARENT_CONTEXT_HEADER) - parent LRA ID in case of nested LRA
 
 ``` java
@@ -196,7 +184,6 @@ public void complete(URI lraId) {
 #### JAX-RS variant with supported LRA context values:
 
 - Header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER) - ID of the LRA transaction
-
 - Header [LRA_HTTP_PARENT_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_PARENT_CONTEXT_HEADER) - parent LRA ID in case of nested LRA
 
 ``` java
@@ -248,7 +235,6 @@ If the coordinator’s call to the participant’s method fails, then it will re
 #### JAX-RS variant with supported LRA context values:
 
 - Header [LRA_HTTP_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_CONTEXT_HEADER) - ID of the LRA transaction
-
 - [ParticipantStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ParticipantStatus.html) - Status of the participant reported to [coordinator](#coordinator)
 
 ``` java
@@ -263,7 +249,6 @@ public Response reportStatus(@HeaderParam(LRA_HTTP_CONTEXT_HEADER) URI lraId) {
 #### Non JAX-RS variant with supported LRA context values:
 
 - URI with LRA ID
-
 - [ParticipantStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ParticipantStatus.html) - Status of the participant reported to [coordinator](#coordinator)
 
 ``` java
@@ -286,9 +271,7 @@ Method annotated with [@AfterLRA](https://download.eclipse.org/microprofile/micr
 #### JAX-RS variant with supported LRA context values:
 
 - Header [LRA_HTTP_ENDED_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_ENDED_CONTEXT_HEADER) - ID of the finished LRA transaction
-
 - Header [LRA_HTTP_PARENT_CONTEXT_HEADER](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/ws/rs/LRA.html#LRA_HTTP_PARENT_CONTEXT_HEADER) - parent LRA ID in case of nested LRA
-
 - [LRAStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html) - Final status of the LRA ([Cancelled](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#Cancelled), [Closed](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#Closed), [FailedToCancel](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#FailedToCancel), [FailedToClose](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#FailedToClose))
 
 ``` java
@@ -305,7 +288,6 @@ public Response whenLRAFinishes(@HeaderParam(LRA_HTTP_ENDED_CONTEXT_HEADER) URI 
 #### Non JAX-RS variant with supported LRA context values:
 
 - URI with finished LRA ID
-
 - [LRAStatus](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html) - Final status of the LRA ([Cancelled](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#Cancelled), [Closed](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#Closed), [FailedToCancel](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#FailedToCancel), [FailedToClose](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/annotation/LRAStatus.html#FailedToClose))
 
 ``` java
@@ -341,9 +323,7 @@ mp.lra:
 ```
 
 - Url of coordinator
-
 - Propagate LRA headers LRA_HTTP_CONTEXT_HEADER and LRA_HTTP_PARENT_CONTEXT_HEADER through non-LRA endpoints
-
 - Url of the LRA enabled service overrides standard base uri, so coordinator can call load-balancer instead of the service
 
 For more information continue to [MicroProfile Long Running Actions specification](https://download.eclipse.org/microprofile/microprofile-lra-2.0/microprofile-lra-spec-2.0.html).
@@ -388,15 +368,10 @@ public Response compensateExample(@HeaderParam(LRA_HTTP_CONTEXT_HEADER) URI lraI
 ```
 
 - This JAX-RS PUT method will start new LRA transactions and join it before method body gets executed
-
 - LRA ID assigned by coordinator to this LRA transaction
-
 - When method execution finishes exceptionally, cancel signal for this particular LRA is sent to coordinator
-
 - When method execution finishes successfully, complete signal for this particular LRA is sent to coordinator
-
 - Method which will be called by coordinator when LRA is completed
-
 - Method which will be called by coordinator when LRA is canceled
 
 ## Testing
@@ -489,23 +464,16 @@ public class LraTest {
 ```
 
 - Resource is discovered automatically
-
 - Test coordinator needs to be added manually
-
 - Injecting test coordinator to access state of LRA managed by coordinator mid-test
-
 - Retrieving LRA managed by coordinator by LraId
-
 - Asserting LRA state in coordinator
 
 LRA testing feature has the following default configuration:
 
 - port: `0` - coordinator is started on random port(Helidon LRA participant is capable to discover test coordinator automatically)
-
 - bind-address: `localhost` - bind address of the coordinator
-
 - helidon.lra.coordinator.persistence: `false` - LRAs managed by test coordinator are not persisted
-
 - helidon.lra.participant.use-build-time-index: `false` - Participant annotation inspection ignores Jandex index files created in build time, it helps to avoid issues with additional test resources
 
 Testing LRA coordinator is started on additional named socket `test-lra-coordinator` configured with default index `500`. Default index can be changed with system property `helidon.lra.coordinator.test-socket.index`.
@@ -526,11 +494,8 @@ public class LraCustomConfigTest {
 ```
 
 - Start test LRA coordinator always on the same port 8070(default is random port)
-
 - Test LRA coordinator socket bind address (default is localhost)
-
 - Persist LRA managed by coordinator(default is false)
-
 - Use build time Jandex index(default is false)
 
 When CDI bean auto-discovery is not desired, LRA and Config CDI extensions needs to be added manually.
@@ -564,9 +529,7 @@ Helidon LRA supports following coordinators
 </div>
 
 - [MicroTx LRA coordinator](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/index.html)
-
 - Helidon LRA coordinator
-
 - [Narayana coordinator](https://narayana.io/lra).
 
 </div>
@@ -675,11 +638,7 @@ Narayana LRA coordinator is running by default under `lra-coordinator` context, 
 ## Reference
 
 - [MicroProfile LRA GitHub Repository](https://github.com/eclipse/microprofile-lra)
-
 - [MicroProfile Long Running Actions specification](https://download.eclipse.org/microprofile/microprofile-lra-2.0/microprofile-lra-spec-2.0.html)
-
 - [Microprofile LRA JavaDoc](https://download.eclipse.org/microprofile/microprofile-lra-1.0-RC3/apidocs/org/eclipse/microprofile/lra/)
-
 - [Helidon LRA Client JavaDoc](https://helidon.io/docs/v4/apidocs/io.helidon.lra.coordinator.client/module-summary.html)
-
 - [MicroTx - Oracle Transaction Manager for Microservices](https://docs.oracle.com/en/database/oracle/transaction-manager-for-microservices/index.html)

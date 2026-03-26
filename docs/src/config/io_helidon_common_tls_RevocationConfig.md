@@ -7,17 +7,11 @@ Certificate revocation configuration.
 ## Usages
 
 - [`clients.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
-
 - [`security.providers.idcs-role-mapper.oidc-config.webclient.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
-
 - [`security.providers.oidc.webclient.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.webclient.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
-
 - [`server.features.security.security.providers.oidc.webclient.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
-
 - [`server.sockets.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
-
 - [`server.tls.revocation`](../config/io_helidon_common_tls_Tls.md#a7a660-revocation)
 
 ## Configuration options

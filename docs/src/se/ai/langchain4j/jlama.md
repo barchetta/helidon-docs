@@ -160,7 +160,5 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4J Integration](langchain4j.md)
-
 - [LangChain4J Jlama Documentation](https://docs.langchain4j.dev/integrations/language-models/jlama/)
-
 - [Jlama Website](https://github.com/tjake/Jlama)

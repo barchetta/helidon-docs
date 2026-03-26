@@ -228,7 +228,6 @@ server:
 ```
 
 - File loaded from the classpath.
-
 - File loaded from the file system.
 
 ### Configuring additional ports
@@ -236,15 +235,12 @@ server:
 Helidon MP can expose multiple ports, with the following limitations:
 
 - The default port is the port that serves your application (JAX-RS applications and resources)
-
 - Other ports (in this example we configure one "admin" port) can be assigned endpoints that are exposed by Helidon components, currently supported by MP Health and MP Metrics
 
 You can set the configuration in either `application.yaml` or `META-INF/microprofile-config.properties`:
 
 - The port `7011` is the default port and will serve your application
-
 - The port `8011` is named "admin" (this is an arbitrary name)
-
 - Observability endpoints, such as metrics and health, use the "admin" port through the `features.observe.sockets` setting.
 
 *Server configuration using `application.yaml`*
@@ -288,7 +284,6 @@ The bean will support injection of `ApplicationScoped` and `Dependent` scoped be
 The service can be customized using annotations and/or configuration to be
 
 - registered on a specific path
-
 - registered with a named routing
 
 #### Assigning an HTTP service to named ports
@@ -438,13 +433,10 @@ Helidon’s requested URI discovery feature allows your application—​and Hel
 When you prepare the connections in your server you can include the following optional requested URI discovery settings:
 
 - enabled or disabled
-
 - which type or types of requested URI discovery to use:
 
   - `FORWARDED` - uses the `Forwarded` header
-
   - `X_FORWARDED` - uses the `X-Forwarded-*` headers
-
   - `HOST` - uses the `Host` header
 
 - what intermediate nodes to trust
@@ -491,5 +483,4 @@ See the [`UriInfo`](/apidocs/io.helidon.common.uri/io/helidon/common/uri/UriInfo
 ## Reference
 
 - [Helidon MicroProfile Server Javadoc](/apidocs/io.helidon.microprofile.server/module-summary.html)
-
 - [Helidon MicroProfile Server on GitHub](https://github.com/oracle/helidon/tree/main/microprofile/server)

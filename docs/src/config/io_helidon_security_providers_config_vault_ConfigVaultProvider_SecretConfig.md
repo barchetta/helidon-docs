@@ -7,7 +7,6 @@ Provider of secrets defined in configuration itself.
 ## Usages
 
 - [`security.secrets.*.config.config-vault`](../config/io_helidon_security_SecretsProviderConfig.md#adf4fc-config-vault)
-
 - [`server.features.security.security.secrets.*.config.config-vault`](../config/io_helidon_security_SecretsProviderConfig.md#adf4fc-config-vault)
 
 ## Configuration options

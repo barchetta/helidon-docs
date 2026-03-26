@@ -7,7 +7,6 @@ Settings for an OTLP publisher.
 ## Usages
 
 - [`metrics.publishers.otlp`](../config/io_helidon_metrics_api_MetricsPublisher.md#aa8a11-otlp)
-
 - [`server.features.observe.observers.metrics.publishers.otlp`](../config/io_helidon_metrics_api_MetricsPublisher.md#aa8a11-otlp)
 
 ## Configuration options

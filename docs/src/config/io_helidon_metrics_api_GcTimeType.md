@@ -7,7 +7,6 @@ This type is an enumeration.
 ## Usages
 
 - [`metrics.gc-time-type`](io_helidon_webserver_observe_metrics_MetricsObserver.md#ac15af-gc-time-type)
-
 - [`server.features.observe.observers.metrics.gc-time-type`](io_helidon_webserver_observe_metrics_MetricsObserver.md#ac15af-gc-time-type)
 
 ## Allowed Values

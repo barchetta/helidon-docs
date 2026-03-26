@@ -11,7 +11,6 @@ config section.
 ## Usages
 
 - [`metrics.scoping.scopes`](../config/io_helidon_metrics_api_ScopingConfig.md#aacbce-scopes)
-
 - [`server.features.observe.observers.metrics.scoping.scopes`](../config/io_helidon_metrics_api_ScopingConfig.md#aacbce-scopes)
 
 ## Configuration options

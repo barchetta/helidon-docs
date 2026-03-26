@@ -21,35 +21,22 @@ The [config system introduction](introduction.md#%3Cem%3Egetting_started) explai
 Each config extension implements one of the interfaces defined in the Configuration SPI:
 
 - `ConfigSource` - Loads raw configuration data from a given type of source and delegates to a `ConfigParser`, producing the in-memory data structure which represents the loaded and parsed configuration.
-
 - `ConfigParser` - Translates configuration content in a given format into the corresponding internal config data structures.
-
 - `OverrideSource` - Provides key/value pairs which override config values loaded from any `ConfigSource`, given the key and *ignoring* the original value.
-
 - `ConfigFilter` - Transforms config `String` values returned from any value-type `Config` node, given the key *and* the original value.
-
 - `ConfigMapperProvider` - Provides one or more `ConfigMapper`s each of which converts a `Config` object tree to a Java type specific to the application.
-
 - `PollingStrategy` - Implements a custom technique to trigger polling of underlying sources for changes
-
 - `ChangeWatcher` - Implements a custom technique to watch underlying sources for changes and notifying the config system of such a change
 
 The extension mechanism of Config can also use Java `ServiceLoader`. For this purpose, you implement providers that serve as factories for your implementation of an extension. This is to support config profiles even for custom extensions. Service providers:
 
 - `ConfigMapperProvider` - support for config mappers, automatically discovered by the config system
-
 - `ConfigFilter` - support for config filters, automatically discovered by the config system
-
 - `ConfigParser` - support for config parsers, automatically discovered by the config system
-
 - `ConfigSourceProvider` - support for named config sources, configurable through profiles
-
 - `ChangeWatcherProvider` - support for named change watchers, configurable through profiles
-
 - `OverrideSourceProvider` - support for named override sources, configurable through profiles
-
 - `PollingStrategyProvider` - support for named polling strategies, configurable through profiles
-
 - `RetryPolicyProvider` - support for retry policies, configurable through profiles
 
 The config system itself implements several of these SPIs, as noted in the sections below.
@@ -59,7 +46,6 @@ The config system itself implements several of these SPIs, as noted in the secti
 You can configure a custom extension in two ways:
 
 1.  Manual configuration with builder
-
 2.  Automatic configuration using a Java service loader
 
 ### Manual Configuration with Builder
@@ -84,7 +70,6 @@ Config config = Config.builder()
 The following extensions are loaded using a service loader for any configuration instance, and do not require an explicit setup:
 
 - `ConfigParser` - each config parser on the classpath that implements `ConfigParserProvider` as a Java service loader service
-
 - `ConfigFilter` - each filter on the classpath that implements `ConfigFilter` as a Java service loader service
 
 Other extensions are only used from Java service loader when you use config profiles. Mapping is done through the type configured in config profile, and the type defined by the extension provider interface. For example for config sources, the interface defines the following methods (only subset shown):
@@ -133,13 +118,9 @@ Figure 3. Content SPI
 Some methods provided are not always mandatory, yet they are part of the APIs to simplify the overall class structure:
 
 - ConfigContent.stamp() - this method is used by `PollingStrategy` to determine if content has been changed. This can be always `empty` for sources, that do not implement `PollableSource`
-
 - ConfigParser.Content.charset() - this can return any `Charset` for media types that are binary
-
 - ConfigParser.Content.mediaType() - this can be used to override media type (that would otherwise be "guessed" from the underlying source)
-
 - ParsableSource.parser() - this can be used to override parser (that would otherwise be based on `mediaType`)
-
 - ParsableSource.mediaType() - return the configured or "guessed" media type of this source, see `io.helidon.common.media.type.MediaTypes`, if not returned, media type must be present on `Content`, or provided through media type mapping
 
 ## ConfigParser SPI
@@ -153,9 +134,7 @@ Figure 4. ConfigParser SPI
 The `ConfigParser.Content` interface defines operations on the content that is to be parsed by a `ConfigParser` implementation:
 
 - `mediaType()` - Reports the media type of the content (if it is to override media type defined on the config source)
-
 - `data()` - Provides the `InputStream` with config source data
-
 - `charset()` - Defines the charset to use to parse the stream in case this is a text based media type, ignored by parsers of binary content
 
 The application can register parsers for a builder by invoking `Config.Builder#addParser(ConfigParser)`. The config system also uses the Java service loader mechanism to load automatically, for all builders, any parsers listed in the `META-INF/services/io.helidon.config.spi.ConfigParser` resource on the runtime classpath. Prevent automatic loading of parsers for a given builder by invoking `Config.Builder#disableParserServices()`.
@@ -173,7 +152,6 @@ my.module.MyConfigParser
 When the application retrieves a configuration value the config system first uses the relevant config sources and filters. It then applies any *overrides* the application has provided. Each override has:
 
 - a `Predicate<Config.Key>` (a boolean-valued function that operates on the config key), and
-
 - a replacement, *overriding*, `String` value the config system should use if the predicate evaluates to true.
 
 To furnish overrides to the config system, implement the [`OverrideSource`](/apidocs/io.helidon.config/io/helidon/config/spi/OverrideSource.html) SPI one or more times and pass instances of those implementations to the config builder’s [`overrides`](/apidocs/io.helidon.config/io/helidon/config/Config.Builder.html#overrides-java.util.function.Supplier-) method. The config system will apply the overrides returned from each `OverrideSource` to each config key requested from a `Config` that is based on that `Config.Builder`.
@@ -239,15 +217,12 @@ To handle mappings to other types the application can register custom mappers wi
 Such providers return a map, with entries in which:
 
 - the key is the Java type (a `Class` object) the mapper produces, and
-
 - the value is a `ConfigMapper` that converts the config in-memory data structure into the type in the key.
 
 The provider may also implement other methods for finer tuned conversion mechanisms:
 
 - `genericTypeMappers()` returns a map with entries for specific `GenericType` conversions, for example when the provider supports only mapping for `GenericType<Map<String, Integer>>`
-
 - `mapper(Class)` returns a conversion function (optional) that converts a config node to the typed instance (if supported by this provider)
-
 - `mapper(GenericType)` returns a conversion function (optional) that coverts a config node to the GenericType (if supported by this provider) - for example in case this provider supports any Map\<String, ?\> type, such as `Map<String, Integer>` and `Map<String, Double>`
 
 The config conversion system works as follows:
@@ -255,11 +230,8 @@ The config conversion system works as follows:
 For `Config.as(Class)`:
 
 1.  Check whether a conversion function exists for the class requested (from method `mappers()`).
-
 2.  Check whether a conversion function is provided by any `ConfigMapperProvider` with method `mapper(Class)`.
-
 3.  Check whether a conversion function exists for a generic type for the class requested (from method `genericTypeMappers`).
-
 4.  Check whether a conversion function is provided by any `ConfigMapperProvider` with method `mapper(GenericType)` for a generic type for the class requested.
 
 For `Config.as(GenericType)` - the first two steps are skipped.

@@ -7,7 +7,6 @@ Configuration of CORS feature.
 ## Usages
 
 - [`cors`](../config/config_reference.md#ad017c-cors)
-
 - [`server.features.cors`](../config/io_helidon_webserver_spi_ServerFeature.md#a9ee5f-cors)
 
 ## Configuration options

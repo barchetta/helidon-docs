@@ -159,9 +159,7 @@ Formats for `/observe/metrics` output
 Clients can also limit the report by appending the metric type to the path:
 
 - `/observe/metrics/base`
-
 - `/observe/metrics/vendor`
-
 - `/observe/metrics/application`
 
 For more information see [Metrics](../se/metrics/metrics.md) documentation.
@@ -173,7 +171,6 @@ To customize the endpoint of an observer:
 1.  For MicroProfile technologies (metrics, health) refer to the Helidon MP documentation for them:
 
     - [metrics config](../mp/metrics/metrics.md#config-intro) documentation
-
     - [health config](../mp/health.md#_configuration) documentation
 
 2.  For other observers, assign a custom endpoint using a config setting such as `server.features.observe.info.endpoint`.
@@ -204,13 +201,10 @@ The Observability features are now implemented with `HttpFeature` and can be reg
 Feature is similar to `HttpService` but gives more freedom in setup. Main difference is that a feature can add `Filter` filters and it cannot be registered on a path (that is left to the discretion of the feature developer).
 
 - Features are not registered immediately - each feature can define a `Weight` or implement `Weighted` to order features according to their weight. Higher weighted features are registered first.
-
 - This is to allow ordering of features in a meaningful way (e.g. Context should be first, Tracing second, Security third etc).
 
 ## Reference
 
 - [MicroProfile Metrics Specification](https://download.eclipse.org/microprofile/microprofile-metrics-5.0.0/microprofile-metrics-spec-5.0.0.pdf)
-
 - [Metrics](../se/metrics/metrics.md) documentation.
-
 - [Health](../se/health.md) documentation.

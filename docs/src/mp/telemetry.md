@@ -75,7 +75,6 @@ Finally, **exporters** are responsible for transmitting the collected trace data
 There are two ways to work with Telemetry, using:
 
 - Automatic Instrumentation
-
 - Manual Instrumentation
 
 For Automatic Instrumentation, OpenTelemetry provides a JavaAgent. The Tracing API allows for the automatic participation in distributed tracing of Jakarta RESTful Web Services (both server and client) as well as MicroProfile REST Clients, without requiring any modifications to the code. This is achieved through automatic instrumentation.
@@ -87,11 +86,8 @@ For Manual Instrumentation, there is a set of annotations and access to OpenTele
 Helidon provides full access to OpenTelemetry Tracing API:
 
 - `io.opentelemetry.api.OpenTelemetry`
-
 - `io.opentelemetry.api.trace.Tracer`
-
 - `io.opentelemetry.api.trace.Span`
-
 - `io.opentelemetry.api.baggage.Baggage`
 
 Accessing and using these objects can be done as follows. For span:
@@ -115,7 +111,6 @@ class HelidonBean {
 ```
 
 - Simple `@WithSpan` annotation usage.
-
 - Additional attributes can be set on a method.
 
 ### Working With Tracers
@@ -147,7 +142,6 @@ public class HelidonEndpoint {
 ```
 
 - Inject `Tracer`.
-
 - Use `Tracer.spanBuilder` to create and start new `Span`.
 
 Helidon Microprofile Telemetry is integrated with [Helidon Tracing API](tracing.md). This means that both APIs can be mixed, and all parent hierarchies will be kept. In the case below, `@WithSpan` annotated method is mixed with manually created `io.helidon.tracing.Span`:
@@ -178,7 +172,6 @@ public GreetingMessage mixedSpanInjected() {
 ```
 
 - Inject `io.helidon.tracing.Tracer`.
-
 - Use the injected tracer to create `io.helidon.tracing.Span` using the `spanBuilder()` method.
 
 The span is then started and ended manually. Span parent relations will be preserved. This means that span named "mixed_injected" with have parent span named "mixed_parent_injected", which will have parent span named "mixed_injected".
@@ -205,7 +198,6 @@ public GreetingMessage mixedSpan() {
 ```
 
 - Obtain tracer using the `io.helidon.tracing.Tracer.global()` method;
-
 - Use the created tracer to create a span.
 
 The span is then started and ended manually. Span parent relations will be preserved.
@@ -237,9 +229,7 @@ public class HelidonEndpoint {
 ```
 
 - Inject the current span.
-
 - Use the injected span.
-
 - Use `Span.current()` to access the current span.
 
 ### Working With Baggage
@@ -269,9 +259,7 @@ public class HelidonEndpoint {
 ```
 
 - Inject the current baggage.
-
 - Use the injected baggage.
-
 - Use `Baggage.current()` to access the current baggage.
 
 ### Responding to Span Lifecycle Events
@@ -279,13 +267,9 @@ public class HelidonEndpoint {
 Applications and libraries can register listeners to be notified at several moments during the lifecycle of every Helidon span:
 
 - Before a new span starts
-
 - After a new span has started
-
 - After a span ends
-
 - After a span is activated (creating a new scope)
-
 - After a scope is closed
 
 See the [Helidon SE documentation on span lifecycle support](../se/tracing.md#Tracing-callbacks) for more detail on the Helidon SE API which supports this feature. You can use those features from a Helidon MP application as well, in particular receiving notification of life cycle changes of *OpenTelemetry* spans.
@@ -366,7 +350,6 @@ public class CustomRestClientRequestFilterHelper implements HelidonTelemetryClie
 To configure OpenTelemetry, MicroProfile Config must be used, and the configuration properties outlined in the following sections must be followed:
 
 - [OpenTelemetry SDK Autoconfigure](https://github.com/open-telemetry/opentelemetry-java/tree/v1.19.0/sdk-extensions/autoconfigure) (excluding properties related to Metrics and Logging)
-
 - [Manual Instrumentation](https://opentelemetry.io/docs/instrumentation/java/manual/)
 
 Please consult with the links above for all configurations' properties usage.
@@ -428,7 +411,6 @@ Together with Helidon Telemetry dependency, an OpenTelemetry Exporter dependency
 ```
 
 - Helidon Telemetry dependency.
-
 - OpenTelemetry Jaeger exporter.
 
 Add these lines to `META-INF/microprofile-config.properties`:
@@ -442,9 +424,7 @@ otel.service.name=greeting-service
 ```
 
 - Enable MicroProfile Telemetry.
-
 - Set exporter to Jaeger.
-
 - Name of our service.
 
 Here we enable MicroProfile Telemetry, set tracer to "jaeger" and give a name, which will be used to identify our service in the tracer.
@@ -512,11 +492,8 @@ public JsonObject useCustomSpan() {
 ```
 
 - Inject OpenTelemetry `Tracer`.
-
 - Create a span around the method `useCustomSpan()`.
-
 - Create a custom `INTERNAL` span and start it.
-
 - End the custom span.
 
 Let us call the custom endpoint:
@@ -548,9 +525,7 @@ public String outbound() {
 ```
 
 - Inject `WebTarget` pointing to Secondary service.
-
 - Wrap method using `WithSpan`.
-
 - Call the secondary service.
 
 The secondary service is basic; it has only one method, which is also annotated with `@WithSpan`.
@@ -566,7 +541,6 @@ public String getSecondaryMessage() {
 ```
 
 - Wrap method in a span.
-
 - Return a string.
 
 Let us call the *Outbound* endpoint:
@@ -589,5 +563,4 @@ This example is available at the [Helidon official GitHub repository](https://gi
 ## Reference
 
 - [MicroProfile Telemetry Specification](https://download.eclipse.org/microprofile/microprofile-telemetry-1.1/tracing/microprofile-telemetry-tracing-spec-1.1.pdf)
-
 - [OpenTelemetry Documentation](https://opentelemetry.io/docs/)

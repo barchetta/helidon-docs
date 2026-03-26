@@ -94,5 +94,4 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [LangChain4j Cohere Documentation](https://docs.langchain4j.dev/integrations/embedding-models/cohere)

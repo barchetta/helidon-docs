@@ -7,7 +7,6 @@ HTTP/1.1 server configuration.
 ## Usages
 
 - [`server.protocols.http_1_1`](../config/io_helidon_webserver_spi_ProtocolConfig.md#ab85ee-http_1_1)
-
 - [`server.sockets.protocols.http_1_1`](../config/io_helidon_webserver_spi_ProtocolConfig.md#ab85ee-http_1_1)
 
 ## Configuration options

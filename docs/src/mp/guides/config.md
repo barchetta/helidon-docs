@@ -90,7 +90,6 @@ public final class Main {
 In this class, a `main` method is defined which starts the Helidon MP server and prints out a message with the listen address.
 
 - Notice that this class has an empty no-args constructor to make sure this class cannot be instantiated.
-
 - The MicroProfile server is started with the default configuration.
 
 Next change the project’s `pom.xml` to use your main class:
@@ -122,9 +121,7 @@ static Server startServer() {
 In order to properly configure your application using configuration sources, you need to understand the precedence rules that Helidon uses to merge your configuration data. By default, Helidon will use the following sources in precedence order:
 
 1.  Java system properties
-
 2.  Environment variables
-
 3.  Properties specified in `META-INF/microprofile-config.properties`
 
 Each of these sources specify configuration properties in Java Property format (key/value), like `color=red`. If any of the Helidon required properties are not specified in one of these source, like `server.port`, then Helidon will use a default value.
@@ -247,9 +244,7 @@ public class GreetingProvider {
 ```
 
 - This class is application scoped so a single instance of `GreetingProvider` will be shared across the entire application.
-
 - Define a thread-safe reference that will refer to the message member variable.
-
 - The value of the configuration property `app.greeting` is injected into the `GreetingProvider`. constructor as a `String` parameter named `message`.
 
 ### Injecting at Field Level
@@ -288,7 +283,6 @@ public class GreetingProvider {
 ```
 
 - Inject the value of `app.greeting` into the `GreetingProvider` object.
-
 - Define a class member variable to hold the greeting.
 
 *Build and run the application, then invoke the endpoint*
@@ -333,7 +327,6 @@ public class GreetingProvider {
 ```
 
 - Inject the `Config` object into the `GreetingProvider` object.
-
 - Get the `app.greeting` value from the `Config` object and set the member variable.
 
 *Build and run the application, then invoke the endpoint*
@@ -405,9 +398,7 @@ public class GreetingProvider {
 ```
 
 - Get the configuration subtree where the `app.greeting` node is the root.
-
 - Get the value from the `message` `Config` node.
-
 - Get the value from the `sender` `Config` node.
 
 *Build and run the application, then invoke the endpoint*
@@ -441,7 +432,6 @@ private static Config buildConfig() {
 ```
 
 - The `app.greeting` value will be fetched from `/etc/config/config-file.properties` within the container.
-
 - The server port is specified in `META-INF/microprofile-config.properties` within the `helidon-quickstart-mp.jar`.
 
 *Update the following code from `GreetingProvider.java`:*
@@ -505,7 +495,6 @@ kind: ConfigMap
 ```
 
 - The file `config-file.properties` will be created within the Kubernetes container.
-
 - The `config-file.properties` file will have this single property defined.
 
 *Create the Kubernetes YAML specification, named `k8s-config.yaml`, with the following contents:*
@@ -559,11 +548,8 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - A deployment with one replica of a pod.
-
 - Mount the ConfigMap as a volume at `/etc/config`. This is where Kubernetes will create `config-file.properties`.
-
 - Specify the ConfigMap which contains the configuration data.
 
 *Create and deploy the application into Kubernetes:*
@@ -619,7 +605,5 @@ This guide has demonstrated how to use basic Helidon configuration features. For
 Refer to the following references for additional information:
 
 - [MicroProfile Config specification](https://download.eclipse.org/microprofile/microprofile-config-3.1/microprofile-config-spec-3.1.html)
-
 - [MicroProfile Config Javadoc](https://download.eclipse.org/microprofile/microprofile-config-3.1/apidocs)
-
 - [Helidon Javadoc](/apidocs/index.html?overview-summary.html)

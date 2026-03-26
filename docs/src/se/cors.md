@@ -61,17 +61,13 @@ See the [configuration](#configuration) section below for more information.
 The Helidon SE CORS API provides two key classes that you use in your application:
 
 - [`CorsFeature`](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/CorsFeature.html) - `WebServer` feature that contains per-path CORS configurations (`CorsPathConfig`) to enforce at runtime; there will be exactly one instance of this class, and it can be configured using a builder
-
 - [`CorsPathConfig`](/apidocs/io.helidon.webserver.cors/io/helidon/webserver/cors/CorsPathConfig.html) - Represents the details for a specific path and a particular type of sharing, such as which origins are allowed to have access using which HTTP methods, etc. Create one instance of `CorsPathConfig` for each path you want covered by CORS
 
 The CORS feature works as follows:
 
 - it registers a filter that handles both pre-flight `OPTIONS` requests and regular requests, the ordering is handled through its weight - by default it is always executed before routing and filters registered in routing
-
 - it registers a low weight route for `OPTIONS` method, to ensure we return a non-`404` response for pre-flight requests
-
 - if a pre-flight request comes to the webserver, the filter will check CORS against the configured path configurations, and configure the correct response headers
-
 - if a request comes to the webserver that is not pre-flight, and it is a CORS request, the filter will validate the request can be executed, and adds appropriate headers to the response, OR it terminates the request as forbidden
 
 ### Sample Routing Setup Using the `CrossOriginConfig` API
@@ -98,17 +94,11 @@ WebServer.builder()
 ```
 
 1.  Create a builder for `CorsFeature`
-
 2.  Add a `CorsPathConfig` using a builder (can be added multiple times with different configuration), this builder allows configuration of all available CORS options
-
 3.  Configure the path pattern of this CORS config (uses the same pattern as WebServer routing)
-
 4.  Add allow origin
-
 5.  Add allow method
-
 6.  Build the `CorsFeature` instance
-
 7.  Register the new `CorsFeature` instance with WebServer builder
 
 The ordering of `.addPath(…​)` methods when configuring the `CorsFeature` is significant, as they are checked in order, and the first `CorsPathConfig` that matches the requested path and method will be used.

@@ -44,9 +44,7 @@ The Helidon DB Client provides a unified API for working with databases.
 The main features of Helidon DB Client are:
 
 - **Unified API for data access and query**: The API was implemented as a layer above JDBC or MongoDB Java Driver, so any relational databases with JDBC driver or MongoDB are supported.
-
 - **Observability**: Support for health checks, metrics and tracing.
-
 - **Portability between relational database drivers**: Works with native database statements that can be used inline in the code or defined as named statements in database configuration. By moving the native query code to configuration files, the Helidon DB Client allows you to switch to another database by changing the configuration files, not the code.
 
 ## Getting Started with Helidon DB Client
@@ -126,7 +124,6 @@ java -jar h2-{latest-version}.jar -webAllowOthers -tcpAllowOthers -web -tcp
 ```
 
 - Pre-create the database (optional if the file `~/test` already exists)
-
 - Start the database
 
 ### Connect to the Database
@@ -134,11 +131,8 @@ java -jar h2-{latest-version}.jar -webAllowOthers -tcpAllowOthers -web -tcp
 Open the console at <http://127.0.0.1:8082> in your favorite browser. It displays a login window. Select `Generic H2` from `Saved Settings`. The following settings should be set by default:
 
 - Driver Class: org.h2.Driver
-
 - JDBC URL: jdbc:h2:tcp://localhost:9092/~/test
-
 - User Name: sa
-
 - Password:
 
 Password must stay empty. Click **Connect**, the browser displays a web page. The database is correctly set and running.
@@ -217,17 +211,11 @@ Navigate to the `helidon-quickstart-se` directory and open the `pom.xml` file to
 ```
 
 - DB Client API dependency.
-
 - Using JDBC driver for this example.
-
 - Using HikariCP as a connection pool.
-
 - H2 driver dependency.
-
 - Support for health check.
-
 - Support for metrics.
-
 - Support for Jsonp.
 
 ### Configure the DB Client
@@ -259,11 +247,8 @@ db:
 ```
 
 - Source property support two values: jdbc and mongo.
-
 - Connection detail we used to set up H2.
-
 - SQL statements to manage the database.
-
 - Add a counter for metrics only for the `select-book` statement.
 
 *Copy these properties into application-test.yaml*
@@ -314,13 +299,9 @@ public static void main(String[] args) {
 ```
 
 - Create the DbClient instance
-
 - Register it in the global context
-
 - Create an instance of HealthObserver to register a DbClientHealthCheck
-
 - Add the `HealthObserver` to the `ObserveFeature`
-
 - Register the ObserveFeature on the server
 
 ### Create the Library service
@@ -354,9 +335,7 @@ public class LibraryService implements HttpService {
 ```
 
 - Declare the DB Client instance
-
 - Initialize the DB Client instance using global config
-
 - Initialize the database schema
 
 As the LibraryService implements `io.helidon.webserver.HttpService`, the `routing(HttpRules)` method has to be implemented. It defines application endpoints and Http request which can be reached by clients.
@@ -375,11 +354,8 @@ public void routing(HttpRules rules) {
 ```
 
 - Return information about the required book from the database.
-
 - Add a book to the library.
-
 - Remove a book from the library.
-
 - Return the book information in Json format.
 
 To summarize, there is one endpoint that can manipulate books. The number of endpoints and application features can be changed from these rules by creating or modifying methods. `{name}` is a path parameter for the book name. The architecture of the application is defined, so the next step is to create these features.
@@ -404,11 +380,8 @@ private void getBook(ServerRequest request,
 ```
 
 - Get the book name from the path in the URL.
-
 - Helidon DB Client executes the `select-book` SQL script from application.yaml.
-
 - Sends 404 HTTP status if no book was found for the given name.
-
 - Sends book information to the client.
 
 The `getBook` method reach the book from the database and send the information to the client. The name of the book is located into the url path. If the book is not present in the database, an HTTP 404 is sent back. The `execute()` method is called on the dbClient instance to execute one statement. Nevertheless, it is possible to execute a set of tasks into a single execution unit by using the `transaction()` method.
@@ -459,7 +432,6 @@ private void addBook(ServerRequest request,
 ```
 
 - The SQL statement requires the book name and its information. They are provided with `addParam` method.
-
 - A new book was added to library, so an HTTP 201 code is returned.
 
 When a user adds a new book, it uses HTTP PUT method where the book name is in the URL and the information in the request content. To catch this content, the information is retrieved as a string and then the DB Client execute the `insert-book` script to add the book to the library. It requires two parameters, the book name and information which are passed to the dbClient thanks to `addParam` method. An HTTP 201 is sent back as a confirmation.
@@ -480,7 +452,6 @@ private void deleteBook(ServerRequest request,
 ```
 
 - Execute SQL script from application.yaml to remove a book from the library by its name.
-
 - The required book was removed, so an HTTP 204 is sent.
 
 To remove a book from the library, use the "delete-book" script in the way than previously. If the book is removed successfully, an HTTP 204 is sent back.

@@ -11,7 +11,6 @@ JacksonSupport
 ## Usages
 
 - [`server.media-context.media-supports.jackson`](../config/io_helidon_http_media_MediaSupport.md#a4a20e-jackson)
-
 - [`server.sockets.media-context.media-supports.jackson`](../config/io_helidon_http_media_MediaSupport.md#a4a20e-jackson)
 
 ## Configuration options

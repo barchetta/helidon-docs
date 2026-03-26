@@ -56,7 +56,6 @@ setx JAVA_HOME=C:\\PROGRA~1\\Java\\jdk-21
 Now that your environment is set up, you can get started with Helidon. Try out the Helidon MP and Helidon SE Quick Start tutorials to build your first Helidon project and application.
 
 - [Helidon MP Quick Start](../mp/guides/quickstart.md)
-
 - [Helidon SE Quick Start](../se/guides/quickstart.md)
 
 > [!TIP]

@@ -82,9 +82,7 @@ Full list of configuration properties:
 The framework attempts to resolve a proxy using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.chat-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
-
 3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
@@ -92,9 +90,7 @@ The framework attempts to resolve a proxy using the following strategy:
 The framework attempts to resolve a tokenizer using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.chat-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
-
 3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ### OpenAiEmbeddingModel
@@ -137,9 +133,7 @@ Full list of configuration properties:
 The framework attempts to resolve a proxy using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.embedding-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
-
 3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
@@ -147,9 +141,7 @@ The framework attempts to resolve a proxy using the following strategy:
 The framework attempts to resolve a tokenizer using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.embedding-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
-
 3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ### OpenAiImageModel
@@ -197,9 +189,7 @@ Full list of configuration properties:
 The framework attempts to resolve a proxy using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.image-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
-
 3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 ### OpenAiLanguageModel
@@ -241,9 +231,7 @@ Full list of configuration properties:
 The framework attempts to resolve a proxy using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.language-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
-
 3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
@@ -251,9 +239,7 @@ The framework attempts to resolve a proxy using the following strategy:
 The framework attempts to resolve a tokenizer using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.language-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
-
 3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ### OpenAiModerationModel
@@ -294,9 +280,7 @@ Full list of configuration properties:
 The framework attempts to resolve a proxy using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.moderation-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
-
 3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 ### OpenAiStreamingChatModel
@@ -349,9 +333,7 @@ Full list of configuration properties:
 The framework attempts to resolve a proxy using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `java.net.Proxy` with the name `open-ai.streaming-chat-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `java.net.Proxy` service with the name `open-ai`.
-
 3.  **No proxy**: If neither service is found, the framework will not use a proxy.
 
 #### Tokenizer
@@ -359,17 +341,12 @@ The framework attempts to resolve a proxy using the following strategy:
 The framework attempts to resolve a tokenizer using the following strategy:
 
 1.  **Check for a named service**: Look in the service registry for a service of type `dev.langchain4j.model.Tokenizer` with the name `open-ai.streaming-chat-model`.
-
 2.  **Fallback to another named service**: If the first service is not found, search for a `dev.langchain4j.model.Tokenizer` service with the name `open-ai`.
-
 3.  **Default Tokenizer**: If neither service is found, the framework will use the default tokenizer provided by LangChain4j.
 
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [LangChain4j OpenAI Documentation](https://docs.langchain4j.dev/integrations/language-models/open-ai)
-
 - [OpenAI API Documentation](https://platform.openai.com/docs/introduction)
-
 - [OpenAI API Reference](https://platform.openai.com/docs/api-reference)

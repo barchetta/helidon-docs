@@ -77,7 +77,6 @@ WebServer.builder()
 ```
 
 - `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
-
 - Server expects the configuration tree located on the node of `server`
 
 ### Configuring TLS
@@ -128,7 +127,6 @@ server:
 ```
 
 - File loaded from classpath.
-
 - File loaded from file system.
 
 Then, in your application code, load the configuration from that file.
@@ -142,7 +140,6 @@ WebServer.builder()
 ```
 
 - `application.yaml` is a default configuration source loaded when YAML support is on classpath, so we can just use `Config.create()`
-
 - Server expects the configuration tree located on the node of `server`
 
 Or you can only create WebServerTls instance based on the config file.
@@ -245,7 +242,6 @@ WebServer.builder()
 ```
 
 - Handle all GETs to `/hello` path. Send the `Hello World!` string.
-
 - Create a server instance with the provided routing
 
 ### HTTP Method Routing
@@ -276,25 +272,15 @@ routing.post("/some/path", (req, res) -> { /* handler */ });
 You can use **path pattern** instead of *path* with the following syntax:
 
 - `/foo/bar/baz` - Exact path match against resolved path even with non-usual characters
-
 - `/foo/*` - convenience method to match `/foo` or any subpath (but not `/foobar`)
-
 - `/foo/{}/baz` - `{}` Unnamed regular expression segment `([^/]+)`
-
 - `/foo/{var}/baz` - Named regular expression segment `([^/]+)`
-
 - `/foo/{var:\d+}` - Named regular expression segment with a specified expression
-
 - `/foo/{:\d+}` - Unnamed regular expression segment with a specified expression
-
 - `/foo/{+var}` - Convenience shortcut for `{var:.+}`
-
 - `/foo/{+}` - Convenience shortcut for unnamed segment with regular expression `{:.+}`
-
 - `/foo/{*}` - Convenience shortcut for unnamed segment with regular expression `{:.*}`
-
 - `/foo[/bar]` - An optional block, which translates to the `/foo(/bar)?` regular expression
-
 - `/*` or `/foo*` - `*` Wildcard character can be matched with any number of characters.
 
 > [!IMPORTANT]
@@ -320,7 +306,6 @@ routing.route(HttpRoute.builder()
 ```
 
 - The route is specified for `GET` and `POST` requests
-
 - The handler consumes the request payload and echoes it back
 
 ### Organizing Code into Services
@@ -378,9 +363,7 @@ Each service has access to the routing builder. HTTP Features are configured for
 Implement the logic to handle requests to WebServer in a `Handler`, which is a `FunctionalInterface`. Handlers:
 
 - Process the request and [send](#sending-a-response) a response.
-
 - Act as a filter and forward requests to downstream handlers using the `response.next()` method.
-
 - Throw an exception to begin [error handling](#error-handling).
 
 ### Process Request and Produce Response
@@ -388,7 +371,6 @@ Implement the logic to handle requests to WebServer in a `Handler`, which is a `
 Each `Handler` has two parameters. `ServerRequest` and `ServerResponse`.
 
 - Request provides access to the request method, URI, path, query parameters, headers and entity.
-
 - Response provides an ability to set response code, headers, and entity.
 
 ### Filtering
@@ -425,9 +407,7 @@ The handler forwards the request to the downstream handlers by *nexting*. There 
   ```
 
   - handler for any HTTP method using the `/hello` path
-
   - business logic implementation
-
   - forward the current request to the downstream handler
 
 - throw an exception to forward to [error handling](#error-handling)
@@ -444,11 +424,8 @@ The handler forwards the request to the downstream handlers by *nexting*. There 
   ```
 
   - handler for any HTTP method using the `/hello` path
-
   - custom logic
-
   - forward the current request to the downstream handler
-
   - forward the request to the error handler
 
 ### Sending a Response
@@ -467,7 +444,6 @@ rules.get("/hello", (req, res) -> {
 ```
 
 - handler that terminates the request handling for any HTTP method using the `/hello` path
-
 - send the response
 
 ## Protocol-Specific Routing
@@ -483,9 +459,7 @@ rules.get("/any-version", (req, res) -> res.send("HTTP Version " + req.prologue(
 ```
 
 - An HTTP route registered on `/any-version` path that prints the version of HTTP protocol
-
 - An HTTP/1.1 route registered on `/version-specific` path
-
 - An HTTP/2 route registered on `/version-specific` path
 
 While `Http1Route` for Http/1 is always available with Helidon webserver, other routes like `Http2Route` for [HTTP/2](#http2-support) needs to be added as additional dependency.
@@ -499,13 +473,10 @@ Helidon’s requested URI discovery feature allows your application—​and Hel
 When you prepare the connections in your server you can include the following optional requested URI discovery settings:
 
 - enabled or disabled
-
 - which type or types of requested URI discovery to use:
 
   - `FORWARDED` - uses the `Forwarded` header
-
   - `X_FORWARDED` - uses the `X-Forwarded-*` headers
-
   - `HOST` - uses the `Host` header
 
 - what intermediate nodes to trust
@@ -540,9 +511,7 @@ WebServer.builder()
 ```
 
 - Create the `AllowList` describing the intermediate networks nodes to trust and not trust. Presumably the `lbxxx.mycorp.com` nodes are trusted load balancers except for the test load balancer `lbtest`, and no other nodes are trusted. `AllowList` accepts prefixes, suffixes, predicates, regex patterns, and exact matches. See the [`AllowList`](/apidocs/io.helidon.common.configurable/io/helidon/common/configurable/AllowList.html) JavaDoc for complete information.
-
 - Use `Forwarded` first, then try `X-Forwarded-*` on each request.
-
 - Set the `AllowList` for trusted intermediaries.
 
 If you build your server with additional sockets, you can control requested URI discovery separately for each.
@@ -597,7 +566,6 @@ routing.error(MyException.class, (req, res, ex) -> {
 ```
 
 - Registers an error handler that handles `MyException` that are thrown from the upstream handlers
-
 - Finishes the request handling by sending a response
 
 Error handlers are called when
@@ -911,15 +879,10 @@ builder.addFeature(StaticContentFeature.builder()
 ```
 
 - Create a new `StaticContentFeature` to register with the web server (will be served on all sockets by default)
-
 - Add path location served from `/some/WEB/pics` absolute path
-
 - Associate the path location with server context `/pictures`
-
 - Add classpath location to serve resources from the contextual `ClassLoader` from location `/static-content`
-
 - `index.html` is the file that is returned if a directory is requested
-
 - serve the classpath content on root context `/`
 
 Static content can also be registered using the configuration of server feature.
@@ -1431,11 +1394,7 @@ public static void main(String[] args) {
 - [Helidon WebServer JavaDoc](/apidocs/io.helidon.webserver/module-summary.html)
 
 - [Helidon WebServer Static Content JavaDoc](/apidocs/io.helidon.webserver.staticcontent/module-summary.html)
-
 - [Helidon JSON-B Support JavaDoc](/apidocs/io.helidon.http.media.jsonp/module-summary.html)
-
 - [Helidon JSON-P Support JavaDoc](/apidocs/io.helidon.http.media.jsonb/module-summary.html)
-
 - [Helidon Jackson Support JavaDoc](/apidocs/io.helidon.http.media.jackson/module-summary.html)
-
 - [Proxy Protocol Specification](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)

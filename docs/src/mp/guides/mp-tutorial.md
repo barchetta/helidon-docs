@@ -100,13 +100,9 @@ Create a new Maven POM file (called `pom.xml`) and add the following content:
 The POM file contains the basic project information and configurations needed to get started and does the following:
 
 - Includes the Helidon MP application parent pom. This parent pom contains dependency and plugin management to keep your application’s pom simple and clean.
-
 - Establishes the Maven coordinates for the new project.
-
 - Sets the `mainClass` which will be used later when building a JAR file. The class will be created later in this tutorial.
-
 - Adds a dependency for the MicroProfile bundle which allows the use of MicroProfile features in the application. The helidon-mp parent pom includes dependency management, so you don’t need to include a version number here. You will automatically use the version of Helidon that matches the version of the parent pom (4.4.0-SNAPSHOT in this case).
-
 - Adds plugins to be executed during the build. The `maven-dependency-plugin` is used to copy the runtime dependencies into your target directory. The `jandex-maven-plugin` builds an index of your class files for faster loading. The Helidon parent pom handles the details of configuring these plugins. But you can modify the configuration here.
 
 > [!TIP]
@@ -161,11 +157,8 @@ public class GreetResource {
 ```
 
 - This class is annotated with `Path` which sets the path for this resource as `/greet`.
-
 - The `RequestScoped` annotation defines that this bean is request scoped. The request scope is active only for the duration of one web service invocation, and it is destroyed at the end of that invocation. You can learn more about scopes and contexts, and how they are used from the [Specification](https://jakarta.ee/specifications/cdi/4.0/jakarta-cdi-spec-4.0.html).
-
 - A `public JsonObject getDefaultMessage()` method is defined which is annotated with `GET`, meaning it will accept the HTTP GET method. It is also annotated with `Produces(MediaType.APPLICATION_JSON)` which declares that this method will return JSON data.
-
 - The method body creates a JSON object containing a single object named "message" with the content "Hello World". This method will be expanded and improved later in the tutorial.
 
 > [!TIP]
@@ -196,7 +189,6 @@ public final class Main {
 In this class, a `main` method is defined which starts the Helidon MP server and prints out a message with the listen address.
 
 - Notice that this class has an empty no-args constructor to make sure this class cannot be instantiated.
-
 - The MicroProfile server is started with the default configuration.
 
 Helidon MP applications also require a `beans.xml` resource file to tell Helidon to use the annotations discussed above to discover Java beans in the application.
@@ -309,9 +301,7 @@ public class GreetingProvider {
 ```
 
 - This class also has the `ApplicationScoped` annotation, so it will persist for the life of the application.
-
 - The class contains an `AtomicReference` to a `String` where the greeting will be stored. The `AtomicReference` provides lock-free thread-safe access to the underlying `String`.
-
 - The `public GreetingProvider(…​)` constructor is annotated with `Inject` which tells Helidon to use Contexts and Dependency Injection to provide the needed values. In this case, the `String message` is annotated with `ConfigProperty(name = "app.greeting")` so Helidon will inject the property from the configuration file with the key `app.greeting`. This method demonstrates how to read configuration information into the application. A getter and setter are also included in this class.
 
 The `GreetResource` must be updated to use this value instead of the hard coded response. Make the following updates to that class:
@@ -347,9 +337,7 @@ public class GreetResource {
 ```
 
 - This updated class adds a `GreetingProvider` and uses constructor injection to get the value from the configuration file.
-
 - The logic to create the response message is refactored into a `createResponse` method and the `getDefaultMessage()` method is updated to use this new method.
-
 - In `createResponse()` the message is obtained from the `GreetingProvider` which in turn got it from the configuration files.
 
 Rebuild and run the application. Notice that it now uses the greeting from the configuration file. Change the configuration file and restart the application, notice that it uses the changed value.
@@ -394,7 +382,6 @@ public Response updateGreeting(JsonObject jsonObject) {
 ```
 
 - The first of these two methods implements a new HTTP GET service that returns JSON, and it has a path parameter. The `Path` annotation defines the next part of the path to be a parameter named `name`. In the method arguments the `PathParam("name")` annotation on `String name` has the effect of passing the parameter from the URL into this method as `name`.
-
 - The second method implements a new HTTP PUT service which produces and consumes JSON, note the `Consumes` and `PUT` annotations. It also defines a path of "/greeting". Notice that the method argument is a `JsonObject`. Inside the method body there is code to check for the expected JSON, extract the value and update the message in the `GreetingProvider`.
 
 Rebuild and run the application. Test the new services using curl commands similar to those shown below:
@@ -436,9 +423,7 @@ java.util.logging.SimpleFormatter.format=%1$tY.%1$tm.%1$td %1$tH:%1$tM:%1$tS %4$
 ```
 
 - The Helidon console logging handler is configured. This handler writes to `System.out`, does not filter by level and uses a custom `SimpleFormatter` that supports thread names.
-
 - The format string is set using the standard options to include the timestamp, thread name and message.
-
 - The global logging level is set to `INFO`.
 
 The Helidon MicroProfile server will detect the new `logging.properties` file and configure the LogManager for you.
@@ -636,13 +621,9 @@ public class GreetHealthcheck implements HealthCheck {
 ```
 
 - This class has the MicroProfile `Liveness` annotation which tells Helidon that this class provides a custom health check. You can learn more about the available annotations in the [MicroProfile Health Protocol and Wireformat](https://download.eclipse.org/microprofile/microprofile-health-4.0/microprofile-health-spec-4.0.html##_protocol_and_wireformat) document.
-
 - This class also has the `ApplicationScoped` annotation, as seen previously.
-
 - The `GreetingProvider` is injected using Context and Dependency Service. This example will use the greeting to determine whether the application is healthy, this is a contrived example for demonstration purposes.
-
 - Health checks must implement the `HealthCheck` functional interface, which includes the method `HealthCheckResponse call()`. Helidon will invoke the `call()` method to verify the healthiness of the application.
-
 - In this example, the application is deemed to be healthy if the `GreetingProvider,getMessage()` method returns the string `"Hello"` and unhealthy otherwise.
 
 Rebuild the application, make sure that the `mp.conf` has the `greeting` set to something other than `"Hello"` and then run the application and check the health:
@@ -661,7 +642,6 @@ connection: keep-alive
 ```
 
 - The HTTP return code is now 503 Service Unavailable.
-
 - The status is reported as "DOWN" and the custom check is included in the output.
 
 Now update the greeting to `"Hello"` using the following request, and then check health again:
@@ -687,9 +667,7 @@ content-length: 536
 ```
 
 - The PUT returns an HTTP 204.
-
 - The health check now returns an HTTP 200.
-
 - The status is now reported as "UP" and the details are provided in the checks.
 
 Learn more about health checks in the [Health Check Guide](health.md).
@@ -734,13 +712,9 @@ EXPOSE 8080
 ```
 
 - This Dockerfile uses Docker’s multi-stage build feature. The `FROM` keyword creates the first stage. In this stage, the base container has the build tools needed to build the application. These are not required to run the application, so the second stage uses a smaller container.
-
 - Add the `pom.xml` and running an "empty" maven build will download all the dependencies and plugins in this layer. This will make future builds faster because they will use this cached layer rather than downloading everything again.
-
 - Add the source code and do the real build.
-
 - Copy the binary and libraries from the first stage.
-
 - Set the initial command and expose port 8080.
 
 To create the Docker image, use the following command:
@@ -829,13 +803,9 @@ spec:
 ```
 
 - Define a Service to provide access to the application.
-
 - Define a NodePort to expose the application outside the Kubernetes cluster.
-
 - Define a Deployment of the application.
-
 - Define how many replicas of the application to run.
-
 - Define the Docker image to use - this must be the one that was built in the previous step. If the image was built on a different machine to the one where Kubernetes is running, or if Kubernetes is running on multiple machines (worker nodes) then the image must either be manually copied to each node or otherwise pushed to a Docker registry that is accessible to the worker nodes.
 
 This Kubernetes YAML file can be used to deploy the application to Kubernetes:
@@ -883,17 +853,10 @@ There were several links to more detailed information included in the tutorial. 
 ## Related links
 
 - [Eclipse MicroProfile](https://projects.eclipse.org/projects/technology.microprofile)
-
 - [Contexts and Dependency Injection Specification](https://jakarta.ee/specifications/cdi/4.0/jakarta-cdi-spec-4.0.html)
-
 - [Server Configuration](../server.md)
-
 - [Config](../config/introduction.md)
-
 - [MicroProfile Metrics Specification](https://download.eclipse.org/microprofile/microprofile-metrics-5.1.1/microprofile-metrics-spec-5.1.1.html)
-
 - [Metrics Guide](metrics.md)
-
 - [MicroProfile Health Protocol and Wireformat](https://download.eclipse.org/microprofile/microprofile-health-4.0/microprofile-health-spec-4.0.html##_protocol_and_wireformat)
-
 - [Install Kubernetes on your desktop](../../about/kubernetes.md)

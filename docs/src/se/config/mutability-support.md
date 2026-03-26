@@ -12,9 +12,7 @@
 An in-memory config tree, once loaded, is immutable, even though the data in the underlying config sources *can* change over time. The config system internally records which config sources it used to load each config tree and some metadata about the configuration. Your application can be aware of updates to the underlying config sources by:
 
 1.  using the metadata the config system maintains,
-
 2.  responding to change when the config sources are updated, or
-
 3.  using `Supplier`s of particular config values to obtain the always-current value for a key.
 
 ## Using Config Metadata
@@ -46,7 +44,6 @@ Note that the config context describes or replaces a currently-loaded config tre
 Although in-memory config trees do not change once loaded, applications can respond to change in the underlying config sources by:
 
 1.  setting up change detection for the config sources used to build a configuration, and
-
 2.  registering a response to be run when a source changes.
 
 Your code’s response can react to the changes in whatever way makes sense for your application.
@@ -60,9 +57,7 @@ When the application creates a config source, it can set up change detection for
 The config system provides some built-in polling strategies, exposed as these methods on the [`PollingStrategies`](/apidocs/io.helidon.config/io/helidon/config/PollingStrategies.html) class:
 
 - `regular(Duration interval)` - a general-purpose scheduled polling strategy with a specified, constant polling interval.
-
 - `watch(Path watchedPath)` - a filesystem-specific strategy to watch specified path. You can use this strategy with the `file` built-in config sources.
-
 - `nop()` - a no-op strategy
 
 This example builds a `Config` object from three sources, each set up with a different polling strategy:
@@ -82,9 +77,7 @@ Config config = Config.create(
 ```
 
 - Optional `file` source `conf/dev.properties` will be checked for changes every `2` seconds.
-
 - Optional `file` source `conf/config.properties` will be watched by the Java `WatchService` for changes on filesystem.
-
 - The `file` resource `my.properties` will not be checked for changes. `PollingStrategies.nop()` polling strategy is default.
 
 The polling strategies internally inform the config system when they detect changes in the monitored config sources (except that the `nop` strategy does nothing).
@@ -107,7 +100,6 @@ config.get("greeting")
 ```
 
 - Navigate to the `Config` node on which you want to register.
-
 - Invoke the `onChange` method, passing a consumer (`Consumer<Config>`). The config system invokes that consumer each time the subtree rooted at the `greeting` node changes. The `changedNode` is a new instance of `Config` representing the updated subtree rooted at `greeting`.
 
 ## Accessing Always-current Values
@@ -128,9 +120,7 @@ System.out.println("Always actual greeting value: " + greetingSupplier.get());
 ```
 
 - Navigate to the `Config` node for which you want access to the always-current value.
-
 - Retrieve and store the returned supplier for later use.
-
 - Invoke the supplier’s `get()` method to retrieve the current value of the node.
 
 > [!IMPORTANT]

@@ -95,9 +95,7 @@ Connectors are used to connect [channels](#channel) to external sources. To make
 Examples of versatile connectors in Helidon include the following:
 
 - [Kafka connector](#kafka-connector)
-
 - [JMS connector](#jms-connector)
-
 - [AQ Connector](#aq-connector)
 
 #### Messaging Connector
@@ -173,7 +171,6 @@ A messaging connector in Helidon SE can be configured explicitly by API or impli
 Configuration that is supplied to connector by the Messaging implementation must include two mandatory attributes:
 
 - `channel-name` which is the name of the channel that has the connector configured as Publisher or Subscriber, or `Channel.create('name-of-channel')` in case of explicit configuration or `mp.messaging.incoming.name-of-channel.connector: connector-name` in case of implicit config
-
 - `connector` name of the connector `@Connector("connector-name")`
 
 *Example connector accessing configuration:*
@@ -231,9 +228,7 @@ Messaging messaging = Messaging.builder()
 ```
 
 - Prepare channel for connecting kafka connector with specific publisher configuration → listener,
-
 - Channel → connector mapping is automatic when using `KafkaConnector.configBuilder()`
-
 - Prepare Kafka connector, can be used by any channel
 
 ###### Implicit Config for Messaging Connector
@@ -249,9 +244,7 @@ mp.messaging.connector.example-connector.second-test-prop: bar
 ```
 
 - Channel → Connector mapping
-
 - Channel configuration properties
-
 - Connector configuration properties
 
 *Example consuming from connector:*
@@ -322,9 +315,7 @@ Messaging messaging = Messaging.builder()
 ```
 
 - Prepare a channel for connecting kafka connector with specific publisher configuration → listener
-
 - Channel → connector mapping is automatic when using KafkaConnector.configBuilder()
-
 - Prepare Kafka connector, can be used by any channel
 
 *Example of producing to Kafka:*
@@ -352,9 +343,7 @@ Messaging messaging = Messaging.builder()
 ```
 
 - Prepare a channel for connecting kafka connector with specific publisher configuration → listener
-
 - Channel → connector mapping is automatic when using KafkaConnector.configBuilder()
-
 - Prepare Kafka connector, can be used by any channel
 
 ##### Implicit Helidon Config for Kafka Connector
@@ -385,7 +374,6 @@ mp.messaging:
 ```
 
 - Kafka client consumer’s property auto.offset.reset configuration for `from-kafka` channel only
-
 - Kafka client’s property [bootstrap.servers](https://kafka.apache.org/28/documentation.html#consumerconfigs_bootstrap.servers) configuration for all channels using the connector
 
 *Example of consuming from Kafka:*
@@ -470,9 +458,7 @@ Messaging messaging = Messaging.builder()
 ```
 
 - Prepare a channel for connecting jms connector with specific publisher configuration → listener
-
 - Channel → connector mapping is automatic when using JmsConnector.configBuilder()
-
 - Prepare JMS connector, can be used by any channel
 
 *Example of producing to JMS:*
@@ -497,9 +483,7 @@ Messaging messaging = Messaging.builder()
 ```
 
 - Prepare a channel for connecting jms connector with specific publisher configuration → listener
-
 - Channel → connector mapping is automatic when using JmsConnector.configBuilder()
-
 - Prepare JMS connector, can be used by any channel
 
 ##### Implicit Helidon Config for JMS Connector
@@ -622,35 +606,23 @@ Messaging.builder()
 ```
 
 - Prepare Oracle UCP
-
 - Setup AQ connector and provide datasource with an identifier `test-ds`
-
 - Setup channel for sending messages to queue `example_queue_1` with datasource `test-ds`
-
 - Setup channel for receiving messages from queue `example_queue_1` with datasource `test-ds`
-
 - Register connector and channels
-
 - Add a publisher for several test messages to publish them to `example_queue_1` immediately
-
 - Subscribe callback for any message coming from `example_queue_1`
 
 ## Configuration
 
 - [Configuration for Messaging Connector](#configuration-for-messaging-connector)
-
 - [Explicit Configuration with Config Builder for Kafka Connector](#explicit-config-with-config-builder-for-kafka-connector)
-
 - [Implicit Helidon Configuration for Kafka Connector](#implicit-helidon-config-for-kafka-connector)
-
 - [Explicit Configuration with Config Builder for JMS Connector](#explicit-config-with-config-builder-for-jms-connector)
-
 - [Implicit Helidon Configuration for JMS Connector](#implicit-helidon-config-for-jms-connector)
 
 ## Reference
 
 - [MicroProfile Reactive Messaging Specification](https://download.eclipse.org/microprofile/microprofile-reactive-messaging-3.0/microprofile-reactive-messaging-spec-3.0.html)
-
 - [MicroProfile Reactive Messaging on GitHub](https://github.com/eclipse/microprofile-reactive-messaging)
-
 - [Helidon Messaging Examples](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/messaging)

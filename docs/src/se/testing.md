@@ -36,7 +36,6 @@ Helidon provides a rich set of extensions based on JUnit 5 for Helidon WebServer
 There are two main annotations that you can use to test Helidon WebServer.
 
 - `@ServerTest` is an integration test annotation that starts the server (opens ports) and provides client injection pre-configured for the server port(s).
-
 - `@RoutingTest` is a unit test annotation that does not start the server and does not open ports but provides a direct client (with the same API as the usual network client) to test routing.
 
 The additional annotation `@Socket` can be used to qualify the injection of parameters into test constructors or methods, such as to obtain a client configured for the named socket.
@@ -44,9 +43,7 @@ The additional annotation `@Socket` can be used to qualify the injection of para
 The following table lists the supported types of parameters for the `@SetUpRoute` annotated methods. Such methods MUST be static and may have any name. The `@SetUpRoute` annotation has `value` with socket name (to customize the setup for a different socket).
 
 - Parameter type - supported class of a parameter
-
 - Annotation - which annotations support this parameter
-
 - Modules - which webserver extension modules support this signature
 
 | Parameter Type | Annotation | Modules | Notes |
@@ -62,19 +59,14 @@ Parameters for the `@SetUpRoute` annotated methods.
 In addition:
 
 - a static method annotated with `@SetUpServer` can be defined for tests, which has a single parameter of [`WebServerConfig.Builder`](/apidocs/io.helidon.webserver/io/helidon/webserver/WebServerConfig.Builder.html).
-
 - a static method annotated with `@SetUpFeatures` can be defined for tests, which returns `List<? extends ServerFeature>` to configure additional features, or update discovered features, feature discovery can be disabled using the annotation `` value()` ``
 
 The following table lists the injectable types (through constructor or method injection).
 
 - Type - type that can be injected
-
 - Socket - if checked, you can use the `@Socket` annotation to obtain a value specific to that named socket
-
 - Annotation - which annotations support this injection
-
 - Modules - which WebServer extension modules support this injection
-
 - Notes - additional details
 
 |  |  |  |  |  |
@@ -125,15 +117,10 @@ class MyServerTest {
 ```
 
 - Use `@ServerTest` to trigger the testing framework.
-
 - Inject `Http1Client` for the test.
-
 - SetUp routing for the test.
-
 - Regular `JUnit` test method.
-
 - Call the `client` to obtain server response
-
 - Perform the necessary assertions.
 
 To trigger the framework to start and configure the server, annotate the testing class with the `@ServerTest` annotation.
@@ -178,15 +165,10 @@ class MyRoutingTest {
 ```
 
 - Use `@RoutingTest` to trigger the testing framework.
-
 - Inject `DirectClient` for the test.
-
 - SetUp routing for the test.
-
 - A regular `JUnit` test method.
-
 - Call the `client` to obtain server response.
-
 - Perform the necessary assertions.
 
 If only routing tests are required, this is a "lighter" way of testing because the framework will not configure and run the full Helidon server. This way, no real ports will be opened. All the communication will be done through `DirectClient`, which makes the tests very effective.
@@ -285,13 +267,9 @@ class WsSocketTest {
 ```
 
 - Declare `WsClient` and later inject it in the constructor.
-
 - Using @SetUpRoute, create WebSocket routing and assign a serverside listener.
-
 - Test the WebSocket endpoint using the regular @Test annotation.
-
 - Create and assign the clientside listener.
-
 - Check if the received message is correct.
 
 *`ClientSideListener` helper class.*
@@ -320,9 +298,7 @@ static class ClientSideListener implements WsListener {
 ```
 
 - Send "Hello" when a connection is opened.
-
 - Save the message when received and close the connection.
-
 - React on an error.
 
 The WebSocket `ClientSideListener` is also a helper class that implements `WsListener` and is very straightforward:

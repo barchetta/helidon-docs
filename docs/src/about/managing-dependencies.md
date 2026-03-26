@@ -46,5 +46,4 @@ Once you have imported the BOM, you can declare dependencies on Helidon componen
 ## For More Information
 
 - Maven Build Guide for [SE](../se/guides/maven-build.md) and [MP](../mp/guides/maven-build.md)
-
 - Gradle Build Guide for [SE](../se/guides/gradle-build.md) and [MP](../mp/guides/gradle-build.md)

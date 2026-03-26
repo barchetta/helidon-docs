@@ -7,7 +7,6 @@ Google Authentication provider.
 ## Usages
 
 - [`security.providers.google-login`](../config/io_helidon_security_spi_SecurityProvider.md#a29106-google-login)
-
 - [`server.features.security.security.providers.google-login`](../config/io_helidon_security_spi_SecurityProvider.md#a29106-google-login)
 
 ## Configuration options

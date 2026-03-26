@@ -13,11 +13,8 @@ Helidon declarative programming model allows inversion of control style programm
 Our declarative approach has the following advantages:
 
 - Uses Helidon SE imperative code to implement features (i.e. performance is same as "pure" imperative application)
-
 - Generates all the necessary code at build-time, to avoid reflection and bytecode manipulation at runtime
-
 - It is based on [Helidon Injection](injection.md#Overview)
-
 - Declarative features are in the same modules as Helidon SE features (i.e. does not require additional dependencies)
 
 |  |  |
@@ -53,29 +50,17 @@ In addition, the following section must be added to the `build` of the Maven `po
 The following features are currently implemented:
 
 - [Configuration](#configuration)
-
 - [HTTP Server Endpoint](#http-server-endpoint)
-
 - [Typed HTTP Client](#typed-http-client)
-
 - [Fault Tolerance](#fault-tolerance)
-
 - [Scheduling](#scheduling)
-
 - [Validation](#validation)
-
 - [Security](#security)
-
 - [Metrics](#metrics)
-
 - [Tracing](#tracing)
-
 - [WebSocket Server](#websocket-server)
-
 - [WebSocket Client](#websocket-client)
-
 - [WebServer CORS](#webserver-cors)
-
 - [Health Checks](#health-checks)
 
 A Helidon Declarative application should be started using the generated application binding, to ensure no lookup and no reflection. The call to `ServiceRegistryManager.start` ensures that all services with a defined `RunLevel` are started, including Helidon WebServer, Scheduled services etc.
@@ -106,7 +91,6 @@ Services available for injection:
 Annotations:
 
 - [`io.helidon.config.Configuration.Value`](/apidocs/io.helidon.config/io/helidon/config/Configuration.html) - define the configuration key to inject, on constructor parameter
-
 - Annotations defined in [`io.helidon.common.Default`](/apidocs/io.helidon.common/io/helidon/common/Default.html) - define a default typed value, on the same constructor parameter
 
 Example of usage can be seen below in HTTP Server Endpoint example.
@@ -122,53 +106,35 @@ N/A
 Supported method parameters (no annotation required):
 
 - [`io.helidon.webserver.http.ServerRequest`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/ServerRequest.html)
-
 - [`io.helidon.webserver.http.ServerResponse`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/ServerResponse.html)
-
 - [`io.helidon.common.context.Context`](/apidocs/io.helidon.common.context/io/helidon/common/context/Context.html)
-
 - `io.helidon.common.security.SecurityContext`
-
 - `` io.helidon.security.SecurityContext - in case `helidon-security `` module is on the classpath
 
 Annotations on endpoint type:
 
 - [`io.helidon.webserver.http.RestServer.Endpoint`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.Endpoint.html) - required annotation
-
 - [`io.helidon.webserver.http.RestServer.Listener`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.Listener.html) - to define the named listener this should be served on (named port/socket)
-
 - [`io.helidon.webserver.http.RestServer.Header`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.Header.html) - header to return with each response from this endpoint
-
 - [`io.helidon.webserver.http.RestServer.ComputedHeader`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.ComputedHeader.html) - computed header to return with each response from this endpoint
-
 - [`io.helidon.http.Http.Path`](/apidocs/io.helidon.http/io/helidon/http/Http.Path.html) - path (context) this endpoint will be available on
 
 Annotations on endpoint methods:
 
 - [`io.helidon.webserver.http.RestServer.Header`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.Header.html) - header to return with each response from this method
-
 - [`io.helidon.webserver.http.RestServer.ComputedHeader`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.ComputedHeader.html) - computed header to return with each response from this method
-
 - [`io.helidon.webserver.http.RestServer.Status`](/apidocs/io.helidon.webserver/io/helidon/webserver/http/RestServer.Status.html) - status to return (if a custom one is required)
-
 - [`io.helidon.http.Http.Path`](/apidocs/io.helidon.http/io/helidon/http/Http.Path.html) - path (context) this method will be available on (subpath of the endpoint path)
-
 - [`io.helidon.http.Http.GET`](/apidocs/io.helidon.http/io/helidon/http/Http.GET.html) (and other methods) - definition of HTTP method this method will serve
-
 - [`io.helidon.http.Http.HttpMethod`](/apidocs/io.helidon.http/io/helidon/http/Http.HttpMethod.html) - for custom HTTP method names (mutually exclusive with above)
-
 - [`io.helidon.http.Http.Produces`](/apidocs/io.helidon.http/io/helidon/http/Http.Produces.html) - what media type this method produces (return entity content type)
-
 - [`io.helidon.http.Http.Consumes`](/apidocs/io.helidon.http/io/helidon/http/Http.Consumes.html) - what media type this method accepts (request entity content type)
 
 Annotations on method parameters:
 
 - [`io.helidon.http.Http.Entity`](/apidocs/io.helidon.http/io/helidon/http/Http.Entity.html) - Request entity, a typed parameter is expected, will use HTTP media type modules to coerce into the correct type
-
 - [`io.helidon.http.Http.HeaderParam`](/apidocs/io.helidon.http/io/helidon/http/Http.HeaderParam.html) - Typed HTTP request header value
-
 - [`io.helidon.http.Http.QueryParam`](/apidocs/io.helidon.http/io/helidon/http/Http.QueryParam.html) - Typed HTTP query value
-
 - [`io.helidon.http.Http.PathParam`](/apidocs/io.helidon.http/io/helidon/http/Http.PathParam.html) - Typed parameter from path template
 
 Example of an HTTP Server Endpoint
@@ -204,37 +170,25 @@ To create a typed HTTP client, create an interface annotated with `RestClient.En
 Annotations on endpoint type:
 
 - [`io.helidon.webclient.api.RestClient.Endpoint`](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/RestClient.Endpoint.html) - required annotation
-
 - [`io.helidon.http.Http.Path`](/apidocs/io.helidon.http/io/helidon/http/Http.Path.html) - path (context) the server listens on
-
 - [`io.helidon.webclient.api.RestClient.Header`](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/RestClient.Header.html) - header to include in every request to the server
-
 - [`io.helidon.webclient.api.RestClient.ComputedHeader`](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/RestClient.ComputedHeader.html) - header to compute and include in every request to the server
 
 Annotations on endpoint methods:
 
 - [`io.helidon.webclient.api.RestClient.Header`](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/RestClient.Header.html) - header to include in every request to the server
-
 - [`io.helidon.webclient.api.RestClient.ComputedHeader`](/apidocs/io.helidon.webclient.api/io/helidon/webclient/api/RestClient.ComputedHeader.html) - header to compute and include in every request to the server
-
 - [`io.helidon.http.Http.Path`](/apidocs/io.helidon.http/io/helidon/http/Http.Path.html) - path (context) the server serves this endpoint method on
-
 - [`io.helidon.http.Http.GET`](/apidocs/io.helidon.http/io/helidon/http/Http.GET.html) (and other methods) - definition of HTTP method this method will invoke
-
 - [`io.helidon.http.Http.HttpMethod`](/apidocs/io.helidon.http/io/helidon/http/Http.HttpMethod.html) - for custom HTTP method names (mutually exclusive with above)
-
 - [`io.helidon.http.Http.Produces`](/apidocs/io.helidon.http/io/helidon/http/Http.Produces.html) - what media type this method produces (content type of entity from the server)
-
 - [`io.helidon.http.Http.Consumes`](/apidocs/io.helidon.http/io/helidon/http/Http.Consumes.html) - what media type this method accepts (request entity content type)
 
 Annotations on method parameters:
 
 - [`io.helidon.http.Http.Entity`](/apidocs/io.helidon.http/io/helidon/http/Http.Entity.html) - Request entity, a typed parameter is expected, will use HTTP media type modules to write to the request
-
 - [`io.helidon.http.Http.HeaderParam`](/apidocs/io.helidon.http/io/helidon/http/Http.HeaderParam.html) - Typed HTTP header value to send
-
 - [`io.helidon.http.Http.QueryParam`](/apidocs/io.helidon.http/io/helidon/http/Http.QueryParam.html) - Typed HTTP query value to send
-
 - [`io.helidon.http.Http.PathParam`](/apidocs/io.helidon.http/io/helidon/http/Http.PathParam.html) - Typed parameter from path template to construct the request URI
 
 Example of a Typed HTTP Client
@@ -256,15 +210,10 @@ Fault tolerance annotations allow adding features to methods on services. The an
 Method Annotations:
 
 - [`io.helidon.faulttolerance.Ft.Retry`](/apidocs/io.helidon.faulttolerance/io/helidon/faulttolerance/Ft.Retry.html) - allow retries
-
 - [`io.helidon.faulttolerance.Ft.Fallback`](/apidocs/io.helidon.faulttolerance/io/helidon/faulttolerance/Ft.Fallback.html) - fallback to another method that provides
-
 - [`io.helidon.faulttolerance.Ft.Async`](/apidocs/io.helidon.faulttolerance/io/helidon/faulttolerance/Ft.Async.html) - invoke method asynchronously
-
 - [`io.helidon.faulttolerance.Ft.Timeout`](/apidocs/io.helidon.faulttolerance/io/helidon/faulttolerance/Ft.Timeout.html) - invoke method with a timeout
-
 - [`io.helidon.faulttolerance.Ft.Bulkhead`](/apidocs/io.helidon.faulttolerance/io/helidon/faulttolerance/Ft.Bulkhead.html) - use bulkhead
-
 - [`io.helidon.faulttolerance.Ft.CircuitBreaker`](/apidocs/io.helidon.faulttolerance/io/helidon/faulttolerance/Ft.CircuitBreaker.html) - use circuit breaker
 
 Example of Fault Tolerance Fallback
@@ -292,7 +241,6 @@ Scheduling allows service methods to be invoked periodically.
 Method annotations:
 
 - [`io.helidon.scheduling.Scheduling.Cron`](/apidocs/io.helidon.scheduling/io/helidon/scheduling/Scheduling.Cron.html) - execute with schedule defined by a CRON expression
-
 - [`io.helidon.scheduling.Scheduling.FixedRate`](/apidocs/io.helidon.scheduling/io/helidon/scheduling/Scheduling.FixedRate.html) - execute with a fixed interval
 
 Example of a fixed rate scheduled method
@@ -310,9 +258,7 @@ static class CacheService {
 The following annotation values can use configuration expressions:
 
 - `Scheduling.Cron#value()`
-
 - `Scheduling.Fixed#delayBy()`
-
 - `Scheduling.FixedRate#value()`
 
 Configuration expressions is a reference to a configuration key, with optional default value:
@@ -343,53 +289,39 @@ Existing constraints:
 Constraints for any type:
 
 - [`io.helidon.validation.Validation.NotNull`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.NotNull.html) - must not be null
-
 - [`io.helidon.validation.Validation.Null`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Null.html) - must be null
 
 Constraints for `String` and `CharSequence`:
 
 - [`io.helidon.validation.Validation.Email`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.String.Email.html) - matches an e-mail structure (basic check only)
-
 - [`io.helidon.validation.Validation.String.NotBlank`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.String.NotBlank.html) - must not be blank (empty or only white-space characters)
-
 - [`io.helidon.validation.Validation.String.NotEmpty`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.String.NotEmpty.html) - must not be empty (i.e. length is `0`)
-
 - [`io.helidon.validation.Validation.String.Length`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.String.Length.html) - check for maximal (and optionally minimal) length
-
 - [`io.helidon.validation.Validation.String.Pattern`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.String.Pattern.html) - check against a regular expression
 
 Constraints for types that extend `java.lang.Number`. These constraints accept any such type, though all types are eventually converted to a `BigDecimal` and the checks are done against the result. `Byte` is always converted as an unsigned number, i.e. its values are from `0` to `255` inclusive.
 
 - [`io.helidon.validation.Validation.Number.Negative`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.Negative.html) - the value must be negative (`< 0`)
-
 - [`io.helidon.validation.Validation.Number.NegativeOrZero`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.NegativeOrZero.html) - the value must be negative or zero (`<= 0`)
-
 - [`io.helidon.validation.Validation.Number.Positive`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.Positive.html) - the value must be positive (`> 0`)
-
 - [`io.helidon.validation.Validation.Number.PositiveOrZero`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.PositiveOrZero.html) - the value must be positive or zero (`>= 0`)
-
 - [`io.helidon.validation.Validation.Number.Min`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.Min.html) - the value must be at least the specified minimal value (`>= min`), value is defined as a `String`
-
 - [`io.helidon.validation.Validation.Number.Max`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.Max.html) - the value must be at most the specified maximal value (`<= max`), value is defined as a `String`
-
 - [`io.helidon.validation.Validation.Number.Digits`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Number.Digits.html) - the number must have at most the specified number of integer and fractional digits
 
 Constraints for `Integer` data types. These constraints accept `int, long, byte, char, short` and their boxed counterparts. `byte` is always converted as an unsigned number, i.e. its values are from `0` to `255` inclusive. These are convenience annotation that use `int` data type:
 
 - [`io.helidon.validation.Validation.Integer.Min`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Integer.Min.html) - the value must be at least the specified minimal value (`>= min`)
-
 - [`io.helidon.validation.Validation.Integer.Max`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Integer.Max.html) - the value must be at most the specified maximal value (`<= max`)
 
 Constraints for `Long` and `long` data types. No other type is supported:
 
 - [`io.helidon.validation.Validation.Long.Min`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Long.Min.html) - the value must be at least the specified minimal value (`>= min`)
-
 - [`io.helidon.validation.Validation.Long.Max`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Long.Max.html) - the value must be at most the specified maximal value (`<= max`)
 
 Constraints for `Boolean` and `boolean` data type. No other type is supported:
 
 - [`io.helidon.validation.Validation.Boolean.True`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Boolean.True.html) - the value must be `true`
-
 - [`io.helidon.validation.Validation.Boolean.False`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Boolean.False.html) - the value must be `false`
 
 Constraints for collection and map data types:
@@ -399,45 +331,27 @@ Constraints for collection and map data types:
 Constraints for calendar/time data types. Behavior depends on the specific type - for example for `Year` data type, past is previous year, future is the next year, and present is the current year, regardless of which month it is. When using `Instant`, past is already the last millisecond.
 
 - [`io.helidon.validation.Validation.Calendar.Future`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Calendar.Future.html) - the value must be in the future
-
 - [`io.helidon.validation.Validation.Calendar.FutureOrPresent`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Calendar.FutureOrPresent.html) - the value must be in the future or now
-
 - [`io.helidon.validation.Validation.Calendar.Past`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Calendar.Past.html) - the value must be in the past
-
 - [`io.helidon.validation.Validation.Calendar.PastOrPresent`](/apidocs/io.helidon.validation/io/helidon/validation/Validation.Calendar.PastOrPresent.html) - the value must be in the past or now
 
 Supported types for calendar/time validations:
 
 - `java.util.Date`
-
 - `java.util.Calendar`
-
 - `java.time.Instant`
-
 - `java.time.LocalDate`
-
 - `java.time.LocalDateTime`
-
 - `java.time.LocalTime`
-
 - `java.time.MonthDay`
-
 - `java.time.OffsetDateTime`
-
 - `java.time.OffsetTime`
-
 - `java.time.Year`
-
 - `java.time.YearMonth`
-
 - `java.time.ZonedDateTime`
-
 - `java.time.chrono.HijrahDate`
-
 - `java.time.chrono.JapaneseDate`
-
 - `java.time.chrono.MinguoDate`
-
 - `java.time.chrono.ThaiBuddhistDate`
 
 #### Type Validation
@@ -540,19 +454,12 @@ Identity propagation (when using a WebClient) depends on configuration of the cl
 Supported annotations:
 
 - `io.helidon.security.annotations.Authenticated` - mark an endpoint or a method as requiring authentication
-
 - `io.helidon.security.annotations.Authorized` - mark an endpoint or a method as requiring authorization
-
 - `io.helidon.security.annotations.Audited` - mark an endpoint or a method as requiring audit logging
-
 - `io.helidon.security.abac.role.RoleValidator.PermitAll` - annotated method does not require any authentication or authorization (even if endpoint does)
-
 - `jakarta.annotation.security.PermitAll` - same as `RoleValidator.PermitAll`
-
 - `jakarta.annotation.security.DenyAll` - annotated method will not be callable with any kind of authentication or authorization
-
 - [`io.helidon.security.abac.role.RoleValidator.Roles`](/apidocs/io.helidon.security/io/helidon/security/abac/role/RoleValidator.Roles.html) - provide a set of roles that can access a resource, implies authentication is required
-
 - `jakarta.annotation.security.RolesAllowed` - same as above (`RoleValidator.Roles`)
 
 ### Metrics
@@ -560,17 +467,13 @@ Supported annotations:
 Add support for the following meters:
 
 - Counter
-
 - Timer
-
 - Gauge
 
 Method annotations:
 
 - [`io.helidon.metrics.api.Metrics.Counted`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/Metrics.Counted.html) - adds a counter metric to the metric registry for method executions
-
 - [`io.helidon.metrics.api.Metrics.Timed`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/Metrics.Timed.html) - adds a timer metric to the metric registry for method executions
-
 - [`io.helidon.metrics.api.Metrics.Gauge`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/Metrics.Gauge.html) - marks a method that returns a number as a gauge
 
 In addition, we can use [`io.helidon.metrics.api.Metrics.Tag`](/apidocs/io.helidon.metrics.api/io/helidon/metrics/api/Metrics.Tag.html) annotation on a type, method, or as a `tags` property of an annotation to add tags to the metric. Tags from type definition will be added to all metrics on the type, tags on methods on all metrics on the method, and tags in the metric annotation will only be used by that metric.
@@ -613,13 +516,11 @@ Add support for tracing of methods. This feature will add a new span for each an
 Annotations:
 
 - [`io.helidon.tracing.Tracing.Traced`](%7Btracing-javadoc%7D/io/helidon/tracing/Tracing.Traced.md) - all methods on the annotated type are will be traced, or the annotated method will be traced
-
 - [`io.helidon.tracing.Tracing.ParamTag`](%7Btracing-javadoc%7D/io/helidon/tracing/Tracing.ParamTag.md) - the annotated method parameter will be added as a tag to the span
 
 Notes on defaults:
 
 - if a `kind` is defined to other value than `INTERNAL`, it will be used unless a `kind` other than `INTERNAL` is defined on a method annotation (i.e. it is not possible to have `SERVER` on type, and `INTERNAL` on method)
-
 - span name defaults to `fully-qualified-class-name.method-name`
 
 The following example shows annotation on a type. This would make all methods traced with span kind of `SERVER`, and with a tag `service` with value `TracedService`.
@@ -657,47 +558,30 @@ N/A
 Supported method parameters (no annotation required):
 
 - [`io.helidon.websocket.WsSession`](/apidocs/io.helidon.websocket/io/helidon/websocket/WsSession.html)
-
 - `boolean` in a method annotated with `@WebSocket.OnMessage` - indicator of "last" message (if not present, the message will be combined before delivery)
-
 - `java.lang.String` (`@WebSocket.OnMessage`) - the message delivered (text)
-
 - `java.io.Reader` (`@WebSocket.OnMessage`) - the message delivered (text)
-
 - [`io.helidon.common.buffers.BufferData`](/apidocs/io.helidon.common.buffers/io/helidon/common/buffers/BufferData.html) (`@WebSocket.OnMessage`) - the message delivered (binary)
-
 - `java.nio.ByteBuffer` (`@WebSocket.OnMessage`) - the message delivered (binary)
-
 - `java.io.InputStream` (`@WebSocket.OnMessage`) - the message delivered (binary)
-
 - `io.helidon.http.HttpPrologue` (\`@WebSocket.OnHttpUpgrade) - the HTTP prologue (method, path, protocol version)
-
 - `io.helidon.http.Headers` (\`@WebSocket.OnHttpUpgrade) - the request headers
-
 - `int` (`@WebSocket.OnClose`) - the close code
-
 - `java.lang.String` (`@WebSocket.OnClose`) - the close reason
-
 - `java.lang.Throwable` (`@WebSocket.OnError`) - the throwable thrown
 
 Annotations on endpoint type:
 
 - [`io.helidon.webserver.websocket.WebSocketServer.Endpoint`](/apidocs/io.helidon.webserver.websocket/io/helidon/webserver/websocket/WebSocketServer.Endpoint.html) - required annotation
-
 - [`io.helidon.webserver.websocket.WebSocketServer.Listener`](/apidocs/io.helidon.webserver.websocket/io/helidon/webserver/websocket/WebSocketServer.Listener.html) - to define the named listener this should be served on (named port/socket)
-
 - [`io.helidon.http.Http.Path`](/apidocs/io.helidon.http/io/helidon/http/Http.Path.html) - path (context) this endpoint will be available on
 
 Annotations on endpoint methods:
 
 - [`io.helidon.websocket.WebSocket.OnMessage`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnMessage.html) - receives either a binary or a text message
-
 - [`io.helidon.websocket.WebSocket.OnHttpUpgrade`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnHttpUpgrade.html) - invoked during HTTP upgrade, the method may return `Headers` to be sent during the upgrade response
-
 - [`io.helidon.websocket.WebSocket.OnOpen`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnOpen.html) - invoked when the WebSocket connection is established (after upgrade)
-
 - [`io.helidon.websocket.WebSocket.OnClose`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnClose.html) - invoked when the WebSocket connection is closed
-
 - [`io.helidon.websocket.WebSocket.OnError`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnError.html) - invoked when an error occurs when invoking other methods
 
 Annotations on method parameters:
@@ -729,41 +613,27 @@ Services available for injection:
 Supported method parameters (no annotation required):
 
 - [`io.helidon.websocket.WsSession`](/apidocs/io.helidon.websocket/io/helidon/websocket/WsSession.html)
-
 - `boolean` in a method annotated with `@WebSocket.OnMessage` - indicator of "last" message (if not present, the message will be combined before delivery)
-
 - `java.lang.String` (`@WebSocket.OnMessage`) - the message delivered (text)
-
 - `java.io.Reader` (`@WebSocket.OnMessage`) - the message delivered (text)
-
 - [`io.helidon.common.buffers.BufferData`](/apidocs/io.helidon.common.buffers/io/helidon/common/buffers/BufferData.html) (`@WebSocket.OnMessage`) - the message delivered (binary)
-
 - `java.nio.ByteBuffer` (`@WebSocket.OnMessage`) - the message delivered (binary)
-
 - `java.io.InputStream` (`@WebSocket.OnMessage`) - the message delivered (binary)
-
 - `int` (`@WebSocket.OnClose`) - the close code
-
 - `java.lang.String` (`@WebSocket.OnClose`) - the close reason
-
 - `java.lang.Throwable` (`@WebSocket.OnError`) - the throwable thrown
 
 Annotations on endpoint type:
 
 - [`io.helidon.webclient.websocket.WebSocketClient`](/apidocs/io.helidon.webclient.websocket/io/helidon/webclient/websocket/WebSocketClient.Endpoint.html) - required annotation
-
 - [`io.helidon.http.Http.Path`](/apidocs/io.helidon.http/io/helidon/http/Http.Path.html) - path (context) this endpoint will be available on
 
 Annotations on endpoint methods:
 
 - [`io.helidon.websocket.WebSocket.OnMessage`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnMessage.html) - receives either a binary or a text message
-
 - [`io.helidon.websocket.WebSocket.OnHttpUpgrade`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnHttpUpgrade.html) - invoked during HTTP upgrade, the method may return `Headers` to be sent during the upgrade response
-
 - [`io.helidon.websocket.WebSocket.OnOpen`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnOpen.html) - invoked when the WebSocket connection is established (after upgrade)
-
 - [`io.helidon.websocket.WebSocket.OnClose`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnClose.html) - invoked when the WebSocket connection is closed
-
 - [`io.helidon.websocket.WebSocket.OnError`](/apidocs/io.helidon.websocket/io/helidon/websocket/WebSocket.OnError.html) - invoked when an error occurs when invoking other methods
 
 Annotations on method parameters:
@@ -814,17 +684,11 @@ To add an explicit CORS (Cross-origin resource sharing) configuration to an endp
 Annotations on endpoint method (must be an `OPTIONS` method):
 
 - [`io.helidon.webserver.cors.Cors.Defaults`](%7Bws-cors-javadoc%7D/Cors.Defaults.md) - support all methods, all origins, do not combine with other annotations from `Cors` class
-
 - [`io.helidon.webserver.cors.Cors.AllowOrigins`](%7Bws-cors-javadoc%7D/Cors.AllowOrigins.md) - configure allowed origins, either as a exact string, or regular expression (if the value contains `\`, `*` or `{`, it is considered a regular expression)
-
 - [`io.helidon.webserver.cors.Cors.AllowMethods`](%7Bws-cors-javadoc%7D/Cors.AllowMethods.md) - set of allowed methods that the different origin script can use
-
 - [`io.helidon.webserver.cors.Cors.AllowHeaders`](%7Bws-cors-javadoc%7D/Cors.AllowHeaders.md) - set of allowed headers sent from the different origin script
-
 - [`io.helidon.webserver.cors.Cors.ExposeHeaders`](%7Bws-cors-javadoc%7D/Cors.ExposeHeaders.md) - set of headers from response exposed to the different origin script
-
 - [`io.helidon.webserver.cors.Cors.AllowCredentials`](%7Bws-cors-javadoc%7D/Cors.AllowCredentials.md) - whether to add credentials (such as Cookie) to requests from the different origin script
-
 - [`io.helidon.webserver.cors.Cors.MaxAgeSeconds`](%7Bws-cors-javadoc%7D/Cors.MaxAgeSeconds.md) - maximal number of seconds the pre-flight is considered valid
 
 Example of a CORS protected endpoint
@@ -844,11 +708,8 @@ static class CorsEndpoint {
 ```
 
 1.  Configure origins that can be overridden using config key `app.cors.allow-origins` with the provided default values (comma separated)
-
 2.  Configure headers the script can send to this host
-
 3.  Configure allowed methods for CORS requests
-
 4.  Configure max age to be 3 minutes
 
 ### Health Checks

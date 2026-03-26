@@ -7,7 +7,6 @@ Settings for a Micrometer Prometheus meter registry.
 ## Usages
 
 - [`metrics.publishers.prometheus`](../config/io_helidon_metrics_api_MetricsPublisher.md#a62230-prometheus)
-
 - [`server.features.observe.observers.metrics.publishers.prometheus`](../config/io_helidon_metrics_api_MetricsPublisher.md#a62230-prometheus)
 
 ## Configuration options

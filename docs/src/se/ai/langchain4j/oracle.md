@@ -82,5 +82,4 @@ Full list of configuration properties:
 ## Additional Information
 
 - [LangChain4j Integration](langchain4j.md)
-
 - [langChain4J Oracle Embedding Store Documentation](https://docs.langchain4j.dev/integrations/embedding-stores/oracle)

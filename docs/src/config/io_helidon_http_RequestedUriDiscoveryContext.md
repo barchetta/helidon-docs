@@ -7,15 +7,10 @@ Requested URI discovery settings for a socket.
 ## Usages
 
 - [`server.protocols.http_1_1.requested-uri-discovery`](../config/io_helidon_webserver_http1_Http1Config.md#afc226-requested-uri-discovery)
-
 - [`server.protocols.http_2.requested-uri-discovery`](../config/io_helidon_webserver_http2_Http2Config.md#a4b1c1-requested-uri-discovery)
-
 - [`server.requested-uri-discovery`](../config/io_helidon_webserver_WebServer.md#aaf9ce-requested-uri-discovery)
-
 - [`server.sockets.protocols.http_1_1.requested-uri-discovery`](../config/io_helidon_webserver_http1_Http1Config.md#afc226-requested-uri-discovery)
-
 - [`server.sockets.protocols.http_2.requested-uri-discovery`](../config/io_helidon_webserver_http2_Http2Config.md#a4b1c1-requested-uri-discovery)
-
 - [`server.sockets.requested-uri-discovery`](../config/io_helidon_webserver_ListenerConfig.md#a1c079-requested-uri-discovery)
 
 ## Configuration options

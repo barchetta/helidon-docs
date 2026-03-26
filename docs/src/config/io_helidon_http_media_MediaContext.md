@@ -7,7 +7,6 @@ Media context to obtain readers and writers of various supported content types.
 ## Usages
 
 - [`server.media-context`](../config/io_helidon_webserver_WebServer.md#a847a9-media-context)
-
 - [`server.sockets.media-context`](../config/io_helidon_webserver_ListenerConfig.md#ad860a-media-context)
 
 ## Configuration options

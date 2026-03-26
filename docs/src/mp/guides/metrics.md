@@ -55,9 +55,7 @@ mvn -U archetype:generate -DinteractiveMode=false \
 Helidon provides three built-in scopes of metrics: base, vendor, and application. Here are the metric endpoints:
 
 1.  `/metrics?scope=base` - Base metrics as specified by the MicroProfile Metrics specification
-
 2.  `/metrics?scope=vendor` - Helidon-specific metrics
-
 3.  `/metrics?scope=application` - Application-specific metrics data.
 
 Applications can add their own custom scopes as well simply by specifying a custom scope name when registering a metric.
@@ -68,7 +66,6 @@ Applications can add their own custom scopes as well simply by specifying a cust
 The built-in metrics fall into these categories:
 
 1.  JVM behavior (in the base scope), and
-
 2.  basic key performance indicators for request handling (in the vendor scope).
 
 A later section describes the [key performance indicator metrics](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics) in detail.
@@ -173,11 +170,8 @@ The `vendor` metric shown above gives an idea of the request traffic the server 
 By adding a `metrics` section to your application configuration you can control how the Helidon metrics subsystem behaves in any of several ways.
 
 - [Disable metrics subsystem entirely](#disabling-metrics-subsystem-entirely).
-
 - [Control `REST.request` metrics.](#controlling-restrequest-metrics)
-
 - Select whether to collect [extended key performance indicator metrics](#collecting-basic-and-extended-key-performance-indicator-kpi-metrics).
-
 - Control reporting of [virtual threads metrics](#configuring-virtual-threads-metrics).
 
 #### Disabling Metrics Subsystem Entirely
@@ -199,11 +193,8 @@ Any time you include the Helidon metrics module in your application, Helidon tra
 Helidon MP also includes additional, extended KPI metrics which are disabled by default:
 
 - current number of requests in-flight - a `Gauge` (`requests.inFlight`) of requests currently being processed
-
 - long-running requests - a `Counter` (`requests.longRunning`) measuring the total number of requests which take at least a given amount of time to complete; configurable, defaults to 10000 milliseconds (10 seconds)
-
 - load - a `Counter` (`requests.load`) measuring the number of requests worked on (as opposed to received)
-
 - deferred - a `Gauge` (`requests.deferred`) measuring delayed request processing (work on a request was delayed after Helidon received the request)
 
 You can enable and control these metrics using configuration:
@@ -272,9 +263,7 @@ Note that the applications you generate using the full Helidon archetype *do* en
 Each metric has associated metadata that includes:
 
 1.  name: The name of the metric.
-
 2.  units: The unit of the metric such as time (seconds, milliseconds), size (bytes, megabytes), etc.
-
 3.  a description of the metric.
 
 You can get the metadata for any scope, such as `/metrics?scope=base`, as shown below:
@@ -317,7 +306,6 @@ Helidon will automatically create and register annotated application metrics and
 There are two metrics that you can use by annotating a method:
 
 1.  `@Counted` - Register a `Counter` metric
-
 2.  `@Timed` - Register a `Timer` metric
 
 The following example will demonstrate how to use the `@Counted` annotation to track the number of times the `/cards` endpoint is called.
@@ -345,9 +333,7 @@ public class GreetingCards {
 ```
 
 - This class is annotated with `Path` which sets the path for this resource as `/cards`.
-
 - The `@RequestScoped` annotation defines that this bean is request scoped. The request scope is active only for the duration of one web service invocation, and it is destroyed at the end of that invocation.
-
 - The annotation `@Counted` will register a `Counter` metric for this method, creating it if needed. The counter is incremented each time the anyCards method is called. The `name` attribute is optional.
 
 *Build and run the application, then invoke the application endpoints below:*
@@ -401,7 +387,6 @@ public class GreetingCards {
 ```
 
 - Specify a custom name for the `Counter` metric and set `absolute=true` to remove the path prefix from the name.
-
 - Add the `@Timed` annotation to get a `Timer` metric.
 
 *Build and run the application, then invoke the application endpoints below:*
@@ -475,7 +460,6 @@ public class GreetingCards {
 ```
 
 - The `/birthday` endpoint uses a `Counter` metric, named `specialEventCard`.
-
 - The `/wedding` endpoint uses the same `Counter` metric, named `specialEventCard`.
 
 *Build and run the application, then invoke the following endpoints:*
@@ -534,9 +518,7 @@ public class GreetingCards {
 ```
 
 - This class is annotated with `@Counted`, which aggregates count data from all the method that have a `Count` annotation.
-
 - Use `absolute=true` to remove path prefix for method-level annotations.
-
 - Add a method with a `Counter` metric to get birthday cards.
 
 *Build and run the application, then invoke the following endpoints:*
@@ -609,11 +591,8 @@ public class GreetingCards {
 ```
 
 - A `Counter` metric field, `cacheHits`, is automatically injected by Helidon.
-
 - Call `updateStats()` to update the cache hits.
-
 - Call `updateStats()` to update the cache hits.
-
 - Randomly increment the `cacheHits` counter.
 
 *Build and run the application, then invoke the following endpoints:*
@@ -666,11 +645,8 @@ public class GreetingCardsAppMetrics {
 ```
 
 - This managed object must be application scoped to properly register and use the `Gauge` metric.
-
 - Declare an `AtomicLong` field to hold the start time of the application.
-
 - Initialize the application start time.
-
 - Return the application `appUpTimeSeconds` metric, which will be included in the application metrics.
 
 *Update the `GreetingCards` class with the following code to simplify the metrics output:*
@@ -768,9 +744,7 @@ spec:
 ```
 
 - A service of type `NodePort` that serves the default routes on port `8080`.
-
 - An annotation that will allow Prometheus to discover and scrape the application pod.
-
 - A deployment with one replica of a pod.
 
 *Create and deploy the application into Kubernetes:*
@@ -848,15 +822,11 @@ kubectl delete -f ./metrics.yaml
 This guide demonstrated how to use metrics in a Helidon MP application using various combinations of metrics and scopes.
 
 - Access metrics for all three scopes: base, vendor, and application
-
 - Configure application metrics at the class, method, and field-level
-
 - Integrate Helidon metrics with Kubernetes and Prometheus
 
 Refer to the following references for additional information:
 
 - [MicroProfile Metrics specification](https://download.eclipse.org/microprofile/microprofile-metrics-5.1.1/microprofile-metrics-spec-5.1.1.html)
-
 - [MicroProfile Metrics Javadoc](https://download.eclipse.org/microprofile/microprofile-metrics-5.1.1/apidocs)
-
 - Helidon Javadoc at /apidocs/index.html?overview-summary.html

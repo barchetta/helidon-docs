@@ -87,9 +87,7 @@ The complete list of properties supported by the Helidon connector is listed bel
 One clear advantage of using the Helidon connector, as opposed to the default one provided by Jersey, is the ability to issue HTTP/2 requests. There are three ways to enable HTTP/2:
 
 1.  Via content negotiation from HTTP/1.1, where the initial request is HTTP/1.1 (text) and the first response is HTTP/2 (binary), assuming the negotiation is successful.
-
 2.  Similar to (1) except that a TLS extension called ALPN is used to convey the upgrade negotiation. Naturally, this only works with secure connections, so TLS is a requirement here.
-
 3.  Using prior knowledge, where the client simply sends an HTTP/2 request knowing *a priori* that the server is capable of handling it. This option always requires TLS.
 
 ## Examples
@@ -173,5 +171,4 @@ For additional information, see the [Jakarta REST Javadocs](https://jakarta.ee/s
 ## Reference
 
 - [Jakarta REST Client Specification](https://jakarta.ee/specifications/restful-ws/3.1/jakarta-restful-ws-spec-3.1.html#client_api)
-
 - [Jersey User Guide](https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest31x/index.html)

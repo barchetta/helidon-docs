@@ -72,9 +72,7 @@ The following is a list of maven coordinates of all Vault modules available:
 Vault integration supports the following:
 
 - **Secret Engines**: Key/Value version 2, Key/Value version 1, Cubbyhole, PKI, Transit, Database
-
 - **Authentication Methods**: Token, Kubernetes (k8s), AppRole
-
 - **Other Sys Operations and Configurations**
 
 Each of these features is implemented as a separate module, with the Vault class binding them together. In Helidon MP, with injection, this binding is done automatically, and you can simply inject your favorite secret engine.
@@ -82,23 +80,14 @@ Each of these features is implemented as a separate module, with the Vault class
 The following classes can be injected into any CDI bean (if appropriate module is on the classpath):
 
 - Kv2Secrets - Key/Value Version 2 Secrets (versioned secrets, default)
-
 - Kv1Secrets - Key/Value Version 1 Secrets (un-versioned secrets, legacy)
-
 - CubbyholeSecrets - Cubbyhole secrets (token bound secrets)
-
 - DbSecrets - Database secrets (for generating temporary DB credentials)
-
 - PkiSecrets - PKI secrets (for generating keys and X.509 certificates)
-
 - TransitSecrets - Transit operations (encryption, signatures, HMAC)
-
 - AppRoleAuth - AppRole authentication method (management operations)
-
 - K8sAuth - Kubernetes authentication method (management operations)
-
 - TokenAuth - Token authentication method (management operations)
-
 - Sys - System operations (management of Vault - enabling/disabling secret engines and authentication methods)
 
 In addition to these features, Vault itself can be authenticated as follows:
@@ -223,9 +212,7 @@ public class CubbyholeResource {
 ```
 
 - Create a secret from request entity, the name of the value is `secret`.
-
 - Delete the secret on a specified path.
-
 - Get the secret on a specified path.
 
 ### KV1 secrets
@@ -309,13 +296,9 @@ public class Kv1Resource {
 ```
 
 - Enable the secrets engine on the default path.
-
 - Disable the secrets engine on the default path.
-
 - Create a secret from request entity, the name of the value is `secret`.
-
 - Delete the secret on a specified path.
-
 - Get the secret on a specified path.
 
 ### KV2 secrets
@@ -379,9 +362,7 @@ public class Kv2Resource {
 ```
 
 - Create a secret from request entity, the name of the value is `secret`.
-
 - Delete the secret on a specified path.
-
 - Get the secret on a specified path.
 
 ### Transit secrets
@@ -526,23 +507,14 @@ public class TransitResource {
 ```
 
 - Enable the secrets engine on the default path.
-
 - Disable the secrets engine on the default path.
-
 - Create the encrypting and signature keys.
-
 - Delete the encryption and signature keys.
-
 - Encrypt a secret.
-
 - Decrypt a secret.
-
 - Create an HMAC for text.
-
 - Create a signature for text.
-
 - Verify HMAC.
-
 - Verify signature.
 
 ## Local Testing

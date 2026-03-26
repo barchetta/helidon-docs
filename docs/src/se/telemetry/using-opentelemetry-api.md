@@ -136,9 +136,7 @@ The following short list of system property settings is enough to get your servi
 Your service needs to do these basic steps:
 
 1.  Create the `OpenTelemetry` object using autoconfigure.
-
 2.  Create a meter and a tracer.
-
 3.  Register and update metrics and create tracing spans.
 
 Now for a bit of confusing terminology. In OpenTelemetry, a *meter* acts as a factory for creating metrics (counters, histograms, etc.). Similarly, a *tracer* serves the same purpose but for creating spans. The confusion for some is that, in Micrometer and some other metrics systems, the term *meter* is a general term that *encompasses* counters, timers, etc. rather than a factory which *creates* them.

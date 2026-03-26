@@ -56,7 +56,6 @@ class MyTest {
 By default, CDI discovery is enabled:
 
 - CDI beans and extensions in the classpath are added automatically
-
 - If disabled, the CDI beans and extensions must be added manually
 
 > [!NOTE]
@@ -82,7 +81,6 @@ class MyTest {
 ```
 
 - Disable CDI discovery
-
 - Add a bean class
 
 When disabling discovery, it can be difficult to identify the CDI extensions needed to activate the desired features.
@@ -101,7 +99,6 @@ class MyTest {
 ```
 
 - Add JAX-RS (Jersey) support
-
 - Add a resource class to the CDI container
 
 Note the following Helidon CDI extensions:
@@ -119,7 +116,6 @@ By default, one CDI container is created per test class and is shared by all tes
 However, test methods can also require a dedicated CDI container:
 
 - By forcing a reset of the CDI container between methods
-
 - By customizing the CDI container per test method
 
 *Reset the CDI container between methods*
@@ -139,7 +135,6 @@ class MyTest {
 ```
 
 - `testOne` executes in a dedicated CDI container
-
 - `testTwo` also executes in a dedicated CDI container
 
 *Customize the CDI container per method*
@@ -161,7 +156,6 @@ class MyTest {
 ```
 
 - `testOne` executes in the shared CDI container
-
 - `testTwo` executes in a dedicated CDI container
 
 ### Configuration
@@ -169,7 +163,6 @@ class MyTest {
 The test configuration can be set up in two exclusive ways:
 
 - Using the "synthetic" configuration expressed with annotations (default)
-
 - Using the "existing" configuration of the current environment
 
 Use [`@Configuration`](/apidocs/io.helidon.microprofile.testing/io/helidon/microprofile/testing/Configuration.html) to switch to the "existing" configuration.
@@ -453,13 +446,9 @@ class MyBean {
 ```
 
 - CDI discovery is disabled
-
 - Add `MyBean` to the CDI container
-
 - Add [`ConfigCdiExtension`](/apidocs/io.helidon.microprofile.config/io/helidon/microprofile/config/ConfigCdiExtension.html) to the CDI container
-
 - Define test configuration
-
 - Inject the configuration
 
 ### Request Scope Example
@@ -497,9 +486,7 @@ class MyResource {
 ```
 
 - CDI discovery is disabled
-
 - Add JAXRS (Jersey) support
-
 - Add `MyResource` to the CDI container
 
 ## Mock Support
@@ -570,7 +557,6 @@ class MyService {
 ```
 
 - Instrument `MyService` using `Answers.CALLS_REAL_METHODS`
-
 - Customize the behavior
 
 ### Using CDI Alternative
@@ -630,11 +616,8 @@ class MyService {
 ```
 
 - Create the mock instance in the test class
-
 - Create a CDI producer method annotated with `@Alternative`
-
 - Set priority to 1 (required by `@Alternative`)
-
 - Customize the behavior
 
 ## Virtual Threads

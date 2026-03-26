@@ -36,9 +36,7 @@ export JAVA_HOME=/usr/lib/jvm/jdk-21
 ```
 
 - [WebClient features](#webclient-features)
-
 - [WebClient usage](#webclient-usage)
-
 - [WebClient Metrics](#webclient-metrics)
 
 ### WebClient Features
@@ -48,9 +46,7 @@ Helidon’s WebClient is used to perform HTTP REST requests to target endpoints 
 WebClient provides the following features:
 
 - **User-friendly**: Every client and request is created by a builder pattern, so it improves readability and code maintenance.
-
 - **Following redirects**: The WebClient is able to follow the redirect chain and perform requests on the correct endpoint for you. You no longer have to point your client to the correct/final endpoint.
-
 - **Tracing, metrics and security propagation**: When you configure the Helidon WebServer to use tracing, metrics and security, the settings are automatically propagated to the WebClient and used during request/response.
 
 For more information about the `WebClient`, please refer to the [WebClient Introduction](../webclient.md).
@@ -134,11 +130,8 @@ System.out.println(entityString);
 ```
 
 - Create an HTTP GET request.
-
 - Target endpoint path.
-
 - Execute the request
-
 - Return response entity handled as a String.
 
 The path method appends `/greet` to the WebClient base URI which results to the request URI becoming `http://localhost:8080/greet`. The received response entity will be a greeting message and will be automatically handled as a String. If no specific type is set in the method request(), `HttpClientResponse` will be returned by default. This `HttpClientResponse` object contains response code, headers and entity.
@@ -199,7 +192,6 @@ System.out.println(value);
 ```
 
 - Request a JsonObject as return value.
-
 - Extract the value of the JsonObject with name of `message`.
 
 In the URI, the String value following `greet` is a path parameter which allows the application to greet someone.
@@ -229,13 +221,9 @@ System.out.println(entityString);
 ```
 
 - Create a JsonObject with key `greeting` and value `bonjour`.
-
 - Create a PUT request.
-
 - Submit the JsonObject created earlier.
-
 - Execute a GET call to verify that the greeting has been changed.
-
 - Retrieve the greeting message from the JSON object
 
 Executing the above code will yield this output showing that the greeting word has been changed.
@@ -287,19 +275,14 @@ WebClientService clientServiceMetric = WebClientMetrics.counter()
 ```
 
 - Specify the metric name.
-
 - From the `MeterRegistry`, create a Counter metric using the specified metric name.
-
 - Specify how the name of the metric will be generated using the `nameFormat`.
-
 - Build a WebClient Metric Service that can count number of GET requests made.
 
 In this example, the metric uses a `Counter` to measure the number of `GET` requests executed on the `localhost`. The format strings in the parameter value of `nameFormat` method will identify how the name of a metric will get generated:
 
 - `%1$s` = Request method
-
 - `%2$s` = Request host
-
 - `%3$s` = Response status
 
 So for example, if the `nameFormat` value is `metric.%1$s.%2$s.%3$s` and a request uses a GET method, targeting a URL with localhost as the hostname, and got a response code of 200, that the final metric will get created with a name of metric.GET.localhost.200.
@@ -318,7 +301,6 @@ webClient.get().path("/greet").request();
 ```
 
 - Register the metric service to the webclient.
-
 - Send an HTTP GET request
 
 To verify that the metric is set up correctly, print the value of the Counter at the end of the main method.
@@ -376,15 +358,10 @@ System.out.println(counterName + ": " + counter.count());
 ```
 
 - Choose the metric name.
-
 - Create counter metric from `MeterRegistry`.
-
 - Create a Helidon Config instance from default config file `application.yaml`.
-
 - Configure the WebClient using the `client` section from `application.yaml`.
-
 - Send an HTTP GET request
-
 - Print out the metric result
 
 As demonstrated, using the configuration file reduces the amount of code needed in the source code. For more information about metrics, see the [Helidon Metrics Guide](metrics.md).

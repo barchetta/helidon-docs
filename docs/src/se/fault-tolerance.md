@@ -109,9 +109,7 @@ T result = breaker.invoke(this::mayFail);
 The circuit breaker in this example defines a processing window of size 10, an error ratio of 30%, a duration to transition to half-open state of 200 milliseconds, and a success threshold to transition from half-open to closed state of 2 observations. It follows that,
 
 - After completing the processing window, if at least 3 errors are detected, the circuit breaker will transition to the open state, thus blocking the execution of any subsequent calls.
-
 - After 200 millis, the circuit breaker will transition back to half-open and allow calls to proceed again.
-
 - If the next two calls after transitioning to half-open are successful, the circuit breaker will transition to closed state; otherwise, it will transition back to open state, waiting for another 200 milliseconds before attempting to transition to half-open again.
 
 A circuit breaker will throw a `io.helidon.faulttolerance.CircuitBreakerOpenException` if an attempt to make an invocation takes place while it is in open state.

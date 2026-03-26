@@ -7,11 +7,8 @@ Open ID Connect tenant configuration.
 ## Usages
 
 - [`security.providers.idcs-role-mapper.oidc-config.tenants`](../config/io_helidon_security_providers_oidc_common_OidcConfig.md#aa908e-tenants)
-
 - [`security.providers.oidc.tenants`](../config/io_helidon_security_providers_oidc_OidcProvider.md#aef163-tenants)
-
 - [`server.features.security.security.providers.idcs-role-mapper.oidc-config.tenants`](../config/io_helidon_security_providers_oidc_common_OidcConfig.md#aa908e-tenants)
-
 - [`server.features.security.security.providers.oidc.tenants`](../config/io_helidon_security_providers_oidc_OidcProvider.md#aef163-tenants)
 
 ## Configuration options

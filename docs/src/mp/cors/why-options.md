@@ -24,7 +24,6 @@ annotations map directly to those CORS sharing attributes. It would be natural, 
 Unfortunately, there is no single Java element that is sure to correspond one-to-one with a JAX-RS resource, for two reasons.
 
 1.  JAX-RS allows a resource class to define one or more subresources, denoted by the `@Path` annotation on methods. So a resource class does not necessarily represent only a single resource.
-
 2.  A JAX-RS resource class can contain multiple endpoints for the same resource. A common example is two methods, annotated with `@GET` and `@PUT` respectively, that have the same path.
 
 Although no single endpoint method by itself fully represents the resource, at least each endpoint method maps to exactly one resource. So we could annotate any one of those endpoint methods with `@Cors.*` and unambiguously link the CORS behavior that the annotation defines to the resource.

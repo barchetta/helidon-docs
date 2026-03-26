@@ -7,7 +7,6 @@ JWT authentication provider.
 ## Usages
 
 - [`security.providers.jwt`](../config/io_helidon_security_spi_SecurityProvider.md#ad2fae-jwt)
-
 - [`server.features.security.security.providers.jwt`](../config/io_helidon_security_spi_SecurityProvider.md#ad2fae-jwt)
 
 ## Configuration options

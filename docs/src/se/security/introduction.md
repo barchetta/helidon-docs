@@ -13,13 +13,10 @@ Helidon Security provides authentication, authorization, and auditing for your H
 1.  Authentication - support for authenticating incoming requests, creating a security Subject with Principal and Grants. Principal represents current user/service. Grant may represent a Role, Scope etc. Responsibility to create Principals and Grants lies with AuthenticationProvider SPI. The following Principals are expected and supported by default:
 
     1.  UserPrincipal - the party is an end-user (e.g. a person) - there can be zero to one user principals in a subject
-
     2.  ServicePrincipal - the party is a service (e.g. a computer program) - there can be zero to one service principals in a subject
 
 2.  Authorization - support for authorizing incoming requests. Out-of-the-box the security module supports ABAC and RBAC (Attribute based access control and Role based access control). RBAC is handled through RolesAllowed annotation (for integrations that support injection).
-
 3.  Outbound security - support for propagating identity or (in general) securing outbound requests. Modification of a request to include outbound security is responsibility of OutboundSecurityProvider SPI
-
 4.  Audit - security module audits most important events through its own API (e.g. Authentication events, Authorization events, outbound security events). A default AuditProvider is provided as well, logging to Java util logging (JUL) logger called "AUDIT" (may be overridden through configuration). AuditProvider SPI may be implemented to support other auditing options.
 
 Each feature is implemented with the help of "[Security Providers](providers.md)".
@@ -42,9 +39,7 @@ To enable Security, add the following dependency to your project’s `pom.xml` (
 To integrate with a container, or to use Security standalone, we must create an instance of security. In general, Security supports three approaches
 
 - a fluent-API builder pattern - you configure everything "by hand"
-
 - a configuration based pattern - you configure everything in a configuration file
-
 - hybrid - you load a builder from configuration and update it in a program
 
 Once a security instance is built, it can be used to initialize an [integration with a container](containers-integration.md), or to use security from a program directly:
@@ -71,7 +66,6 @@ if (response.status().isSuccess()) {
 ```
 
 - Create a security context
-
 - Use the context to authenticate a request
 
 ### Builder Pattern
@@ -149,5 +143,4 @@ Security security2 = Security.builder()
 ```
 
 - Uses io.helidon.Config
-
 - Or reverse order

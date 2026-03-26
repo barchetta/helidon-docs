@@ -94,7 +94,6 @@ helidon.oci:
 ```
 
 - `auto`(default value): cycles through the list of authentication types from `helidon.oci.allowed-authentication-methods` and chooses the first one capable of providing data. In case the `helidon.oci.allowed-authentication-methods` list is empty, Helidon tries all available strategies, ordered by decreasing Weight.
-
 - If the configured method is not available, an exception is thrown for OCI related services.
 
 If your environment is already set up to work with the OCI SDK or the OCI CLI, then it is likely you do not need to perform any additional configuration for this integration. When the provider is added as a dependency, it will self-configure.
@@ -142,7 +141,6 @@ ObjectStorage objectStorageClient = ObjectStorageClient.builder().build(authProv
 Once you have created an ObjectStorage client you can use it as described in:
 
 - [OCI SDK Object Storage Javadocs](https://docs.oracle.com/en-us/iaas/tools/java/latest/com/oracle/bmc/objectstorage/package-summary.html)
-
 - [OCI Object Storage Overview](https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm)
 
 ## Region Information
@@ -155,9 +153,7 @@ Services can have a dependency on `com.oracle.bmc.Region`, and your service can 
 Region is discovered by using following out-of-the-box order region provider:
 
 - Config based: Based on the value of `helidon.oci.region`. Weight: default - 10
-
 - Authentication provider based: Based on an available OCI authentication method, if it yields an authentication details provider that implements a region provider. Weight: default - 20
-
 - OCI SDK based: Uses `com.oracle.bmc.Region.registerFromInstanceMetadataService()` to find region. Weight: default - 100
 
 ## Instance Metadata Service Instance Information
@@ -167,21 +163,13 @@ Services may need some information about its running environment. The Instance M
 The following information is made available from IMDS in `io.helidon.integrations.oci.ImdsInstanceInfo`:
 
 - displayName - Display Name of the Instance.
-
 - hostName - Host Name of the Instance.
-
 - canonicalRegionName - Canonical Region Name of where the Instance exists.
-
 - region - Short Region Name of where the Instance exists.
-
 - ociAdName - Physical Availaibility Domain Name where the Instance exists.
-
 - faultDomain - Fault Domain Name where the Instance exists.
-
 - tenantId - Tenant Id where the Instance was provisioned.
-
 - compartmentId - Compartment Id where the Instance was provisioned.
-
 - jsonObject - A JsonObject containing full information about the Instance from IMDS.
 
 ## Configuration
@@ -229,5 +217,4 @@ helidon.oci:
 ## References
 
 - [OCI SDK Usage Examples](https://github.com/helidon-io/helidon-examples/tree/helidon-4.x/examples/integrations/oci)
-
 - [OCI Documentation](https://docs.oracle.com/en-us/iaas/Content/home.htm)

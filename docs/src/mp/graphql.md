@@ -30,9 +30,7 @@ To enable MicroProfile GraphQL, add the following dependency to your project’s
 The MicroProfile GraphQL specification defines a number of key annotations to be used when writing a GraphQL endpoint:
 
 - `@GraphQLApi` - identifies a CDI Bean as a GraphQL endpoint
-
 - `@Query` - identifies a method as returning one or more entities
-
 - `@Mutation` - identifies a method which creates, deletes or updates entities
 
 For example, the following defines a GraphQL endpoint with a number of queries and mutations that work against a fictional `CustomerService` service and `Customer` class.
@@ -81,11 +79,8 @@ public class customer {
 ```
 
 - a query with no-arguments that will return all `Customer` s
-
 - a query that takes an argument to return a specific `Customer`
-
 - a query that optionally takes a name and returns a collection of `Customer` s
-
 - a mutation that creates a Customer and returns the newly created `Customer`
 
 The example above would generate a GraphQL schema as shown below:

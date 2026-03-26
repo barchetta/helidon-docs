@@ -7,9 +7,7 @@ You can also use [minikube](https://minikube.sigs.k8s.io/docs/) for local develo
 For instructions on how to install and configure Docker Desktop for your platform, see the following Docker documentation:
 
 - [Docker Desktop on Linux](https://docs.docker.com/desktop/setup/install/linux/)
-
 - [Docker Desktop on macOS](https://docs.docker.com/desktop/setup/install/mac-install/)
-
 - [Docker Desktop on Windows](https://docs.docker.com/desktop/setup/install/windows-install/).
 
 After you install Docker Desktop, see [Explore the Kubernetes view](https://docs.docker.com/desktop/use-desktop/kubernetes/) in the Docker documentation for guidance on enabling and using Kubernetes in Docker Desktop.
