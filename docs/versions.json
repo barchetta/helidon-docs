@@ -1,0 +1,29 @@
+[
+  {
+    "name": "core",
+    "repository": "https://github.com/barchetta/helidon.git",
+    "releases": [
+      {
+        "name": "4.4.1",
+        "ref": "4.x-docs-markdown",
+        "dir": "docs"
+      }
+    ]
+  },
+  {
+    "name": "mcp",
+    "repository": "https://github.com/helidon-io/helidon-mcp.git",
+    "releases": [
+      {
+        "name": "1.1.0",
+        "ref": "refs/tags/1.1.0",
+        "dir": "docs"
+      },
+      {
+        "name": "1.0.3",
+        "ref": "refs/tags/1.0.3",
+        "dir": "docs"
+      }
+    ]
+  }
+]
