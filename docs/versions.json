@@ -1,6 +1,7 @@
 [
   {
     "name": "core",
+    "description": "Helidon Core",
     "repository": "https://github.com/barchetta/helidon.git",
     "releases": [
       {
@@ -12,6 +13,7 @@
   },
   {
     "name": "mcp",
+    "description": "Helidon MCP",
     "repository": "https://github.com/helidon-io/helidon-mcp.git",
     "releases": [
       {
