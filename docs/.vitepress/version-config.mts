@@ -14,12 +14,19 @@ type ComponentEntry = {
 }
 
 type ResolvedDocsVersion = {
+  // Component name from docs/versions.json, for example "core".
   component: string
+  // Release name from docs/versions.json, for example "4.4.1".
   version: string
+  // Stable combined identifier in "component/version" form.
   id: string
+  // VitePress srcDir relative to the docs project root.
   srcDir: string
+  // Absolute filesystem path to the selected documentation source tree.
   srcDirAbsolute: string
+  // Public base path for the generated site.
   base: string
+  // VitePress output directory relative to the docs project root.
   outDir: string
 }
 
