@@ -54,6 +54,10 @@ function validateComponent(component, index) {
     throw new Error(`Component at index ${index} is missing a non-empty "name".`)
   }
 
+  if (!isNonEmptyString(component.description)) {
+    throw new Error(`Component "${component.name}" is missing a non-empty "description".`)
+  }
+
   if (!isNonEmptyString(component.repository)) {
     throw new Error(`Component "${component.name}" is missing a non-empty "repository".`)
   }

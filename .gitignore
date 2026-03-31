@@ -1,4 +1,5 @@
 docs/src/
+!docs/src/platform
 
 # Compiled class file
 *.class
