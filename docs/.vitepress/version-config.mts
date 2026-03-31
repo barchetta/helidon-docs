@@ -9,6 +9,7 @@ type ReleaseEntry = {
 
 type ComponentEntry = {
   name: string
+  description: string
   repository: string
   releases: ReleaseEntry[]
 }
@@ -16,6 +17,8 @@ type ComponentEntry = {
 type ResolvedDocsVersion = {
   // Component name from docs/versions.json, for example "core".
   component: string
+  // Human-readable component description from docs/versions.json, for example "Helidon Core".
+  componentDescription: string
   // Release name from docs/versions.json, for example "4.4.1".
   version: string
   // Stable combined identifier in "component/version" form.
@@ -45,6 +48,7 @@ export function resolveSelectedDocsVersion(requestedId = process.env.DOCS_VERSIO
 
   return {
     component,
+    componentDescription: selectedRelease.component.description,
     version,
     id: `${component}/${version}`,
     srcDir: toPosixPath(path.join('src', component, version)),
