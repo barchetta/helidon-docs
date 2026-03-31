@@ -5,8 +5,10 @@
   },
   "scripts": {
     "docs:import-versions": "node scripts/import-versions.mjs",
+    "docs:build": "node scripts/docs-build.mjs build-all",
+    "docs:build:all": "node scripts/docs-build.mjs build-all",
+    "docs:build:version": "node scripts/docs-build.mjs build",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   }
 }

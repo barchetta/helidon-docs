@@ -1,7 +1,8 @@
 import { existsSync, readdirSync } from 'node:fs'
 import path from 'node:path'
+import { selectedDocsVersion } from './version-config.mts'
 
-export const DOCS_SRC_DIR = path.resolve(process.cwd(), 'docs/src')
+export const DOCS_SRC_DIR = selectedDocsVersion.srcDirAbsolute
 
 export function generateReadmeRewrites(): Record<string, string> {
   const rewrites: Record<string, string> = {}

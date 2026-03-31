@@ -1,10 +1,13 @@
 import { defineConfig } from 'vitepress'
 import { generateReadmeRewrites } from './routes.mts'
 import { generateReadmeSidebar } from './sidebar.mts'
+import { selectedDocsVersion } from './version-config.mts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  srcDir: "src",
+  srcDir: selectedDocsVersion.srcDir,
+  outDir: selectedDocsVersion.outDir,
+  base: selectedDocsVersion.base,
   ignoreDeadLinks: true,
   rewrites: generateReadmeRewrites(),
   head: [
@@ -12,7 +15,7 @@ export default defineConfig({
   ],
   
   title: "Helidon",
-  description: "A VitePress Site",
+  description: `Documentation for ${selectedDocsVersion.id}`,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
@@ -26,7 +29,7 @@ export default defineConfig({
 
     logo: {
       src: '/images/frank-mark.svg',
-      alt: 'Helidon'
+      alt: 'frank'
     },
 
     socialLinks: [
