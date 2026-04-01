@@ -19,6 +19,22 @@ export function generateReadmeRewrites(): Record<string, string> {
   return rewrites
 }
 
+export function rewriteReadmeMarkdownLink(link: string): string {
+  if (!link || isExternalLink(link) || link.startsWith('#')) {
+    return link
+  }
+
+  const match = link.match(/^([^?#]*)(\?[^#]*)?(#.*)?$/)
+  if (!match) {
+    return link
+  }
+
+  const [, pathname, search = '', hash = ''] = match
+  const rewrittenPathname = pathname.replace(/(^|\/)README\.md$/i, '$1index.md')
+
+  return `${rewrittenPathname}${search}${hash}`
+}
+
 export function toVitePressLink(filePath: string): string {
   const relativePath = toRelativePath(filePath)
 
@@ -70,4 +86,8 @@ function isReadmePath(filePath: string): boolean {
 
 function toRelativePath(filePath: string): string {
   return path.relative(DOCS_SRC_DIR, filePath).split(path.sep).join('/')
+}
+
+function isExternalLink(link: string): boolean {
+  return /^[a-z]+:/i.test(link) || link.startsWith('//')
 }

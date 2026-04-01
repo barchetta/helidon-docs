@@ -1,7 +1,33 @@
 import { defineConfig } from 'vitepress'
-import { generateReadmeRewrites } from './routes.mts'
+import { generateReadmeRewrites, rewriteReadmeMarkdownLink } from './routes.mts'
 import { generateReadmeSidebar } from './sidebar.mts'
-import { selectedDocsVersion } from './version-config.mts'
+import { configuredPlatforms, configuredVersions, selectedDocsVersion } from './version-config.mts'
+
+const nav = [
+  { text: 'Home', link: '/' },
+]
+
+const versionSwitcher = selectedDocsVersion.kind === 'component'
+  ? {
+      kind: 'component',
+      label: `${selectedDocsVersion.description} ${selectedDocsVersion.version}`,
+      currentLink: `/${selectedDocsVersion.name}/${selectedDocsVersion.version}/`,
+      items: configuredVersions
+        .filter((component) => component.name === selectedDocsVersion.name)
+        .map((component) => ({
+          text: component.description,
+          items: component.releases.map((release) => ({
+            text: release.name,
+            link: `/${component.name}/${release.name}/`,
+          })),
+        })),
+    }
+  : {
+      kind: 'platform',
+      label: `${selectedDocsVersion.description} ${selectedDocsVersion.version}`,
+      currentLink: `/${selectedDocsVersion.version}/`,
+      items: groupPlatformsByDescription(),
+    }
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -10,22 +36,37 @@ export default defineConfig({
   base: selectedDocsVersion.base,
   ignoreDeadLinks: true,
   rewrites: generateReadmeRewrites(),
+  markdown: {
+    config(md) {
+      md.core.ruler.push('rewrite-readme-links', (state) => {
+        for (const token of state.tokens) {
+          if (token.type !== 'inline' || !token.children) {
+            continue
+          }
+
+          for (const child of token.children) {
+            if (child.type === 'link_open') {
+              child.attrSet('href', rewriteReadmeMarkdownLink(child.attrGet('href') ?? ''))
+            }
+          }
+        }
+      })
+    },
+  },
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/images/frank-mark.svg' }]
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${selectedDocsVersion.base}images/frank-mark.svg` }]
   ],
   
-  title: "Helidon",
+  title: selectedDocsVersion.description,
   description: `Documentation for ${selectedDocsVersion.id}`,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
       provider: 'local'
     },
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'About', link: '/about/README.md' }
-    ],
+    nav,
     sidebar: generateReadmeSidebar(),
+    versionSwitcher,
 
     logo: {
       src: '/images/frank-mark.svg',
@@ -37,3 +78,18 @@ export default defineConfig({
     ]
   }
 })
+
+function groupPlatformsByDescription() {
+  const groupedPlatforms = new Map()
+
+  for (const platform of configuredPlatforms) {
+    const items = groupedPlatforms.get(platform.description) ?? []
+    items.push({
+      text: platform.name,
+      link: `/${platform.name}/`,
+    })
+    groupedPlatforms.set(platform.description, items)
+  }
+
+  return [...groupedPlatforms.entries()].map(([text, items]) => ({ text, items }))
+}

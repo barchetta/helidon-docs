@@ -4,6 +4,7 @@
     "vitepress-sidebar": "^1.33.1"
   },
   "scripts": {
+    "docs:generate-platforms": "node scripts/generate-platform-pages.mjs",
     "docs:import-versions": "node scripts/import-versions.mjs",
     "docs:build": "node scripts/docs-build.mjs build-all",
     "docs:build:all": "node scripts/docs-build.mjs build-all",
