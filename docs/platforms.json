@@ -1,0 +1,31 @@
+[
+  {
+    "name": "4.4.0",
+    "description": "Helidon",
+    "components": [
+      {
+        "name": "core",
+        "release": "4.4.0"
+      },
+      {
+        "name": "mcp",
+        "release": "1.0.3"
+      }
+    ]
+  },
+  {
+    "name": "4.4.1",
+    "description": "Helidon",
+    "latest": "true",
+    "components": [
+      {
+        "name": "core",
+        "release": "4.4.1"
+      },
+      {
+        "name": "mcp",
+        "release": "1.1.0"
+      }
+    ]
+  }
+]
