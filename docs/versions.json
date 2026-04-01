@@ -8,6 +8,11 @@
         "name": "4.4.1",
         "ref": "4.x-docs-markdown",
         "dir": "docs"
+      },
+      {
+        "name": "4.4.0",
+        "ref": "hackathon-md-port",
+        "dir": "docs/src/main/markdown"
       }
     ]
   },
