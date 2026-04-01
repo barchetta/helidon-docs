@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import type { DefaultTheme } from 'vitepress'
 import { DOCS_SRC_DIR, toVitePressLink } from './routes.mts'
@@ -11,6 +11,10 @@ type ReadmeRow = {
 }
 
 export function generateReadmeSidebar(): DefaultTheme.SidebarItem[] {
+  if (!existsSync(ROOT_README)) {
+    return []
+  }
+
   return readSidebarItems(ROOT_README)
 }
 
