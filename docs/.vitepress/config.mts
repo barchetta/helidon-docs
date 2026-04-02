@@ -4,7 +4,13 @@ import { generateReadmeSidebar } from './sidebar.mts'
 import { configuredPlatforms, configuredVersions, selectedDocsVersion } from './version-config.mts'
 
 const nav = [
-  { text: 'Home', link: '/' },
+  {
+    component: 'FullPageNavBarMenuLink',
+    props: {
+      text: 'Home',
+      link: '/latest/',
+    },
+  },
 ]
 
 const versionSwitcher = selectedDocsVersion.kind === 'component'
@@ -61,9 +67,11 @@ export default defineConfig({
   description: `Documentation for ${selectedDocsVersion.id}`,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    search: {
-      provider: 'local'
-    },
+    search: selectedDocsVersion.kind === 'component'
+      ? {
+          provider: 'local'
+        }
+      : false,
     nav,
     sidebar: generateReadmeSidebar(),
     versionSwitcher,

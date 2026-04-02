@@ -24,55 +24,21 @@ type RecentPlatform = {
   link: string
 }
 
-const RECENT_PLATFORM_KEY = 'helidon-docs-recent-platform'
-
 const { theme } = useData()
 
 const switcher = computed(() => theme.value.versionSwitcher as VersionSwitcherConfig | undefined)
 const selectedLink = ref('')
-const recentPlatform = ref<RecentPlatform | null>(null)
 
 watch(
   switcher,
   (value) => {
     selectedLink.value = value?.currentLink ?? ''
-
-    if (!value || typeof window === 'undefined') {
-      recentPlatform.value = null
-      return
-    }
-
-    if (value.kind === 'platform') {
-      const platform = {
-        text: value.label,
-        link: value.currentLink,
-      }
-
-      window.localStorage.setItem(RECENT_PLATFORM_KEY, JSON.stringify(platform))
-      recentPlatform.value = platform
-      return
-    }
-
-    recentPlatform.value = loadRecentPlatform()
   },
   { immediate: true }
 )
 
-const platformJumpItems = computed(() => {
-  if (switcher.value?.kind !== 'component' || !recentPlatform.value) {
-    return []
-  }
-
-  return [
-    {
-      text: 'Documentation Home',
-      items: [recentPlatform.value],
-    },
-  ]
-})
-
 const visibleGroups = computed(() => {
-  return [...(switcher.value?.items ?? []), ...platformJumpItems.value]
+  return switcher.value?.items ?? []
 })
 
 function navigate(event: Event) {
@@ -85,24 +51,6 @@ function navigate(event: Event) {
 
   selectedLink.value = destination
   window.location.assign(destination)
-}
-
-function loadRecentPlatform(): RecentPlatform | null {
-  const raw = window.localStorage.getItem(RECENT_PLATFORM_KEY)
-  if (!raw) {
-    return null
-  }
-
-  try {
-    const parsed = JSON.parse(raw) as RecentPlatform
-    if (typeof parsed.text === 'string' && typeof parsed.link === 'string') {
-      return parsed
-    }
-  } catch {
-    window.localStorage.removeItem(RECENT_PLATFORM_KEY)
-  }
-
-  return null
 }
 </script>
 

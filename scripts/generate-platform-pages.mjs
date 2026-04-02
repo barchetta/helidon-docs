@@ -38,9 +38,7 @@ function renderPlatformReadme(platformEntry, componentDescriptions) {
   })
 
   const lines = [
-    `<PlatformTitle title="${escapeHtmlAttribute(`${platformEntry.description} ${platformEntry.name}`)}" />`,
-    '',
-    '## Documentation',
+    `<PlatformTitle title="${escapeHtmlAttribute(`${platformEntry.description} ${platformEntry.name}`)} Documentation" />`,
     '',
     `<PlatformTiles :items='${JSON.stringify(items)}' />`,
   ]
