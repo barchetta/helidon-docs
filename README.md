@@ -1,19 +1,25 @@
 
 # Helidon Documentation Project
 
-This project contains a [VitePress](https://vitepress.dev/) project for Helidon Documentation.
+This repo contains a [VitePress](https://vitepress.dev/) project for Helidon Documentation.
 
 ## To build docs
 
 1. Install VitePress: `npm add -D vitepress@next`
    * See [VitePress Getting Started](https://vitepress.dev/guide/getting-started)
-2. Build the site: `npm run docs:build`
-3. Run dev HTTP server: `npm run docs:dev` (this will rebuild site as you make changes)
+2. Import documentation source from git repositories as defined in [versions.json](docs/versions.json)
+   * `npm run docs:import-versions`
+   * This copies doc source into `docs/src`
+3. Build all doc sites. This performs multiple vitepress builds, one per doc site.
+   * `npm run docs:build:all`
+3. Run an HTTP server
+   * `python3 -m http.server 8800 -d docs/.vitepress/dist`
 
-## Key files
+In a browser load http://localhost:8800/latest.
 
-* `docs/src` : Helidon documentation source as markdown files
-* `docs/src/index.md` : Site's landing page
-* `docs/src/.vitepress/config.mts` : VitePress configuration
-* `docs/src/.vitepress/dist` : the generated static site (not committed into git)
+## For more information
+
+* VitePress configuration and customization [README](docs/.vitepress/README.md)
+* Build scripts [README](scripts/README.md) 
+* Custom VUE components [README](docs/.vitepress/theme/components/README.md)
 
