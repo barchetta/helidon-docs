@@ -19,11 +19,11 @@
   {
     "name": "mcp",
     "description": "Helidon MCP",
-    "repository": "https://github.com/helidon-io/helidon-mcp.git",
+    "repository": "https://github.com/barchetta/helidon-mcp.git",
     "releases": [
       {
         "name": "1.1.0",
-        "ref": "refs/tags/1.1.0",
+        "ref": "docs-update",
         "dir": "docs"
       },
       {
