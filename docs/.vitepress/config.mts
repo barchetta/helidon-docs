@@ -77,7 +77,8 @@ export default defineConfig({
     versionSwitcher,
 
     logo: {
-      src: '/images/frank-mark.svg',
+      light: '/images/frank-mark-light.svg',
+      dark: '/images/frank-mark.svg',
       alt: 'frank'
     },
 
